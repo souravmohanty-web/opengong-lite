@@ -14,15 +14,15 @@ Anthropic extraction) — never "fully local/private." Demo is Friday 6pm.
 
 ## Current state (as of 2026-08-13 evening)
 
-**Research and planning are complete. Product-code build is GATED, not started.**
-6 research artifacts + 8+ audit rounds are done, evidence-backed. `DECISION-BRIEF.md` is
-the single merged spec (19 locked decisions, L1–L19). `team/plans/master-plan.md` (the
-"BUILD-START DECISION" doc) has Sourav's approval to push planning artifacts to the repo
-and run this cleanup pass — **that approval is explicitly not build approval.** Actual
-product-code work stays frozen pending two things: Saritha's extraction-model bake-off
-(`research/10-reasoning-model/`) and Sourav's final go/no-go gate. A small Phase-0/Phase-1
-code skeleton already exists in `src/`/`test/` (key-mint, ingest, transcript builder) —
-treat it as frozen unless you have confirmed the freeze has lifted.
+**Research and planning are complete. The build is IN FLIGHT — Slice 1 (walking
+skeleton), gate opened by Sourav Aug 13 ~17:20.** 6 research artifacts + 8+ audit rounds
+done, evidence-backed. `DECISION-BRIEF.md` is the single merged spec (19 locked decisions,
+L1–L19); `team/plans/master-plan.md` + `build-orchestration.md` govern the build (vertical
+slices, test-first, adversarial audit at slice boundaries). Landed: key-mint skeleton,
+ingest → canonical transcript, minimal receipts viewer + app server (`npm run demo` —
+cached, offline, zero keys). In flight: the gate/extraction stack. The extraction model
+defaults to claude-sonnet-5; the lane-10 bake-off result is a one-line config change (L12).
+Work is claimed on `team/TASKBOARD.md` — claim before you touch.
 
 Do not trust this paragraph blindly — the live state lives in `team/SYNC.md`, always. This
 file is oriented as of the date above; SYNC.md's top entry is oriented as of *now*.
@@ -57,7 +57,7 @@ of the above automatically.
 | `.env.example` | Env var template (PyAI / Anthropic keys) — never commit a real key. |
 | `LICENSE`, `SECURITY.md` | MIT license; vulnerability disclosure + the "sandbox keys are low-severity to leak" note. |
 | `.github/workflows/` | CI — gitleaks secret scanning. |
-| `src/` | Frozen Phase-0/1 code skeleton: key mint (`pyai.js`, `keystore.js`, `index.js`), ingest (`ingest.js`), transcript builder (`transcript.js`). Build-frozen — do not modify without confirming the freeze has lifted. |
+| `src/` | Build in flight: key mint (`pyai.js`, `keystore.js`, `index.js`), ingest (`ingest.js`), transcript builder (`transcript.js`), receipts viewer (`viewer.js`, `viewer.html`), app server (`server.js`). Claim on the taskboard before modifying. |
 | `test/` | Tests for `src/` — golden fixtures + unit tests. |
 | `research/` | Audited research lineage (`00`–`05`) + two open research lanes (`10`, `11`). Hard-won, verified facts — do not re-derive them. See `research/README.md`. |
 | `research/00-api-probe/` | Lane Zero — live PyAI API probes, raw responses committed as fixtures. Ground truth behind L1–L4. |

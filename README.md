@@ -20,9 +20,11 @@ incumbent: Gong's own call briefs don't cite. Receipts verified in code are the 
 
 ## Current state — one line
 
-**Research ✅ · Planning ✅ · Build: GATED** — waiting on the extraction-model bake-off
-(lane 10) and Sourav's final go. Foundation code (key-mint skeleton + ingest/transcript
-builder) is committed and green: `npm test` → 11/11 (fresh, Aug 13 evening).
+**Research ✅ · Planning ✅ · Build: IN FLIGHT (Slice 1)** — gate opened Aug 13 ~17:20
+(Sourav's go). Landed so far: ingest → canonical transcript, the minimal receipts viewer
+with the click-claim→highlight→audio interaction, and the cached demo path
+(`npm run demo`, zero keys, offline). Gate/extraction stack in progress. `npm test` →
+22/22 (fresh, Aug 13 evening).
 
 The always-current truth lives in **`team/SYNC.md`** (top entry) — trust it over any
 static file, including this one.
