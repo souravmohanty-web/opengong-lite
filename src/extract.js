@@ -197,6 +197,107 @@ export function flattenClaims(extractorName, data) {
   throw new Error(`flattenClaims: no claim mapping defined for extractor "${extractorName}" (Slice 1 ships objections + summary only)`);
 }
 
+// ── deep-shape claim flattening (P1/P2 extractor families) ──────────────────
+// flattenClaims above stays exactly as Slice 1 left it (objections + summary
+// + tracker identity) so every existing caller/test keeps its narrower
+// contract. This is the superset a full pipeline run needs once the registry
+// grows past those two shapes: competitors/pain/next_steps/pricing carry
+// their own array-of-mentions shape, and buying_stage/stakeholders/
+// risk_flags carry derived-fact {value, basis, evidence} blocks. Two-sided
+// facts (objection+rep response's cousins here: competitor+switching
+// trigger, pain+quantified impact) carry BOTH quotes as evidence, so the
+// gate re-verifies each side as its own receipt. Mirrors the mapping
+// scripts/extract-offline.mjs authored for the offline harness — same
+// shapes, same rule, kept independent so neither lineage has to change for
+// the other to work.
+
+const onlyCite = (e) => ({ utterance_id: e.utterance_id, quote: e.quote });
+function mergeEvidence(...groups) {
+  return groups.flat().filter(Boolean).map(onlyCite);
+}
+
+// A derived-fact block (buying_stage / stakeholders.threading / risk_flags):
+// {value, basis, evidence}. It only becomes a claim when it actually stands on
+// a cited quote — an "absent" basis with no evidence is a coverage note, never
+// a claim (no fabricated receipt for an abstention).
+function factClaim(extractor, key, fact, label) {
+  if (!fact || fact.basis === 'absent' || !(fact.evidence?.length)) return null;
+  return {
+    id: `${extractor}-${key}`,
+    extractor,
+    section: extractor,
+    // The extractor supplies a human sentence for the notes; `Label: enum` is
+    // only the fallback for a fact block authored before `text` was required.
+    text: fact.text ?? `${label}: ${fact.value}`,
+    basis: fact.basis,
+    evidence: mergeEvidence(fact.evidence),
+  };
+}
+
+const DEEP_FLATTENERS = {
+  competitors: (data) => (data.competitor_mentions ?? []).map((m, i) => ({
+    id: `competitors-${i}`, extractor: 'competitors', section: 'competitors',
+    text: m.text, competitor: m.competitor, relationship: m.relationship,
+    ...(m.stance ? { stance: m.stance } : {}),
+    evidence: mergeEvidence(m.evidence, m.switching_trigger?.evidence),
+  })),
+  pain: (data) => (data.pain_points ?? []).map((p, i) => ({
+    id: `pain-${i}`, extractor: 'pain', section: 'pain',
+    text: p.text, layer: p.layer, who_it_affects: p.who_it_affects,
+    ...(p.stance ? { stance: p.stance } : {}),
+    ...(p.quantities ? { quantities: p.quantities } : {}),
+    evidence: mergeEvidence(p.evidence, p.quantified_impact?.evidence),
+  })),
+  next_steps: (data) => (data.next_steps ?? []).map((n, i) => ({
+    id: `next_steps-${i}`, extractor: 'next_steps', section: 'next_steps',
+    text: n.text, type: n.type, owner: n.owner, commitment: n.commitment,
+    due: n.due, ...(n.stance ? { stance: n.stance } : {}),
+    evidence: mergeEvidence(n.evidence),
+  })),
+  pricing: (data) => (data.pricing_mentions ?? []).map((m, i) => ({
+    id: `pricing-${i}`, extractor: 'pricing', section: 'pricing',
+    text: m.text, kind: m.kind, pricing_signal: m.pricing_signal,
+    ...(m.stance ? { stance: m.stance } : {}),
+    ...(m.quantities ? { quantities: m.quantities } : {}),
+    evidence: mergeEvidence(m.evidence),
+  })),
+  buying_stage: (data) => [
+    factClaim('buying_stage', 'stage', data.stage, 'Buying stage'),
+    factClaim('buying_stage', 'urgency', data.urgency, 'Urgency'),
+    factClaim('buying_stage', 'trigger', data.trigger_event, 'Trigger event'),
+  ].filter(Boolean),
+  stakeholders: (data) => {
+    const out = (data.stakeholders ?? []).map((s, i) => ({
+      id: `stakeholders-${i}`, extractor: 'stakeholders', section: 'stakeholders',
+      text: s.text, role_signal: s.role_signal, present_on_call: s.present_on_call,
+      evidence: mergeEvidence(s.evidence),
+    }));
+    const threading = factClaim('stakeholders', 'threading', data.threading, 'Threading');
+    if (threading) out.push(threading);
+    return out;
+  },
+  risk_flags: (data) => [
+    factClaim('risk_flags', 'buyer_posture', data.buyer_posture, 'Buyer posture'),
+    factClaim('risk_flags', 'transcript_quality', data.transcript_quality, 'Transcript quality'),
+    factClaim('risk_flags', 'anomaly', data.anomaly, 'Anomaly'),
+  ].filter(Boolean),
+};
+
+// flattenExtraction(extractorName, data) — the superset src/run.js's
+// runPipeline dispatches through so a full run can actually cover the full
+// enabled registry (buying_stage, competitors, next_steps, objections, pain,
+// pricing, risk_flags, stakeholders, summary, tracker), not just the
+// Slice-1 pair. Tracker identity + objections/summary delegate straight to
+// flattenClaims (one mapping, not two); everything else goes through
+// DEEP_FLATTENERS above.
+export function flattenExtraction(extractorName, data) {
+  if (Array.isArray(data?.claims)) return data.claims;
+  if (extractorName === 'objections' || extractorName === 'summary') return flattenClaims(extractorName, data);
+  const flattener = DEEP_FLATTENERS[extractorName];
+  if (!flattener) throw new Error(`flattenExtraction: no claim mapping defined for extractor "${extractorName}"`);
+  return flattener(data);
+}
+
 // ── deterministic tracker dispatch (role:"tracker") ──────────────────────────
 // A tracker never touches the LLM: registry.js validates `keywords` as a
 // non-empty array of strings, and this scans the canonical transcript for

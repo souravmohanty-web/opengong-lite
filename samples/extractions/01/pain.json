@@ -2,31 +2,50 @@
   "pain_points": [
     {
       "evidence": [
-        { "utterance_id": 3, "quote": "cause drop mid transfer between locations at least a few times a day now" }
+        {
+          "utterance_id": 3,
+          "quote": "cause drop mid transfer between locations at least a few times a day now"
+        }
       ],
       "text": "Calls drop mid-transfer between locations at least a few times a day.",
       "layer": "business",
       "who_it_affects": "team",
       "quantified_impact": {
-        "evidence": [ { "utterance_id": 3, "quote": "at least a few times a day" } ],
+        "evidence": [
+          {
+            "utterance_id": 3,
+            "quote": "at least a few times a day"
+          }
+        ],
         "text": "at least a few times a day"
       }
     },
     {
       "evidence": [
-        { "utterance_id": 5, "quote": "after hours is the real bleed anything after six just rings out and goes to a voice mail nobody checks until morning" }
+        {
+          "utterance_id": 5,
+          "quote": "after hours is the real bleed anything after six just rings out and goes to a voice mail nobody checks until morning"
+        }
       ],
       "text": "After-hours calls ring out to a voicemail nobody checks until morning: the real bleed.",
       "layer": "business",
       "who_it_affects": "company",
       "quantified_impact": {
-        "evidence": [ { "utterance_id": 5, "quote": "we lose maybe ten bookings a week that way" } ],
+        "evidence": [
+          {
+            "utterance_id": 5,
+            "quote": "we lose maybe ten bookings a week that way"
+          }
+        ],
         "text": "about ten bookings a week lost after hours"
       }
     },
     {
       "evidence": [
-        { "utterance_id": 14, "quote": "i keep hearing letters like tcpa and i don't want to be the test case so today we just don't text at all" }
+        {
+          "utterance_id": 14,
+          "quote": "i keep hearing letters like tcpa and i don't want to be the test case so today we just don't text at all"
+        }
       ],
       "text": "Fear of TCPA keeps the practice from texting patients at all today, even though the office manager wants it.",
       "layer": "business",

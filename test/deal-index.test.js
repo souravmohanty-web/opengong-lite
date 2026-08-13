@@ -15,11 +15,11 @@ function loadBundles() {
   return files.map((f) => JSON.parse(readFileSync(join(BUNDLES_DIR, f), 'utf8')));
 }
 
-test('buildDealIndex covers all 5 sample calls in order', () => {
+test('buildDealIndex covers all 6 sample calls in order', () => {
   const index = buildDealIndex(loadBundles());
-  assert.equal(index.calls.length, 5);
-  assert.deepEqual(index.calls.map((c) => c.id), ['01', '02', '03', '04', '05']);
-  assert.deepEqual(index.calls.map((c) => c.seq), [1, 2, 3, 4, 5]);
+  assert.equal(index.calls.length, 6);
+  assert.deepEqual(index.calls.map((c) => c.id), ['01', '02', '03', '04', '05', '06']);
+  assert.deepEqual(index.calls.map((c) => c.seq), [1, 2, 3, 4, 5, 6]);
   assert.ok(index.records.length > 0);
 });
 
@@ -45,6 +45,27 @@ test('blocked_injection claims never enter the searchable index', () => {
   assert.ok(!index.records.some((r) => r.claimId === 'planted-injection'));
   const hit = searchDeal(index, 'forty percent discount');
   assert.deepEqual(hit.callIds, [], 'quarantined text must not be findable by search');
+});
+
+test('an utterance a blocked_injection claim stands on is quarantined from the index too', () => {
+  // Quarantining the claim but still indexing the raw line hands the payload
+  // straight back to the same search box — the quote IS the attack.
+  const bundles = loadBundles();
+  const index = buildDealIndex(bundles);
+  for (const b of bundles) {
+    const tainted = new Set(
+      b.claims
+        .filter((c) => c.status === 'blocked_injection')
+        .flatMap((c) => (c.evidence ?? []).map((e) => e.utterance_id)),
+    );
+    for (const r of index.records) {
+      if (r.callId !== b.call.id || r.source !== 'utterance') continue;
+      assert.ok(!tainted.has(r.utteranceId), `call ${b.call.id} indexed quarantined utterance ${r.utteranceId}`);
+    }
+  }
+  // call 06's planted line, end to end
+  assert.deepEqual(searchDeal(index, 'ignore all previous instructions').callIds, []);
+  assert.deepEqual(searchDeal(index, 'forty percent discount').callIds, []);
 });
 
 test('cross-call search: "ringhawk" surfaces calls 1-4, not call 5 (DEAL-STATE answer key)', () => {

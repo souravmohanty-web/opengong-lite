@@ -2,16 +2,29 @@
   "stage": {
     "value": "committed",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 7, "quote": "then we're done negotiating send the agreement over" } ]
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "then we're done negotiating send the agreement over"
+      }
+    ],
+    "text": "Committed. Ready to sign."
   },
   "urgency": {
     "value": "high",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 7, "quote": "i'll have doctor meta sign early next week" } ]
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "i'll have doctor meta sign early next week"
+      }
+    ],
+    "text": "High urgency: Dr. Mehta signs early next week."
   },
   "trigger_event": {
     "value": "none",
     "basis": "absent",
-    "evidence": []
+    "evidence": [],
+    "text": "Not established on this call (trigger event: none)."
   }
 }

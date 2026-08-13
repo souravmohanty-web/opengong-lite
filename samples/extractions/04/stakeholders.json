@@ -1,14 +1,24 @@
 {
   "stakeholders": [
     {
-      "evidence": [ { "utterance_id": 3, "quote": "she's the one selling it internally not me" } ],
-      "text": "Office manager has become the internal champion, selling the deal internally; referenced, not on the call.",
+      "evidence": [
+        {
+          "utterance_id": 3,
+          "quote": "she's the one selling it internally not me"
+        }
+      ],
+      "text": "Office manager's now the internal champion, selling this deal for us. She wasn't on this call.",
       "role_signal": "champion",
       "present_on_call": "referenced"
     },
     {
-      "evidence": [ { "utterance_id": 5, "quote": "i can defend to doctor meta without a fight" } ],
-      "text": "Dr Mehta remains the economic buyer Rahul must satisfy; referenced, not on the call.",
+      "evidence": [
+        {
+          "utterance_id": 5,
+          "quote": "i can defend to doctor meta without a fight"
+        }
+      ],
+      "text": "Dr. Mehta's still the economic buyer Rahul has to satisfy. He wasn't on this call.",
       "role_signal": "economic_buyer",
       "present_on_call": "referenced"
     }
@@ -16,6 +26,12 @@
   "threading": {
     "value": "single_threaded",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 3, "quote": "she's the one selling it internally not me" } ]
+    "evidence": [
+      {
+        "utterance_id": 3,
+        "quote": "she's the one selling it internally not me"
+      }
+    ],
+    "text": "Single-threaded: only one contact in the loop so far."
   }
 }

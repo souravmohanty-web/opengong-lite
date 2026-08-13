@@ -18,8 +18,9 @@ email. The badge at the top says "67% verified" because honesty is the product.*
 
 ```bash
 git clone <repo-url> && cd opengong-lite
-npm start      # opens the product on a bundled call. No install step, no key.
-npm run demo   # same, viewer only
+npm start      # http://127.0.0.1:4318 — a real 6-call deal, notes with receipts.
+               # No install step, no key, no network.
+npm run demo   # http://127.0.0.1:4317 — the older single-call receipts viewer
 npm test       # 380+ tests, all offline
 ```
 

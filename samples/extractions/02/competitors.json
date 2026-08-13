@@ -2,7 +2,10 @@
   "competitor_mentions": [
     {
       "evidence": [
-        { "utterance_id": 7, "quote": "pull our call volume report from ringcak so you can size this properly" }
+        {
+          "utterance_id": 7,
+          "quote": "pull our call volume report from ringcak so you can size this properly"
+        }
       ],
       "text": "RingHawk (spoken 'ringcak') is still the system of record: the buyer will export its call-volume report to size the CallForge deal.",
       "competitor": "RingHawk",

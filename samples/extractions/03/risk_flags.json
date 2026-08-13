@@ -2,16 +2,29 @@
   "buyer_posture": {
     "value": "mixed",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 9, "quote": "one thing that spooked me" } ]
+    "evidence": [
+      {
+        "utterance_id": 9,
+        "quote": "one thing that spooked me"
+      }
+    ],
+    "text": "Buyer's mixed: interested, but something spooked them."
   },
   "transcript_quality": {
     "value": "some_gaps",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 7, "quote": "lehi tamming matters here" } ]
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "lehi tamming matters here"
+      }
+    ],
+    "text": "Heads up: a few spots in this recording were hard to make out."
   },
   "anomaly": {
     "value": "none",
     "basis": "absent",
-    "evidence": []
+    "evidence": [],
+    "text": "Not established on this call (anomaly: none)."
   }
 }

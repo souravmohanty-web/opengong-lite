@@ -86,10 +86,10 @@
       "id": "pp-2.6-precision-golden-call",
       "dimension": "product_pull",
       "weight": 5,
-      "target": "precision on hand-labeled golden call ≥90% (n≥8) (SCORECARD 2.6, bold, UNOWNED)",
-      "band_thresholds": { "green": ">=90% precision", "yellow": "80-89% precision", "red": "<80% precision or no labels.json" },
-      "method": "scan for team/labels.json or labels.json at repo root; compute precision if found, else pending — this is the Gate C input",
-      "grader": "pending-samples",
+      "target": "precision on hand-labeled golden call ≥90% (n≥8) (SCORECARD 2.6, bold)",
+      "band_thresholds": { "green": ">=90% precision", "yellow": "80-89% precision", "red": "<80% precision, n<8, or no labels.json" },
+      "method": "team/labels.json (44 shipped claims across calls 01+03) — precision = shipped_correct / shipped_total over status:\"verified\" labels, computed exactly per team/labels-method.md's formula, including its one intentional 'incorrect' label (not smoothed to 100%); this is the Gate C input",
+      "grader": "auto",
       "gate": "C"
     },
     {
@@ -159,8 +159,8 @@
       "weight": 4,
       "target": "3 planted cross-call searches hit in ≤2s (SCORECARD 3.4)",
       "band_thresholds": { "green": "3/3 planted searches hit in <=2s", "red": "any planted search misses or is slow" },
-      "method": "needs the planted 5-call sample deal arc with known searchable facts — samples/ does not have the planted arc wired yet",
-      "grader": "pending-samples",
+      "method": "live-exercises src/deal-index.mjs's buildDealIndex()+searchDeal() over samples/bundles/*.bundle.json (the real 5-call arc) for the 3 planted queries from samples/DEAL-STATE.md's answer key — ringhawk→[01,02,03,04], tcpa→[01,02,04], \"soc 2\"→[02,04] (same fixtures + expectations as test/deal-index.test.js) — and times each query",
+      "grader": "auto",
       "gate": null
     },
     {
@@ -220,10 +220,10 @@
       "id": "ag-4.3-recurring-loop",
       "dimension": "api_gravity",
       "weight": 5,
-      "target": "new-extractor → 5-call corpus re-run ≤120s, one command (SCORECARD 4.3)",
-      "band_thresholds": { "green": "measured re-run of a 5-call corpus completes in <=120s", "red": ">120s" },
-      "method": "needs a 5-call sample corpus to re-run — samples/ does not have 5 calls wired for this yet",
-      "grader": "pending-samples",
+      "target": "declarative-extractor corpus re-run ≤120s, one command (SCORECARD 4.3)",
+      "band_thresholds": { "green": "measured re-run of the 5-call corpus completes in <=120s", "red": ">120s" },
+      "method": "actually spawns `node scripts/extract-offline.mjs` and times it: the real 5-call samples/transcripts/ corpus re-run through every declarative extractors/*.json file (loadExtractors() re-reads the directory fresh each run, so a new extractor JSON needs zero code change to be picked up on the next run) — no 'npx opengong new-extractor' scaffolder exists yet, so this checks the real re-run capability underneath that story, not the aspirational CLI",
+      "grader": "auto",
       "gate": null
     },
     {

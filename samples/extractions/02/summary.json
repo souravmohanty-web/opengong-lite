@@ -4,7 +4,12 @@
       "title": "Outcome",
       "blocks": [
         {
-          "evidence": [ { "utterance_id": 5, "quote": "texting piece with the consent baked in that i like" } ],
+          "evidence": [
+            {
+              "utterance_id": 5,
+              "quote": "texting piece with the consent baked in that i like"
+            }
+          ],
           "text": "Demo landed: after-hours routing, AMD, and consent-tracked texting all resonated with the buyer."
         }
       ]
@@ -13,7 +18,12 @@
       "title": "Interests",
       "blocks": [
         {
-          "evidence": [ { "utterance_id": 3, "quote": "my front desk isn't sitting there listening to beeps all afternoon" } ],
+          "evidence": [
+            {
+              "utterance_id": 3,
+              "quote": "my front desk isn't sitting there listening to beeps all afternoon"
+            }
+          ],
           "text": "Buyer is drawn to answering-machine detection and to consent-tracked texting for compliance."
         }
       ]
@@ -22,7 +32,12 @@
       "title": "Next steps",
       "blocks": [
         {
-          "evidence": [ { "utterance_id": 6, "quote": "i'll send you our sot report and the tcpa one paper for your office manager both by friday" } ],
+          "evidence": [
+            {
+              "utterance_id": 6,
+              "quote": "i'll send you our sot report and the tcpa one paper for your office manager both by friday"
+            }
+          ],
           "text": "Rep to send SOC 2 report and TCPA one-pager by Friday; buyer to send the call-volume report early next week."
         }
       ]

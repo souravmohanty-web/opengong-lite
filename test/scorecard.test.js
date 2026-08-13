@@ -100,10 +100,16 @@ test('SC-06 a known-green loop-depth test suite (gate.test.js) reports green', (
 });
 
 test('SC-07 a known-absent sample-dependent metric reports pending — never a faked green or a faked red', () => {
+  // dm-3.4-cross-call-search, ag-4.3-recurring-loop, and pp-2.6-precision-golden-call
+  // used to be this test's example (samples/ had no wired arc/labels yet) — the
+  // real 5-call arc + golden-call labels have since landed and those three now
+  // have real CHECKS handlers (correctly green), so they're no longer "absent".
+  // cr-6.1-self-describing-fields has no handler yet and genuinely has nowhere
+  // to read a claim-schema field audit from, so it's this test's current example.
   const scoreRun = readJson('team/score-run.json');
-  const m = scoreRun.metrics.find((x) => x.id === 'dm-3.4-cross-call-search');
-  assert.ok(m, 'dm-3.4-cross-call-search should be present in the metrics list');
-  assert.equal(m.band, 'pending', `expected the no-samples-yet metric to report pending, got ${m.band}`);
+  const m = scoreRun.metrics.find((x) => x.id === 'cr-6.1-self-describing-fields');
+  assert.ok(m, 'cr-6.1-self-describing-fields should be present in the metrics list');
+  assert.equal(m.band, 'pending', `expected the no-handler-yet metric to report pending, got ${m.band}`);
   assert.notEqual(m.band, 'red', 'a metric with no data should never be faked as red');
   assert.notEqual(m.band, 'green', 'a metric with no data should never be faked as green');
 });

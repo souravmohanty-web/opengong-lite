@@ -1,0 +1,14 @@
+{
+  "next_steps": [
+    {
+      "evidence": [
+        { "utterance_id": 8, "quote": "we're all set from my side anyway" }
+      ],
+      "text": "No next step was agreed on this call: the rep confirmed nothing is outstanding on his side.",
+      "type": "no_next_step",
+      "owner": "joint",
+      "commitment": "unclear",
+      "due": "none"
+    }
+  ]
+}

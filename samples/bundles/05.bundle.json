@@ -2,7 +2,16 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "05",
-    "title": "Close: verbal commit on the pilot"
+    "title": "Close: verbal commit on the pilot",
+    "source": {
+      "system": null,
+      "external_call_id": null,
+      "external_contact_id": null,
+      "external_account_id": null,
+      "external_deal_id": null,
+      "occurred_at": null,
+      "direction": null
+    }
   },
   "audio": null,
   "transcript": {
@@ -867,6 +876,12 @@
             "text": "Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.",
             "claim_ids": [
               "next_steps-3"
+            ]
+          },
+          {
+            "text": "Rep sends the agreement this afternoon; Dr. Mehta signs early next week; cutover the weekend after.",
+            "claim_ids": [
+              "summary-3-0"
             ]
           }
         ]

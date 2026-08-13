@@ -1,7 +1,12 @@
 {
   "pricing_mentions": [
     {
-      "evidence": [ { "utterance_id": 13, "quote": "and then let's talk numbers" } ],
+      "evidence": [
+        {
+          "utterance_id": 13,
+          "quote": "and then let's talk numbers"
+        }
+      ],
       "text": "No numbers yet: buyer signals pricing is the next conversation once documents are exchanged.",
       "kind": "other",
       "pricing_signal": "none"

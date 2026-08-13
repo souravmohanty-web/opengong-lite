@@ -2,16 +2,34 @@
   "stage": {
     "value": "negotiation",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 5, "quote": "can you do fifteen that gets me close enough that the conversation is about service not price" } ]
+    "evidence": [
+      {
+        "utterance_id": 5,
+        "quote": "can you do fifteen that gets me close enough that the conversation is about service not price"
+      }
+    ],
+    "text": "In negotiation now, haggling on price."
   },
   "urgency": {
     "value": "high",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 7, "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me" } ]
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me"
+      }
+    ],
+    "text": "High urgency: the RingHawk renewal auto-locks in November."
   },
   "trigger_event": {
     "value": "contract_expiry",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 7, "quote": "the ringhawk renewal is november" } ]
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "the ringhawk renewal is november"
+      }
+    ],
+    "text": "Driven by the RingHawk contract expiring in November."
   }
 }

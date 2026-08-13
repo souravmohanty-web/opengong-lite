@@ -1,0 +1,25 @@
+{
+  "stage": {
+    "value": "committed",
+    "basis": "cited",
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "it's with doctor meta nothing new since we talked"
+      }
+    ],
+    "text": "Committed: the agreement is sitting with Dr. Mehta and nothing changed on this call."
+  },
+  "urgency": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": [],
+    "text": "No time pressure came up on this call."
+  },
+  "trigger_event": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": [],
+    "text": "No trigger event came up on this call."
+  }
+}

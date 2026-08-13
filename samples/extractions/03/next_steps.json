@@ -2,9 +2,12 @@
   "next_steps": [
     {
       "evidence": [
-        { "utterance_id": 11, "quote": "bring me a sharper number and the porting proof now and then i take it to doctor meta" }
+        {
+          "utterance_id": 11,
+          "quote": "bring me a sharper number and the porting proof now and then i take it to doctor meta"
+        }
       ],
-      "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr Mehta.",
+      "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.",
       "type": "send_info",
       "owner": "rep",
       "commitment": "firm",

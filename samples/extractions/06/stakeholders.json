@@ -1,0 +1,37 @@
+{
+  "stakeholders": [
+    {
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "it's with doctor meta nothing new since we talked"
+        }
+      ],
+      "text": "Dr. Mehta still holds the agreement; referenced, not on this call.",
+      "role_signal": "economic_buyer",
+      "present_on_call": "referenced"
+    },
+    {
+      "evidence": [
+        {
+          "utterance_id": 4,
+          "quote": "tell your office manager the same if she got one"
+        }
+      ],
+      "text": "Office manager flagged as a likely second recipient of the phishing email; referenced, not on this call.",
+      "role_signal": "user",
+      "present_on_call": "referenced"
+    }
+  ],
+  "threading": {
+    "value": "single_threaded",
+    "basis": "cited",
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "it's with doctor meta nothing new since we talked"
+      }
+    ],
+    "text": "Single-threaded: only one contact in the loop so far."
+  }
+}

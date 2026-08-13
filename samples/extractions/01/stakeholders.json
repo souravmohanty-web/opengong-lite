@@ -1,8 +1,13 @@
 {
   "stakeholders": [
     {
-      "evidence": [ { "utterance_id": 14, "quote": "my office manager keeps asking about text reminders" } ],
-      "text": "Office manager is pushing internally for text reminders: a user/influencer, referenced but not on this call.",
+      "evidence": [
+        {
+          "utterance_id": 14,
+          "quote": "my office manager keeps asking about text reminders"
+        }
+      ],
+      "text": "Office manager's pushing for text reminders internally, though she wasn't on this call.",
       "role_signal": "influencer",
       "present_on_call": "referenced"
     }
@@ -10,6 +15,12 @@
   "threading": {
     "value": "single_threaded",
     "basis": "inferred",
-    "evidence": [ { "utterance_id": 14, "quote": "my office manager keeps asking about text reminders" } ]
+    "evidence": [
+      {
+        "utterance_id": 14,
+        "quote": "my office manager keeps asking about text reminders"
+      }
+    ],
+    "text": "Single-threaded: only one contact in the loop so far."
   }
 }

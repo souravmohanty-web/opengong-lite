@@ -2,17 +2,17 @@
   "next_steps": { "next_steps": [] },
   "pricing": { "pricing_mentions": [] },
   "buying_stage": {
-    "stage": { "value": "unclear", "basis": "absent", "evidence": [] },
-    "urgency": { "value": "none", "basis": "absent", "evidence": [] },
-    "trigger_event": { "value": "none", "basis": "absent", "evidence": [] }
+    "stage": { "value": "unclear", "basis": "absent", "evidence": [], "text": "The call gave no read on where this deal actually is." },
+    "urgency": { "value": "none", "basis": "absent", "evidence": [], "text": "No time pressure came up on this call." },
+    "trigger_event": { "value": "none", "basis": "absent", "evidence": [], "text": "No trigger event came up on this call." }
   },
   "risk_flags": {
-    "buyer_posture": { "value": "open", "basis": "inferred", "evidence": [] },
-    "transcript_quality": { "value": "clean", "basis": "inferred", "evidence": [] },
-    "anomaly": { "value": "none", "basis": "absent", "evidence": [] }
+    "buyer_posture": { "value": "open", "basis": "inferred", "evidence": [], "text": "Buyer reads as open, though no single line proves it." },
+    "transcript_quality": { "value": "clean", "basis": "inferred", "evidence": [], "text": "The recording came through clean." },
+    "anomaly": { "value": "none", "basis": "absent", "evidence": [], "text": "Nothing anomalous showed up on this call." }
   },
   "stakeholders": {
     "stakeholders": [],
-    "threading": { "value": "single_threaded", "basis": "inferred", "evidence": [] }
+    "threading": { "value": "single_threaded", "basis": "inferred", "evidence": [], "text": "Single-threaded: only one contact in the loop so far." }
   }
 }

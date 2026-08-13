@@ -2,7 +2,16 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "02",
-    "title": "Demo: after-hours routing and compliant texting"
+    "title": "Demo: after-hours routing and compliant texting",
+    "source": {
+      "system": null,
+      "external_call_id": null,
+      "external_contact_id": null,
+      "external_account_id": null,
+      "external_deal_id": null,
+      "occurred_at": null,
+      "direction": null
+    }
   },
   "audio": null,
   "transcript": {
@@ -828,6 +837,12 @@
             "text": "Once the documents are exchanged, both sides move to pricing.",
             "claim_ids": [
               "next_steps-2"
+            ]
+          },
+          {
+            "text": "Rep to send SOC 2 report and TCPA one-pager by Friday; buyer to send the call-volume report early next week.",
+            "claim_ids": [
+              "summary-2-0"
             ]
           }
         ]

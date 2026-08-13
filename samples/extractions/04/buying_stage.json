@@ -2,16 +2,29 @@
   "stage": {
     "value": "negotiation",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 5, "quote": "two locations i can defend to doctor meta without a fight" } ]
+    "evidence": [
+      {
+        "utterance_id": 5,
+        "quote": "two locations i can defend to doctor meta without a fight"
+      }
+    ],
+    "text": "In negotiation. Buyer's narrowing scope to two locations to make it an easy internal sell."
   },
   "urgency": {
     "value": "medium",
     "basis": "inferred",
-    "evidence": [ { "utterance_id": 9, "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it" } ]
+    "evidence": [
+      {
+        "utterance_id": 9,
+        "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it"
+      }
+    ],
+    "text": "Medium urgency: wants the proposal on paper this week."
   },
   "trigger_event": {
     "value": "none",
     "basis": "absent",
-    "evidence": []
+    "evidence": [],
+    "text": "Not established on this call (trigger event: none)."
   }
 }

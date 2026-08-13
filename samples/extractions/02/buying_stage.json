@@ -2,16 +2,29 @@
   "stage": {
     "value": "evaluating",
     "basis": "inferred",
-    "evidence": [ { "utterance_id": 1, "quote": "that's the part we lose today that's genuinely useful" } ]
+    "evidence": [
+      {
+        "utterance_id": 1,
+        "quote": "that's the part we lose today that's genuinely useful"
+      }
+    ],
+    "text": "Still evaluating. Liked what they saw in the demo."
   },
   "urgency": {
     "value": "medium",
     "basis": "inferred",
-    "evidence": [ { "utterance_id": 13, "quote": "and then let's talk numbers" } ]
+    "evidence": [
+      {
+        "utterance_id": 13,
+        "quote": "and then let's talk numbers"
+      }
+    ],
+    "text": "Medium urgency: ready to move to pricing next."
   },
   "trigger_event": {
     "value": "none",
     "basis": "absent",
-    "evidence": []
+    "evidence": [],
+    "text": "Not established on this call (trigger event: none)."
   }
 }

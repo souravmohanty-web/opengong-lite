@@ -2,16 +2,29 @@
   "buyer_posture": {
     "value": "guarded",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 10, "quote": "i got burned once switching software and i'm not doing that dance again without proof it works" } ]
+    "evidence": [
+      {
+        "utterance_id": 10,
+        "quote": "i got burned once switching software and i'm not doing that dance again without proof it works"
+      }
+    ],
+    "text": "Buyer's guarded. Got burned switching software before and wants proof this works."
   },
   "transcript_quality": {
     "value": "some_gaps",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 8, "quote": "we asked ring hog for after hours routing last year" } ]
+    "evidence": [
+      {
+        "utterance_id": 8,
+        "quote": "we asked ring hog for after hours routing last year"
+      }
+    ],
+    "text": "Heads up: a few spots in this recording were hard to make out."
   },
   "anomaly": {
     "value": "none",
     "basis": "absent",
-    "evidence": []
+    "evidence": [],
+    "text": "Not established on this call (anomaly: none)."
   }
 }

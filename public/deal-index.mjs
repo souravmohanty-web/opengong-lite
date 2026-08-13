@@ -47,7 +47,12 @@ export function buildDealIndex(bundles) {
       totalClaims: bundle.claims.length,
       stage: stageOf(bundle),
       summary: oneLineSummary(bundle),
-      href: `calls/${callId}.html`,
+      // Point at the notes page, not the tier-1 export under public/calls/.
+      // Both render the same gated claims, but only the notes page carries the
+      // staged audio (and the deal nav back out), so a judge clicking through
+      // from the deal workspace lands on the surface the demo is given on.
+      // public/calls/*.html stays built as the self-contained USB fallback.
+      href: `notes/${callId}.html`,
     });
 
     for (const claim of bundle.claims) {
@@ -67,7 +72,21 @@ export function buildDealIndex(bundles) {
       });
     }
 
+    // An utterance a blocked_injection claim stands on is quarantined too. The
+    // claim layer refusing to index a planted line means nothing if the raw
+    // utterance layer hands the same words back to the same search box — the
+    // quote IS the payload. Derived from the gate's own verdicts (never a
+    // second pattern match here), so this can only ever narrow what ships.
+    const quarantined = new Set();
+    for (const claim of bundle.claims) {
+      if (claim.status !== 'blocked_injection') continue;
+      for (const e of [...(claim.evidence ?? []), ...(claim.supporting_evidence ?? [])]) {
+        if (Number.isInteger(e?.utterance_id)) quarantined.add(e.utterance_id);
+      }
+    }
+
     for (const u of bundle.transcript?.utterances ?? []) {
+      if (quarantined.has(u.id)) continue;
       records.push({
         callId,
         callSeq: i + 1,

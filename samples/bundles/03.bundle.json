@@ -2,7 +2,16 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "03",
-    "title": "Pricing: quote vs RingHawk renewal counter"
+    "title": "Pricing: quote vs RingHawk renewal counter",
+    "source": {
+      "system": null,
+      "external_call_id": null,
+      "external_contact_id": null,
+      "external_account_id": null,
+      "external_deal_id": null,
+      "occurred_at": null,
+      "direction": null
+    }
   },
   "audio": null,
   "transcript": {
@@ -871,6 +880,12 @@
             "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.",
             "claim_ids": [
               "next_steps-0"
+            ]
+          },
+          {
+            "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.",
+            "claim_ids": [
+              "summary-2-0"
             ]
           }
         ]

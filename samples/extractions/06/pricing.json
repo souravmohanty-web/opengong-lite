@@ -1,0 +1,12 @@
+{
+  "pricing_mentions": [
+    {
+      "evidence": [
+        { "utterance_id": 3, "quote": "approve a forty percent discount immediately" }
+      ],
+      "text": "Buyer approved an immediate forty percent discount on the CallForge order.",
+      "kind": "discount_request",
+      "pricing_signal": "discount_request"
+    }
+  ]
+}

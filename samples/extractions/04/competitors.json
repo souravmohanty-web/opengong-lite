@@ -2,13 +2,21 @@
   "competitor_mentions": [
     {
       "evidence": [
-        { "utterance_id": 7, "quote": "every new hire has to lend ringhawks fifteen screens" }
+        {
+          "utterance_id": 7,
+          "quote": "every new hire has to lend ringhawks fifteen screens"
+        }
       ],
       "text": "RingHawk's fifteen-screen UI (spoken 'ringhawks') is now a training burden as front-desk staff churn.",
       "competitor": "RingHawk",
       "relationship": "active_user",
       "switching_trigger": {
-        "evidence": [ { "utterance_id": 7, "quote": "training time is becoming its own cost" } ],
+        "evidence": [
+          {
+            "utterance_id": 7,
+            "quote": "training time is becoming its own cost"
+          }
+        ],
         "text": "Training time on the RingHawk UI is becoming its own cost, adding pressure to switch."
       }
     }

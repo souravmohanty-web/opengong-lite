@@ -2,7 +2,10 @@
   "next_steps": [
     {
       "evidence": [
-        { "utterance_id": 2, "quote": "it goes out today and i'll send it directly to her so it doesn't root through you" }
+        {
+          "utterance_id": 2,
+          "quote": "it goes out today and i'll send it directly to her so it doesn't root through you"
+        }
       ],
       "text": "Rep to send the overdue TCPA one-pager today, directly to the office manager.",
       "type": "send_info",
@@ -12,8 +15,14 @@
     },
     {
       "evidence": [
-        { "utterance_id": 9, "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it" },
-        { "utterance_id": 10, "quote": "you'll have the proposal and the number together" }
+        {
+          "utterance_id": 9,
+          "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it"
+        },
+        {
+          "utterance_id": 10,
+          "quote": "you'll have the proposal and the number together"
+        }
       ],
       "text": "Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.",
       "type": "send_info",

@@ -4,7 +4,12 @@
       "title": "Outcome",
       "blocks": [
         {
-          "evidence": [ { "utterance_id": 0, "quote": "here's where we land twenty eight per month all five locations routing texting and the recall tooling included" } ],
+          "evidence": [
+            {
+              "utterance_id": 0,
+              "quote": "here's where we land twenty eight per month all five locations routing texting and the recall tooling included"
+            }
+          ],
           "text": "Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off."
         }
       ]
@@ -13,7 +18,12 @@
       "title": "Key takeaways",
       "blocks": [
         {
-          "evidence": [ { "utterance_id": 7, "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me" } ],
+          "evidence": [
+            {
+              "utterance_id": 7,
+              "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me"
+            }
+          ],
           "text": "RingHawk renews in November: the buyer needs a decision before the auto-renew locks."
         }
       ]
@@ -22,8 +32,13 @@
       "title": "Next steps",
       "blocks": [
         {
-          "evidence": [ { "utterance_id": 11, "quote": "bring me a sharper number and the porting proof now and then i take it to doctor meta" } ],
-          "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr Mehta."
+          "evidence": [
+            {
+              "utterance_id": 11,
+              "quote": "bring me a sharper number and the porting proof now and then i take it to doctor meta"
+            }
+          ],
+          "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta."
         }
       ]
     }

@@ -1,7 +1,12 @@
 {
   "next_steps": [
     {
-      "evidence": [ { "utterance_id": 8, "quote": "agreement goes out this afternoon" } ],
+      "evidence": [
+        {
+          "utterance_id": 8,
+          "quote": "agreement goes out this afternoon"
+        }
+      ],
       "text": "Rep to send the agreement this afternoon.",
       "type": "concrete_date",
       "owner": "rep",
@@ -9,15 +14,25 @@
       "due": "this afternoon"
     },
     {
-      "evidence": [ { "utterance_id": 7, "quote": "i'll have doctor meta sign early next week" } ],
-      "text": "Buyer to have Dr Mehta sign the agreement early next week.",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "i'll have doctor meta sign early next week"
+        }
+      ],
+      "text": "Buyer to have Dr. Mehta sign the agreement early next week.",
       "type": "concrete_date",
       "owner": "buyer",
       "commitment": "firm",
       "due": "early next week"
     },
     {
-      "evidence": [ { "utterance_id": 7, "quote": "let's aim the cutover for the weekend after" } ],
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "let's aim the cutover for the weekend after"
+        }
+      ],
       "text": "Both sides to aim the cutover for the weekend after signing.",
       "type": "concrete_date",
       "owner": "joint",
@@ -25,7 +40,12 @@
       "due": "weekend after signing"
     },
     {
-      "evidence": [ { "utterance_id": 6, "quote": "i'll set up the training live review for your office manager as part of onboarding no extra line item" } ],
+      "evidence": [
+        {
+          "utterance_id": 6,
+          "quote": "i'll set up the training live review for your office manager as part of onboarding no extra line item"
+        }
+      ],
       "text": "Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.",
       "type": "soft_followup",
       "owner": "rep",

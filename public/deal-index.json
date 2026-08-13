@@ -10,7 +10,7 @@
       "totalClaims": 24,
       "stage": "Still evaluating, no decision made yet.",
       "summary": "Discovery landed a 30-minute demo of after-hours routing and compliant texting.",
-      "href": "calls/01.html"
+      "href": "notes/01.html"
     },
     {
       "id": "02",
@@ -22,7 +22,7 @@
       "totalClaims": 19,
       "stage": "Still evaluating. Liked what they saw in the demo.",
       "summary": "Demo landed: after-hours routing, AMD, and consent-tracked texting all resonated with the buyer.",
-      "href": "calls/02.html"
+      "href": "notes/02.html"
     },
     {
       "id": "03",
@@ -34,7 +34,7 @@
       "totalClaims": 21,
       "stage": "In negotiation now, haggling on price.",
       "summary": "Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.",
-      "href": "calls/03.html"
+      "href": "notes/03.html"
     },
     {
       "id": "04",
@@ -46,7 +46,7 @@
       "totalClaims": 21,
       "stage": "In negotiation. Buyer's narrowing scope to two locations to make it an easy internal sell.",
       "summary": "SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.",
-      "href": "calls/04.html"
+      "href": "notes/04.html"
     },
     {
       "id": "05",
@@ -58,7 +58,19 @@
       "totalClaims": 23,
       "stage": "Committed. Ready to sign.",
       "summary": "Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.",
-      "href": "calls/05.html"
+      "href": "notes/05.html"
+    },
+    {
+      "id": "06",
+      "seq": 6,
+      "title": "Messy: the phishing email and the honesty test",
+      "band": "SHIPPED",
+      "ratio": 1,
+      "verifiedCount": 10,
+      "totalClaims": 13,
+      "stage": "Committed: the agreement is sitting with Dr. Mehta and nothing changed on this call.",
+      "summary": "Rahul called in to read out a suspicious email about CallForge. The rep identified it as a phishing template using the CallForge name and told him not to click the link.",
+      "href": "notes/06.html"
     }
   ],
   "records": [
@@ -2137,6 +2149,234 @@
       "quote": "get my after ask patients booking again and i'll be your reference customer talk next week",
       "utteranceId": 9,
       "tStart": 63.84
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "buying_stage-stage",
+      "extractor": "buying_stage",
+      "status": "verified",
+      "text": "Committed: the agreement is sitting with Dr. Mehta and nothing changed on this call.",
+      "quote": "it's with doctor meta nothing new since we talked",
+      "utteranceId": 7,
+      "tStart": 55.22
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "next_steps-0",
+      "extractor": "next_steps",
+      "status": "verified",
+      "text": "No next step was agreed on this call: the rep confirmed nothing is outstanding on his side.",
+      "quote": "we're all set from my side anyway",
+      "utteranceId": 8,
+      "tStart": 65.32
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "risk_flags-buyer_posture",
+      "extractor": "risk_flags",
+      "status": "verified",
+      "text": "Buyer's mixed: still engaged on the deal, but irritated at getting spam about the switch.",
+      "quote": "now i get spam about it too wonderful",
+      "utteranceId": 5,
+      "tStart": 40.8
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "risk_flags-transcript_quality",
+      "extractor": "risk_flags",
+      "status": "verified",
+      "text": "Heads up: the buyer called in from a parking lot, so parts of this recording are noisy.",
+      "quote": "you sound like you're in a wind tunnel",
+      "utteranceId": 0,
+      "tStart": 0.16
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "stakeholders-0",
+      "extractor": "stakeholders",
+      "status": "verified",
+      "text": "Dr. Mehta still holds the agreement; referenced, not on this call.",
+      "quote": "it's with doctor meta nothing new since we talked",
+      "utteranceId": 7,
+      "tStart": 55.22
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "stakeholders-1",
+      "extractor": "stakeholders",
+      "status": "verified",
+      "text": "Office manager flagged as a likely second recipient of the phishing email; referenced, not on this call.",
+      "quote": "tell your office manager the same if she got one",
+      "utteranceId": 4,
+      "tStart": 31.04
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "stakeholders-threading",
+      "extractor": "stakeholders",
+      "status": "verified",
+      "text": "Single-threaded: only one contact in the loop so far.",
+      "quote": "it's with doctor meta nothing new since we talked",
+      "utteranceId": 7,
+      "tStart": 55.22
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "summary-0-0",
+      "extractor": "summary",
+      "status": "verified",
+      "text": "Rahul called in to read out a suspicious email about CallForge. The rep identified it as a phishing template using the CallForge name and told him not to click the link.",
+      "quote": "that's not from us that's a phishing template with our name pasted in",
+      "utteranceId": 4,
+      "tStart": 31.04
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "summary-1-0",
+      "extractor": "summary",
+      "status": "verified",
+      "text": "Nothing moved on the deal itself: the agreement is still with Dr. Mehta and there is no change since the last call.",
+      "quote": "it's with doctor meta nothing new since we talked",
+      "utteranceId": 7,
+      "tStart": 55.22
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "claim",
+      "claimId": "summary-2-0",
+      "extractor": "summary",
+      "status": "verified",
+      "text": "Nothing was promised on this call, so nothing is owed out of it.",
+      "quote": "we're all set from my side anyway",
+      "utteranceId": 8,
+      "tStart": 65.32
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "rahul you called everything okay you sound like you're in a wind tunnel",
+      "quote": "rahul you called everything okay you sound like you're in a wind tunnel",
+      "utteranceId": 0,
+      "tStart": 0.16
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "i'm in the parking lot sorry give me a second hold on someone's beeping okay so this is probably nothing but i got a weird email about your company and i wanted to read it to you",
+      "quote": "i'm in the parking lot sorry give me a second hold on someone's beeping okay so this is probably nothing but i got a weird email about your company and i wanted to read it to you",
+      "utteranceId": 1,
+      "tStart": 4.82
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "go ahead read it out",
+      "quote": "go ahead read it out",
+      "utteranceId": 2,
+      "tStart": 17.64
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "yeah that's not from us that's a phishing template with our name pasted in don't click it and tell your office manager the same if she got one",
+      "quote": "yeah that's not from us that's a phishing template with our name pasted in don't click it and tell your office manager the same if she got one",
+      "utteranceId": 4,
+      "tStart": 31.04
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "figured oh sure because switching phone systems is everyone's idea of fun now i get spam about it too wonderful",
+      "quote": "figured oh sure because switching phone systems is everyone's idea of fun now i get spam about it too wonderful",
+      "utteranceId": 5,
+      "tStart": 40.8
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "comes with being in anyone's crm these days unfortunately while i have you anything you need from me on the agreement",
+      "quote": "comes with being in anyone's crm these days unfortunately while i have you anything you need from me on the agreement",
+      "utteranceId": 6,
+      "tStart": 47.84
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "no it's with doctor meta nothing new since we talked sorry i have to run my hygienist is waving at me through the window about something it's always something",
+      "quote": "no it's with doctor meta nothing new since we talked sorry i have to run my hygienist is waving at me through the window about something it's always something",
+      "utteranceId": 7,
+      "tStart": 55.22
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "go we're all set from my side anyway",
+      "quote": "go we're all set from my side anyway",
+      "utteranceId": 8,
+      "tStart": 65.32
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "source": "utterance",
+      "claimId": null,
+      "extractor": null,
+      "status": null,
+      "text": "yeah okay bye wait no nothing else bye",
+      "quote": "yeah okay bye wait no nothing else bye",
+      "utteranceId": 9,
+      "tStart": 68.28
     }
   ],
   "commitments": [
@@ -2319,6 +2559,18 @@
       "text": "Dr. Mehta's only remaining question: are we locked in if the pilot goes badly?",
       "status": "verified",
       "claimId": "objections-0"
+    },
+    {
+      "callId": "06",
+      "callSeq": 6,
+      "callTitle": "Messy: the phishing email and the honesty test",
+      "kind": "promise",
+      "owner": "joint",
+      "commitment": "unclear",
+      "due": "none",
+      "text": "No next step was agreed on this call: the rep confirmed nothing is outstanding on his side.",
+      "status": "verified",
+      "claimId": "next_steps-0"
     }
   ]
 }

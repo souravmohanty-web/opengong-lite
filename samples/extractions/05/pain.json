@@ -2,7 +2,10 @@
   "pain_points": [
     {
       "evidence": [
-        { "utterance_id": 5, "quote": "the core recording can we use those for training the new front desk hires because that alone might fix my churn problem" }
+        {
+          "utterance_id": 5,
+          "quote": "the core recording can we use those for training the new front desk hires because that alone might fix my churn problem"
+        }
       ],
       "text": "Front-desk churn is Rahul's own problem; he sees call recordings for training as the thing that might fix it.",
       "layer": "personal",

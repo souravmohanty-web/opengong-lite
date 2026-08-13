@@ -1,0 +1,46 @@
+{
+  "sections": [
+    {
+      "title": "Outcome",
+      "blocks": [
+        {
+          "evidence": [
+            {
+              "utterance_id": 4,
+              "quote": "that's not from us that's a phishing template with our name pasted in"
+            }
+          ],
+          "text": "Rahul called in to read out a suspicious email about CallForge. The rep identified it as a phishing template using the CallForge name and told him not to click the link."
+        }
+      ]
+    },
+    {
+      "title": "Key takeaways",
+      "blocks": [
+        {
+          "evidence": [
+            {
+              "utterance_id": 7,
+              "quote": "it's with doctor meta nothing new since we talked"
+            }
+          ],
+          "text": "Nothing moved on the deal itself: the agreement is still with Dr. Mehta and there is no change since the last call."
+        }
+      ]
+    },
+    {
+      "title": "Next steps",
+      "blocks": [
+        {
+          "evidence": [
+            {
+              "utterance_id": 8,
+              "quote": "we're all set from my side anyway"
+            }
+          ],
+          "text": "Nothing was promised on this call, so nothing is owed out of it."
+        }
+      ]
+    }
+  ]
+}

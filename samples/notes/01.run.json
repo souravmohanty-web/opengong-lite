@@ -6,9 +6,9 @@
   "exit_reason": "SHIPPED",
   "exit_class": "SHIPPED",
   "exit_code": 0,
-  "started_at": "2026-08-13T11:20:32.210Z",
-  "completed_at": "2026-08-13T11:20:32.210Z",
-  "heartbeat_at": "2026-08-13T11:20:32.210Z",
+  "started_at": "2026-08-13T13:51:30.341Z",
+  "completed_at": "2026-08-13T13:51:30.341Z",
+  "heartbeat_at": "2026-08-13T13:51:30.341Z",
   "current_stage": "bundle",
   "extractors_planned": [
     "buying_stage",

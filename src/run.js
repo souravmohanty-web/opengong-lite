@@ -3,7 +3,7 @@ import path from 'node:path';
 import { createHash, randomBytes } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { buildSystem, buildUser } from './prompt.js';
-import { runExtraction, flattenClaims } from './extract.js';
+import { runExtraction, flattenExtraction } from './extract.js';
 import { gateClaim, gradeRun } from './gate.js';
 import { screenTranscript, screenClaim } from './injection.js';
 import { buildBundle } from './bundle.js';
@@ -239,6 +239,15 @@ export async function runPipeline({
   transcript, extractorDefs, glossaryEntries = [], callId = 'call',
   budgetUsd = 1.0, model = 'claude-sonnet-5', callLlm, concurrency = 3,
   runsRoot = DEFAULT_RUNS_ROOT, now = () => new Date(),
+  // Keyless-fallback honesty seam (src/fallback.js decides the mode; this
+  // function only stamps whatever it's told — no key-sniffing here). Callers
+  // that never pass these get the pre-existing behavior unchanged: a bundle/
+  // record stamped 'llm-extraction', no note. When extractorDefs has been
+  // pre-filtered down to trackers only (no ANTHROPIC_API_KEY), the caller
+  // passes 'deterministic-trackers-only' + a human note + the LLM extractor
+  // names it chose not to run, so the record names its own limited coverage
+  // instead of silently looking like a full run.
+  extractionMode = 'llm-extraction', extractionNote = null, extractorsSkipped = [],
 } = {}) {
   const ctx = openRun({ runsRoot, callId, budgetUsd, extractorDefs, now }); // write-ahead, before any spend
 
@@ -283,7 +292,7 @@ export async function runPipeline({
   const claims = [];
   const extractorFailures = [];
   for (const result of extraction.results) {
-    if (result.status === 'ok') claims.push(...flattenClaims(result.extractor, result.data));
+    if (result.status === 'ok') claims.push(...flattenExtraction(result.extractor, result.data));
     else extractorFailures.push(result.extractor);
   }
 
@@ -300,7 +309,14 @@ export async function runPipeline({
   const rejected = gated.filter((c) => c.status === 'uncorroborated' || c.status === 'blocked_injection');
 
   if (coverage.band !== 'GATE_BLOCKED_UNPROVEN_CLAIMS') {
-    const bundle = buildBundle({ transcript, claims: gated, coverage, callId, provenance: { extraction_model: model } });
+    const bundle = buildBundle({
+      transcript, claims: gated, coverage, callId,
+      provenance: {
+        extraction_model: model,
+        extraction_mode: extractionMode,
+        ...(extractionNote ? { extraction_note: extractionNote } : {}),
+      },
+    });
     writeAtomic(path.join(ctx.dir, 'bundle.json'), bundle);
   }
   if (rejected.length) {
@@ -312,6 +328,9 @@ export async function runPipeline({
     extra: {
       coverage_band: coverage.band, coverage_ratio: coverage.ratio, coverage_stats: coverage.stats,
       extractor_failures: extractorFailures,
+      extraction_mode: extractionMode,
+      ...(extractionNote ? { extraction_note: extractionNote } : {}),
+      ...(extractorsSkipped.length ? { extractors_skipped_no_key: extractorsSkipped } : {}),
     },
   });
 }

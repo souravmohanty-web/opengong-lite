@@ -2,8 +2,14 @@
   "next_steps": [
     {
       "evidence": [
-        { "utterance_id": 16, "quote": "do it thursday before the lunch rush and keep it practical" },
-        { "utterance_id": 17, "quote": "i'll bring the routing demo and the texting flow no slides" }
+        {
+          "utterance_id": 16,
+          "quote": "do it thursday before the lunch rush and keep it practical"
+        },
+        {
+          "utterance_id": 17,
+          "quote": "i'll bring the routing demo and the texting flow no slides"
+        }
       ],
       "text": "Rep to run a 30-minute demo Thursday covering after-hours routing and the compliant texting flow, no slides.",
       "type": "concrete_date",

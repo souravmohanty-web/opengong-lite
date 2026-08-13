@@ -2,13 +2,21 @@
   "pain_points": [
     {
       "evidence": [
-        { "utterance_id": 3, "quote": "my front desk isn't sitting there listening to beeps all afternoon" }
+        {
+          "utterance_id": 3,
+          "quote": "my front desk isn't sitting there listening to beeps all afternoon"
+        }
       ],
       "text": "Front desk currently loses time to answering-machine beeps on recall campaigns; AMD would give that time back.",
       "layer": "business",
       "who_it_affects": "team",
       "quantified_impact": {
-        "evidence": [ { "utterance_id": 3, "quote": "recall days are half wasted on that" } ],
+        "evidence": [
+          {
+            "utterance_id": 3,
+            "quote": "recall days are half wasted on that"
+          }
+        ],
         "text": "recall days are half wasted on listening to voicemail beeps"
       }
     }

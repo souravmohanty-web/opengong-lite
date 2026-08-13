@@ -38,14 +38,28 @@ const EXTRACTIONS_DIR = path.join(ROOT, 'samples', 'extractions');
 const BUNDLES_DIR = path.join(ROOT, 'samples', 'bundles');
 const NOTES_DIR = path.join(ROOT, 'samples', 'notes');
 
+// Titles are DISPLAY copy, so they are written in house voice here (colon
+// separator, no dash) and must stay byte-identical to what the committed
+// bundles carry. A re-run of this harness rewrites every bundle it is given, so
+// a drifting title here silently un-does a copy pass on the demo pages.
 const CALL_TITLES = {
-  '01': 'Discovery — Brightsmile Dental, on RingHawk',
-  '02': 'Demo — after-hours routing + compliant texting',
-  '03': 'Pricing — quote vs RingHawk renewal counter',
-  '04': 'Commitment check — the ledger moment',
-  '05': 'Close — verbal commit on the pilot',
-  '06': 'Messy — the honesty test',
+  '01': 'Discovery: Brightsmile Dental, on RingHawk',
+  '02': 'Demo: after-hours routing and compliant texting',
+  '03': 'Pricing: quote vs RingHawk renewal counter',
+  '04': 'Commitment check: the ledger moment',
+  '05': 'Close: verbal commit on the pilot',
+  '06': 'Messy: the phishing email and the honesty test',
 };
+
+// Per-call provenance truth. 01-05 were really spoken by PyAI TTS and really
+// transcribed back by PyAI Hear. Call 06 was NOT: the `voice:synthesize` scope
+// was unavailable when the samples were generated, so there is no audio and the
+// transcript is authored in Hear's own output shape. Saying "pyai-hear" for 06
+// would be exactly the kind of unearned claim this project exists to refuse.
+const TRANSCRIPTION_MODEL = {
+  '06': 'authored transcript (no audio: TTS scope was unavailable when the samples were generated)',
+};
+const DEFAULT_TRANSCRIPTION_MODEL = 'pyai-hear';
 
 // The band -> exit mapping is run.js's public taxonomy (BAND_EXIT there). It is
 // infra vocabulary, not gate logic; replicated (not the gate) so the offline
@@ -93,7 +107,9 @@ function factClaim(extractor, key, fact, label) {
     id: `${extractor}-${key}`,
     extractor,
     section: extractor,
-    text: `${label}: ${fact.value}`,
+    // The extractor supplies a human sentence for the notes; `Label: enum` is
+    // only the fallback for a fact block authored before `text` was required.
+    text: fact.text ?? `${label}: ${fact.value}`,
     basis: fact.basis,
     evidence: mergeEvidence(fact.evidence),
   };
@@ -240,7 +256,10 @@ function buildRunRecord({ callId, transcript, extractorDefs, coverage, extractor
     coverage_ratio: coverage.ratio,
     coverage_stats: coverage.stats,
     extractor_failures: extractorFailures,
-    provenance: { transcription_model: 'pyai-hear', extraction: OFFLINE_NOTE },
+    provenance: {
+      transcription_model: TRANSCRIPTION_MODEL[callId] ?? DEFAULT_TRANSCRIPTION_MODEL,
+      extraction: OFFLINE_NOTE,
+    },
   };
 }
 
@@ -275,7 +294,7 @@ async function runCall(callId, extractorRegistry) {
     transcript, claims: gated, coverage, callId,
     title: CALL_TITLES[callId] ?? callId,
     provenance: {
-      transcription_model: 'pyai-hear',
+      transcription_model: TRANSCRIPTION_MODEL[callId] ?? DEFAULT_TRANSCRIPTION_MODEL,
       extraction_model: 'offline-author',
       note: OFFLINE_NOTE,
     },

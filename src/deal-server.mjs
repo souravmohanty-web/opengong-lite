@@ -22,6 +22,9 @@ const CONTENT_TYPES = {
   '.mjs': 'text/javascript; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
+  '.m4a': 'audio/mp4',
+  '.wav': 'audio/wav',
+  '.mp3': 'audio/mpeg',
 };
 
 function fail(res, status, message) {
@@ -36,11 +39,38 @@ function fail(res, status, message) {
 // outside it — a demo server is still a server (same discipline as
 // server.js's read-before-headers / never-kill-the-process rules).
 export function resolvePath(publicDir, pathname) {
-  const decoded = decodeURIComponent(pathname === '/' ? '/deal.html' : pathname);
+  const decoded = decodeURIComponent(pathname === '/' ? '/notes/index.html' : pathname);
   const cleaned = normalize(decoded).replace(/^([.][.][/\\])+/, '');
   const full = join(publicDir, cleaned);
   if (full !== publicDir && !full.startsWith(publicDir + sep)) return null;
   return full;
+}
+
+// Parse a single-range `Range: bytes=start-end` header against a known size.
+// Returns {start, end} (inclusive) or null when absent/unsatisfiable, so a bad
+// or multi-range header simply falls back to a whole-file 200 (never throws).
+export function parseRange(header, size) {
+  if (!header || typeof header !== 'string') return null;
+  const m = /^bytes=(\d*)-(\d*)$/.exec(header.trim());
+  if (!m) return null;
+  const hasStart = m[1] !== '';
+  const hasEnd = m[2] !== '';
+  let start;
+  let end;
+  if (hasStart) {
+    start = Number(m[1]);
+    end = hasEnd ? Number(m[2]) : size - 1;
+  } else if (hasEnd) {
+    const suffix = Number(m[2]); // last N bytes
+    if (suffix === 0) return null;
+    start = Math.max(0, size - suffix);
+    end = size - 1;
+  } else {
+    return null;
+  }
+  end = Math.min(end, size - 1);
+  if (!Number.isFinite(start) || !Number.isFinite(end) || start > end || start >= size) return null;
+  return { start, end };
 }
 
 export function createApp(publicDir = DEFAULT_PUBLIC_DIR) {
@@ -65,7 +95,24 @@ export function createApp(publicDir = DEFAULT_PUBLIC_DIR) {
       }
       const body = readFileSync(full); // read before headers, same as server.js
       const type = CONTENT_TYPES[extname(full)] ?? 'application/octet-stream';
-      res.writeHead(200, { 'Content-Type': type, 'Content-Length': body.length }).end(body);
+      // Range support so the browser can seek audio to a claim's timestamp
+      // (the play-from-here reveal). Falls back to a whole-file 200 otherwise.
+      const range = parseRange(req.headers.range, body.length);
+      if (range) {
+        const slice = body.subarray(range.start, range.end + 1);
+        res.writeHead(206, {
+          'Content-Type': type,
+          'Content-Range': `bytes ${range.start}-${range.end}/${body.length}`,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': slice.length,
+        }).end(slice);
+        return;
+      }
+      res.writeHead(200, {
+        'Content-Type': type,
+        'Content-Length': body.length,
+        'Accept-Ranges': 'bytes',
+      }).end(body);
     } catch (err) {
       fail(res, 500, `error: ${err.message}`);
     }

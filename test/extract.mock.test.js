@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  tolerantParse, validateOutput, checkSuppliedIds, flattenClaims,
+  tolerantParse, validateOutput, checkSuppliedIds, flattenClaims, flattenExtraction,
   runExtractorCall, runExtraction, MAX_REPAIRS,
 } from '../src/extract.js';
 import { buildSystem } from '../src/prompt.js';
@@ -96,6 +96,83 @@ test('EX-09 flattenClaims maps summary "Next steps" blocks to section next_steps
   });
   assert.equal(claims.find((c) => c.title === 'Outcome').section, 'summary');
   assert.equal(claims.find((c) => c.title === 'Next steps').section, 'next_steps');
+});
+
+// ── flattenExtraction: the full-registry superset (pipeline wiring) ─────────
+// src/run.js's runPipeline dispatches through flattenExtraction (not the
+// narrower flattenClaims above) so a full run can cover the whole enabled
+// extractor registry, not just objections+summary. Fixtures are the REAL
+// authored samples (samples/extractions/) — same shapes the offline harness
+// already exercises end to end, so these mappings are proven against real
+// data, not a hand-rolled shape that happens to satisfy the code.
+
+const loadSample = (callId, name) =>
+  JSON.parse(readFileSync(new URL(`../samples/extractions/${callId}/${name}.json`, import.meta.url), 'utf8'));
+
+test('EX-19 flattenExtraction delegates objections/summary to flattenClaims (same output, one mapping)', () => {
+  const data = tolerantParse(load('ok.json').content[0].text);
+  assert.deepEqual(flattenExtraction('objections', data), flattenClaims('objections', data));
+});
+
+test('EX-20 flattenExtraction maps competitor_mentions, merging the switching_trigger quote as a second receipt', () => {
+  const data = loadSample('03', 'competitors');
+  const claims = flattenExtraction('competitors', data);
+  assert.equal(claims.length, 1);
+  assert.equal(claims[0].extractor, 'competitors');
+  assert.equal(claims[0].competitor, 'RingHawk');
+  assert.equal(claims[0].evidence.length, 2, 'both the mention quote and the switching-trigger quote must carry as receipts');
+});
+
+test('EX-21 flattenExtraction maps pain_points, merging the quantified_impact quote', () => {
+  const data = loadSample('01', 'pain');
+  const claims = flattenExtraction('pain', data);
+  assert.ok(claims.length >= 2);
+  assert.ok(claims.every((c) => c.extractor === 'pain' && c.section === 'pain'));
+  const dropCall = claims.find((c) => c.text.includes('mid-transfer'));
+  assert.equal(dropCall.evidence.length, 2);
+});
+
+test('EX-22 flattenExtraction maps next_steps (owner/commitment/due carried through)', () => {
+  const data = loadSample('01', 'next_steps');
+  const claims = flattenExtraction('next_steps', data);
+  assert.equal(claims.length, 1);
+  assert.equal(claims[0].owner, 'rep');
+  assert.equal(claims[0].due, 'Thursday');
+  assert.equal(claims[0].evidence.length, 2);
+});
+
+test('EX-23 flattenExtraction maps pricing_mentions', () => {
+  const data = loadSample('03', 'pricing');
+  const claims = flattenExtraction('pricing', data);
+  assert.ok(claims.length >= 1);
+  assert.ok(claims.every((c) => c.extractor === 'pricing'));
+});
+
+test('EX-24 flattenExtraction maps buying_stage derived-fact blocks into claims, one per cited fact', () => {
+  const data = loadSample('01', 'buying_stage');
+  const claims = flattenExtraction('buying_stage', data);
+  // stage + urgency + trigger_event are all cited in the fixture -> 3 claims
+  assert.equal(claims.length, 3);
+  assert.ok(claims.every((c) => c.evidence.length >= 1));
+});
+
+test('EX-25 flattenExtraction never fabricates a claim for an "absent" derived fact (risk_flags.anomaly)', () => {
+  const data = loadSample('01', 'risk_flags');
+  const claims = flattenExtraction('risk_flags', data);
+  // buyer_posture + transcript_quality are cited -> 2 claims; anomaly is basis:"absent" -> dropped, not stubbed
+  assert.equal(claims.length, 2);
+  assert.ok(!claims.some((c) => c.id === 'risk_flags-anomaly'), 'an absent basis must never produce a fabricated receipt');
+});
+
+test('EX-26 flattenExtraction maps stakeholders + threading', () => {
+  const data = loadSample('01', 'stakeholders');
+  const claims = flattenExtraction('stakeholders', data);
+  assert.ok(claims.some((c) => c.extractor === 'stakeholders' && c.role_signal));
+  assert.ok(claims.some((c) => c.id === 'stakeholders-threading'));
+});
+
+test('EX-27 flattenExtraction throws a named error for a genuinely unknown extractor', () => {
+  assert.throws(() => flattenExtraction('mystery', {}), /no claim mapping defined/);
 });
 
 // ── per-extractor repair loop (the runner's core contract) ──────────────────

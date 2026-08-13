@@ -2,16 +2,29 @@
   "buyer_posture": {
     "value": "mixed",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 1, "quote": "it never showed up she asked me twice" } ]
+    "evidence": [
+      {
+        "utterance_id": 1,
+        "quote": "it never showed up she asked me twice"
+      }
+    ],
+    "text": "Buyer's mixed: annoyed the TCPA one-pager never showed up, but still engaged."
   },
   "transcript_quality": {
     "value": "some_gaps",
     "basis": "cited",
-    "evidence": [ { "utterance_id": 7, "quote": "contest tenab again lost two receptions this month" } ]
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "contest tenab again lost two receptions this month"
+      }
+    ],
+    "text": "Heads up: a few spots in this recording were hard to make out."
   },
   "anomaly": {
     "value": "none",
     "basis": "absent",
-    "evidence": []
+    "evidence": [],
+    "text": "Not established on this call (anomaly: none)."
   }
 }

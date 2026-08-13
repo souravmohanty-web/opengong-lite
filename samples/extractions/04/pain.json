@@ -2,13 +2,21 @@
   "pain_points": [
     {
       "evidence": [
-        { "utterance_id": 7, "quote": "every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost" }
+        {
+          "utterance_id": 7,
+          "quote": "every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost"
+        }
       ],
       "text": "Front-desk churn is now a cost center: every new hire must learn RingHawk's fifteen screens, so training time is its own cost.",
       "layer": "business",
       "who_it_affects": "department",
       "quantified_impact": {
-        "evidence": [ { "utterance_id": 7, "quote": "lost two receptions this month" } ],
+        "evidence": [
+          {
+            "utterance_id": 7,
+            "quote": "lost two receptions this month"
+          }
+        ],
         "text": "lost two front-desk receptionists this month"
       }
     }

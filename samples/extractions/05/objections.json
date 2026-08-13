@@ -2,15 +2,21 @@
   "objections": [
     {
       "evidence": [
-        { "utterance_id": 1, "quote": "his only question was whether we're locked in if the pilot goes badly" }
+        {
+          "utterance_id": 1,
+          "quote": "his only question was whether we're locked in if the pilot goes badly"
+        }
       ],
-      "text": "Dr Mehta's only remaining question: are we locked in if the pilot goes badly?",
+      "text": "Dr. Mehta's only remaining question: are we locked in if the pilot goes badly?",
       "category": "trust",
       "handling": "addressed",
       "objection_status": "buyer_accepted",
       "rep_response": {
         "evidence": [
-          { "utterance_id": 2, "quote": "you're not if the pilot fills your numbers you walk at ninety days and your lines port right back that's in section four" }
+          {
+            "utterance_id": 2,
+            "quote": "you're not if the pilot fills your numbers you walk at ninety days and your lines port right back that's in section four"
+          }
         ],
         "text": "Rep points to the walk-away clause in section four: if the pilot underperforms, they leave at ninety days and lines port back."
       }

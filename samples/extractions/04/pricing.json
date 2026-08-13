@@ -1,7 +1,12 @@
 {
   "pricing_mentions": [
     {
-      "evidence": [ { "utterance_id": 9, "quote": "the sharper number you owe me from last time comes with it" } ],
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "the sharper number you owe me from last time comes with it"
+        }
+      ],
       "text": "Buyer is still owed the sharper number from the pricing call; it will land with the proposal.",
       "kind": "other",
       "pricing_signal": "none"

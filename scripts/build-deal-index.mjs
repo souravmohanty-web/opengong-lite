@@ -40,7 +40,10 @@ export function build(dir = BUNDLES_DIR) {
   return { bundles, index, commitments };
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// The whole deal-workspace build as a callable function (same reason as
+// build-notes.mjs's buildNotes): `npm start` refreshes a stale workspace
+// in-process rather than shelling out to a second node.
+export function buildDealWorkspace({ quiet = false } = {}) {
   const { bundles, index, commitments } = build();
 
   mkdirSync(CALLS_DIR, { recursive: true });
@@ -58,13 +61,20 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     writeFileSync(join(CALLS_DIR, `${id}.html`), tier1Html(bundle));
   }
 
-  console.log(
-    `deal index: ${index.calls.length} calls, ${index.records.length} searchable records, ` +
-      `${commitments.length} commitment-ledger entries`,
-  );
-  console.log(
-    `wrote public/deal-index.json, public/deal-index.mjs, and public/calls/{${bundles
-      .map((b) => b.call.id)
-      .join(',')}}.html`,
-  );
+  if (!quiet) {
+    console.log(
+      `deal index: ${index.calls.length} calls, ${index.records.length} searchable records, ` +
+        `${commitments.length} commitment-ledger entries`,
+    );
+    console.log(
+      `wrote public/deal-index.json, public/deal-index.mjs, and public/calls/{${bundles
+        .map((b) => b.call.id)
+        .join(',')}}.html`,
+    );
+  }
+  return { calls: index.calls.length, records: index.records.length, commitments: commitments.length };
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  buildDealWorkspace();
 }

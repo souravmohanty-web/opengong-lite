@@ -1,8 +1,13 @@
 {
   "stakeholders": [
     {
-      "evidence": [ { "utterance_id": 5, "quote": "my office manager will like it more" } ],
-      "text": "Office manager is the internal champion for the texting piece; referenced, not on the call.",
+      "evidence": [
+        {
+          "utterance_id": 5,
+          "quote": "my office manager will like it more"
+        }
+      ],
+      "text": "Office manager's the internal champion for texting. She wasn't on this call.",
       "role_signal": "influencer",
       "present_on_call": "referenced"
     }
@@ -10,6 +15,12 @@
   "threading": {
     "value": "single_threaded",
     "basis": "inferred",
-    "evidence": [ { "utterance_id": 5, "quote": "my office manager will like it more" } ]
+    "evidence": [
+      {
+        "utterance_id": 5,
+        "quote": "my office manager will like it more"
+      }
+    ],
+    "text": "Single-threaded: only one contact in the loop so far."
   }
 }

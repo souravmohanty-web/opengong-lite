@@ -10,14 +10,18 @@
   },
   "scripts": {
     "start": "node src/index.js",
+    "new-extractor": "node scripts/new-extractor.mjs",
     "demo": "node src/server.js",
     "test": "node --test",
     "extract": "node src/extract.js --fixture stereo",
     "run": "node src/extract.js --fixture stereo",
+    "pipeline": "node scripts/pipeline.mjs",
     "scorecard": "node scripts/scorecard.mjs",
     "control-room": "node scripts/control-room.mjs",
     "build:deal": "node scripts/build-deal-index.mjs",
     "demo:deal": "node scripts/build-deal-index.mjs && node src/deal-server.mjs",
+    "build:notes": "node scripts/build-notes.mjs",
+    "demo:notes": "node scripts/build-notes.mjs && node src/deal-server.mjs",
     "coach": "node src/methodology/cli.js",
     "coach:demo": "node src/methodology/cli.js score samples/methodology/call-discovery.txt"
   }

@@ -2,7 +2,16 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "04",
-    "title": "Commitment check: the ledger moment"
+    "title": "Commitment check: the ledger moment",
+    "source": {
+      "system": null,
+      "external_call_id": null,
+      "external_contact_id": null,
+      "external_account_id": null,
+      "external_deal_id": null,
+      "occurred_at": null,
+      "direction": null
+    }
   },
   "audio": null,
   "transcript": {
@@ -893,6 +902,12 @@
             "text": "Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.",
             "claim_ids": [
               "next_steps-1"
+            ]
+          },
+          {
+            "text": "Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.",
+            "claim_ids": [
+              "summary-2-0"
             ]
           }
         ]
