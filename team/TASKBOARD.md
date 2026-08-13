@@ -30,7 +30,9 @@ state **current truth only**.
 | Slice-2: tier-1 self-contained HTML export (`node src/export.js <bundle>`) + A-007 mono residual fix | **projects-2f** | **done** — src/export.js + viewer inline-mode boot; escaped-inline-JSON breakout tested; invalid bundle fails at export time; 12KB real file generated; scoped suites 42/42 (full-suite run deferred: gate remediation mid-flight) |
 | Slice-2: email-from-verified-claims choke point (L8, spec-core: email role never sees transcript; uncited bullets cut; unknown claim_id rejects whole draft) | **projects-2f** | **done** — src/email.js + 6 tests: composer refuses bundle-shaped input structurally; uncorroborated/blocked can't enter or be cited (whole-draft reject); deterministic keyless baseline passes its own screen; suite 215/215 |
 | Slice-2: README limitations block (follow-ups b+d: hyphen/slash false-rejection, taint-screen best-effort, cross-utterance cue gap) | **projects-2f** | **done** — 4 limitations incl. "right quote, wrong claim" unsolved; public README inherits the section |
-| Slice-2: P1 extractor JSON files · keyword tracker · gate-schema items (a)(c) | hackathon (+ unclaimed extractor files) | per hackathon's routing |
+| Slice-2: P1 extractor files (next_steps, pain, pricing, competitors) | **projects-2f** | **done** — 4 JSON files, zero code (the extensibility demo); all 6 families load through the frozen registry's full lint chain; suite 215/215 |
+| Slice-2: deterministic keyword tracker | **blocked → hackathon** | needs 2 extensions in gate-lane files: registry ALLOWED_KEYS + `keywords` field, and a deterministic dispatch in extract.js (no LLM). Design proposed via SendMessage; JSON file is 10 min once unblocked |
+| Slice-2: gate-schema items (a)(c) | hackathon | per hackathon's routing |
 
 ## Build slices — roadmap
 

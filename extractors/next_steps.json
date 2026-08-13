@@ -1,0 +1,44 @@
+{
+  "name": "next_steps",
+  "version": "1.0.0",
+  "title": "Next Steps",
+  "description": "Every concrete commitment or agreed action, with which side owns it and the spoken due timeframe.",
+  "enabled": true,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "required_section": true,
+  "applies_to": ["all"],
+  "crm_map": {
+    "hubspot": { "property": "ai_next_action" },
+    "salesforce": { "field": "AI_Next_Action__c" }
+  },
+  "prompt": "List every concrete next step that was actually agreed or promised on this call, one entry per action.\n\nFor each next step:\n- evidence: cite the utterance(s) where the action is agreed or promised, before you write \"text\".\n- text: the action, stated from the owner's side, <=240 characters. Quote the speaker's exact words for what was promised wherever a direct quote exists — do not convert number words to digits or digits to number words.\n- owner: which side owns the action — \"rep\", \"buyer\", \"joint\" only when both sides explicitly share it, else \"unknown\". Never guess an owner the transcript does not support.\n- due: the spoken timeframe copied verbatim (\"by friday\", \"next quarter\"). Use an empty string when no timeframe was spoken — never invent one.\n\nA vague intention (\"we should look into that sometime\") is not a next step. Only extract actions that are actually in the transcript. An empty list is a valid, correct result when nothing was agreed.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["next_steps"],
+    "properties": {
+      "next_steps": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "text", "owner", "due"],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": { "$ref": "opengong://evidence" }
+            },
+            "text": { "type": "string" },
+            "owner": {
+              "type": "string",
+              "enum": ["rep", "buyer", "joint", "unknown"]
+            },
+            "due": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

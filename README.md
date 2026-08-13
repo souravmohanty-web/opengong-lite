@@ -79,6 +79,8 @@ npm test    # 11 tests incl. golden tests against real API fixtures (Node >= 22)
   receipts render with surrounding turns visible to mitigate, not solve.
 - **"Right quote, wrong claim" is unsolved** — the gate proves the line was said, not
   that it means what the claim says. The interpretation layer badges, never blocks.
+- **The email composer trusts the gate.** It builds only from claims the gate marked
+  verified — its guarantee is downstream of gate integrity, not independent of it.
 
 This is the internal team README; the public launch README is a Slice-3 deliverable
 (and inherits this section — honesty is a scored craft feature, not a disclaimer).

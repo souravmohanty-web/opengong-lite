@@ -1,0 +1,38 @@
+{
+  "name": "pain",
+  "version": "1.0.0",
+  "title": "Pain & Impact",
+  "description": "What is hurting the buyer today, in their own words, and the consequence they attach to it.",
+  "enabled": true,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "applies_to": ["discovery", "demo", "renewal"],
+  "crm_map": {
+    "hubspot": { "property": "ai_pain_points" }
+  },
+  "prompt": "List every pain point the buyer expresses about their current situation, one entry per distinct pain.\n\nFor each pain point:\n- evidence: cite the utterance(s) where the buyer expresses it, before you write \"text\".\n- text: the pain in the buyer's exact words wherever a direct quote exists — never rewritten into corporate register, never softened, no converting number words to digits or digits to number words.\n- impact: the consequence the buyer attaches to it, quoted verbatim when spoken (\"we lose deals every week\"). Use an empty string when the buyer states no consequence — never infer one.\n\nA pain point is something hurting them TODAY. A hypothetical (\"it would be bad if…\"), a negated statement (\"we do NOT have that problem\"), or a reported third-party view (\"our old vendor said…\") is not the buyer's pain. Only extract what is actually in the transcript. An empty list is a valid, correct result.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["pain_points"],
+    "properties": {
+      "pain_points": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "text", "impact"],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": { "$ref": "opengong://evidence" }
+            },
+            "text": { "type": "string" },
+            "impact": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

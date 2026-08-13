@@ -1,0 +1,41 @@
+{
+  "name": "pricing",
+  "version": "1.0.0",
+  "title": "Budget & Pricing",
+  "description": "Every mention of money: budget, quotes, discount asks, competitor pricing — numbers copied exactly as spoken.",
+  "enabled": true,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "applies_to": ["discovery", "demo", "negotiation", "renewal"],
+  "crm_map": {
+    "hubspot": { "property": "ai_pricing_signals" }
+  },
+  "prompt": "List every mention of money or budget on this call, one entry per distinct mention.\n\nFor each mention:\n- evidence: cite the utterance(s), before you write \"text\".\n- kind: the single closest fit — \"budget\" (their spending capacity), \"quote\" (a price offered), \"discount_request\", \"competitor_price\", \"price_objection\", \"other\".\n- text: the mention in the speaker's exact words. CRITICAL: copy numbers character-for-character exactly as the transcript renders them — if it says \"forty\" write \"forty\", if it says \"40\" write \"40\". Converting between digits and number words will cause the claim to be rejected by verification.\n\nOnly extract mentions actually in the transcript. An empty list is a valid, correct result when money never came up — do not stretch non-monetary mentions to fill the list.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["pricing_mentions"],
+    "properties": {
+      "pricing_mentions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "kind", "text"],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": { "$ref": "opengong://evidence" }
+            },
+            "kind": {
+              "type": "string",
+              "enum": ["budget", "quote", "discount_request", "competitor_price", "price_objection", "other"]
+            },
+            "text": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

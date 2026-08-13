@@ -1,0 +1,42 @@
+{
+  "name": "competitors",
+  "version": "1.0.0",
+  "title": "Competition",
+  "description": "Every competitor mention, with the buyer's actual relationship to it — an active user is not the same signal as someone migrating away.",
+  "enabled": true,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "applies_to": ["all"],
+  "crm_map": {
+    "hubspot": { "property": "ai_competitor_signals" }
+  },
+  "prompt": "List every mention of a competing product or vendor, one entry per mention.\n\nFor each mention:\n- evidence: cite the utterance(s), before you write \"text\".\n- competitor: the competitor's name exactly as spoken in the transcript (lowercase if the transcript is lowercase). Never normalize to an official brand spelling the transcript doesn't contain.\n- relationship: the buyer's actual relationship — \"active_user\" (using it today), \"migrating_from\" (leaving it), \"evaluating\" (considering it), \"mentioned\" (came up without a stated relationship). Distinguish carefully: an active user and someone migrating away are opposite signals.\n- text: the mention in the speaker's exact words — no digit/number-word conversion, no paraphrase.\n\nOnly extract mentions actually in the transcript. A generic reference to \"other tools\" with no identifiable product is not a competitor mention. An empty list is a valid, correct result.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["competitor_mentions"],
+    "properties": {
+      "competitor_mentions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "competitor", "relationship", "text"],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": { "$ref": "opengong://evidence" }
+            },
+            "competitor": { "type": "string" },
+            "relationship": {
+              "type": "string",
+              "enum": ["active_user", "migrating_from", "evaluating", "mentioned"]
+            },
+            "text": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
