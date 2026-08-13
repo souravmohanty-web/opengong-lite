@@ -15,3 +15,49 @@ The spec proposes a HubSpot-native action layer with pasted-transcript ingestion
 - **Merged positioning:** *Gong records. We prove — then we act on what was proven.*
 
 Aakash: treat this as the standing interpretation; challenge with evidence via 💬 + SYNC per protocol.
+
+---
+
+## Addendum (Aug 13 ~20:15, filed by projects-2f; hackathon to ratify per A1): `inbox-aakash-architecture-comparison.md`
+
+Third inbox file: OSS-field sweep + reconstructed Sybill architecture + steal-list.
+**Caveat first:** its baseline is `build-plan.md` — the PM-spec this synthesis already
+ruled on — so its "our (planned)" column describes the REJECTED ingestion shape
+(pasted transcripts, no ASR, HubSpot-as-DB, Next.js). The intel stands; the baseline
+column must not be quoted as our architecture.
+
+### ADOPT (spec-independent, high value)
+1. **Lane-empty confirmation, now with a two-camp map:** OSS splits into local
+   note-takers (Meetily 29K★, anarlog 9K★, Amurex) vs bot/transcription APIs (Vexa,
+   Attendee, Speaches) — nobody does the sales layer, nobody touches the CRM.
+   Adapted pitch line: *"20K+ stars of open source can transcribe your sales call.
+   None of it can prove a claim or act on one. That's us."*
+2. **Kill-line (new, strong):** Meetily paywalls diarization out of its 29K-star OSS
+   edition — ours is free-by-construction from stereo channels (L2). Same pattern as
+   the anarlog finding: the popular OSS tools gate or skip exactly what we lead with.
+3. **Judge-proof lines** (F-42 Q&A prep): Sybill at Series A also outsources ingestion
+   (Recall.ai — in-house bots "could've taken a year"), also drafts-but-never-sends
+   email (= our L8 choke point), also runs batch post-call only (= our jobs API). Our
+   scope cuts are the incumbent-challenger's production architecture.
+4. **Steal-list items mapped to our build:** confidence-gated review queue → our
+   interpretation-gate badges + per-claim confidence already planned; amber
+   "check this one" render = one schema field + one CSS class (Slice-2 candidate).
+   Append-don't-replace → action-layer rule when CRM write-back ships (roadmap).
+   Vexa `meeting.completed` webhook-compatible input shape → costs nothing to keep in
+   mind for a future transcript-import path (NOT the primary ingest — that stays
+   audio → PyAI per L1). Meetily's opt-in telemetry posture → copy if analytics ever.
+5. **Positioning line, merged with our wedge:** *Sybill's architecture, Gong's target,
+   zero lock-in — and receipts none of them have.*
+
+### FLAG — PM-spec lineage, do NOT quote as our architecture (conflicts with canon)
+- "ASR: None (transcripts arrive labeled)" / "`Name (Role):` format sidesteps
+  diarization" → contradicts L1/L2: PyAI batch ASR + channel diarization IS the
+  product's happy path and the API-gravity score.
+- "Storage: None — HubSpot is the DB" → contradicts L10 (JSON files are the source of
+  truth; "your data is files" is a headline feature per §2 above).
+- "Next.js on Vercel, synchronous `/api/analyze`" → our stack is zero-dep Node +
+  local server (technical-spec-core ruling).
+- §3's framing "validates build-plan.md" → the four validations DO carry over to our
+  real shape (don't build a recorder / draft-don't-send / batch post-call / grounded
+  LLM) — but ours grounds via verified receipts, not RAG-context-only, which is
+  stronger and is the wedge. Quote them for our build, not for build-plan.md's.
