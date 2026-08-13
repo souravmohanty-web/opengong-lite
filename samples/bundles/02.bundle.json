@@ -2,7 +2,7 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "02",
-    "title": "Demo — after-hours routing + compliant texting"
+    "title": "Demo: after-hours routing and compliant texting"
   },
   "audio": null,
   "transcript": {
@@ -156,7 +156,7 @@
       "id": "tracker-2-answering machine detection",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: answering machine detection",
+      "text": "Answering machine detection came up.",
       "status": "verified",
       "evidence": [
         {
@@ -180,7 +180,7 @@
       "id": "tracker-4-compliance",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: compliance",
+      "text": "Compliance came up.",
       "status": "verified",
       "evidence": [
         {
@@ -211,7 +211,7 @@
       "id": "tracker-6-tcpa",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: tcpa",
+      "text": "TCPA came up.",
       "status": "verified",
       "evidence": [
         {
@@ -242,7 +242,7 @@
       "id": "buying_stage-stage",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Buying stage: evaluating",
+      "text": "Still evaluating. Liked what they saw in the demo.",
       "basis": "inferred",
       "status": "verified",
       "evidence": [
@@ -267,7 +267,7 @@
       "id": "buying_stage-urgency",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Urgency: medium",
+      "text": "Medium urgency: ready to move to pricing next.",
       "basis": "inferred",
       "status": "verified",
       "evidence": [
@@ -432,7 +432,7 @@
       "id": "objections-0",
       "extractor": "objections",
       "section": "objections",
-      "text": "Downtime is a dealbreaker: 'we cannot be down during patient hours at all -- if switching means two dead days of phones the deal is off before it starts.'",
+      "text": "Downtime is a dealbreaker: 'we cannot be down during patient hours at all, if switching means two dead days of phones the deal is off before it starts.'",
       "category": "timing",
       "handling": "addressed",
       "objection_status": "left_open",
@@ -543,7 +543,7 @@
       "id": "risk_flags-buyer_posture",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Buyer posture: open",
+      "text": "Buyer's open, engaged and receptive.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -575,7 +575,7 @@
       "id": "risk_flags-transcript_quality",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Transcript quality: some_gaps",
+      "text": "Heads up: a few spots in this recording were hard to make out.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -600,7 +600,7 @@
       "id": "stakeholders-0",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Office manager is the internal champion for the texting piece; referenced, not on the call.",
+      "text": "Office manager's the internal champion for texting. She wasn't on this call.",
       "role_signal": "influencer",
       "present_on_call": "referenced",
       "status": "verified",
@@ -626,7 +626,7 @@
       "id": "stakeholders-threading",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Threading: single_threaded",
+      "text": "Single-threaded: only one contact in the loop so far.",
       "basis": "inferred",
       "status": "verified",
       "evidence": [
@@ -762,19 +762,19 @@
         "title": "tracker",
         "blocks": [
           {
-            "text": "Tracker 'tracker' matched: answering machine detection",
+            "text": "Answering machine detection came up.",
             "claim_ids": [
               "tracker-2-answering machine detection"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: compliance",
+            "text": "Compliance came up.",
             "claim_ids": [
               "tracker-4-compliance"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: tcpa",
+            "text": "TCPA came up.",
             "claim_ids": [
               "tracker-6-tcpa"
             ]
@@ -785,13 +785,13 @@
         "title": "buying_stage",
         "blocks": [
           {
-            "text": "Buying stage: evaluating",
+            "text": "Still evaluating. Liked what they saw in the demo.",
             "claim_ids": [
               "buying_stage-stage"
             ]
           },
           {
-            "text": "Urgency: medium",
+            "text": "Medium urgency: ready to move to pricing next.",
             "claim_ids": [
               "buying_stage-urgency"
             ]
@@ -829,12 +829,6 @@
             "claim_ids": [
               "next_steps-2"
             ]
-          },
-          {
-            "text": "Rep to send SOC 2 report and TCPA one-pager by Friday; buyer to send the call-volume report early next week.",
-            "claim_ids": [
-              "summary-2-0"
-            ]
           }
         ]
       },
@@ -842,7 +836,7 @@
         "title": "Objections",
         "blocks": [
           {
-            "text": "Downtime is a dealbreaker: 'we cannot be down during patient hours at all -- if switching means two dead days of phones the deal is off before it starts.'",
+            "text": "Downtime is a dealbreaker: 'we cannot be down during patient hours at all, if switching means two dead days of phones the deal is off before it starts.'",
             "claim_ids": [
               "objections-0"
             ]
@@ -875,13 +869,13 @@
         "title": "risk_flags",
         "blocks": [
           {
-            "text": "Buyer posture: open",
+            "text": "Buyer's open, engaged and receptive.",
             "claim_ids": [
               "risk_flags-buyer_posture"
             ]
           },
           {
-            "text": "Transcript quality: some_gaps",
+            "text": "Heads up: a few spots in this recording were hard to make out.",
             "claim_ids": [
               "risk_flags-transcript_quality"
             ]
@@ -892,13 +886,13 @@
         "title": "stakeholders",
         "blocks": [
           {
-            "text": "Office manager is the internal champion for the texting piece; referenced, not on the call.",
+            "text": "Office manager's the internal champion for texting. She wasn't on this call.",
             "claim_ids": [
               "stakeholders-0"
             ]
           },
           {
-            "text": "Threading: single_threaded",
+            "text": "Single-threaded: only one contact in the loop so far.",
             "claim_ids": [
               "stakeholders-threading"
             ]

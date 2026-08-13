@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>OpenGong Lite: notes with receipts</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, sans-serif; color: #1a1a1a; background: #fafafa; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 20px; border-bottom: 1px solid #ddd; background: #fff; }
+  h1 { font-size: 18px; margin: 0; }
+  .band { font-size: 13px; color: #555; background: #f0f0f0; padding: 2px 10px; border-radius: 10px; white-space: nowrap; }
+  .counts { display: block; font-size: 12px; color: #666; margin-top: 2px; }
+  main { display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: calc(100vh - 110px); }
+  #notes, #transcript { overflow-y: auto; padding: 16px 20px; }
+  #transcript { border-left: 1px solid #ddd; background: #fff; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #777; margin: 18px 0 6px; }
+  .claim { border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; background: #fff; }
+  .claim p { margin: 4px 0 0; }
+  .claim.active { border-color: #2563eb; box-shadow: 0 0 0 2px #2563eb33; }
+  .claim.uncorroborated { background: #f5f5f5; color: #777; border-style: dashed; cursor: default; }
+  .claim.blocked_injection { border-color: #dc2626; background: #fef2f2; cursor: default; }
+  .claim.blocked_injection .offending { font-size: 12px; color: #991b1b; margin-top: 6px; }
+  .badge { font-size: 11px; font-weight: 600; }
+  .verified .badge, .segment_corrected .badge { color: #15803d; }
+  .uncorroborated .badge { color: #92400e; }
+  .blocked_injection .badge { color: #dc2626; }
+  .utt { padding: 6px 8px; border-radius: 6px; margin: 2px 0; }
+  .utt.active { background: #eff6ff; outline: 1px solid #bfdbfe; }
+  .ts { color: #999; font-size: 12px; margin-right: 6px; }
+  .spk { font-weight: 600; margin-right: 4px; }
+  mark { background: #fde047; padding: 0 2px; border-radius: 2px; }
+  footer { padding: 8px 20px; border-top: 1px solid #ddd; background: #fff; }
+  audio { width: 100%; }
+  .audio-note { font-size: 12px; color: #999; }
+</style>
+</head>
+<body>
+  <div id="app">loading…</div>
+  <footer><audio controls preload="auto" src="/audio.wav"></audio></footer>
+  <script type="application/json" id="og-data">{"format":"opengong.bundle.v1","call":{"id":"02","title":"Demo: after-hours routing and compliant texting"},"audio":null,"transcript":{"mode":"diarized","speakers":2,"utterances":[{"id":0,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":0,"end":8.72,"text":"rahul thanks for the thirty minutes straight into it this is the after hours flow call comes in at seven no answer at the desk watch what happens"},{"id":1,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":8.64,"end":15.68,"text":"okay so it routed to the oncore line and then texted the patient at booking link that's the part we lose today that's genuinely useful"},{"id":2,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":15.68,"end":25.2,"text":"and he is answering machine detection on the outbound side when your record campaign hits a voice mail the system knows it's a machine and drops the right message instead of burning staff time"},{"id":3,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":25.6,"end":32,"text":"so the detection part is my front desk isn't sitting there listening to beeps all afternoon because recall days are half wasted on that"},{"id":4,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":31.92,"end":39.04,"text":"exactly that and the texting flow you're asking every message goes out with consent tracking attached so the compliance question stops being your problem"},{"id":5,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":39.36,"end":43.84,"text":"texting piece with the consent baked in that i like my office manager will like it more"},{"id":6,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":43.92,"end":50.800000000000004,"text":"do things from my side then i'll send you our sot report and the tcpa one paper for your office manager both by friday"},{"id":7,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":50.88,"end":58.32,"text":"could send both an exchange or pull our call volume report from ringcak so you can size this properly i can get that to you early next week"},{"id":8,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":58.32,"end":60,"text":"deal what worries you about actually moving"},{"id":9,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":60.160000000000004,"end":67.44,"text":"downtime we cannot be down during patient hours at all if switching means two dead days of phones the deal is off before it starts"},{"id":10,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":67.36,"end":76.4,"text":"whatever happens on a weekend numbers port in the background and the old system stays live until the new one answers nobody's phones go dark on a tuesday"},{"id":11,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":76.4,"end":82.88,"text":"alright and hypothetically if we ever opened a sixth location next year adding it as what a form not a project"},{"id":12,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":83.12,"end":85.76,"text":"form same day but let's get five working first"},{"id":13,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":85.84,"end":90.32000000000001,"text":"fine send me the two documents i'll send the report and then let's talk numbers"}]},"claims":[{"id":"tracker-2-answering machine detection","extractor":"tracker","section":"tracker","text":"Answering machine detection came up.","status":"verified","evidence":[{"utterance_id":2,"quote":"and he is answering machine detection on the outbound side when your record campaign hits a voice mail the system knows it's a machine and drops the right message instead of burning staff time","match_type":"exact","t_start":15.68,"t_end":25.2,"char_start":0,"char_end":192}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"tracker-4-compliance","extractor":"tracker","section":"tracker","text":"Compliance came up.","status":"verified","evidence":[{"utterance_id":4,"quote":"exactly that and the texting flow you're asking every message goes out with consent tracking attached so the compliance question stops being your problem","match_type":"exact","t_start":31.92,"t_end":39.04,"char_start":0,"char_end":153}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"tracker-6-tcpa","extractor":"tracker","section":"tracker","text":"TCPA came up.","status":"verified","evidence":[{"utterance_id":6,"quote":"do things from my side then i'll send you our sot report and the tcpa one paper for your office manager both by friday","match_type":"exact","t_start":43.92,"t_end":50.800000000000004,"char_start":0,"char_end":118}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":6}],"interpretation_confidence":"medium"},{"id":"buying_stage-stage","extractor":"buying_stage","section":"buying_stage","text":"Still evaluating. Liked what they saw in the demo.","basis":"inferred","status":"verified","evidence":[{"utterance_id":1,"quote":"that's the part we lose today that's genuinely useful","match_type":"exact","t_start":8.64,"t_end":15.68,"char_start":81,"char_end":134}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"buying_stage-urgency","extractor":"buying_stage","section":"buying_stage","text":"Medium urgency: ready to move to pricing next.","basis":"inferred","status":"verified","evidence":[{"utterance_id":13,"quote":"and then let's talk numbers","match_type":"exact","t_start":85.84,"t_end":90.32000000000001,"char_start":52,"char_end":79}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"competitors-0","extractor":"competitors","section":"competitors","text":"RingHawk (spoken 'ringcak') is still the system of record: the buyer will export its call-volume report to size the CallForge deal.","competitor":"RingHawk","relationship":"active_user","status":"verified","evidence":[{"utterance_id":7,"quote":"pull our call volume report from ringcak so you can size this properly","match_type":"exact","t_start":50.88,"t_end":58.32,"char_start":31,"char_end":101}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"next_steps-0","extractor":"next_steps","section":"next_steps","text":"Rep committed to send the SOC 2 report and the TCPA one-pager to the office manager, both by Friday.","type":"send_info","owner":"rep","commitment":"firm","due":"Friday","status":"verified","evidence":[{"utterance_id":6,"quote":"i'll send you our sot report and the tcpa one paper for your office manager both by friday","match_type":"exact","t_start":43.92,"t_end":50.800000000000004,"char_start":28,"char_end":118}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":6}],"interpretation_confidence":"medium"},{"id":"next_steps-1","extractor":"next_steps","section":"next_steps","text":"Buyer to pull the RingHawk call-volume report and send it so the rep can size the deal, early next week.","type":"send_info","owner":"buyer","commitment":"firm","due":"early next week","status":"verified","evidence":[{"utterance_id":7,"quote":"pull our call volume report from ringcak so you can size this properly","match_type":"exact","t_start":50.88,"t_end":58.32,"char_start":31,"char_end":101},{"utterance_id":7,"quote":"i can get that to you early next week","match_type":"exact","t_start":50.88,"t_end":58.32,"char_start":102,"char_end":139}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"next_steps-2","extractor":"next_steps","section":"next_steps","text":"Once the documents are exchanged, both sides move to pricing.","type":"soft_followup","owner":"joint","commitment":"tentative","due":"after documents exchanged","status":"verified","evidence":[{"utterance_id":13,"quote":"and then let's talk numbers","match_type":"exact","t_start":85.84,"t_end":90.32000000000001,"char_start":52,"char_end":79}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"objections-0","extractor":"objections","section":"objections","text":"Downtime is a dealbreaker: 'we cannot be down during patient hours at all, if switching means two dead days of phones the deal is off before it starts.'","category":"timing","handling":"addressed","objection_status":"left_open","status":"verified","evidence":[{"utterance_id":9,"quote":"we cannot be down during patient hours at all if switching means two dead days of phones the deal is off before it starts","match_type":"exact","t_start":60.160000000000004,"t_end":67.44,"char_start":9,"char_end":130},{"utterance_id":10,"quote":"numbers port in the background and the old system stays live until the new one answers nobody's phones go dark on a tuesday","match_type":"exact","t_start":67.36,"t_end":76.4,"char_start":30,"char_end":153}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":10}],"interpretation_confidence":"medium"},{"id":"pain-0","extractor":"pain","section":"pain","text":"Front desk currently loses time to answering-machine beeps on recall campaigns; AMD would give that time back.","layer":"business","who_it_affects":"team","status":"verified","evidence":[{"utterance_id":3,"quote":"my front desk isn't sitting there listening to beeps all afternoon","match_type":"exact","t_start":25.6,"t_end":32,"char_start":25,"char_end":91},{"utterance_id":3,"quote":"recall days are half wasted on that","match_type":"exact","t_start":25.6,"t_end":32,"char_start":100,"char_end":135}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"pricing-0","extractor":"pricing","section":"pricing","text":"No numbers yet: buyer signals pricing is the next conversation once documents are exchanged.","kind":"other","pricing_signal":"none","status":"verified","evidence":[{"utterance_id":13,"quote":"and then let's talk numbers","match_type":"exact","t_start":85.84,"t_end":90.32000000000001,"char_start":52,"char_end":79}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"risk_flags-buyer_posture","extractor":"risk_flags","section":"risk_flags","text":"Buyer's open, engaged and receptive.","basis":"cited","status":"verified","evidence":[{"utterance_id":1,"quote":"that's genuinely useful","match_type":"exact","t_start":8.64,"t_end":15.68,"char_start":111,"char_end":134}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"risk_flags-transcript_quality","extractor":"risk_flags","section":"risk_flags","text":"Heads up: a few spots in this recording were hard to make out.","basis":"cited","status":"verified","evidence":[{"utterance_id":7,"quote":"pull our call volume report from ringcak so you can size this properly","match_type":"exact","t_start":50.88,"t_end":58.32,"char_start":31,"char_end":101}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"stakeholders-0","extractor":"stakeholders","section":"stakeholders","text":"Office manager's the internal champion for texting. She wasn't on this call.","role_signal":"influencer","present_on_call":"referenced","status":"verified","evidence":[{"utterance_id":5,"quote":"my office manager will like it more","match_type":"exact","t_start":39.36,"t_end":43.84,"char_start":52,"char_end":87}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"stakeholders-threading","extractor":"stakeholders","section":"stakeholders","text":"Single-threaded: only one contact in the loop so far.","basis":"inferred","status":"verified","evidence":[{"utterance_id":5,"quote":"my office manager will like it more","match_type":"exact","t_start":39.36,"t_end":43.84,"char_start":52,"char_end":87}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-0-0","extractor":"summary","section":"summary","title":"Outcome","text":"Demo landed: after-hours routing, AMD, and consent-tracked texting all resonated with the buyer.","status":"verified","evidence":[{"utterance_id":5,"quote":"texting piece with the consent baked in that i like","match_type":"exact","t_start":39.36,"t_end":43.84,"char_start":0,"char_end":51}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-1-0","extractor":"summary","section":"summary","title":"Interests","text":"Buyer is drawn to answering-machine detection and to consent-tracked texting for compliance.","status":"verified","evidence":[{"utterance_id":3,"quote":"my front desk isn't sitting there listening to beeps all afternoon","match_type":"exact","t_start":25.6,"t_end":32,"char_start":25,"char_end":91}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-2-0","extractor":"summary","section":"next_steps","title":"Next steps","text":"Rep to send SOC 2 report and TCPA one-pager by Friday; buyer to send the call-volume report early next week.","status":"verified","evidence":[{"utterance_id":6,"quote":"i'll send you our sot report and the tcpa one paper for your office manager both by friday","match_type":"exact","t_start":43.92,"t_end":50.800000000000004,"char_start":28,"char_end":118}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":6}],"interpretation_confidence":"medium"}],"notes":{"coverage":{"band":"SHIPPED","ratio":1,"stats":{"total":19,"attempted":19,"verified":19,"segment_corrected":0,"uncorroborated":0,"blocked_injection":0,"corroborated":19},"required_sections":[{"section":"summary","attempted":2,"corroborated":2},{"section":"next_steps","attempted":4,"corroborated":4}],"extractor_failures":[]},"sections":[{"title":"tracker","blocks":[{"text":"Answering machine detection came up.","claim_ids":["tracker-2-answering machine detection"]},{"text":"Compliance came up.","claim_ids":["tracker-4-compliance"]},{"text":"TCPA came up.","claim_ids":["tracker-6-tcpa"]}]},{"title":"buying_stage","blocks":[{"text":"Still evaluating. Liked what they saw in the demo.","claim_ids":["buying_stage-stage"]},{"text":"Medium urgency: ready to move to pricing next.","claim_ids":["buying_stage-urgency"]}]},{"title":"competitors","blocks":[{"text":"RingHawk (spoken 'ringcak') is still the system of record: the buyer will export its call-volume report to size the CallForge deal.","claim_ids":["competitors-0"]}]},{"title":"Next steps","blocks":[{"text":"Rep committed to send the SOC 2 report and the TCPA one-pager to the office manager, both by Friday.","claim_ids":["next_steps-0"]},{"text":"Buyer to pull the RingHawk call-volume report and send it so the rep can size the deal, early next week.","claim_ids":["next_steps-1"]},{"text":"Once the documents are exchanged, both sides move to pricing.","claim_ids":["next_steps-2"]}]},{"title":"Objections","blocks":[{"text":"Downtime is a dealbreaker: 'we cannot be down during patient hours at all, if switching means two dead days of phones the deal is off before it starts.'","claim_ids":["objections-0"]}]},{"title":"pain","blocks":[{"text":"Front desk currently loses time to answering-machine beeps on recall campaigns; AMD would give that time back.","claim_ids":["pain-0"]}]},{"title":"pricing","blocks":[{"text":"No numbers yet: buyer signals pricing is the next conversation once documents are exchanged.","claim_ids":["pricing-0"]}]},{"title":"risk_flags","blocks":[{"text":"Buyer's open, engaged and receptive.","claim_ids":["risk_flags-buyer_posture"]},{"text":"Heads up: a few spots in this recording were hard to make out.","claim_ids":["risk_flags-transcript_quality"]}]},{"title":"stakeholders","blocks":[{"text":"Office manager's the internal champion for texting. She wasn't on this call.","claim_ids":["stakeholders-0"]},{"text":"Single-threaded: only one contact in the loop so far.","claim_ids":["stakeholders-threading"]}]},{"title":"Summary","blocks":[{"text":"Demo landed: after-hours routing, AMD, and consent-tracked texting all resonated with the buyer.","claim_ids":["summary-0-0"]},{"text":"Buyer is drawn to answering-machine detection and to consent-tracked texting for compliance.","claim_ids":["summary-1-0"]}]}]},"provenance":{"transcription_model":"pyai-hear","extraction_model":"offline-author","note":"offline extraction (author=agent, gate-verified)"}}</script>
+<script type="module">// Slice-1 viewer: pure view-model helpers (node-testable) + browser render.
+// One interaction: click a claim → its cited line highlights → audio seeks and
+// plays at that second. blocked_injection is quarantined, never in notes body.
+
+export function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[ch]));
+}
+
+export function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+// Closed enums (technical-spec-core §2). Anything outside them fails CLOSED at
+// the boundary — a typo'd status must never render a claim into the main list.
+const CLAIM_STATUSES = new Set(['verified', 'segment_corrected', 'uncorroborated', 'blocked_injection']);
+
+export function buildViewModel(bundle) {
+  const uttById = new Map();
+  for (const u of bundle.transcript.utterances) {
+    if (!Number.isInteger(u.id)) {
+      throw new Error(`utterance id must be an integer, got: ${JSON.stringify(u.id)}`);
+    }
+    uttById.set(u.id, u);
+  }
+
+  const claims = bundle.claims.map((claim) => {
+    if (!CLAIM_STATUSES.has(claim.status)) {
+      throw new Error(`unknown claim.status ${JSON.stringify(claim.status)} — closed enum, failing closed`);
+    }
+    const primary = claim.evidence?.[0] ?? null;
+    const anchored = claim.status === 'verified' || claim.status === 'segment_corrected';
+    if (anchored && primary && !uttById.has(primary.utterance_id)) {
+      throw new Error(`claim ${claim.id} cites utterance ${primary.utterance_id} which is not in the bundle — exports must be self-contained`);
+    }
+    return {
+      id: claim.id,
+      extractor: claim.extractor,
+      text: claim.text,
+      status: claim.status,
+      anchor: anchored && primary ? {
+        utterance_id: primary.utterance_id,
+        quote: primary.quote,
+        t_start: primary.t_start,
+        match_type: primary.match_type,
+      } : null,
+      offending: claim.status === 'blocked_injection' ? primary?.quote ?? '' : null,
+    };
+  });
+
+  const blocked = new Set(claims.filter((c) => c.status === 'blocked_injection').map((c) => c.id));
+  for (const section of bundle.notes.sections) {
+    for (const block of section.blocks) {
+      for (const id of block.claim_ids) {
+        if (blocked.has(id)) {
+          throw new Error(`notes block references blocked_injection claim ${id} — the notes body must never contain a blocked claim`);
+        }
+      }
+    }
+  }
+
+  // The gate's own scorecard, always on screen: what shipped AND what was
+  // dropped/demoted/blocked. Nothing is silently removed (L7).
+  const counts = { verified: 0, segment_corrected: 0, uncorroborated: 0, blocked_injection: 0 };
+  for (const c of claims) counts[c.status] += 1;
+
+  return {
+    title: bundle.call?.title ?? bundle.call?.id ?? 'call',
+    coverage: bundle.notes.coverage,          // rendered verbatim, never recomputed
+    counts,
+    utterances: bundle.transcript.utterances,
+    uttById,                                  // id-keyed — array order is NOT id order
+    claims,
+    quarantine: claims.filter((c) => c.status === 'blocked_injection'),
+    sections: bundle.notes.sections,
+    provenance: bundle.provenance ?? null,
+  };
+}
+
+// ── browser side ───────────────────────────────────────────────────────────
+const BADGE = {
+  verified: '✓ verified',
+  segment_corrected: '✓ corrected',
+  uncorroborated: '⚠ not found in the call',
+  blocked_injection: '⛔ blocked: planted instruction',
+};
+
+export function render(vm, root, audio) {
+  root.innerHTML = `
+    <header>
+      <div>
+        <h1>${escapeHtml(vm.title)}</h1>
+        <span class="counts">${vm.counts.verified} verified · ${vm.counts.segment_corrected} corrected · ${vm.counts.uncorroborated} not found in the call · ${vm.counts.blocked_injection} blocked</span>
+      </div>
+      <span class="band">${escapeHtml(vm.coverage.band)} · ${Math.round(vm.coverage.ratio * 100)}% verified</span>
+    </header>
+    <main>
+      <section id="notes">
+        ${vm.sections.map((s) => `
+          <h2>${escapeHtml(s.title)}</h2>
+          ${s.blocks.map((b) => `<p class="block">${escapeHtml(b.text)}</p>`).join('')}`).join('')}
+        <h2>Claims</h2>
+        ${vm.claims.filter((c) => c.status !== 'blocked_injection').map((c) => `
+          <div class="claim ${c.status}" data-id="${escapeHtml(c.id)}">
+            <span class="badge">${BADGE[c.status] ?? escapeHtml(c.status)}</span>
+            <p>${escapeHtml(c.text)}</p>
+          </div>`).join('')}
+        ${vm.quarantine.length ? `<h2>Quarantined</h2>` : ''}
+        ${vm.quarantine.map((c) => `
+          <div class="claim blocked_injection">
+            <span class="badge">${BADGE.blocked_injection}</span>
+            <p><s>${escapeHtml(c.text)}</s></p>
+            <p class="offending">line: “${escapeHtml(c.offending)}”</p>
+          </div>`).join('')}
+      </section>
+      <section id="transcript">
+        ${vm.utterances.map((u) => `
+          <div class="utt" data-utt="${escapeHtml(u.id)}">
+            <span class="ts">[${formatTime(u.start)}]</span>
+            ${u.speaker ? `<span class="spk">${escapeHtml(u.speaker)}:</span>` : ''}
+            <span class="txt">${escapeHtml(u.text)}</span>
+          </div>`).join('')}
+      </section>
+    </main>`;
+
+  root.querySelectorAll('.claim[data-id]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const claim = vm.claims.find((c) => c.id === el.dataset.id);
+      root.querySelectorAll('.utt.active').forEach((n) => n.classList.remove('active'));
+      root.querySelectorAll('.claim.active').forEach((n) => n.classList.remove('active'));
+      el.classList.add('active');
+      if (!claim?.anchor) return;                     // demoted claims have nothing to prove
+      const source = vm.uttById.get(claim.anchor.utterance_id);  // id-keyed, survives reordering
+      const utt = root.querySelector(`.utt[data-utt="${Number(claim.anchor.utterance_id)}"]`);
+      if (!utt || !source) return;
+      utt.classList.add('active');
+      const txt = utt.querySelector('.txt');
+      const raw = source.text;
+      const idx = raw.indexOf(claim.anchor.quote);
+      if (idx >= 0) {
+        txt.innerHTML = `${escapeHtml(raw.slice(0, idx))}<mark>${escapeHtml(claim.anchor.quote)}</mark>${escapeHtml(raw.slice(idx + claim.anchor.quote.length))}`;
+      }
+      utt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      safeSeekAndPlay(audio, claim.anchor.t_start);   // bonus layer — can never break the highlight
+    });
+  });
+}
+
+// Audio is a BONUS layer on the receipts moment, never a dependency: the
+// highlight has already landed by the time this runs, and nothing here can
+// throw past it. Returns whether playback was attempted (DOM-free testable).
+export function safeSeekAndPlay(audio, tStart) {
+  if (!audio || audio.error || !Number.isFinite(tStart)) return false;
+  try {
+    audio.currentTime = tStart;
+    const played = audio.play();
+    played?.catch?.(() => {});          // autoplay policy / decode failure — silently a no-op
+    return true;
+  } catch {
+    return false;                       // seeking an unready element must never surface
+  }
+}
+
+// App-mode footer: if the audio file 404s or dies mid-load, swap the broken
+// player for a quiet note — receipts keep working without it.
+function watchAudio(audio) {
+  if (!audio) return;
+  audio.addEventListener('error', () => {
+    const footer = audio.closest('footer');
+    if (footer) footer.innerHTML = '<span class="audio-note">Audio&#39;s not loaded. Click a claim to see its line.</span>';
+  }, { once: true });
+}
+
+// Boot only in a browser; node imports the pure helpers above. Two fuel lines:
+// tier-1 export inlines the bundle as #og-data (no server, no audio — the
+// footer player is removed); app mode fetches from the local server.
+if (typeof document !== 'undefined') {
+  const inline = document.getElementById('og-data');
+  if (inline) {
+    document.querySelector('footer')?.remove();
+    try {
+      render(buildViewModel(JSON.parse(inline.textContent)), document.getElementById('app'), null);
+    } catch (err) {
+      document.getElementById('app').textContent = `failed to load bundle: ${err.message}`;
+    }
+  } else {
+    const audio = document.querySelector('audio');
+    watchAudio(audio);
+    fetch('/bundle.json')
+      .then((r) => r.json())
+      .then((bundle) => render(buildViewModel(bundle), document.getElementById('app'), audio))
+      .catch((err) => { document.getElementById('app').textContent = `failed to load bundle: ${err.message}`; });
+  }
+}
+</script>
+</body>
+</html>

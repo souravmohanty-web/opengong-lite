@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenGong Lite — Control Room</title>
+<style>
+
+:root {
+  color-scheme: light dark;
+  --bg: #f7f7f8;
+  --panel: #ffffff;
+  --text: #1a1a1e;
+  --muted: #6b6f76;
+  --border: #e2e3e6;
+  --accent: #3454d1;
+  --green: #1a8f4c;
+  --green-bg: #e5f6ec;
+  --amber: #a15c00;
+  --amber-bg: #fdf1dc;
+  --red: #b3261e;
+  --red-bg: #fbe6e4;
+  --code-bg: #f0f1f3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16171a;
+    --panel: #1f2024;
+    --text: #e8e9ec;
+    --muted: #9a9ea7;
+    --border: #2c2d32;
+    --accent: #7c96ff;
+    --green: #4ade80;
+    --green-bg: #123322;
+    --amber: #f5b350;
+    --amber-bg: #3a2c10;
+    --red: #f2837c;
+    --red-bg: #3a1614;
+    --code-bg: #26272c;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+main { max-width: 1080px; margin: 0 auto; padding: 0 24px 64px; }
+.topbar {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+  padding: 28px 24px; border-bottom: 1px solid var(--border);
+  max-width: 1080px; margin: 0 auto;
+}
+h1 { margin: 0 0 4px; font-size: 1.5rem; }
+h2 { font-size: 1.15rem; margin: 0 0 12px; }
+h3 { font-size: 0.95rem; margin: 20px 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.iron-law {
+  font-size: 0.72rem; font-weight: 600; text-align: right; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; white-space: nowrap;
+}
+.panel {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 24px; margin: 24px 0;
+}
+.muted { color: var(--muted); }
+.small { font-size: 0.82rem; }
+.big { font-size: 2.1rem; font-weight: 700; margin: 4px 0; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+@media (max-width: 720px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+table.mini { width: auto; min-width: 260px; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.02em; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.band { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+.bar-track { width: 100px; height: 8px; background: var(--code-bg); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); }
+.fill-green { background: var(--green); }
+.fill-amber { background: var(--amber); }
+.fill-red { background: var(--red); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em; }
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-amber { background: var(--amber-bg); color: var(--amber); }
+.badge-red { background: var(--red-bg); color: var(--red); }
+.badge-pending { background: var(--code-bg); color: var(--muted); }
+.real, .real-tag { color: var(--green); }
+.stub, .stub-tag { color: var(--amber); }
+.alarm { color: var(--red); font-weight: 700; }
+code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+footer { max-width: 1080px; margin: 8px auto 0; padding: 0 24px; }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>Control Room</h1>
+    <p class="muted">Internal ops console — quality, cost, reliability, drift. Generated 2026-08-13T11:50:17.154Z from 5 bundle(s) and 6 run record(s) on disk. Not part of the end-user product.</p>
+  </div>
+  <div class="iron-law">THE CONTROL ROOM OBSERVES AND PROPOSES;<br>IT NEVER SILENTLY CHANGES THE PIPELINE</div>
+</header>
+
+<main>
+
+<section id="panel-quality" class="panel">
+  <h2>1 · Quality</h2>
+
+  <div class="grid-2">
+    <div>
+      <h3>Gate pass-rate (aggregate)</h3>
+      <p class="big">99.1%</p>
+      <p class="muted small">107 of 108 claims verified or segment-corrected across 5 bundle(s). <span class="real-tag">REAL</span></p>
+      <table class="mini">
+        <tbody>
+          <tr><td>verified</td><td class="num">106</td><td><div class="bar-track"><div class="bar-fill fill-green" style="width:98.1%"></div></div></td></tr>
+          <tr><td>segment_corrected</td><td class="num">1</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:0.9%"></div></div></td></tr>
+          <tr><td>uncorroborated</td><td class="num">1</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:0.9%"></div></div></td></tr>
+          <tr><td>blocked_injection</td><td class="num">0</td><td><div class="bar-track"><div class="bar-fill fill-red" style="width:0%"></div></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Interpretation-confidence mix</h3>
+      <table class="mini">
+        <tbody>
+          <tr><td>high</td><td class="num">57</td><td><div class="bar-track"><div class="bar-fill fill-green" style="width:52.8%"></div></div></td></tr>
+<tr><td>medium</td><td class="num">25</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:23.1%"></div></div></td></tr>
+<tr><td>low</td><td class="num">25</td><td><div class="bar-track"><div class="bar-fill fill-red" style="width:23.1%"></div></div></td></tr>
+<tr><td>unset</td><td class="num">1</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:0.9%"></div></div></td></tr>
+        </tbody>
+      </table>
+      <p class="muted small">7-day trend not shown — only one snapshot of bundles exists in this checkout; trending needs repeated runs over time. <span class="stub-tag">STUB (trend)</span></p>
+    </div>
+  </div>
+
+  <h3>Per-call gate pass-rate</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Call</th><th class="num">Claims</th><th class="num">Pass rate</th><th class="num">verified</th><th class="num">seg_corrected</th><th class="num">uncorroborated</th><th class="num">blocked_injection</th></tr></thead>
+    <tbody><tr>
+        <td>01<div class="muted small">Discovery: Brightsmile Dental, on RingHawk</div></td>
+        <td class="num">24</td>
+        <td class="num">100%</td>
+        <td class="num">24</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+      </tr>
+<tr>
+        <td>02<div class="muted small">Demo: after-hours routing and compliant texting</div></td>
+        <td class="num">19</td>
+        <td class="num">100%</td>
+        <td class="num">19</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+      </tr>
+<tr>
+        <td>03<div class="muted small">Pricing: quote vs RingHawk renewal counter</div></td>
+        <td class="num">21</td>
+        <td class="num">95.2%</td>
+        <td class="num">20</td>
+        <td class="num">0</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+<tr>
+        <td>04<div class="muted small">Commitment check: the ledger moment</div></td>
+        <td class="num">21</td>
+        <td class="num">100%</td>
+        <td class="num">21</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+      </tr>
+<tr>
+        <td>05<div class="muted small">Close: verbal commit on the pilot</div></td>
+        <td class="num">23</td>
+        <td class="num">100%</td>
+        <td class="num">22</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+      </tr></tbody>
+  </table>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h3>Top firing context_flags</h3>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Flag</th><th class="num">Count</th><th></th></tr></thead>
+        <tbody><tr><td>number_without_unit_anchor</td><td class="num">30</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:100%"></div></div></td></tr>
+<tr><td>requires_context_missing_support</td><td class="num">19</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:63.3%"></div></div></td></tr>
+<tr><td>double_negation</td><td class="num">6</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:20%"></div></div></td></tr></tbody>
+      </table>
+      </div>
+      <p class="muted small">A spike in one flag localizes to a prompt/lexicon problem (control-room.md §1). <span class="real-tag">REAL</span></p>
+    </div>
+    <div>
+      <h3>Evidence match_type breakdown</h3>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>match_type</th><th class="num">Count</th></tr></thead>
+        <tbody><tr><td>exact</td><td class="num">123</td></tr>
+<tr><td>none</td><td class="num">1</td></tr>
+<tr><td>segment_corrected</td><td class="num">1</td></tr></tbody>
+      </table>
+      </div>
+      <p class="muted small">Real breakdown from <code>evidence[].match_type</code> across loaded bundles — the design doc's "exact / normalized" split is shown as whatever match types the data actually contains today. <span class="real-tag">REAL</span></p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h3>Precision vs golden labels</h3>
+      <p class="stub">PENDING — no <code>team/labels.json</code> golden-label file yet. Precision-vs-golden re-scores automatically on every prompt/model change once the labeled real call(s) land (control-room.md §1).</p>
+    </div>
+    <div>
+      <h3>Feedback score &amp; triage health</h3>
+      <p class="stub">STUB — no background evals loop exists yet (see panel 4). Mark-wrong rate per extractor and mismatch/shadow-sample false-negative rate both depend on it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="panel-performance" class="panel">
+  <h2>2 · Performance &amp; cost</h2>
+
+  <div class="grid-3">
+    <div>
+      <h3>Latency per stage</h3>
+      <p class="real">REAL — total run wall-time (started_at→completed_at) across 6 run(s): p50 <b>0ms</b>, p90 <b>32ms</b>.</p>
+             <p class="muted small">Run records stamp <code>started_at</code>/<code>completed_at</code>/<code>current_stage</code> but not a per-stage timing array yet — this is END-TO-END wall time, not a per-stage p50/p90 breakdown. <span class="stub-tag">STUB (per-stage)</span></p>
+    </div>
+    <div>
+      <h3>Cost per call</h3>
+      <p class="real">REAL — $0.006706 total across 6 run record(s): $0.006706 on 1 live-API run(s), $0.000000 (BYO-LLM/offline) on 5 offline run(s).</p>
+      <p class="muted small">Stamped from <code>context_ledger[].cost_usd</code>, never estimated. The offline sample bundles are genuinely $0 — shown honestly, not hidden.</p>
+    </div>
+    <div>
+      <h3>Cache economics</h3>
+      <table class="mini">
+        <tbody>
+          <tr><td>offline</td><td class="num">45</td></tr>
+<tr><td>write</td><td class="num">1</td></tr>
+<tr><td>read</td><td class="num">1</td></tr>
+        </tbody>
+      </table>
+      <p class="real small">cache_misses_unexpected: <b>0</b> (0 across all runs — holding).</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h3>Token mix</h3>
+      <table class="mini">
+        <tbody>
+          <tr><td>input</td><td class="num">900</td></tr>
+          <tr><td>output</td><td class="num">280</td></tr>
+          <tr><td>cache_creation</td><td class="num">780</td></tr>
+          <tr><td>cache_read</td><td class="num">780</td></tr>
+          <tr><td><b>total</b></td><td class="num"><b>2,740</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Budget events</h3>
+      <p class="muted">No degrade-ladder rungs have fired in any loaded run — <code>budget.decisions</code> is empty everywhere. That is expected at this volume, not a stub.</p>
+    </div>
+  </div>
+</section>
+
+<section id="panel-reliability" class="panel">
+  <h2>3 · Reliability</h2>
+  <div class="grid-2">
+    <div>
+      <h3>Exit-reason distribution</h3>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>Exit reason</th><th class="num">Count</th><th></th></tr></thead>
+        <tbody><tr><td>SHIPPED</td><td class="num">5</td><td><div class="bar-track"><div class="bar-fill fill-green" style="width:83.3%"></div></div></td></tr>
+<tr><td>SHIPPED_WITH_CORRECTIONS</td><td class="num">1</td><td><div class="bar-track"><div class="bar-fill fill-green" style="width:16.7%"></div></div></td></tr></tbody>
+      </table>
+      </div>
+      <p class="real small">CRASHED: <b>0</b> (none — holding). <span class="real-tag">REAL</span> across 6 run record(s).</p>
+    </div>
+    <div>
+      <h3>Repairs, retries &amp; extractor failures</h3>
+      <table class="mini">
+        <tbody>
+          <tr><td>context_ledger repair=true count</td><td class="num">0</td></tr>
+          <tr><td>extractor_failures (summed)</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+      <p class="stub small">STUB — transport-retry counts per vendor, API error classes with request_ids, and sandbox-key age are not stamped into run records yet; wire when those fields land.</p>
+    </div>
+  </div>
+</section>
+
+<section id="panel-confidence" class="panel">
+  <h2>4 · Confidence &amp; feedback loop</h2>
+  <div class="grid-2">
+    <div>
+      <h3>Confidence-score distribution (all claims)</h3>
+      <table class="mini">
+        <tbody>
+          <tr><td>high</td><td class="num">57</td><td><div class="bar-track"><div class="bar-fill fill-green" style="width:52.8%"></div></div></td></tr>
+<tr><td>medium</td><td class="num">25</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:23.1%"></div></div></td></tr>
+<tr><td>low</td><td class="num">25</td><td><div class="bar-track"><div class="bar-fill fill-red" style="width:23.1%"></div></div></td></tr>
+<tr><td>unset</td><td class="num">1</td><td><div class="bar-track"><div class="bar-fill fill-amber" style="width:0.9%"></div></div></td></tr>
+        </tbody>
+      </table>
+      <p class="muted small">Same source as panel 1's mix — surfaced here as its own read since it's the number the feedback loop below will eventually correct against. <span class="real-tag">REAL</span></p>
+    </div>
+    <div>
+      <h3>Feedback loop (mark-wrong → evals)</h3>
+      <p class="stub">NO EVAL DATA YET, WIRE ON FIRST EVAL RUN. Design (master-plan.md): mark-a-claim-wrong in the viewer → logged to <code>evals/</code> with evidence → an <code>evals</code> replay command reports precision drift per extractor → documented fix cycle. Runs quietly in the background; this panel is where its output surfaces once the loop exists.</p>
+    </div>
+  </div>
+</section>
+
+<section id="panel-thresholds" class="panel">
+  <h2>5 · Thresholds</h2>
+  <p class="muted small">Thresholds are data, not code (control-room.md). Bands marked illustrative are not yet fit to real volume; <code>actual</code> is computed live from the files on disk right now.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Metric</th><th class="num">Actual</th><th>Green</th><th>Amber</th><th>Red</th><th>Status</th><th>Named action on red</th></tr></thead>
+    <tbody><tr>
+        <td>Gate pass-rate (verified + segment_corrected / total)</td>
+        <td class="num">99.1%</td>
+        <td class="band">≥ 95%</td>
+        <td class="band">85–95%</td>
+        <td class="band">&lt; 85%</td>
+        <td><span class="badge badge-green">GREEN</span></td>
+        <td class="muted small">run traps suite; check canonical-text invariant; review last prompt change</td>
+      </tr>
+<tr>
+        <td>Precision vs golden labels</td>
+        <td class="num">PENDING — no team/labels.json yet</td>
+        <td class="band">≥ 90%</td>
+        <td class="band">75–90%</td>
+        <td class="band">&lt; 75%</td>
+        <td><span class="badge badge-pending">PENDING</span></td>
+        <td class="muted small">flip gate to exact-only via config</td>
+      </tr>
+<tr>
+        <td>cache_misses_unexpected (sum across runs)</td>
+        <td class="num">0</td>
+        <td class="band">0</td>
+        <td class="band">n/a</td>
+        <td class="band">&gt; 0 (any)</td>
+        <td><span class="badge badge-green">GREEN</span></td>
+        <td class="muted small">diff prefix hashes; find the invalidator</td>
+      </tr>
+<tr>
+        <td>Exit-reason: CRASHED count</td>
+        <td class="num">0</td>
+        <td class="band">0</td>
+        <td class="band">n/a</td>
+        <td class="band">&gt; 0 (any)</td>
+        <td><span class="badge badge-green">GREEN</span></td>
+        <td class="muted small">read crashed_stage + heartbeat gap; file incident</td>
+      </tr>
+<tr>
+        <td>Exit-reason: FAILED / PARTIAL count</td>
+        <td class="num">0</td>
+        <td class="band">0</td>
+        <td class="band">1–2</td>
+        <td class="band">≥ 3</td>
+        <td><span class="badge badge-green">GREEN</span></td>
+        <td class="muted small">check extractor_failures per run; isolate the failing extractor</td>
+      </tr>
+<tr>
+        <td>Outcome-correlation contract (score → deal stage)</td>
+        <td class="num">PENDING — v2, needs CRM sync + volume (control-room.md §Build cost &amp; phasing)</td>
+        <td class="band">HOLDING</td>
+        <td class="band">DRIFTING</td>
+        <td class="band">BROKEN (≥5 same-direction mismatches, rolling window)</td>
+        <td><span class="badge badge-pending">PENDING</span></td>
+        <td class="muted small">emit written reconciliation proposal — human accepts, never auto-applied</td>
+      </tr></tbody>
+  </table>
+  </div>
+  <h3>Scorecard cross-reference</h3>
+  <p class="real">REAL — team/score-run.json, generated 2026-08-13T11:50:09.364Z</p>
+       <p>green <b>23</b> · amber <b>0</b> · red <b>0</b> · pending <b>12</b> · total metrics <b>35</b></p>
+</section>
+
+<footer>
+  <p class="muted small">Not built in v1, on purpose (control-room.md §Build cost &amp; phasing): full outcome-correlation with real CRM sync (needs volume), and the scheduled drift-watch fixture re-run. Both are v2/cron scope, not omissions.</p>
+</footer>
+
+</main>
+</body>
+</html>

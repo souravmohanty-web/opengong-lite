@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>OpenGong Lite: notes with receipts</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, sans-serif; color: #1a1a1a; background: #fafafa; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 20px; border-bottom: 1px solid #ddd; background: #fff; }
+  h1 { font-size: 18px; margin: 0; }
+  .band { font-size: 13px; color: #555; background: #f0f0f0; padding: 2px 10px; border-radius: 10px; white-space: nowrap; }
+  .counts { display: block; font-size: 12px; color: #666; margin-top: 2px; }
+  main { display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: calc(100vh - 110px); }
+  #notes, #transcript { overflow-y: auto; padding: 16px 20px; }
+  #transcript { border-left: 1px solid #ddd; background: #fff; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #777; margin: 18px 0 6px; }
+  .claim { border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; background: #fff; }
+  .claim p { margin: 4px 0 0; }
+  .claim.active { border-color: #2563eb; box-shadow: 0 0 0 2px #2563eb33; }
+  .claim.uncorroborated { background: #f5f5f5; color: #777; border-style: dashed; cursor: default; }
+  .claim.blocked_injection { border-color: #dc2626; background: #fef2f2; cursor: default; }
+  .claim.blocked_injection .offending { font-size: 12px; color: #991b1b; margin-top: 6px; }
+  .badge { font-size: 11px; font-weight: 600; }
+  .verified .badge, .segment_corrected .badge { color: #15803d; }
+  .uncorroborated .badge { color: #92400e; }
+  .blocked_injection .badge { color: #dc2626; }
+  .utt { padding: 6px 8px; border-radius: 6px; margin: 2px 0; }
+  .utt.active { background: #eff6ff; outline: 1px solid #bfdbfe; }
+  .ts { color: #999; font-size: 12px; margin-right: 6px; }
+  .spk { font-weight: 600; margin-right: 4px; }
+  mark { background: #fde047; padding: 0 2px; border-radius: 2px; }
+  footer { padding: 8px 20px; border-top: 1px solid #ddd; background: #fff; }
+  audio { width: 100%; }
+  .audio-note { font-size: 12px; color: #999; }
+</style>
+</head>
+<body>
+  <div id="app">loading…</div>
+  <footer><audio controls preload="auto" src="/audio.wav"></audio></footer>
+  <script type="application/json" id="og-data">{"format":"opengong.bundle.v1","call":{"id":"05","title":"Close: verbal commit on the pilot"},"audio":null,"transcript":{"mode":"diarized","speakers":2,"utterances":[{"id":0,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":0,"end":8,"text":"so proposals in front of you two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included"},{"id":1,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":8.08,"end":15.280000000000001,"text":"twenty six i can sell doctor meta looked at it last night and his only question was whether we're locked in if the pilot goes badly"},{"id":2,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":15.200000000000001,"end":21.68,"text":"you're not if the pilot fills your numbers you walk at ninety days and your lines port right back that's in section four"},{"id":3,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":22.080000000000002,"end":29.36,"text":"that clause is what got him to yes honestly okay the two pilot sites are the downtown location and the elm street one"},{"id":4,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":29.44,"end":35.36,"text":"busiest and smallest smart cutover happens on a weekend like we your phones never go dark on a patient day"},{"id":5,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":35.76,"end":45.12,"text":"more thing i noticed in the proposal the core recording can we use those for training the new front desk hires because that alone might fix my churn problem"},{"id":6,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":45.28,"end":51.04,"text":"yes and i'll set up the training live review for your office manager as part of onboarding no extra line item"},{"id":7,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":51.04,"end":59.36,"text":"then we're done negotiating send the agreement over i'll have doctor meta sign early next week and let's aim the cutover for the weekend after"},{"id":8,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":59.44,"end":63.92,"text":"agreement goes out this afternoon rahul genuinely looking forward to this one"},{"id":9,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":63.84,"end":68,"text":"get my after ask patients booking again and i'll be your reference customer talk next week"}]},"claims":[{"id":"tracker-0-pilot","extractor":"tracker","section":"tracker","text":"Pilot came up.","status":"verified","evidence":[{"utterance_id":0,"quote":"so proposals in front of you two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included","match_type":"exact","t_start":0,"t_end":8,"char_start":0,"char_end":129}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"tracker-1-pilot","extractor":"tracker","section":"tracker","text":"Pilot came up.","status":"verified","evidence":[{"utterance_id":1,"quote":"twenty six i can sell doctor meta looked at it last night and his only question was whether we're locked in if the pilot goes badly","match_type":"exact","t_start":8.08,"t_end":15.280000000000001,"char_start":0,"char_end":131}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"twenty","utterance_id":1}],"interpretation_confidence":"medium"},{"id":"tracker-2-pilot","extractor":"tracker","section":"tracker","text":"Pilot came up.","status":"verified","evidence":[{"utterance_id":2,"quote":"you're not if the pilot fills your numbers you walk at ninety days and your lines port right back that's in section four","match_type":"exact","t_start":15.200000000000001,"t_end":21.68,"char_start":0,"char_end":120}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"four","utterance_id":2}],"interpretation_confidence":"medium"},{"id":"tracker-3-pilot","extractor":"tracker","section":"tracker","text":"Pilot came up.","status":"verified","evidence":[{"utterance_id":3,"quote":"that clause is what got him to yes honestly okay the two pilot sites are the downtown location and the elm street one","match_type":"exact","t_start":22.080000000000002,"t_end":29.36,"char_start":0,"char_end":117}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"two","utterance_id":3},{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"buying_stage-stage","extractor":"buying_stage","section":"buying_stage","text":"Committed. Ready to sign.","basis":"cited","status":"verified","evidence":[{"utterance_id":7,"quote":"then we're done negotiating send the agreement over","match_type":"exact","t_start":51.04,"t_end":59.36,"char_start":0,"char_end":51}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"buying_stage-urgency","extractor":"buying_stage","section":"buying_stage","text":"High urgency: Dr. Mehta signs early next week.","basis":"cited","status":"verified","evidence":[{"utterance_id":7,"quote":"i'll have doctor meta sign early next week","match_type":"exact","t_start":51.04,"t_end":59.36,"char_start":52,"char_end":94}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"next_steps-0","extractor":"next_steps","section":"next_steps","text":"Rep to send the agreement this afternoon.","type":"concrete_date","owner":"rep","commitment":"firm","due":"this afternoon","status":"verified","evidence":[{"utterance_id":8,"quote":"agreement goes out this afternoon","match_type":"exact","t_start":59.44,"t_end":63.92,"char_start":0,"char_end":33}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"next_steps-1","extractor":"next_steps","section":"next_steps","text":"Buyer to have Dr. Mehta sign the agreement early next week.","type":"concrete_date","owner":"buyer","commitment":"firm","due":"early next week","status":"verified","evidence":[{"utterance_id":7,"quote":"i'll have doctor meta sign early next week","match_type":"exact","t_start":51.04,"t_end":59.36,"char_start":52,"char_end":94}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"next_steps-2","extractor":"next_steps","section":"next_steps","text":"Both sides to aim the cutover for the weekend after signing.","type":"concrete_date","owner":"joint","commitment":"tentative","due":"weekend after signing","status":"verified","evidence":[{"utterance_id":7,"quote":"let's aim the cutover for the weekend after","match_type":"exact","t_start":51.04,"t_end":59.36,"char_start":99,"char_end":142}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"next_steps-3","extractor":"next_steps","section":"next_steps","text":"Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.","type":"soft_followup","owner":"rep","commitment":"firm","due":"during onboarding","status":"verified","evidence":[{"utterance_id":6,"quote":"i'll set up the training live review for your office manager as part of onboarding no extra line item","match_type":"exact","t_start":45.28,"t_end":51.04,"char_start":8,"char_end":109}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"objections-0","extractor":"objections","section":"objections","text":"Dr. Mehta's only remaining question: are we locked in if the pilot goes badly?","category":"trust","handling":"addressed","objection_status":"buyer_accepted","status":"verified","evidence":[{"utterance_id":1,"quote":"his only question was whether we're locked in if the pilot goes badly","match_type":"exact","t_start":8.08,"t_end":15.280000000000001,"char_start":62,"char_end":131},{"utterance_id":2,"quote":"you're not if the pilot fills your numbers you walk at ninety days and your lines port right back that's in section four","match_type":"exact","t_start":15.200000000000001,"t_end":21.68,"char_start":0,"char_end":120}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"four","utterance_id":2}],"interpretation_confidence":"medium"},{"id":"pain-0","extractor":"pain","section":"pain","text":"Front-desk churn is Rahul's own problem; he sees call recordings for training as the thing that might fix it.","layer":"personal","who_it_affects":"department","status":"verified","evidence":[{"utterance_id":5,"quote":"the core recording can we use those for training the new front desk hires because that alone might fix my churn problem","match_type":"exact","t_start":35.76,"t_end":45.12,"char_start":37,"char_end":156}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"pricing-0","extractor":"pricing","section":"pricing","text":"Final landed price: twenty six per seat, recall tooling included, on a two-location ninety-day pilot.","kind":"quote","pricing_signal":"none","status":"verified","evidence":[{"utterance_id":0,"quote":"we landed at twenty six per seat with the recall tooling included","match_type":"exact","t_start":0,"t_end":8,"char_start":64,"char_end":129}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"pricing-1","extractor":"pricing","section":"pricing","text":"Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.","kind":"other","pricing_signal":"none","status":"verified","evidence":[{"utterance_id":1,"quote":"twenty six i can sell doctor meta looked at it last night","match_type":"exact","t_start":8.08,"t_end":15.280000000000001,"char_start":0,"char_end":57}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"twenty","utterance_id":1}],"interpretation_confidence":"medium"},{"id":"risk_flags-buyer_posture","extractor":"risk_flags","section":"risk_flags","text":"Buyer's open, ready to be a reference customer.","basis":"cited","status":"verified","evidence":[{"utterance_id":9,"quote":"i'll be your reference customer","match_type":"exact","t_start":63.84,"t_end":68,"char_start":44,"char_end":75}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"risk_flags-transcript_quality","extractor":"risk_flags","section":"risk_flags","text":"Heads up: a few spots in this recording were hard to make out.","basis":"cited","status":"verified","evidence":[{"utterance_id":9,"quote":"get my after ask patients booking again","match_type":"exact","t_start":63.84,"t_end":68,"char_start":0,"char_end":39}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"stakeholders-0","extractor":"stakeholders","section":"stakeholders","text":"Dr. Mehta reviewed the proposal himself and is set to sign. He wasn't on this call.","role_signal":"economic_buyer","present_on_call":"referenced","status":"verified","evidence":[{"utterance_id":1,"quote":"doctor meta looked at it last night","match_type":"exact","t_start":8.08,"t_end":15.280000000000001,"char_start":22,"char_end":57}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"stakeholders-1","extractor":"stakeholders","section":"stakeholders","text":"Office manager gets the training live-review as part of onboarding. She wasn't on this call either.","role_signal":"influencer","present_on_call":"referenced","status":"verified","evidence":[{"utterance_id":6,"quote":"i'll set up the training live review for your office manager","match_type":"exact","t_start":45.28,"t_end":51.04,"char_start":8,"char_end":68}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"stakeholders-threading","extractor":"stakeholders","section":"stakeholders","text":"Single-threaded: only one contact in the loop so far.","basis":"cited","status":"verified","evidence":[{"utterance_id":7,"quote":"i'll have doctor meta sign early next week","match_type":"exact","t_start":51.04,"t_end":59.36,"char_start":52,"char_end":94}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-0-0","extractor":"summary","section":"summary","title":"Outcome","text":"Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.","status":"verified","evidence":[{"utterance_id":0,"quote":"two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included","match_type":"exact","t_start":0,"t_end":8,"char_start":29,"char_end":129}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-1-0","extractor":"summary","section":"summary","title":"Key takeaways","text":"Cutover happens on a weekend so phones never go dark on a patient day.","status":"segment_corrected","evidence":[{"utterance_id":4,"claimed_utterance_id":8,"quote":"smart cutover happens on a weekend like we your phones never go dark on a patient day","match_type":"segment_corrected","t_start":29.44,"t_end":35.36,"char_start":21,"char_end":106}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-2-0","extractor":"summary","section":"summary","title":"Interests","text":"Buyer wants to use call recordings to train new front-desk hires and sees it fixing churn.","status":"verified","evidence":[{"utterance_id":5,"quote":"the core recording can we use those for training the new front desk hires","match_type":"exact","t_start":35.76,"t_end":45.12,"char_start":37,"char_end":110}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-3-0","extractor":"summary","section":"next_steps","title":"Next steps","text":"Rep sends the agreement this afternoon; Dr. Mehta signs early next week; cutover the weekend after.","status":"verified","evidence":[{"utterance_id":7,"quote":"i'll have doctor meta sign early next week and let's aim the cutover for the weekend after","match_type":"exact","t_start":51.04,"t_end":59.36,"char_start":52,"char_end":142}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"}],"notes":{"coverage":{"band":"SHIPPED_WITH_CORRECTIONS","ratio":1,"stats":{"total":23,"attempted":23,"verified":22,"segment_corrected":1,"uncorroborated":0,"blocked_injection":0,"corroborated":23},"required_sections":[{"section":"summary","attempted":3,"corroborated":3},{"section":"next_steps","attempted":5,"corroborated":5}],"extractor_failures":[]},"sections":[{"title":"tracker","blocks":[{"text":"Pilot came up.","claim_ids":["tracker-0-pilot"]},{"text":"Pilot came up.","claim_ids":["tracker-1-pilot"]},{"text":"Pilot came up.","claim_ids":["tracker-2-pilot"]},{"text":"Pilot came up.","claim_ids":["tracker-3-pilot"]}]},{"title":"buying_stage","blocks":[{"text":"Committed. Ready to sign.","claim_ids":["buying_stage-stage"]},{"text":"High urgency: Dr. Mehta signs early next week.","claim_ids":["buying_stage-urgency"]}]},{"title":"Next steps","blocks":[{"text":"Rep to send the agreement this afternoon.","claim_ids":["next_steps-0"]},{"text":"Buyer to have Dr. Mehta sign the agreement early next week.","claim_ids":["next_steps-1"]},{"text":"Both sides to aim the cutover for the weekend after signing.","claim_ids":["next_steps-2"]},{"text":"Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.","claim_ids":["next_steps-3"]}]},{"title":"Objections","blocks":[{"text":"Dr. Mehta's only remaining question: are we locked in if the pilot goes badly?","claim_ids":["objections-0"]}]},{"title":"pain","blocks":[{"text":"Front-desk churn is Rahul's own problem; he sees call recordings for training as the thing that might fix it.","claim_ids":["pain-0"]}]},{"title":"pricing","blocks":[{"text":"Final landed price: twenty six per seat, recall tooling included, on a two-location ninety-day pilot.","claim_ids":["pricing-0"]},{"text":"Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.","claim_ids":["pricing-1"]}]},{"title":"risk_flags","blocks":[{"text":"Buyer's open, ready to be a reference customer.","claim_ids":["risk_flags-buyer_posture"]},{"text":"Heads up: a few spots in this recording were hard to make out.","claim_ids":["risk_flags-transcript_quality"]}]},{"title":"stakeholders","blocks":[{"text":"Dr. Mehta reviewed the proposal himself and is set to sign. He wasn't on this call.","claim_ids":["stakeholders-0"]},{"text":"Office manager gets the training live-review as part of onboarding. She wasn't on this call either.","claim_ids":["stakeholders-1"]},{"text":"Single-threaded: only one contact in the loop so far.","claim_ids":["stakeholders-threading"]}]},{"title":"Summary","blocks":[{"text":"Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.","claim_ids":["summary-0-0"]},{"text":"Cutover happens on a weekend so phones never go dark on a patient day.","claim_ids":["summary-1-0"]},{"text":"Buyer wants to use call recordings to train new front-desk hires and sees it fixing churn.","claim_ids":["summary-2-0"]}]}]},"provenance":{"transcription_model":"pyai-hear","extraction_model":"offline-author","note":"offline extraction (author=agent, gate-verified)"}}</script>
+<script type="module">// Slice-1 viewer: pure view-model helpers (node-testable) + browser render.
+// One interaction: click a claim → its cited line highlights → audio seeks and
+// plays at that second. blocked_injection is quarantined, never in notes body.
+
+export function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[ch]));
+}
+
+export function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+// Closed enums (technical-spec-core §2). Anything outside them fails CLOSED at
+// the boundary — a typo'd status must never render a claim into the main list.
+const CLAIM_STATUSES = new Set(['verified', 'segment_corrected', 'uncorroborated', 'blocked_injection']);
+
+export function buildViewModel(bundle) {
+  const uttById = new Map();
+  for (const u of bundle.transcript.utterances) {
+    if (!Number.isInteger(u.id)) {
+      throw new Error(`utterance id must be an integer, got: ${JSON.stringify(u.id)}`);
+    }
+    uttById.set(u.id, u);
+  }
+
+  const claims = bundle.claims.map((claim) => {
+    if (!CLAIM_STATUSES.has(claim.status)) {
+      throw new Error(`unknown claim.status ${JSON.stringify(claim.status)} — closed enum, failing closed`);
+    }
+    const primary = claim.evidence?.[0] ?? null;
+    const anchored = claim.status === 'verified' || claim.status === 'segment_corrected';
+    if (anchored && primary && !uttById.has(primary.utterance_id)) {
+      throw new Error(`claim ${claim.id} cites utterance ${primary.utterance_id} which is not in the bundle — exports must be self-contained`);
+    }
+    return {
+      id: claim.id,
+      extractor: claim.extractor,
+      text: claim.text,
+      status: claim.status,
+      anchor: anchored && primary ? {
+        utterance_id: primary.utterance_id,
+        quote: primary.quote,
+        t_start: primary.t_start,
+        match_type: primary.match_type,
+      } : null,
+      offending: claim.status === 'blocked_injection' ? primary?.quote ?? '' : null,
+    };
+  });
+
+  const blocked = new Set(claims.filter((c) => c.status === 'blocked_injection').map((c) => c.id));
+  for (const section of bundle.notes.sections) {
+    for (const block of section.blocks) {
+      for (const id of block.claim_ids) {
+        if (blocked.has(id)) {
+          throw new Error(`notes block references blocked_injection claim ${id} — the notes body must never contain a blocked claim`);
+        }
+      }
+    }
+  }
+
+  // The gate's own scorecard, always on screen: what shipped AND what was
+  // dropped/demoted/blocked. Nothing is silently removed (L7).
+  const counts = { verified: 0, segment_corrected: 0, uncorroborated: 0, blocked_injection: 0 };
+  for (const c of claims) counts[c.status] += 1;
+
+  return {
+    title: bundle.call?.title ?? bundle.call?.id ?? 'call',
+    coverage: bundle.notes.coverage,          // rendered verbatim, never recomputed
+    counts,
+    utterances: bundle.transcript.utterances,
+    uttById,                                  // id-keyed — array order is NOT id order
+    claims,
+    quarantine: claims.filter((c) => c.status === 'blocked_injection'),
+    sections: bundle.notes.sections,
+    provenance: bundle.provenance ?? null,
+  };
+}
+
+// ── browser side ───────────────────────────────────────────────────────────
+const BADGE = {
+  verified: '✓ verified',
+  segment_corrected: '✓ corrected',
+  uncorroborated: '⚠ not found in the call',
+  blocked_injection: '⛔ blocked: planted instruction',
+};
+
+export function render(vm, root, audio) {
+  root.innerHTML = `
+    <header>
+      <div>
+        <h1>${escapeHtml(vm.title)}</h1>
+        <span class="counts">${vm.counts.verified} verified · ${vm.counts.segment_corrected} corrected · ${vm.counts.uncorroborated} not found in the call · ${vm.counts.blocked_injection} blocked</span>
+      </div>
+      <span class="band">${escapeHtml(vm.coverage.band)} · ${Math.round(vm.coverage.ratio * 100)}% verified</span>
+    </header>
+    <main>
+      <section id="notes">
+        ${vm.sections.map((s) => `
+          <h2>${escapeHtml(s.title)}</h2>
+          ${s.blocks.map((b) => `<p class="block">${escapeHtml(b.text)}</p>`).join('')}`).join('')}
+        <h2>Claims</h2>
+        ${vm.claims.filter((c) => c.status !== 'blocked_injection').map((c) => `
+          <div class="claim ${c.status}" data-id="${escapeHtml(c.id)}">
+            <span class="badge">${BADGE[c.status] ?? escapeHtml(c.status)}</span>
+            <p>${escapeHtml(c.text)}</p>
+          </div>`).join('')}
+        ${vm.quarantine.length ? `<h2>Quarantined</h2>` : ''}
+        ${vm.quarantine.map((c) => `
+          <div class="claim blocked_injection">
+            <span class="badge">${BADGE.blocked_injection}</span>
+            <p><s>${escapeHtml(c.text)}</s></p>
+            <p class="offending">line: “${escapeHtml(c.offending)}”</p>
+          </div>`).join('')}
+      </section>
+      <section id="transcript">
+        ${vm.utterances.map((u) => `
+          <div class="utt" data-utt="${escapeHtml(u.id)}">
+            <span class="ts">[${formatTime(u.start)}]</span>
+            ${u.speaker ? `<span class="spk">${escapeHtml(u.speaker)}:</span>` : ''}
+            <span class="txt">${escapeHtml(u.text)}</span>
+          </div>`).join('')}
+      </section>
+    </main>`;
+
+  root.querySelectorAll('.claim[data-id]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const claim = vm.claims.find((c) => c.id === el.dataset.id);
+      root.querySelectorAll('.utt.active').forEach((n) => n.classList.remove('active'));
+      root.querySelectorAll('.claim.active').forEach((n) => n.classList.remove('active'));
+      el.classList.add('active');
+      if (!claim?.anchor) return;                     // demoted claims have nothing to prove
+      const source = vm.uttById.get(claim.anchor.utterance_id);  // id-keyed, survives reordering
+      const utt = root.querySelector(`.utt[data-utt="${Number(claim.anchor.utterance_id)}"]`);
+      if (!utt || !source) return;
+      utt.classList.add('active');
+      const txt = utt.querySelector('.txt');
+      const raw = source.text;
+      const idx = raw.indexOf(claim.anchor.quote);
+      if (idx >= 0) {
+        txt.innerHTML = `${escapeHtml(raw.slice(0, idx))}<mark>${escapeHtml(claim.anchor.quote)}</mark>${escapeHtml(raw.slice(idx + claim.anchor.quote.length))}`;
+      }
+      utt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      safeSeekAndPlay(audio, claim.anchor.t_start);   // bonus layer — can never break the highlight
+    });
+  });
+}
+
+// Audio is a BONUS layer on the receipts moment, never a dependency: the
+// highlight has already landed by the time this runs, and nothing here can
+// throw past it. Returns whether playback was attempted (DOM-free testable).
+export function safeSeekAndPlay(audio, tStart) {
+  if (!audio || audio.error || !Number.isFinite(tStart)) return false;
+  try {
+    audio.currentTime = tStart;
+    const played = audio.play();
+    played?.catch?.(() => {});          // autoplay policy / decode failure — silently a no-op
+    return true;
+  } catch {
+    return false;                       // seeking an unready element must never surface
+  }
+}
+
+// App-mode footer: if the audio file 404s or dies mid-load, swap the broken
+// player for a quiet note — receipts keep working without it.
+function watchAudio(audio) {
+  if (!audio) return;
+  audio.addEventListener('error', () => {
+    const footer = audio.closest('footer');
+    if (footer) footer.innerHTML = '<span class="audio-note">Audio&#39;s not loaded. Click a claim to see its line.</span>';
+  }, { once: true });
+}
+
+// Boot only in a browser; node imports the pure helpers above. Two fuel lines:
+// tier-1 export inlines the bundle as #og-data (no server, no audio — the
+// footer player is removed); app mode fetches from the local server.
+if (typeof document !== 'undefined') {
+  const inline = document.getElementById('og-data');
+  if (inline) {
+    document.querySelector('footer')?.remove();
+    try {
+      render(buildViewModel(JSON.parse(inline.textContent)), document.getElementById('app'), null);
+    } catch (err) {
+      document.getElementById('app').textContent = `failed to load bundle: ${err.message}`;
+    }
+  } else {
+    const audio = document.querySelector('audio');
+    watchAudio(audio);
+    fetch('/bundle.json')
+      .then((r) => r.json())
+      .then((bundle) => render(buildViewModel(bundle), document.getElementById('app'), audio))
+      .catch((err) => { document.getElementById('app').textContent = `failed to load bundle: ${err.message}`; });
+  }
+}
+</script>
+</body>
+</html>

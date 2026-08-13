@@ -226,6 +226,23 @@ function wordBoundaryPattern(keyword) {
   return new RegExp(`(?<!${WORD_CHAR})${escaped}(?!${WORD_CHAR})`, 'iu');
 }
 
+// Note-facing text for a tracker hit is a plain human mention, NOT a debug
+// string ("Tracker 'tracker' matched: ringhawk" read like a database dump in
+// review — copy pass, Aug 13). A keyword tracker's job is search/counting,
+// not prose, so its claim.text is kept to the shortest human phrase that
+// still says what happened ("RingHawk came up.") rather than narrating the
+// mechanism that found it. DISPLAY_GLOSSARY covers keywords whose natural
+// written form isn't a simple capitalize-first-letter (a brand's internal
+// capitalization, an acronym); everything else falls back to Title Case.
+const DISPLAY_GLOSSARY = { ringhawk: 'RingHawk' };
+const KNOWN_ACRONYMS = new Set(['tcpa', 'soc2', 'crm', 'roi', 'sla']);
+function humanizeKeyword(keyword) {
+  const lower = keyword.toLowerCase();
+  if (DISPLAY_GLOSSARY[lower]) return DISPLAY_GLOSSARY[lower];
+  if (KNOWN_ACRONYMS.has(lower)) return keyword.toUpperCase();
+  return keyword.charAt(0).toUpperCase() + keyword.slice(1);
+}
+
 export function scanTrackerClaims(extractorDef, transcript) {
   const keywords = extractorDef.keywords ?? [];
   const claims = [];
@@ -236,7 +253,7 @@ export function scanTrackerClaims(extractorDef, transcript) {
         id: `${extractorDef.name}-${u.id}-${keyword}`,
         extractor: extractorDef.name,
         section: extractorDef.name,
-        text: `Tracker '${extractorDef.name}' matched: ${keyword}`,
+        text: `${humanizeKeyword(keyword)} came up.`,
         evidence: [{ utterance_id: u.id, quote: u.text }],
       });
     }

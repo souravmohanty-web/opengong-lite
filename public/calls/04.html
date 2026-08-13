@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>OpenGong Lite: notes with receipts</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, sans-serif; color: #1a1a1a; background: #fafafa; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 20px; border-bottom: 1px solid #ddd; background: #fff; }
+  h1 { font-size: 18px; margin: 0; }
+  .band { font-size: 13px; color: #555; background: #f0f0f0; padding: 2px 10px; border-radius: 10px; white-space: nowrap; }
+  .counts { display: block; font-size: 12px; color: #666; margin-top: 2px; }
+  main { display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: calc(100vh - 110px); }
+  #notes, #transcript { overflow-y: auto; padding: 16px 20px; }
+  #transcript { border-left: 1px solid #ddd; background: #fff; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #777; margin: 18px 0 6px; }
+  .claim { border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; background: #fff; }
+  .claim p { margin: 4px 0 0; }
+  .claim.active { border-color: #2563eb; box-shadow: 0 0 0 2px #2563eb33; }
+  .claim.uncorroborated { background: #f5f5f5; color: #777; border-style: dashed; cursor: default; }
+  .claim.blocked_injection { border-color: #dc2626; background: #fef2f2; cursor: default; }
+  .claim.blocked_injection .offending { font-size: 12px; color: #991b1b; margin-top: 6px; }
+  .badge { font-size: 11px; font-weight: 600; }
+  .verified .badge, .segment_corrected .badge { color: #15803d; }
+  .uncorroborated .badge { color: #92400e; }
+  .blocked_injection .badge { color: #dc2626; }
+  .utt { padding: 6px 8px; border-radius: 6px; margin: 2px 0; }
+  .utt.active { background: #eff6ff; outline: 1px solid #bfdbfe; }
+  .ts { color: #999; font-size: 12px; margin-right: 6px; }
+  .spk { font-weight: 600; margin-right: 4px; }
+  mark { background: #fde047; padding: 0 2px; border-radius: 2px; }
+  footer { padding: 8px 20px; border-top: 1px solid #ddd; background: #fff; }
+  audio { width: 100%; }
+  .audio-note { font-size: 12px; color: #999; }
+</style>
+</head>
+<body>
+  <div id="app">loading…</div>
+  <footer><audio controls preload="auto" src="/audio.wav"></audio></footer>
+  <script type="application/json" id="og-data">{"format":"opengong.bundle.v1","call":{"id":"04","title":"Commitment check: the ledger moment"},"audio":null,"transcript":{"mode":"diarized","speakers":2,"utterances":[{"id":0,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":0,"end":3.36,"text":"for a whole quick check in before we talk pilot you got the soc report"},{"id":1,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":3.2800000000000002,"end":13.84,"text":"got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice"},{"id":2,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":14,"end":19.84,"text":"you're right that one's on me it goes out today and i'll send it directly to her so it doesn't root through you"},{"id":3,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":20,"end":26.16,"text":"please because the texting piece is her favorite part of this whole thing and right now she's the one selling it internally not me"},{"id":4,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":26.32,"end":36,"text":"noted today and thank you for the volume report that's what let us ship the pilot here's the idea two locations your busiest and your smallest running live before you commit the other three"},{"id":5,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":36.08,"end":41.2,"text":"two locations i can defend to doctor meta without a fight which too is my call though"},{"id":6,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":41.36,"end":44.160000000000004,"text":"completely your call what's changed on your side since we talked"},{"id":7,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":44.08,"end":52.24,"text":"contest tenab again lost two receptions this month every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost"},{"id":8,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":52.160000000000004,"end":58.800000000000004,"text":"for what it's worth new stuff get one screen with ring and subtext the pilot will show that faster than i can say it"},{"id":9,"speaker":"speaker_2","channel":1,"role":null,"role_confidence":null,"start":58.88,"end":66.24,"text":"good so tcpa paper today palate proposal on paper this week and the sharper number you owe me from last time comes with it"},{"id":10,"speaker":"speaker_1","channel":0,"role":null,"role_confidence":null,"start":66.32000000000001,"end":68.8,"text":"all three you'll have the proposal and the number together"}]},"claims":[{"id":"tracker-0-pilot","extractor":"tracker","section":"tracker","text":"Pilot came up.","status":"verified","evidence":[{"utterance_id":0,"quote":"for a whole quick check in before we talk pilot you got the soc report","match_type":"exact","t_start":0,"t_end":3.36,"char_start":0,"char_end":70}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"tracker-1-tcpa","extractor":"tracker","section":"tracker","text":"TCPA came up.","status":"verified","evidence":[{"utterance_id":1,"quote":"got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice","match_type":"exact","t_start":3.2800000000000002,"t_end":13.84,"char_start":0,"char_end":161}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":1}],"interpretation_confidence":"medium"},{"id":"tracker-4-pilot","extractor":"tracker","section":"tracker","text":"Pilot came up.","status":"verified","evidence":[{"utterance_id":4,"quote":"noted today and thank you for the volume report that's what let us ship the pilot here's the idea two locations your busiest and your smallest running live before you commit the other three","match_type":"exact","t_start":26.32,"t_end":36,"char_start":0,"char_end":189}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"two","utterance_id":4}],"interpretation_confidence":"medium"},{"id":"tracker-8-pilot","extractor":"tracker","section":"tracker","text":"Pilot came up.","status":"verified","evidence":[{"utterance_id":8,"quote":"for what it's worth new stuff get one screen with ring and subtext the pilot will show that faster than i can say it","match_type":"exact","t_start":52.160000000000004,"t_end":58.800000000000004,"char_start":0,"char_end":116}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":8}],"interpretation_confidence":"medium"},{"id":"tracker-9-tcpa","extractor":"tracker","section":"tracker","text":"TCPA came up.","status":"verified","evidence":[{"utterance_id":9,"quote":"good so tcpa paper today palate proposal on paper this week and the sharper number you owe me from last time comes with it","match_type":"exact","t_start":58.88,"t_end":66.24,"char_start":0,"char_end":122}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"buying_stage-stage","extractor":"buying_stage","section":"buying_stage","text":"In negotiation. Buyer's narrowing scope to two locations to make it an easy internal sell.","basis":"cited","status":"verified","evidence":[{"utterance_id":5,"quote":"two locations i can defend to doctor meta without a fight","match_type":"exact","t_start":36.08,"t_end":41.2,"char_start":0,"char_end":57}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"two","utterance_id":5}],"interpretation_confidence":"medium"},{"id":"buying_stage-urgency","extractor":"buying_stage","section":"buying_stage","text":"Medium urgency: wants the proposal on paper this week.","basis":"inferred","status":"verified","evidence":[{"utterance_id":9,"quote":"palate proposal on paper this week and the sharper number you owe me from last time comes with it","match_type":"exact","t_start":58.88,"t_end":66.24,"char_start":25,"char_end":122}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"competitors-0","extractor":"competitors","section":"competitors","text":"RingHawk's fifteen-screen UI (spoken 'ringhawks') is now a training burden as front-desk staff churn.","competitor":"RingHawk","relationship":"active_user","status":"verified","evidence":[{"utterance_id":7,"quote":"every new hire has to lend ringhawks fifteen screens","match_type":"exact","t_start":44.08,"t_end":52.24,"char_start":51,"char_end":103},{"utterance_id":7,"quote":"training time is becoming its own cost","match_type":"exact","t_start":44.08,"t_end":52.24,"char_start":117,"char_end":155}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"fifteen","utterance_id":7}],"interpretation_confidence":"medium"},{"id":"next_steps-0","extractor":"next_steps","section":"next_steps","text":"Rep to send the overdue TCPA one-pager today, directly to the office manager.","type":"send_info","owner":"rep","commitment":"firm","due":"today","status":"verified","evidence":[{"utterance_id":2,"quote":"it goes out today and i'll send it directly to her so it doesn't root through you","match_type":"exact","t_start":14,"t_end":19.84,"char_start":30,"char_end":111}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"next_steps-1","extractor":"next_steps","section":"next_steps","text":"Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.","type":"send_info","owner":"rep","commitment":"firm","due":"this week","status":"verified","evidence":[{"utterance_id":9,"quote":"palate proposal on paper this week and the sharper number you owe me from last time comes with it","match_type":"exact","t_start":58.88,"t_end":66.24,"char_start":25,"char_end":122},{"utterance_id":10,"quote":"you'll have the proposal and the number together","match_type":"exact","t_start":66.32000000000001,"t_end":68.8,"char_start":10,"char_end":58}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"objections-0","extractor":"objections","section":"objections","text":"Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.","category":"trust","handling":"accepted","objection_status":"left_open","status":"verified","evidence":[{"utterance_id":1,"quote":"you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice","match_type":"exact","t_start":3.2800000000000002,"t_end":13.84,"char_start":62,"char_end":161},{"utterance_id":2,"quote":"you're right that one's on me it goes out today and i'll send it directly to her so it doesn't root through you","match_type":"exact","t_start":14,"t_end":19.84,"char_start":0,"char_end":111}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":1}],"interpretation_confidence":"medium"},{"id":"pain-0","extractor":"pain","section":"pain","text":"Front-desk churn is now a cost center: every new hire must learn RingHawk's fifteen screens, so training time is its own cost.","layer":"business","who_it_affects":"department","status":"verified","evidence":[{"utterance_id":7,"quote":"every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost","match_type":"exact","t_start":44.08,"t_end":52.24,"char_start":51,"char_end":155},{"utterance_id":7,"quote":"lost two receptions this month","match_type":"exact","t_start":44.08,"t_end":52.24,"char_start":20,"char_end":50}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"fifteen","utterance_id":7},{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"pricing-0","extractor":"pricing","section":"pricing","text":"Buyer is still owed the sharper number from the pricing call; it will land with the proposal.","kind":"other","pricing_signal":"none","status":"verified","evidence":[{"utterance_id":9,"quote":"the sharper number you owe me from last time comes with it","match_type":"exact","t_start":58.88,"t_end":66.24,"char_start":64,"char_end":122}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"risk_flags-buyer_posture","extractor":"risk_flags","section":"risk_flags","text":"Buyer's mixed: annoyed the TCPA one-pager never showed up, but still engaged.","basis":"cited","status":"verified","evidence":[{"utterance_id":1,"quote":"it never showed up she asked me twice","match_type":"exact","t_start":3.2800000000000002,"t_end":13.84,"char_start":124,"char_end":161}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":true,"context_flags":[{"flag":"requires_context_missing_support","where":null,"cue":null,"utterance_id":null}],"interpretation_confidence":"low"},{"id":"risk_flags-transcript_quality","extractor":"risk_flags","section":"risk_flags","text":"Heads up: a few spots in this recording were hard to make out.","basis":"cited","status":"verified","evidence":[{"utterance_id":7,"quote":"contest tenab again lost two receptions this month","match_type":"exact","t_start":44.08,"t_end":52.24,"char_start":0,"char_end":50}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"two","utterance_id":7}],"interpretation_confidence":"medium"},{"id":"stakeholders-0","extractor":"stakeholders","section":"stakeholders","text":"Office manager's now the internal champion, selling this deal for us. She wasn't on this call.","role_signal":"champion","present_on_call":"referenced","status":"verified","evidence":[{"utterance_id":3,"quote":"she's the one selling it internally not me","match_type":"exact","t_start":20,"t_end":26.16,"char_start":88,"char_end":130}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":3}],"interpretation_confidence":"medium"},{"id":"stakeholders-1","extractor":"stakeholders","section":"stakeholders","text":"Dr. Mehta's still the economic buyer Rahul has to satisfy. He wasn't on this call.","role_signal":"economic_buyer","present_on_call":"referenced","status":"verified","evidence":[{"utterance_id":5,"quote":"i can defend to doctor meta without a fight","match_type":"exact","t_start":36.08,"t_end":41.2,"char_start":14,"char_end":57}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"stakeholders-threading","extractor":"stakeholders","section":"stakeholders","text":"Single-threaded: only one contact in the loop so far.","basis":"cited","status":"verified","evidence":[{"utterance_id":3,"quote":"she's the one selling it internally not me","match_type":"exact","t_start":20,"t_end":26.16,"char_start":88,"char_end":130}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"one","utterance_id":3}],"interpretation_confidence":"medium"},{"id":"summary-0-0","extractor":"summary","section":"summary","title":"Outcome","text":"SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.","status":"verified","evidence":[{"utterance_id":2,"quote":"you're right that one's on me it goes out today","match_type":"exact","t_start":14,"t_end":19.84,"char_start":0,"char_end":47}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"},{"id":"summary-1-0","extractor":"summary","section":"summary","title":"Pain points","text":"Front-desk churn: lost two receptionists this month; RingHawk's fifteen screens make training a cost.","status":"verified","evidence":[{"utterance_id":7,"quote":"lost two receptions this month every new hire has to lend ringhawks fifteen screens","match_type":"exact","t_start":44.08,"t_end":52.24,"char_start":20,"char_end":103}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[{"flag":"number_without_unit_anchor","where":"in_quote","cue":"two","utterance_id":7}],"interpretation_confidence":"medium"},{"id":"summary-2-0","extractor":"summary","section":"next_steps","title":"Next steps","text":"Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.","status":"verified","evidence":[{"utterance_id":9,"quote":"palate proposal on paper this week and the sharper number you owe me from last time comes with it","match_type":"exact","t_start":58.88,"t_end":66.24,"char_start":25,"char_end":122}],"rejected_evidence":[],"supporting_evidence":[],"rejected_supporting_evidence":[],"requires_context":false,"context_flags":[],"interpretation_confidence":"high"}],"notes":{"coverage":{"band":"SHIPPED","ratio":1,"stats":{"total":21,"attempted":21,"verified":21,"segment_corrected":0,"uncorroborated":0,"blocked_injection":0,"corroborated":21},"required_sections":[{"section":"summary","attempted":2,"corroborated":2},{"section":"next_steps","attempted":3,"corroborated":3}],"extractor_failures":[]},"sections":[{"title":"tracker","blocks":[{"text":"Pilot came up.","claim_ids":["tracker-0-pilot"]},{"text":"TCPA came up.","claim_ids":["tracker-1-tcpa"]},{"text":"Pilot came up.","claim_ids":["tracker-4-pilot"]},{"text":"Pilot came up.","claim_ids":["tracker-8-pilot"]},{"text":"TCPA came up.","claim_ids":["tracker-9-tcpa"]}]},{"title":"buying_stage","blocks":[{"text":"In negotiation. Buyer's narrowing scope to two locations to make it an easy internal sell.","claim_ids":["buying_stage-stage"]},{"text":"Medium urgency: wants the proposal on paper this week.","claim_ids":["buying_stage-urgency"]}]},{"title":"competitors","blocks":[{"text":"RingHawk's fifteen-screen UI (spoken 'ringhawks') is now a training burden as front-desk staff churn.","claim_ids":["competitors-0"]}]},{"title":"Next steps","blocks":[{"text":"Rep to send the overdue TCPA one-pager today, directly to the office manager.","claim_ids":["next_steps-0"]},{"text":"Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.","claim_ids":["next_steps-1"]}]},{"title":"Objections","blocks":[{"text":"Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.","claim_ids":["objections-0"]}]},{"title":"pain","blocks":[{"text":"Front-desk churn is now a cost center: every new hire must learn RingHawk's fifteen screens, so training time is its own cost.","claim_ids":["pain-0"]}]},{"title":"pricing","blocks":[{"text":"Buyer is still owed the sharper number from the pricing call; it will land with the proposal.","claim_ids":["pricing-0"]}]},{"title":"risk_flags","blocks":[{"text":"Buyer's mixed: annoyed the TCPA one-pager never showed up, but still engaged.","claim_ids":["risk_flags-buyer_posture"]},{"text":"Heads up: a few spots in this recording were hard to make out.","claim_ids":["risk_flags-transcript_quality"]}]},{"title":"stakeholders","blocks":[{"text":"Office manager's now the internal champion, selling this deal for us. She wasn't on this call.","claim_ids":["stakeholders-0"]},{"text":"Dr. Mehta's still the economic buyer Rahul has to satisfy. He wasn't on this call.","claim_ids":["stakeholders-1"]},{"text":"Single-threaded: only one contact in the loop so far.","claim_ids":["stakeholders-threading"]}]},{"title":"Summary","blocks":[{"text":"SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.","claim_ids":["summary-0-0"]},{"text":"Front-desk churn: lost two receptionists this month; RingHawk's fifteen screens make training a cost.","claim_ids":["summary-1-0"]}]}]},"provenance":{"transcription_model":"pyai-hear","extraction_model":"offline-author","note":"offline extraction (author=agent, gate-verified)"}}</script>
+<script type="module">// Slice-1 viewer: pure view-model helpers (node-testable) + browser render.
+// One interaction: click a claim → its cited line highlights → audio seeks and
+// plays at that second. blocked_injection is quarantined, never in notes body.
+
+export function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[ch]));
+}
+
+export function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+// Closed enums (technical-spec-core §2). Anything outside them fails CLOSED at
+// the boundary — a typo'd status must never render a claim into the main list.
+const CLAIM_STATUSES = new Set(['verified', 'segment_corrected', 'uncorroborated', 'blocked_injection']);
+
+export function buildViewModel(bundle) {
+  const uttById = new Map();
+  for (const u of bundle.transcript.utterances) {
+    if (!Number.isInteger(u.id)) {
+      throw new Error(`utterance id must be an integer, got: ${JSON.stringify(u.id)}`);
+    }
+    uttById.set(u.id, u);
+  }
+
+  const claims = bundle.claims.map((claim) => {
+    if (!CLAIM_STATUSES.has(claim.status)) {
+      throw new Error(`unknown claim.status ${JSON.stringify(claim.status)} — closed enum, failing closed`);
+    }
+    const primary = claim.evidence?.[0] ?? null;
+    const anchored = claim.status === 'verified' || claim.status === 'segment_corrected';
+    if (anchored && primary && !uttById.has(primary.utterance_id)) {
+      throw new Error(`claim ${claim.id} cites utterance ${primary.utterance_id} which is not in the bundle — exports must be self-contained`);
+    }
+    return {
+      id: claim.id,
+      extractor: claim.extractor,
+      text: claim.text,
+      status: claim.status,
+      anchor: anchored && primary ? {
+        utterance_id: primary.utterance_id,
+        quote: primary.quote,
+        t_start: primary.t_start,
+        match_type: primary.match_type,
+      } : null,
+      offending: claim.status === 'blocked_injection' ? primary?.quote ?? '' : null,
+    };
+  });
+
+  const blocked = new Set(claims.filter((c) => c.status === 'blocked_injection').map((c) => c.id));
+  for (const section of bundle.notes.sections) {
+    for (const block of section.blocks) {
+      for (const id of block.claim_ids) {
+        if (blocked.has(id)) {
+          throw new Error(`notes block references blocked_injection claim ${id} — the notes body must never contain a blocked claim`);
+        }
+      }
+    }
+  }
+
+  // The gate's own scorecard, always on screen: what shipped AND what was
+  // dropped/demoted/blocked. Nothing is silently removed (L7).
+  const counts = { verified: 0, segment_corrected: 0, uncorroborated: 0, blocked_injection: 0 };
+  for (const c of claims) counts[c.status] += 1;
+
+  return {
+    title: bundle.call?.title ?? bundle.call?.id ?? 'call',
+    coverage: bundle.notes.coverage,          // rendered verbatim, never recomputed
+    counts,
+    utterances: bundle.transcript.utterances,
+    uttById,                                  // id-keyed — array order is NOT id order
+    claims,
+    quarantine: claims.filter((c) => c.status === 'blocked_injection'),
+    sections: bundle.notes.sections,
+    provenance: bundle.provenance ?? null,
+  };
+}
+
+// ── browser side ───────────────────────────────────────────────────────────
+const BADGE = {
+  verified: '✓ verified',
+  segment_corrected: '✓ corrected',
+  uncorroborated: '⚠ not found in the call',
+  blocked_injection: '⛔ blocked: planted instruction',
+};
+
+export function render(vm, root, audio) {
+  root.innerHTML = `
+    <header>
+      <div>
+        <h1>${escapeHtml(vm.title)}</h1>
+        <span class="counts">${vm.counts.verified} verified · ${vm.counts.segment_corrected} corrected · ${vm.counts.uncorroborated} not found in the call · ${vm.counts.blocked_injection} blocked</span>
+      </div>
+      <span class="band">${escapeHtml(vm.coverage.band)} · ${Math.round(vm.coverage.ratio * 100)}% verified</span>
+    </header>
+    <main>
+      <section id="notes">
+        ${vm.sections.map((s) => `
+          <h2>${escapeHtml(s.title)}</h2>
+          ${s.blocks.map((b) => `<p class="block">${escapeHtml(b.text)}</p>`).join('')}`).join('')}
+        <h2>Claims</h2>
+        ${vm.claims.filter((c) => c.status !== 'blocked_injection').map((c) => `
+          <div class="claim ${c.status}" data-id="${escapeHtml(c.id)}">
+            <span class="badge">${BADGE[c.status] ?? escapeHtml(c.status)}</span>
+            <p>${escapeHtml(c.text)}</p>
+          </div>`).join('')}
+        ${vm.quarantine.length ? `<h2>Quarantined</h2>` : ''}
+        ${vm.quarantine.map((c) => `
+          <div class="claim blocked_injection">
+            <span class="badge">${BADGE.blocked_injection}</span>
+            <p><s>${escapeHtml(c.text)}</s></p>
+            <p class="offending">line: “${escapeHtml(c.offending)}”</p>
+          </div>`).join('')}
+      </section>
+      <section id="transcript">
+        ${vm.utterances.map((u) => `
+          <div class="utt" data-utt="${escapeHtml(u.id)}">
+            <span class="ts">[${formatTime(u.start)}]</span>
+            ${u.speaker ? `<span class="spk">${escapeHtml(u.speaker)}:</span>` : ''}
+            <span class="txt">${escapeHtml(u.text)}</span>
+          </div>`).join('')}
+      </section>
+    </main>`;
+
+  root.querySelectorAll('.claim[data-id]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const claim = vm.claims.find((c) => c.id === el.dataset.id);
+      root.querySelectorAll('.utt.active').forEach((n) => n.classList.remove('active'));
+      root.querySelectorAll('.claim.active').forEach((n) => n.classList.remove('active'));
+      el.classList.add('active');
+      if (!claim?.anchor) return;                     // demoted claims have nothing to prove
+      const source = vm.uttById.get(claim.anchor.utterance_id);  // id-keyed, survives reordering
+      const utt = root.querySelector(`.utt[data-utt="${Number(claim.anchor.utterance_id)}"]`);
+      if (!utt || !source) return;
+      utt.classList.add('active');
+      const txt = utt.querySelector('.txt');
+      const raw = source.text;
+      const idx = raw.indexOf(claim.anchor.quote);
+      if (idx >= 0) {
+        txt.innerHTML = `${escapeHtml(raw.slice(0, idx))}<mark>${escapeHtml(claim.anchor.quote)}</mark>${escapeHtml(raw.slice(idx + claim.anchor.quote.length))}`;
+      }
+      utt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      safeSeekAndPlay(audio, claim.anchor.t_start);   // bonus layer — can never break the highlight
+    });
+  });
+}
+
+// Audio is a BONUS layer on the receipts moment, never a dependency: the
+// highlight has already landed by the time this runs, and nothing here can
+// throw past it. Returns whether playback was attempted (DOM-free testable).
+export function safeSeekAndPlay(audio, tStart) {
+  if (!audio || audio.error || !Number.isFinite(tStart)) return false;
+  try {
+    audio.currentTime = tStart;
+    const played = audio.play();
+    played?.catch?.(() => {});          // autoplay policy / decode failure — silently a no-op
+    return true;
+  } catch {
+    return false;                       // seeking an unready element must never surface
+  }
+}
+
+// App-mode footer: if the audio file 404s or dies mid-load, swap the broken
+// player for a quiet note — receipts keep working without it.
+function watchAudio(audio) {
+  if (!audio) return;
+  audio.addEventListener('error', () => {
+    const footer = audio.closest('footer');
+    if (footer) footer.innerHTML = '<span class="audio-note">Audio&#39;s not loaded. Click a claim to see its line.</span>';
+  }, { once: true });
+}
+
+// Boot only in a browser; node imports the pure helpers above. Two fuel lines:
+// tier-1 export inlines the bundle as #og-data (no server, no audio — the
+// footer player is removed); app mode fetches from the local server.
+if (typeof document !== 'undefined') {
+  const inline = document.getElementById('og-data');
+  if (inline) {
+    document.querySelector('footer')?.remove();
+    try {
+      render(buildViewModel(JSON.parse(inline.textContent)), document.getElementById('app'), null);
+    } catch (err) {
+      document.getElementById('app').textContent = `failed to load bundle: ${err.message}`;
+    }
+  } else {
+    const audio = document.querySelector('audio');
+    watchAudio(audio);
+    fetch('/bundle.json')
+      .then((r) => r.json())
+      .then((bundle) => render(buildViewModel(bundle), document.getElementById('app'), audio))
+      .catch((err) => { document.getElementById('app').textContent = `failed to load bundle: ${err.message}`; });
+  }
+}
+</script>
+</body>
+</html>

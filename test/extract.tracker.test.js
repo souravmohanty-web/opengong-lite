@@ -110,12 +110,17 @@ test('TR-03b keyword matching is case-insensitive', () => {
   assert.equal(runTrackerExtractor(def, TRACKER_T).data.claims.length, 1);
 });
 
-test('TR-03c claim text and evidence are gate-ready and traceable to the matching extractor/keyword', () => {
+test('TR-03c claim text is a plain human mention, not a debug string, and traces to the matching extractor/keyword via claim.extractor + claim.id', () => {
   const def = trackerDef();
   const [claim] = runTrackerExtractor(def, TRACKER_T).data.claims;
-  assert.match(claim.text, /competitor-tracker/);
-  assert.match(claim.text, /aircall/);
+  // Note-facing text: no "Tracker '<name>' matched: <keyword>" debug shape —
+  // just the keyword, humanized, as a short plain mention.
+  assert.match(claim.text, /^Aircall came up\.$/);
+  assert.doesNotMatch(claim.text, /Tracker|matched:/);
+  // Traceability lives in the structured fields, not the prose: id is
+  // "<extractor>-<utteranceId>-<keyword>" and extractor names the tracker.
   assert.equal(claim.extractor, 'competitor-tracker');
+  assert.equal(claim.id, 'competitor-tracker-0-aircall');
   assert.equal(claim.evidence[0].utterance_id, 0);
 });
 

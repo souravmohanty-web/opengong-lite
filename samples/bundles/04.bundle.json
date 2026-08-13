@@ -2,7 +2,7 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "04",
-    "title": "Commitment check — the ledger moment"
+    "title": "Commitment check: the ledger moment"
   },
   "audio": null,
   "transcript": {
@@ -126,7 +126,7 @@
       "id": "tracker-0-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -150,7 +150,7 @@
       "id": "tracker-1-tcpa",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: tcpa",
+      "text": "TCPA came up.",
       "status": "verified",
       "evidence": [
         {
@@ -181,7 +181,7 @@
       "id": "tracker-4-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -212,7 +212,7 @@
       "id": "tracker-8-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -243,7 +243,7 @@
       "id": "tracker-9-tcpa",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: tcpa",
+      "text": "TCPA came up.",
       "status": "verified",
       "evidence": [
         {
@@ -267,7 +267,7 @@
       "id": "buying_stage-stage",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Buying stage: negotiation",
+      "text": "In negotiation. Buyer's narrowing scope to two locations to make it an easy internal sell.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -299,7 +299,7 @@
       "id": "buying_stage-urgency",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Urgency: medium",
+      "text": "Medium urgency: wants the proposal on paper this week.",
       "basis": "inferred",
       "status": "verified",
       "evidence": [
@@ -555,7 +555,7 @@
       "id": "risk_flags-buyer_posture",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Buyer posture: mixed",
+      "text": "Buyer's mixed: annoyed the TCPA one-pager never showed up, but still engaged.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -587,7 +587,7 @@
       "id": "risk_flags-transcript_quality",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Transcript quality: some_gaps",
+      "text": "Heads up: a few spots in this recording were hard to make out.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -619,7 +619,7 @@
       "id": "stakeholders-0",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Office manager has become the internal champion, selling the deal internally; referenced, not on the call.",
+      "text": "Office manager's now the internal champion, selling this deal for us. She wasn't on this call.",
       "role_signal": "champion",
       "present_on_call": "referenced",
       "status": "verified",
@@ -652,7 +652,7 @@
       "id": "stakeholders-1",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Dr Mehta remains the economic buyer Rahul must satisfy; referenced, not on the call.",
+      "text": "Dr. Mehta's still the economic buyer Rahul has to satisfy. He wasn't on this call.",
       "role_signal": "economic_buyer",
       "present_on_call": "referenced",
       "status": "verified",
@@ -678,7 +678,7 @@
       "id": "stakeholders-threading",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Threading: single_threaded",
+      "text": "Single-threaded: only one contact in the loop so far.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -821,31 +821,31 @@
         "title": "tracker",
         "blocks": [
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-0-pilot"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: tcpa",
+            "text": "TCPA came up.",
             "claim_ids": [
               "tracker-1-tcpa"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-4-pilot"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-8-pilot"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: tcpa",
+            "text": "TCPA came up.",
             "claim_ids": [
               "tracker-9-tcpa"
             ]
@@ -856,13 +856,13 @@
         "title": "buying_stage",
         "blocks": [
           {
-            "text": "Buying stage: negotiation",
+            "text": "In negotiation. Buyer's narrowing scope to two locations to make it an easy internal sell.",
             "claim_ids": [
               "buying_stage-stage"
             ]
           },
           {
-            "text": "Urgency: medium",
+            "text": "Medium urgency: wants the proposal on paper this week.",
             "claim_ids": [
               "buying_stage-urgency"
             ]
@@ -893,12 +893,6 @@
             "text": "Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.",
             "claim_ids": [
               "next_steps-1"
-            ]
-          },
-          {
-            "text": "Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.",
-            "claim_ids": [
-              "summary-2-0"
             ]
           }
         ]
@@ -940,13 +934,13 @@
         "title": "risk_flags",
         "blocks": [
           {
-            "text": "Buyer posture: mixed",
+            "text": "Buyer's mixed: annoyed the TCPA one-pager never showed up, but still engaged.",
             "claim_ids": [
               "risk_flags-buyer_posture"
             ]
           },
           {
-            "text": "Transcript quality: some_gaps",
+            "text": "Heads up: a few spots in this recording were hard to make out.",
             "claim_ids": [
               "risk_flags-transcript_quality"
             ]
@@ -957,19 +951,19 @@
         "title": "stakeholders",
         "blocks": [
           {
-            "text": "Office manager has become the internal champion, selling the deal internally; referenced, not on the call.",
+            "text": "Office manager's now the internal champion, selling this deal for us. She wasn't on this call.",
             "claim_ids": [
               "stakeholders-0"
             ]
           },
           {
-            "text": "Dr Mehta remains the economic buyer Rahul must satisfy; referenced, not on the call.",
+            "text": "Dr. Mehta's still the economic buyer Rahul has to satisfy. He wasn't on this call.",
             "claim_ids": [
               "stakeholders-1"
             ]
           },
           {
-            "text": "Threading: single_threaded",
+            "text": "Single-threaded: only one contact in the loop so far.",
             "claim_ids": [
               "stakeholders-threading"
             ]

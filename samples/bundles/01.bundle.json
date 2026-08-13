@@ -2,7 +2,7 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "01",
-    "title": "Discovery — Brightsmile Dental, on RingHawk"
+    "title": "Discovery: Brightsmile Dental, on RingHawk"
   },
   "audio": null,
   "transcript": {
@@ -196,7 +196,7 @@
       "id": "tracker-2-ringhawk",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: ringhawk",
+      "text": "RingHawk came up.",
       "status": "verified",
       "evidence": [
         {
@@ -227,7 +227,7 @@
       "id": "tracker-3-ringhawk",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: ringhawk",
+      "text": "RingHawk came up.",
       "status": "verified",
       "evidence": [
         {
@@ -258,7 +258,7 @@
       "id": "tracker-11-ringhawk",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: ringhawk",
+      "text": "RingHawk came up.",
       "status": "verified",
       "evidence": [
         {
@@ -282,7 +282,7 @@
       "id": "tracker-13-compliance",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: compliance",
+      "text": "Compliance came up.",
       "status": "verified",
       "evidence": [
         {
@@ -319,7 +319,7 @@
       "id": "tracker-14-tcpa",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: tcpa",
+      "text": "TCPA came up.",
       "status": "verified",
       "evidence": [
         {
@@ -343,7 +343,7 @@
       "id": "tracker-15-compliance",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: compliance",
+      "text": "Compliance came up.",
       "status": "verified",
       "evidence": [
         {
@@ -367,7 +367,7 @@
       "id": "buying_stage-stage",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Buying stage: evaluating",
+      "text": "Still evaluating, no decision made yet.",
       "basis": "inferred",
       "status": "verified",
       "evidence": [
@@ -392,7 +392,7 @@
       "id": "buying_stage-urgency",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Urgency: medium",
+      "text": "Medium urgency: wants it live by Thursday, before the lunch rush.",
       "basis": "inferred",
       "status": "verified",
       "evidence": [
@@ -417,7 +417,7 @@
       "id": "buying_stage-trigger",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Trigger event: tool_failure",
+      "text": "Shopping because RingHawk keeps breaking on them.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -544,7 +544,7 @@
       "id": "objections-0",
       "extractor": "objections",
       "section": "objections",
-      "text": "It is not a budget problem, it is a trust problem: 'i got burned once switching software and i'm not doing that dance again without proof it works.'",
+      "text": "Trust is the blocker. They got burned switching software once and won't repeat that without proof it works.",
       "category": "trust",
       "handling": "deflected",
       "objection_status": "left_open",
@@ -723,7 +723,7 @@
       "id": "pricing-1",
       "extractor": "pricing",
       "section": "pricing",
-      "text": "The RingHawk renewal is 'too expensive for what we're getting' -- here 'it' refers to the incumbent renewal, not CallForge's price.",
+      "text": "The RingHawk renewal is 'too expensive for what we're getting.' That's about the incumbent's price, not CallForge's.",
       "kind": "competitor_price",
       "pricing_signal": "comparison",
       "status": "verified",
@@ -749,7 +749,7 @@
       "id": "risk_flags-buyer_posture",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Buyer posture: guarded",
+      "text": "Buyer's guarded. Got burned switching software before and wants proof this works.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -781,7 +781,7 @@
       "id": "risk_flags-transcript_quality",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Transcript quality: some_gaps",
+      "text": "Heads up: a few spots in this recording were hard to make out.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -806,7 +806,7 @@
       "id": "stakeholders-0",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Office manager is pushing internally for text reminders: a user/influencer, referenced but not on this call.",
+      "text": "Office manager's pushing for text reminders internally, though she wasn't on this call.",
       "role_signal": "influencer",
       "present_on_call": "referenced",
       "status": "verified",
@@ -832,7 +832,7 @@
       "id": "stakeholders-threading",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Threading: single_threaded",
+      "text": "Single-threaded: only one contact in the loop so far.",
       "basis": "inferred",
       "status": "verified",
       "evidence": [
@@ -968,37 +968,37 @@
         "title": "tracker",
         "blocks": [
           {
-            "text": "Tracker 'tracker' matched: ringhawk",
+            "text": "RingHawk came up.",
             "claim_ids": [
               "tracker-2-ringhawk"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: ringhawk",
+            "text": "RingHawk came up.",
             "claim_ids": [
               "tracker-3-ringhawk"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: ringhawk",
+            "text": "RingHawk came up.",
             "claim_ids": [
               "tracker-11-ringhawk"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: compliance",
+            "text": "Compliance came up.",
             "claim_ids": [
               "tracker-13-compliance"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: tcpa",
+            "text": "TCPA came up.",
             "claim_ids": [
               "tracker-14-tcpa"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: compliance",
+            "text": "Compliance came up.",
             "claim_ids": [
               "tracker-15-compliance"
             ]
@@ -1009,19 +1009,19 @@
         "title": "buying_stage",
         "blocks": [
           {
-            "text": "Buying stage: evaluating",
+            "text": "Still evaluating, no decision made yet.",
             "claim_ids": [
               "buying_stage-stage"
             ]
           },
           {
-            "text": "Urgency: medium",
+            "text": "Medium urgency: wants it live by Thursday, before the lunch rush.",
             "claim_ids": [
               "buying_stage-urgency"
             ]
           },
           {
-            "text": "Trigger event: tool_failure",
+            "text": "Shopping because RingHawk keeps breaking on them.",
             "claim_ids": [
               "buying_stage-trigger"
             ]
@@ -1047,12 +1047,6 @@
             "claim_ids": [
               "next_steps-0"
             ]
-          },
-          {
-            "text": "Rep to run the demo Thursday: routing plus texting, no slides.",
-            "claim_ids": [
-              "summary-2-0"
-            ]
           }
         ]
       },
@@ -1060,7 +1054,7 @@
         "title": "Objections",
         "blocks": [
           {
-            "text": "It is not a budget problem, it is a trust problem: 'i got burned once switching software and i'm not doing that dance again without proof it works.'",
+            "text": "Trust is the blocker. They got burned switching software once and won't repeat that without proof it works.",
             "claim_ids": [
               "objections-0"
             ]
@@ -1100,7 +1094,7 @@
             ]
           },
           {
-            "text": "The RingHawk renewal is 'too expensive for what we're getting' -- here 'it' refers to the incumbent renewal, not CallForge's price.",
+            "text": "The RingHawk renewal is 'too expensive for what we're getting.' That's about the incumbent's price, not CallForge's.",
             "claim_ids": [
               "pricing-1"
             ]
@@ -1111,13 +1105,13 @@
         "title": "risk_flags",
         "blocks": [
           {
-            "text": "Buyer posture: guarded",
+            "text": "Buyer's guarded. Got burned switching software before and wants proof this works.",
             "claim_ids": [
               "risk_flags-buyer_posture"
             ]
           },
           {
-            "text": "Transcript quality: some_gaps",
+            "text": "Heads up: a few spots in this recording were hard to make out.",
             "claim_ids": [
               "risk_flags-transcript_quality"
             ]
@@ -1128,13 +1122,13 @@
         "title": "stakeholders",
         "blocks": [
           {
-            "text": "Office manager is pushing internally for text reminders: a user/influencer, referenced but not on this call.",
+            "text": "Office manager's pushing for text reminders internally, though she wasn't on this call.",
             "claim_ids": [
               "stakeholders-0"
             ]
           },
           {
-            "text": "Threading: single_threaded",
+            "text": "Single-threaded: only one contact in the loop so far.",
             "claim_ids": [
               "stakeholders-threading"
             ]

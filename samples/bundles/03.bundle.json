@@ -2,7 +2,7 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "03",
-    "title": "Pricing — quote vs RingHawk renewal counter"
+    "title": "Pricing: quote vs RingHawk renewal counter"
   },
   "audio": null,
   "transcript": {
@@ -136,7 +136,7 @@
       "id": "tracker-6-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -173,7 +173,7 @@
       "id": "tracker-7-ringhawk",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: ringhawk",
+      "text": "RingHawk came up.",
       "status": "verified",
       "evidence": [
         {
@@ -197,7 +197,7 @@
       "id": "buying_stage-stage",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Buying stage: negotiation",
+      "text": "In negotiation now, haggling on price.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -229,7 +229,7 @@
       "id": "buying_stage-urgency",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Urgency: high",
+      "text": "High urgency: the RingHawk renewal auto-locks in November.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -254,7 +254,7 @@
       "id": "buying_stage-trigger",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Trigger event: contract_expiry",
+      "text": "Driven by the RingHawk contract expiring in November.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -328,7 +328,7 @@
       "id": "next_steps-0",
       "extractor": "next_steps",
       "section": "next_steps",
-      "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr Mehta.",
+      "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.",
       "type": "send_info",
       "owner": "rep",
       "commitment": "firm",
@@ -356,7 +356,7 @@
       "id": "objections-0",
       "extractor": "objections",
       "section": "objections",
-      "text": "Buyer must justify the six-per-seat gap to Dr Mehta, who signs the checks.",
+      "text": "Buyer must justify the six-per-seat gap to Dr. Mehta, who signs the checks.",
       "category": "authority",
       "handling": "addressed",
       "objection_status": "left_open",
@@ -399,7 +399,7 @@
       "id": "objections-1",
       "extractor": "objections",
       "section": "objections",
-      "text": "Porting fear, attributed to the OLD VENDOR (reported speech, not the buyer's own finding): they claimed porting numbers takes months.",
+      "text": "Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer's actually experienced.",
       "category": "trust",
       "handling": "addressed",
       "objection_status": "left_open",
@@ -494,7 +494,7 @@
       "id": "pricing-2",
       "extractor": "pricing",
       "section": "pricing",
-      "text": "Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr Mehta will question.",
+      "text": "Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr. Mehta will question.",
       "kind": "price_objection",
       "pricing_signal": "comparison",
       "status": "verified",
@@ -520,7 +520,7 @@
       "id": "pricing-3",
       "extractor": "pricing",
       "section": "pricing",
-      "text": "Buyer asks for fifteen off so the decision is about service, not price.",
+      "text": "Buyer wants fifteen off, enough to make this a service decision instead of a price fight.",
       "kind": "discount_request",
       "pricing_signal": "discount_request",
       "status": "verified",
@@ -585,7 +585,7 @@
       "id": "risk_flags-buyer_posture",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Buyer posture: mixed",
+      "text": "Buyer's mixed: interested, but something spooked them.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -623,7 +623,7 @@
       "id": "risk_flags-transcript_quality",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Transcript quality: some_gaps",
+      "text": "Heads up: a few spots in this recording were hard to make out.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -655,7 +655,7 @@
       "id": "stakeholders-0",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Dr Mehta is the economic buyer who signs the checks; referenced, never on these calls.",
+      "text": "Dr. Mehta signs the checks. He's never been on these calls himself.",
       "role_signal": "economic_buyer",
       "present_on_call": "referenced",
       "status": "verified",
@@ -681,7 +681,7 @@
       "id": "stakeholders-threading",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Threading: single_threaded",
+      "text": "Single-threaded: only one contact in the loop so far.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -764,7 +764,7 @@
       "extractor": "summary",
       "section": "next_steps",
       "title": "Next steps",
-      "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr Mehta.",
+      "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.",
       "status": "verified",
       "evidence": [
         {
@@ -817,13 +817,13 @@
         "title": "tracker",
         "blocks": [
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-6-pilot"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: ringhawk",
+            "text": "RingHawk came up.",
             "claim_ids": [
               "tracker-7-ringhawk"
             ]
@@ -834,19 +834,19 @@
         "title": "buying_stage",
         "blocks": [
           {
-            "text": "Buying stage: negotiation",
+            "text": "In negotiation now, haggling on price.",
             "claim_ids": [
               "buying_stage-stage"
             ]
           },
           {
-            "text": "Urgency: high",
+            "text": "High urgency: the RingHawk renewal auto-locks in November.",
             "claim_ids": [
               "buying_stage-urgency"
             ]
           },
           {
-            "text": "Trigger event: contract_expiry",
+            "text": "Driven by the RingHawk contract expiring in November.",
             "claim_ids": [
               "buying_stage-trigger"
             ]
@@ -868,15 +868,9 @@
         "title": "Next steps",
         "blocks": [
           {
-            "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr Mehta.",
+            "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.",
             "claim_ids": [
               "next_steps-0"
-            ]
-          },
-          {
-            "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr Mehta.",
-            "claim_ids": [
-              "summary-2-0"
             ]
           }
         ]
@@ -885,13 +879,13 @@
         "title": "Objections",
         "blocks": [
           {
-            "text": "Buyer must justify the six-per-seat gap to Dr Mehta, who signs the checks.",
+            "text": "Buyer must justify the six-per-seat gap to Dr. Mehta, who signs the checks.",
             "claim_ids": [
               "objections-0"
             ]
           },
           {
-            "text": "Porting fear, attributed to the OLD VENDOR (reported speech, not the buyer's own finding): they claimed porting numbers takes months.",
+            "text": "Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer's actually experienced.",
             "claim_ids": [
               "objections-1"
             ]
@@ -914,13 +908,13 @@
             ]
           },
           {
-            "text": "Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr Mehta will question.",
+            "text": "Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr. Mehta will question.",
             "claim_ids": [
               "pricing-2"
             ]
           },
           {
-            "text": "Buyer asks for fifteen off so the decision is about service, not price.",
+            "text": "Buyer wants fifteen off, enough to make this a service decision instead of a price fight.",
             "claim_ids": [
               "pricing-3"
             ]
@@ -931,13 +925,13 @@
         "title": "risk_flags",
         "blocks": [
           {
-            "text": "Buyer posture: mixed",
+            "text": "Buyer's mixed: interested, but something spooked them.",
             "claim_ids": [
               "risk_flags-buyer_posture"
             ]
           },
           {
-            "text": "Transcript quality: some_gaps",
+            "text": "Heads up: a few spots in this recording were hard to make out.",
             "claim_ids": [
               "risk_flags-transcript_quality"
             ]
@@ -948,13 +942,13 @@
         "title": "stakeholders",
         "blocks": [
           {
-            "text": "Dr Mehta is the economic buyer who signs the checks; referenced, never on these calls.",
+            "text": "Dr. Mehta signs the checks. He's never been on these calls himself.",
             "claim_ids": [
               "stakeholders-0"
             ]
           },
           {
-            "text": "Threading: single_threaded",
+            "text": "Single-threaded: only one contact in the loop so far.",
             "claim_ids": [
               "stakeholders-threading"
             ]

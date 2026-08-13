@@ -2,7 +2,7 @@
   "format": "opengong.bundle.v1",
   "call": {
     "id": "05",
-    "title": "Close — verbal commit on the pilot"
+    "title": "Close: verbal commit on the pilot"
   },
   "audio": null,
   "transcript": {
@@ -116,7 +116,7 @@
       "id": "tracker-0-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -140,7 +140,7 @@
       "id": "tracker-1-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -171,7 +171,7 @@
       "id": "tracker-2-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -202,7 +202,7 @@
       "id": "tracker-3-pilot",
       "extractor": "tracker",
       "section": "tracker",
-      "text": "Tracker 'tracker' matched: pilot",
+      "text": "Pilot came up.",
       "status": "verified",
       "evidence": [
         {
@@ -239,7 +239,7 @@
       "id": "buying_stage-stage",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Buying stage: committed",
+      "text": "Committed. Ready to sign.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -264,7 +264,7 @@
       "id": "buying_stage-urgency",
       "extractor": "buying_stage",
       "section": "buying_stage",
-      "text": "Urgency: high",
+      "text": "High urgency: Dr. Mehta signs early next week.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -324,7 +324,7 @@
       "id": "next_steps-1",
       "extractor": "next_steps",
       "section": "next_steps",
-      "text": "Buyer to have Dr Mehta sign the agreement early next week.",
+      "text": "Buyer to have Dr. Mehta sign the agreement early next week.",
       "type": "concrete_date",
       "owner": "buyer",
       "commitment": "firm",
@@ -408,7 +408,7 @@
       "id": "objections-0",
       "extractor": "objections",
       "section": "objections",
-      "text": "Dr Mehta's only remaining question: are we locked in if the pilot goes badly?",
+      "text": "Dr. Mehta's only remaining question: are we locked in if the pilot goes badly?",
       "category": "trust",
       "handling": "addressed",
       "objection_status": "buyer_accepted",
@@ -503,7 +503,7 @@
       "id": "pricing-1",
       "extractor": "pricing",
       "section": "pricing",
-      "text": "Buyer can sell twenty six internally; Dr Mehta reviewed it the night before.",
+      "text": "Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.",
       "kind": "other",
       "pricing_signal": "none",
       "status": "verified",
@@ -536,7 +536,7 @@
       "id": "risk_flags-buyer_posture",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Buyer posture: open",
+      "text": "Buyer's open, ready to be a reference customer.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -568,7 +568,7 @@
       "id": "risk_flags-transcript_quality",
       "extractor": "risk_flags",
       "section": "risk_flags",
-      "text": "Transcript quality: some_gaps",
+      "text": "Heads up: a few spots in this recording were hard to make out.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -593,7 +593,7 @@
       "id": "stakeholders-0",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Dr Mehta, the economic buyer, reviewed the proposal himself and is set to sign; referenced, not on the call.",
+      "text": "Dr. Mehta reviewed the proposal himself and is set to sign. He wasn't on this call.",
       "role_signal": "economic_buyer",
       "present_on_call": "referenced",
       "status": "verified",
@@ -619,7 +619,7 @@
       "id": "stakeholders-1",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Office manager will get the training live-review as part of onboarding; referenced, not on the call.",
+      "text": "Office manager gets the training live-review as part of onboarding. She wasn't on this call either.",
       "role_signal": "influencer",
       "present_on_call": "referenced",
       "status": "verified",
@@ -645,7 +645,7 @@
       "id": "stakeholders-threading",
       "extractor": "stakeholders",
       "section": "stakeholders",
-      "text": "Threading: single_threaded",
+      "text": "Single-threaded: only one contact in the loop so far.",
       "basis": "cited",
       "status": "verified",
       "evidence": [
@@ -747,7 +747,7 @@
       "extractor": "summary",
       "section": "next_steps",
       "title": "Next steps",
-      "text": "Rep sends the agreement this afternoon; Dr Mehta signs early next week; cutover the weekend after.",
+      "text": "Rep sends the agreement this afternoon; Dr. Mehta signs early next week; cutover the weekend after.",
       "status": "verified",
       "evidence": [
         {
@@ -800,25 +800,25 @@
         "title": "tracker",
         "blocks": [
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-0-pilot"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-1-pilot"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-2-pilot"
             ]
           },
           {
-            "text": "Tracker 'tracker' matched: pilot",
+            "text": "Pilot came up.",
             "claim_ids": [
               "tracker-3-pilot"
             ]
@@ -829,13 +829,13 @@
         "title": "buying_stage",
         "blocks": [
           {
-            "text": "Buying stage: committed",
+            "text": "Committed. Ready to sign.",
             "claim_ids": [
               "buying_stage-stage"
             ]
           },
           {
-            "text": "Urgency: high",
+            "text": "High urgency: Dr. Mehta signs early next week.",
             "claim_ids": [
               "buying_stage-urgency"
             ]
@@ -852,7 +852,7 @@
             ]
           },
           {
-            "text": "Buyer to have Dr Mehta sign the agreement early next week.",
+            "text": "Buyer to have Dr. Mehta sign the agreement early next week.",
             "claim_ids": [
               "next_steps-1"
             ]
@@ -868,12 +868,6 @@
             "claim_ids": [
               "next_steps-3"
             ]
-          },
-          {
-            "text": "Rep sends the agreement this afternoon; Dr Mehta signs early next week; cutover the weekend after.",
-            "claim_ids": [
-              "summary-3-0"
-            ]
           }
         ]
       },
@@ -881,7 +875,7 @@
         "title": "Objections",
         "blocks": [
           {
-            "text": "Dr Mehta's only remaining question: are we locked in if the pilot goes badly?",
+            "text": "Dr. Mehta's only remaining question: are we locked in if the pilot goes badly?",
             "claim_ids": [
               "objections-0"
             ]
@@ -909,7 +903,7 @@
             ]
           },
           {
-            "text": "Buyer can sell twenty six internally; Dr Mehta reviewed it the night before.",
+            "text": "Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.",
             "claim_ids": [
               "pricing-1"
             ]
@@ -920,13 +914,13 @@
         "title": "risk_flags",
         "blocks": [
           {
-            "text": "Buyer posture: open",
+            "text": "Buyer's open, ready to be a reference customer.",
             "claim_ids": [
               "risk_flags-buyer_posture"
             ]
           },
           {
-            "text": "Transcript quality: some_gaps",
+            "text": "Heads up: a few spots in this recording were hard to make out.",
             "claim_ids": [
               "risk_flags-transcript_quality"
             ]
@@ -937,19 +931,19 @@
         "title": "stakeholders",
         "blocks": [
           {
-            "text": "Dr Mehta, the economic buyer, reviewed the proposal himself and is set to sign; referenced, not on the call.",
+            "text": "Dr. Mehta reviewed the proposal himself and is set to sign. He wasn't on this call.",
             "claim_ids": [
               "stakeholders-0"
             ]
           },
           {
-            "text": "Office manager will get the training live-review as part of onboarding; referenced, not on the call.",
+            "text": "Office manager gets the training live-review as part of onboarding. She wasn't on this call either.",
             "claim_ids": [
               "stakeholders-1"
             ]
           },
           {
-            "text": "Threading: single_threaded",
+            "text": "Single-threaded: only one contact in the loop so far.",
             "claim_ids": [
               "stakeholders-threading"
             ]

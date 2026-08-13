@@ -14,6 +14,9 @@
     "test": "node --test",
     "extract": "node src/extract.js --fixture stereo",
     "run": "node src/extract.js --fixture stereo",
-    "scorecard": "node scripts/scorecard.mjs"
+    "scorecard": "node scripts/scorecard.mjs",
+    "control-room": "node scripts/control-room.mjs",
+    "build:deal": "node scripts/build-deal-index.mjs",
+    "demo:deal": "node scripts/build-deal-index.mjs && node src/deal-server.mjs"
   }
 }
