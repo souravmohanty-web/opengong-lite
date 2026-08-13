@@ -11,7 +11,8 @@ git clone <repo-url> && cd opengong-lite
 ```
 
 Read: `DECISION-BRIEF.md` (the spec, 5 min) → `team/SYNC.md` top entries (current state)
-→ `team/TASKBOARD.md` (find your lane).
+→ `team/TASKBOARD.md` (find your lane — or open a new one; see "Open lanes" there.
+You don't need permission to start a lane, you need evidence to promote one).
 
 ## The loop — one pebble on top
 

@@ -14,6 +14,22 @@ Status values: `blocked` / `ready` / `claimed:<session>` / `in-progress:<session
 | R-10. Reasoning-model lane | — | Extraction model bake-off → `capabilities.json` roles.extraction + L-decision | Quote-fidelity eval run against fixtures, results as fixtures in lane dir | ready (research lanes exempt from build freeze) | Saritha (`research/10-reasoning-model/`) |
 | R-11. Competitive-intel lane | — | Wedge receipts, README "hate this if" boundaries, demo beats | Claims sourced w/ evidence files; OSS prompt-wish receipts found | ready (research lanes exempt from build freeze) | Aakash (`research/11-competitive-intel/`) |
 
+## Open lanes — unclaimed, grab one (or invent your own)
+
+Anyone can open a lane: take the next free number, create `research/NN-name/FINDINGS.md`
+(copy the structure of lane 10/11), claim it here with a pushed commit. You do NOT need
+permission — you need evidence. Seeds worth grabbing (from brief §5 + audit orphans + D-items):
+
+| Lane seed | Why it matters |
+|---|---|
+| Long-audio segmentation probe | Is 1-segment-per-file a short-file artifact? Ingest utterance layer depends on it (brief §5) |
+| Sandbox daily-cap + key-mint throttling | Demo-day budget governor + HN-load survival need the real numbers (brief §5) |
+| Hinglish / accent WER on pyai-hear | Our own sales calls are the demo; if WER tanks, demo scripts must dodge it (brief §5) |
+| Prompt-injection threat model | Orphan finding F-4 — needs a named owner; feeds the L17 demo beat |
+| Real dual-channel recording hunt | D3 — a genuine JustCall stereo export proves the happy path before we claim it on stage |
+| Demo-day run-of-show | Script the 6pm Friday demo: beats, timings, fallback if wifi dies (L17 cached path) |
+| Voice catalog curation | Which /v1/voices personas make the 5 sample calls sound real; flaky-voice fallback list |
+
 **Standing auditor orphan findings (route via hackathon session):**
 - F-4: prompt-injection threat model needs a named owner (→ D5)
 - Uncorroborated-bucket coverage thresholds need a decision
