@@ -22,6 +22,14 @@ Live probes against `https://api.pyai.com/v1` with a self-minted sandbox key. Ra
 6. **Errors are RFC-7807 problem+json** with `request_id` — nice for the harness's failure records.
 7. **Transcript text is lowercase, unpunctuated, and normalizes numbers inconsistently** ("almost 40 less" in one run, "forty" in another for the same audio). Receipts matching MUST normalize (lowercase, strip punctuation, number-word folding) — exact string match on LLM-quoted text will fail.
 
+## ADDENDUM (probe round 3, console + docs, 2026-08-13 evening) — quota mechanism + params confirmed
+
+12. **Quota is per-key via `GET /v1/me`** (not surfaced in console UI): returns `limits.{rps, burst, concurrency, monthly_units, daily_unit_cap}`, `credit.{gated, available_cents}`, `key_budget_cents` (null = no cap). Test keys = sandbox tier + daily cap + no credit gate; live keys = pay-as-you-go + credit gating. Design retries around: 402 credit/entitlement exhausted, 403 scope/org-suspended, 429 rate-limited, 409 idempotency-key body mismatch. Async jobs ~50% cheaper than sync ("async tier"). (Real numeric values not yet fetched — run `curl .../v1/me` with the key.)
+13. **Async transcription params confirmed** (`POST /v1/transcription/jobs`, default model `pyai-hear-telephony`): `channel` (exact per-channel stereo diarization, no ML), `diarize` (mono diarization via Sortformer, word-aligned — better than our LLM-role-inference fallback assumption), `numerals` (spoken→digits), `output_formats: [json,srt,vtt]`, signed `webhook_url` (X-PyAI-Signature) OR poll, `Idempotency-Key` header. Response: `result.{text, segments[{id,start,end,text,speaker,channel}], words[]}`.
+14. **Two hard constraints (design-locking):** (a) transcription is **English-only today** — non-`en` hard-400s on sync; validates our English-only v1 scoping with a source. (b) `trace` (PII redaction) is **NOT combinable with `diarize`/`channel`** → our own redaction stays ours (as designed). Also: **no "nova" model exists** in the console — extraction stays external (Anthropic), L5 reconfirmed. Recap exists but bills on call-minutes and is not enabled on this org.
+
+> KEY-HYGIENE NOTE: a browser agent minted an over-scoped uncapped live key (`opengong-hackathon`) during this round and tripped the credential-safety classifier fighting a masked-key read. Recommend Sourav revoke it and mint a `hear:*`+`speak:*`-scoped, spend-capped key. Build runs keyless on fixtures through Slices 1–2; key only needed for Slice-3 sample-audio generation + live encore. No key material is in git (`.env` gitignored + unstaged, verified).
+
 ## What is STILL OPEN (test at build hour zero)
 
 - **Does diarization split real two-human audio?** Synthetic same-pipeline voices are the worst case for speaker embeddings. Test with a genuine two-person recording before concluding anything. If it still returns 1 speaker → fallback plan: LLM turn-attribution from content (Rep/Prospect roles), never fabricated names.
