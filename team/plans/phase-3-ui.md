@@ -129,6 +129,12 @@ click-through of all 7 states; tier-2 link pasted into Slack and opened cold.
 
 Cut order if squeezed: tier-2 → reverse-highlight → md writer. Never cut: escaping tests.
 
+> **Demo constraint (relayed from demo-plan agent, Aug 13 — binding once master plan
+> approved):** the demo NEVER cuts (a) click→highlight→audio, (b) the uncorroborated
+> bucket, (c) the visible injection line — those three carry ~70% of the score. The
+> tier-1 static-HTML export is the designated Phase-3 de-risk if the full UI looks
+> shaky by Friday noon. Cut order above already respects this.
+
 ## 7. Open questions (for auditor / Sourav before Phase 3 starts)
 
 - Q1: Does app mode get a real HTTP server in Phase 3, or does the CLI write the tier-1
