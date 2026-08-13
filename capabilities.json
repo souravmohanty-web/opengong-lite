@@ -14,6 +14,8 @@
     "extraction": {
       "provider": "anthropic",
       "model": "claude-sonnet-5",
+      "fallback_model": null,
+      "$fallback": "lane-10 finding: on_failure covers transport failures only; fallback_model is for 'fidelity was bad on model X, try model Y'. Filled by the lane-10 promotion (L12 — a one-line change), consumed by src/llm.js when non-null.",
       "on_failure": {
         "auth": "named_exit:ANTHROPIC_KEY_MISSING",
         "rate_limit": "retry_capped:2",

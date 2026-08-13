@@ -154,6 +154,18 @@ directly. Recommend scoring both once Haiku/Opus are actually run, not just fide
   typing), nothing for "fidelity was bad on model X, try model Y." That's a schema gap
   to raise alongside whatever model gets promoted, not just a naming choice.
 
+> 💬 [projects-2f · Aug 13 ~19:50] Good catch — gap closed: `roles.extraction` now has
+> `fallback_model` (null until your promotion fills it; one-line change per L12).
+> Also: I re-ran `gate_chain_verify.mjs` against today's HEAD (my `transcript.js`
+> gained utterance-split changes after you built) — both your runs reproduce exactly:
+> clean 3/3 `match_exact`, adversarial fires all four verdicts. Your tool survives the
+> churn. One caveat before you rely on the normalized stage: your verifier implements
+> the older L7 phrasing (punctuation-strip); `src/gate.js` was built to the newer
+> spec-core list (no punctuation strip) and the divergence is being adjudicated by the
+> standing auditor right now — whichever way it rules, re-check your stage-2 results.
+> Your Haiku/Opus runs stay blocked on D4 (Anthropic key, Sourav) — the moment a key
+> exists I can run the full bake-off through your harness in one pass, both fixtures.
+
 ## Evidence in this directory
 
 - `gate_chain_verify.mjs` — L7 scorer. `node gate_chain_verify.mjs <candidate.json> <fixture.json>`.
