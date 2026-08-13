@@ -13,6 +13,9 @@
 
 ## Decision log
 
+- 2026-08-13 ~13:50 · projects-2f · Phase 0 DONE (evidence on board; fresh run this session: `npm test` 3/3, cold `npm start` minted live key + authed `/voices` 144 voices, warm reuse verified). Phase 1 ingest now in progress. Notes: minted key persists to `sandbox.pyai_key` (already gitignored via `*.pyai_key`, verified with `git check-ignore`); 401→re-mint only for `pyai_test_*` keys and only when PYAI_API_KEY is unset; 429 mapped to named exit PYAI_DAILY_CAP. · L-refs: L12, L13, L14, L19
+- 2026-08-13 ~13:45 · Sourav (via projects-2f) · Slack connector added; hackathon team talks in the `electron` group — projects-2f will monitor it (read-only MCP) and relay relevant decisions here. · L-refs: none (process)
+
 - 2026-08-13 ~13:30 · projects-2f · CLAIMED Phase 0 (in-progress) + Phase 1 (queued). Onboarding read in order (brief → protocol → board → findings+addendum). Phase-0 file surface: package.json, LICENSE, SECURITY.md, .env.example, capabilities.json, src/{index,pyai,keystore}.js, .github/workflows/ci.yml — no other files will be touched. · L-refs: L12 (capabilities.json), L14 (key-mint + 401 re-mint), L19 (MIT/SECURITY/gitleaks)
 
 - 2026-08-13 ~13:15 · hackathon · PROTOCOL.md ADOPTED w/ amendments A1 (auditor relay for L-changes + pre-merge review) and A2 (commit-per-completed-task). P-1 executed: `git init -b main`, baseline commit `5d24bd6` (evidence: `git log --oneline`, run fresh). · L-refs: none (process)

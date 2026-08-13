@@ -1,0 +1,15 @@
+{
+  "name": "opengong-lite",
+  "version": "0.0.1",
+  "description": "Open-source call notes with claim-level receipts: every claim points to the exact transcript line.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  }
+}

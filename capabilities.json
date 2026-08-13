@@ -1,0 +1,36 @@
+{
+  "$comment": "Role -> model map (L12). Extractors declare a role, never a model. Fallbacks are typed by failure class; 'named_exit' means stop with that exit name, never a silent retry loop.",
+  "roles": {
+    "transcription": {
+      "provider": "pyai",
+      "model": "pyai-hear",
+      "endpoint": "/v1/transcription/jobs",
+      "on_failure": {
+        "auth_expired": "remint_sandbox_key_once",
+        "daily_cap": "named_exit:PYAI_DAILY_CAP",
+        "transient": "retry_capped:2"
+      }
+    },
+    "extraction": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "on_failure": {
+        "auth": "named_exit:ANTHROPIC_KEY_MISSING",
+        "rate_limit": "retry_capped:2",
+        "transient": "retry_capped:2"
+      }
+    },
+    "tts": {
+      "provider": "pyai",
+      "model": "pyai-voice",
+      "endpoint": "/v1/audio/speech",
+      "voice_preference": [],
+      "$voices": "resolve at runtime from GET /v1/voices; per-voice availability is flaky (research/00 addendum #9), so sample-generation walks this list and falls through on upstream_error",
+      "on_failure": {
+        "voice_unavailable": "next_voice",
+        "auth_expired": "remint_sandbox_key_once",
+        "transient": "retry_capped:2"
+      }
+    }
+  }
+}
