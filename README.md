@@ -63,4 +63,22 @@ npm test    # 11 tests incl. golden tests against real API fixtures (Node >= 22)
 | `src/`, `test/` | Committed foundation: key-mint flow, ingest → canonical transcript, golden tests |
 | `capabilities.json` | Role → model map — extractors declare roles, never models (L12) |
 
-This is the internal team README; the public launch README is a Slice-3 deliverable.
+## Known limitations (on purpose, stated plainly)
+
+- **Hyphen/slash quotes can demote honestly-cited claims.** The transcript is
+  unpunctuated ("follow up"); a model quoting "follow-up" fails exact match and may land
+  in the unverified bucket. We prefer a false demotion to a loosened matcher — digit
+  folding stays refused so a wrong number can never be laundered in (L7). A narrow
+  stage-2b (strip hyphens only when not digit-flanked) is a candidate, not shipped.
+- **The injection taint screen is best-effort.** It's deterministic pattern screening, so
+  a novel phrasing can slip past it. The system doesn't rely on it alone: escaping in
+  every view and the email choke point (outbound drafts build only from verified claims;
+  an unknown citation kills the whole draft) contain what the screen misses.
+- **Cross-utterance cues aren't modeled.** Sarcasm, hypotheticals, or reported speech
+  that span turns can produce a technically-verified quote with a misleading reading;
+  receipts render with surrounding turns visible to mitigate, not solve.
+- **"Right quote, wrong claim" is unsolved** — the gate proves the line was said, not
+  that it means what the claim says. The interpretation layer badges, never blocks.
+
+This is the internal team README; the public launch README is a Slice-3 deliverable
+(and inherits this section — honesty is a scored craft feature, not a disclaimer).
