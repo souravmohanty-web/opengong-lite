@@ -1,0 +1,26 @@
+[
+  {
+    "type": "objection",
+    "text": "Prospect says a competitor quoted about 40% less.",
+    "quote": "your competitor quoted as almost 40 less last week",
+    "segment_id": 1
+  },
+  {
+    "type": "objection",
+    "text": "Prospect says pricing is the main concern.",
+    "quote": "Honestly, my main concern is pricing.",
+    "segment_id": 1
+  },
+  {
+    "type": "next_step",
+    "text": "Rep offers a free trial next quarter.",
+    "quote": "we can set up a free trial for next quarter",
+    "segment_id": 2
+  },
+  {
+    "type": "objection",
+    "text": "Prospect mentions total cost picture as a long unique rescue case.",
+    "quote": "let me show you the total cost picture including answering machine detection",
+    "segment_id": 0
+  }
+]

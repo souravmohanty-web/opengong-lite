@@ -1,0 +1,20 @@
+[
+  {
+    "type": "topic",
+    "text": "Rep opens the call and frames the agenda around how the dialer handles compliance.",
+    "quote": "hi rahul thanks for taking the time today i wanted to walk you through how our dialer handles compliance",
+    "segment_id": 0
+  },
+  {
+    "type": "objection",
+    "text": "Prospect's main concern is pricing; a competitor quoted roughly forty percent less last week.",
+    "quote": "honestly my main concern is pricing your competitor quoted as almost forty less last week",
+    "segment_id": 1
+  },
+  {
+    "type": "next_step",
+    "text": "Rep commits to walking through the total cost picture, including answering machine detection, to address the pricing objection.",
+    "quote": "that is fair let me show you the total cost picture including answering machine detection",
+    "segment_id": 2
+  }
+]
