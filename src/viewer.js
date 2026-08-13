@@ -62,9 +62,15 @@ export function buildViewModel(bundle) {
     }
   }
 
+  // The gate's own scorecard, always on screen: what shipped AND what was
+  // dropped/demoted/blocked. Nothing is silently removed (L7).
+  const counts = { verified: 0, segment_corrected: 0, uncorroborated: 0, blocked_injection: 0 };
+  for (const c of claims) counts[c.status] += 1;
+
   return {
     title: bundle.call?.title ?? bundle.call?.id ?? 'call',
     coverage: bundle.notes.coverage,          // rendered verbatim, never recomputed
+    counts,
     utterances: bundle.transcript.utterances,
     uttById,                                  // id-keyed — array order is NOT id order
     claims,
@@ -85,7 +91,10 @@ const BADGE = {
 export function render(vm, root, audio) {
   root.innerHTML = `
     <header>
-      <h1>${escapeHtml(vm.title)}</h1>
+      <div>
+        <h1>${escapeHtml(vm.title)}</h1>
+        <span class="counts">✓ ${vm.counts.verified} verified · ${vm.counts.segment_corrected} corrected · ⚠ ${vm.counts.uncorroborated} uncorroborated · ⛔ ${vm.counts.blocked_injection} blocked — dropped claims stay visible, nothing is silently removed</span>
+      </div>
       <span class="band">${escapeHtml(vm.coverage.band)} · ${Math.round(vm.coverage.ratio * 100)}% verified</span>
     </header>
     <main>

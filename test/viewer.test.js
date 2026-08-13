@@ -84,6 +84,13 @@ test('a notes block citing a blocked claim is a build error, not a render fallba
   assert.throws(() => buildViewModel(bad), /blocked_injection/);
 });
 
+test('the gate scorecard counts every status — dropped claims are counted, never hidden', () => {
+  const vm = buildViewModel(bundle());
+  assert.deepEqual(vm.counts, { verified: 1, segment_corrected: 1, uncorroborated: 1, blocked_injection: 1 });
+  const total = Object.values(vm.counts).reduce((a, b) => a + b, 0);
+  assert.equal(total, bundle().claims.length, 'every claim lands in exactly one bucket');
+});
+
 test('coverage band is rendered verbatim, never recomputed', () => {
   const b = bundle();
   b.notes.coverage.band = 'SOME_FUTURE_BAND';
