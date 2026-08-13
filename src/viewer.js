@@ -84,8 +84,8 @@ export function buildViewModel(bundle) {
 const BADGE = {
   verified: '✓ verified',
   segment_corrected: '✓ corrected',
-  uncorroborated: '⚠ no verified line',
-  blocked_injection: '⛔ injection blocked',
+  uncorroborated: '⚠ not found in the call',
+  blocked_injection: '⛔ blocked: planted instruction',
 };
 
 export function render(vm, root, audio) {
@@ -93,7 +93,7 @@ export function render(vm, root, audio) {
     <header>
       <div>
         <h1>${escapeHtml(vm.title)}</h1>
-        <span class="counts">✓ ${vm.counts.verified} verified · ${vm.counts.segment_corrected} corrected · ⚠ ${vm.counts.uncorroborated} uncorroborated · ⛔ ${vm.counts.blocked_injection} blocked — dropped claims stay visible, nothing is silently removed</span>
+        <span class="counts">${vm.counts.verified} verified · ${vm.counts.segment_corrected} corrected · ${vm.counts.uncorroborated} not found in the call · ${vm.counts.blocked_injection} blocked</span>
       </div>
       <span class="band">${escapeHtml(vm.coverage.band)} · ${Math.round(vm.coverage.ratio * 100)}% verified</span>
     </header>
@@ -170,7 +170,7 @@ function watchAudio(audio) {
   if (!audio) return;
   audio.addEventListener('error', () => {
     const footer = audio.closest('footer');
-    if (footer) footer.innerHTML = '<span class="audio-note">audio unavailable — click-to-highlight still works</span>';
+    if (footer) footer.innerHTML = '<span class="audio-note">Audio&#39;s not loaded. Click a claim to see its line.</span>';
   }, { once: true });
 }
 
