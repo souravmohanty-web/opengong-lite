@@ -1,0 +1,19 @@
+{
+  "id": "msg_fixture_refusal",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-sonnet-5-fixture",
+  "stop_reason": "refusal",
+  "content": [
+    {
+      "type": "text",
+      "text": "I'm not able to help with that request."
+    }
+  ],
+  "usage": {
+    "input_tokens": 850,
+    "output_tokens": 12,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0
+  }
+}

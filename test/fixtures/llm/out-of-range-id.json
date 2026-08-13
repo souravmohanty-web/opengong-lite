@@ -1,0 +1,19 @@
+{
+  "id": "msg_fixture_out_of_range",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-sonnet-5-fixture",
+  "stop_reason": "end_turn",
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"objections\":[{\"evidence\":[{\"utterance_id\":99,\"quote\":\"my main concern is pricing your competitor quoted us almost forty less last week\"}],\"category\":\"price\",\"text\":\"my main concern is pricing your competitor quoted us almost forty less last week\"}]}"
+    }
+  ],
+  "usage": {
+    "input_tokens": 850,
+    "output_tokens": 96,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0
+  }
+}
