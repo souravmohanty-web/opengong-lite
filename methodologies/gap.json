@@ -1,0 +1,99 @@
+{
+  "id": "gap",
+  "name": "GAP Selling",
+  "origin": "Keenan (Jim Keenan), A Sales Growth Company — 'Gap Selling' (2018).",
+  "summary": "Diagnostic selling: rigorously establish the Current State (facts, problems, impact, root cause, emotion), the Future State (the buyer's own measurable vision), and the Gap between them — the gap IS the value of the sale. Solution talk maps strictly to the diagnosed gap.",
+  "motion": "Discovery-heavy, problem-centric selling; the strongest rubric for first/second discovery calls.",
+  "traits": [
+    {
+      "id": "current_state",
+      "name": "Current State",
+      "weight": 4,
+      "definition": "The literal, factual environment today: how things work, the specific problems, their business impact, and the emotional dimension for the buyer.",
+      "classifying_questions": [
+        "Did the rep uncover the literal, factual environment — how things work today?",
+        "Did they identify specific problems AND their business impact?",
+        "Did they capture the emotional dimension (frustration, risk to the buyer personally)?"
+      ],
+      "met_signals": ["process mapped in concrete detail", "problems tied to named impacts"],
+      "miss_signals": ["current state assumed from the demo request", "impact never asked, only problems listed"],
+      "coaching": {
+        "why_it_matters": "You can't sell a change you haven't diagnosed — the current state is the baseline every dollar of value is measured against.",
+        "next_move": "Re-open discovery: pick the vaguest problem from this call and get the literal facts and its measured impact.",
+        "example_line": "Walk me through exactly what happens today from the moment a call ends to the moment the CRM is updated."
+      }
+    },
+    {
+      "id": "root_cause",
+      "name": "Root Cause & Impact diagnosis",
+      "weight": 4,
+      "definition": "Digging past surface symptoms to root causes your product actually addresses, and tracing how one problem cascades into others (problem -> impact -> root cause).",
+      "classifying_questions": [
+        "Did the rep dig to root cause rather than accepting surface symptoms?",
+        "Did they connect problems to root causes their product actually addresses?",
+        "Did they explore how one problem cascades into others?"
+      ],
+      "met_signals": ["'why does that happen?' chains", "a symptom traced to a process or tooling cause"],
+      "miss_signals": ["first symptom accepted and pitched at", "root cause asserted by the rep without evidence"],
+      "coaching": {
+        "why_it_matters": "Selling to symptoms invites the cheapest painkiller; selling to root cause invites the cure — and justifies its price.",
+        "next_move": "For the top problem, ask 'why' until you hit a cause your product removes, and confirm that chain with the buyer.",
+        "example_line": "You said follow-ups slip — why do they slip? What is it about the current setup that makes that the default?"
+      }
+    },
+    {
+      "id": "future_state",
+      "name": "Future State",
+      "weight": 3,
+      "definition": "The buyer's OWN desired end state in concrete, measurable terms — including what achieving it means for them personally.",
+      "classifying_questions": [
+        "Did the rep get the buyer to articulate the desired end state in concrete, measurable terms?",
+        "Is the future state the buyer's own vision, not the rep's projection?",
+        "Did they explore what achieving it means for the buyer personally?"
+      ],
+      "met_signals": ["buyer describes the target numbers or workflow themselves", "personal stake surfaced"],
+      "miss_signals": ["rep paints the after-picture and the buyer nods", "future state is 'use our product'"],
+      "coaching": {
+        "why_it_matters": "The buyer moves toward their own picture, not yours — a future state they authored is one they'll fund.",
+        "next_move": "Ask the buyer to describe six months after the problem is gone: what's different, and by how much?",
+        "example_line": "Paint me the picture: it's two quarters from now and this is solved — what does the team's week look like, and what number moved?"
+      }
+    },
+    {
+      "id": "the_gap",
+      "name": "The Gap",
+      "weight": 5,
+      "definition": "The explicitly quantified distance between current and future state — made big enough to justify change, and agreed by the buyer to be worth closing.",
+      "classifying_questions": [
+        "Did the rep explicitly quantify the distance between current and future state (revenue, cost, time)?",
+        "Was the gap made large enough to justify the cost and pain of change?",
+        "Did the buyer agree the gap is worth closing?"
+      ],
+      "met_signals": ["a stated delta ('from 12 hours to 2, that's 500 hours a quarter')", "buyer confirms the math"],
+      "miss_signals": ["current and future discussed but never subtracted", "gap stated only by the rep"],
+      "coaching": {
+        "why_it_matters": "The gap is the value of the sale — no quantified gap, no defensible price, no urgency.",
+        "next_move": "Do the subtraction out loud with the buyer on the next call and get their agreement that the delta is real.",
+        "example_line": "So today it's 12 hours a week, and the target is 2 — that's 500 hours a quarter. Is that a gap worth spending money to close?"
+      }
+    },
+    {
+      "id": "gap_alignment",
+      "name": "Solution mapped to the gap",
+      "weight": 2,
+      "definition": "Demo and solution talk tied strictly to the diagnosed gap — no features unrelated to the identified problems.",
+      "classifying_questions": [
+        "Did the rep tie demo/solution talk strictly to the diagnosed gap?",
+        "Did they avoid pitching features unrelated to the identified problems?",
+        "Mark not_applicable if the call was pure discovery with no solution segment."
+      ],
+      "met_signals": ["each capability introduced with the problem it closes", "features skipped explicitly ('you don't need X for this')"],
+      "miss_signals": ["generic product tour", "features hunting for a problem"],
+      "coaching": {
+        "why_it_matters": "Every off-gap feature dilutes the diagnosis and reopens price comparison — you sell the bridge, not the catalog.",
+        "next_move": "Cut the next demo to only what closes this buyer's diagnosed gap; name the problem before each capability.",
+        "example_line": "You don't need most of what we do — here are the two things that close the gap we measured, and nothing else."
+      }
+    }
+  ]
+}

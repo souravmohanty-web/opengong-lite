@@ -17,6 +17,8 @@
     "scorecard": "node scripts/scorecard.mjs",
     "control-room": "node scripts/control-room.mjs",
     "build:deal": "node scripts/build-deal-index.mjs",
-    "demo:deal": "node scripts/build-deal-index.mjs && node src/deal-server.mjs"
+    "demo:deal": "node scripts/build-deal-index.mjs && node src/deal-server.mjs",
+    "coach": "node src/methodology/cli.js",
+    "coach:demo": "node src/methodology/cli.js score samples/methodology/call-discovery.txt"
   }
 }

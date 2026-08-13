@@ -1,0 +1,117 @@
+{
+  "id": "meddic",
+  "name": "MEDDIC",
+  "origin": "Dick Dunkel & Jack Napoli, PTC (1996)",
+  "summary": "Qualification framework for complex B2B sales: deals are won by rigorously qualifying Metrics, Economic buyer, Decision criteria, Decision process, Identified pain, and Champion. Scored per call as observed / not-yet-observed.",
+  "motion": "Enterprise and mid-market complex sales with multiple stakeholders.",
+  "traits": [
+    {
+      "id": "metrics",
+      "name": "Metrics",
+      "weight": 4,
+      "definition": "Quantified business impact of solving the problem — numbers the buyer confirmed, not the rep's brochure claims.",
+      "classifying_questions": [
+        "Did the rep get the prospect to quantify the problem or the value of solving it (revenue, cost, hours, error rate)?",
+        "Are the numbers the prospect's own (stated or confirmed by them), rather than only asserted by the rep?",
+        "Did the rep tie those numbers to what success would look like after purchase?"
+      ],
+      "met_signals": ["prospect states a number for the pain or the win", "rep asks 'how much does that cost you today?'", "a before/after target is agreed"],
+      "miss_signals": ["value discussed only in adjectives ('faster', 'better')", "rep quotes ROI stats the prospect never engages with"],
+      "coaching": {
+        "why_it_matters": "Unquantified pain loses to 'do nothing'. Metrics are what your champion repeats to the CFO when you're not in the room.",
+        "next_move": "Pick the sharpest pain from this call and ask the prospect to put a number on it, then confirm the number back in writing.",
+        "example_line": "You mentioned reps re-dial manually all day — roughly how many hours a week is that across the team, and what does that cost you?"
+      }
+    },
+    {
+      "id": "economic_buyer",
+      "name": "Economic Buyer",
+      "weight": 4,
+      "definition": "Identifying (and working toward access to) the person with final budget authority and veto power.",
+      "classifying_questions": [
+        "Did the rep ask who gives final sign-off or owns the budget for this purchase?",
+        "Is the economic buyer named as a person or role (not just 'management')?",
+        "Was a step agreed that moves toward the economic buyer (intro, exec briefing, joint call)?"
+      ],
+      "met_signals": ["a named budget owner", "an agreed path to meet them"],
+      "miss_signals": ["rep assumes the contact can sign", "'we'll run it by leadership' left unexplored"],
+      "coaching": {
+        "why_it_matters": "Deals stall in the last mile when the person who can say yes has never heard your story.",
+        "next_move": "Ask your contact directly who signs and what that person cares about; propose a specific joint step with them.",
+        "example_line": "When a purchase like this gets approved, whose budget does it come out of — and what would they need to see to say yes quickly?"
+      }
+    },
+    {
+      "id": "decision_criteria",
+      "name": "Decision Criteria",
+      "weight": 3,
+      "definition": "The formal and informal yardsticks the buyer will use to compare options (technical, commercial, compliance).",
+      "classifying_questions": [
+        "Did the rep ask what the buyer will evaluate vendors on?",
+        "Were specific criteria surfaced (integrations, security, price ceiling, support model)?",
+        "Did the rep attempt to influence or add to the criteria in their favor?"
+      ],
+      "met_signals": ["a criteria list is stated or confirmed", "rep introduces a differentiating criterion the buyer accepts"],
+      "miss_signals": ["demo proceeds with no idea how it will be judged", "criteria assumed from a previous deal"],
+      "coaching": {
+        "why_it_matters": "If you don't know the yardstick, a competitor is defining it — usually around their strengths.",
+        "next_move": "Get the written or informal evaluation list before the next stage; propose one criterion where you win outright.",
+        "example_line": "When you compare us against the others, what are the three things that will actually decide it?"
+      }
+    },
+    {
+      "id": "decision_process",
+      "name": "Decision Process",
+      "weight": 3,
+      "definition": "The steps, people, and timeline between 'we like it' and a signed contract — including validation and approval stages.",
+      "classifying_questions": [
+        "Did the rep map how a decision like this actually gets made (stages, approvers, timeline)?",
+        "Is there an agreed target date or event anchoring the timeline?",
+        "Did the rep test the process against the buyer's stated deadline ('to go live by X, we'd need to...')?"
+      ],
+      "met_signals": ["stages and dates are articulated", "a mutual plan or next milestone is agreed"],
+      "miss_signals": ["'send us a proposal' accepted with no process mapped", "no timeline anchor at all"],
+      "coaching": {
+        "why_it_matters": "Deals without a mapped process slip quarter after quarter — every unmapped step is a surprise delay.",
+        "next_move": "Build a reverse timeline from the buyer's target date and confirm each step and owner with your contact.",
+        "example_line": "If you wanted this live before the new quarter, could we walk backwards from that date and list every step and who owns it?"
+      }
+    },
+    {
+      "id": "identify_pain",
+      "name": "Identified Pain",
+      "weight": 5,
+      "definition": "A concrete, admitted business pain with consequences — the reason to change at all.",
+      "classifying_questions": [
+        "Did the prospect articulate a specific problem in their own words?",
+        "Did the rep dig into the consequences of not solving it (who is affected, what breaks, what it blocks)?",
+        "Is the pain connected to a business outcome rather than a mild inconvenience?"
+      ],
+      "met_signals": ["prospect describes the problem unprompted or under questioning", "consequences and urgency surfaced"],
+      "miss_signals": ["rep pitches features before any pain is established", "pain stated by the rep and merely not denied"],
+      "coaching": {
+        "why_it_matters": "No admitted pain, no deal — everything else in MEDDIC hangs off a pain the buyer owns.",
+        "next_move": "Re-open discovery on the strongest pain hint from this call before advancing the demo conversation.",
+        "example_line": "You said missed follow-ups are hurting renewals — can you walk me through the last time that happened and what it cost?"
+      }
+    },
+    {
+      "id": "champion",
+      "name": "Champion",
+      "weight": 4,
+      "definition": "A person with power and personal stake who sells for you internally.",
+      "classifying_questions": [
+        "Is there someone on the buyer side who actively wants this to happen and says so?",
+        "Did the rep test the champion's influence (access to power, willingness to advocate)?",
+        "Did the rep equip them with something to sell internally (summary, business case, demo access)?"
+      ],
+      "met_signals": ["contact volunteers to advocate or arrange internal meetings", "rep asks 'who else needs convincing and can you get us in front of them?'"],
+      "miss_signals": ["friendly contact mistaken for champion with no influence test", "no internal selling materials offered"],
+      "coaching": {
+        "why_it_matters": "You are absent from most of the buying process; a tested champion is your proxy in every meeting you're not in.",
+        "next_move": "Give your likely champion one concrete asset (a one-pager with THEIR metrics) and ask them to socialize it, then watch whether they do.",
+        "example_line": "If I put together a one-page summary with the numbers we discussed, would you be comfortable walking your VP through it before our next call?"
+      }
+    }
+  ]
+}

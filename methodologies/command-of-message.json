@@ -1,0 +1,111 @@
+{
+  "id": "command-of-message",
+  "name": "Command of the Message",
+  "origin": "Force Management (Frank Azzolino & John Kaplan). Usually deployed alongside a MEDDPICC qualification layer.",
+  "summary": "Value-based messaging via the Value Framework: Current State & Negative Consequences -> Positive Business Outcomes -> Required Capabilities ('the ability to...') -> Metrics -> Proof Points -> Differentiation. Framed by the Three Whys: Why change? Why now? Why you?",
+  "motion": "Enterprise value-based selling; the messaging layer at Force Management-trained orgs.",
+  "traits": [
+    {
+      "id": "negative_consequences",
+      "name": "Current State & Negative Consequences",
+      "weight": 4,
+      "definition": "The buyer's current state established, with the cost of inaction made explicit — and acknowledged by the buyer.",
+      "classifying_questions": [
+        "Did the rep establish the buyer's current state and make the cost of staying there explicit?",
+        "Did the buyer acknowledge those negative consequences?"
+      ],
+      "met_signals": ["cost of inaction stated and confirmed", "'why change?' effectively answered"],
+      "miss_signals": ["current state skipped en route to the pitch", "consequences asserted but never agreed"],
+      "coaching": {
+        "why_it_matters": "'Why change?' is the first why — un-answered, the status quo wins by default.",
+        "next_move": "Get the buyer to say out loud what staying put costs them before you present anything.",
+        "example_line": "If nothing changes this year, what does that cost the team — and is that acceptable to leadership?"
+      }
+    },
+    {
+      "id": "pbo",
+      "name": "Positive Business Outcomes",
+      "weight": 4,
+      "definition": "The conversation elevated from features to measurable business results the buyer agrees to target.",
+      "classifying_questions": [
+        "Did the rep elevate the conversation from features to business outcomes stated as measurable results?",
+        "Did the buyer agree on the target outcomes?"
+      ],
+      "met_signals": ["outcomes phrased as measurable results", "buyer signs up to the target"],
+      "miss_signals": ["conversation stays at feature level", "outcomes generic ('efficiency')"],
+      "coaching": {
+        "why_it_matters": "Executives fund outcomes, not features — PBOs are what the deal is actually about.",
+        "next_move": "Reframe your top three talking points as measurable business results and validate them with the buyer.",
+        "example_line": "Forget the product for a second — is 'cut ramp time for new reps from 8 weeks to 4' the outcome that matters here?"
+      }
+    },
+    {
+      "id": "required_capabilities",
+      "name": "Required Capabilities",
+      "weight": 4,
+      "definition": "Needs framed as capabilities ('the ability to...') rather than product features — seeded to map to your differentiation.",
+      "classifying_questions": [
+        "Did the rep frame needs as capabilities ('the ability to...') rather than product features?",
+        "Did they seed capabilities that map to their differentiation?"
+      ],
+      "met_signals": ["'so you need the ability to X' formulations agreed", "capabilities that only you fully satisfy"],
+      "miss_signals": ["straight feature-matching against a checklist", "capabilities dictated entirely by a competitor's RFP"],
+      "coaching": {
+        "why_it_matters": "Whoever writes the required capabilities writes the scorecard the winner is picked on.",
+        "next_move": "Translate this call's pains into 'ability to' statements and get the buyer to adopt them as requirements.",
+        "example_line": "It sounds like the requirement is the ability to have every call logged and followed up without a rep touching the CRM — fair?"
+      }
+    },
+    {
+      "id": "metrics",
+      "name": "Metrics",
+      "weight": 3,
+      "definition": "Numbers attached to outcomes and capabilities, baselined against the current state.",
+      "classifying_questions": [
+        "Did the rep attach numbers to outcomes and capabilities?",
+        "Were metrics baselined against the current state?"
+      ],
+      "met_signals": ["before/after numbers agreed"],
+      "miss_signals": ["outcomes stay qualitative"],
+      "coaching": {
+        "why_it_matters": "A PBO without a metric is a wish — metrics make the business case auditable and the success plan real.",
+        "next_move": "Baseline today's number for each agreed outcome before proposing targets.",
+        "example_line": "What's the current number for ramp time, so we can measure the change against it?"
+      }
+    },
+    {
+      "id": "proof_points",
+      "name": "Proof Points",
+      "weight": 2,
+      "definition": "Specific, relevant customer evidence — mapped to this buyer's desired outcomes, not generic logos.",
+      "classifying_questions": [
+        "Did the rep cite specific, relevant customer results rather than generic logos?",
+        "Did the proof map to this buyer's desired outcomes?"
+      ],
+      "met_signals": ["a named peer story with numbers matching this buyer's PBOs"],
+      "miss_signals": ["logo slide with no outcomes", "case study from an irrelevant segment"],
+      "coaching": {
+        "why_it_matters": "Proof de-risks the decision for the people you never meet — but only when it mirrors this buyer's target outcomes.",
+        "next_move": "Pick one customer whose before/after matches this buyer's PBOs and tell that story with numbers.",
+        "example_line": "A 45-rep team just like yours cut missed follow-ups 80% in one quarter — here's exactly how their numbers moved."
+      }
+    },
+    {
+      "id": "differentiation",
+      "name": "Differentiation (Why you? Why now?)",
+      "weight": 3,
+      "definition": "How you solve the problem differently and better, mapped to the buyer's outcomes — answering 'Why you?' and 'Why now?' convincingly.",
+      "classifying_questions": [
+        "Did the rep articulate how they solve the problem differently or better?",
+        "Did they answer 'Why you?' and 'Why now?' convincingly, tied to the buyer's outcomes?"
+      ],
+      "met_signals": ["differentiators tied to required capabilities", "urgency grounded in the buyer's timeline"],
+      "miss_signals": ["'we're the leader' assertions", "differentiation the buyer can't repeat"],
+      "coaching": {
+        "why_it_matters": "Your champion has to answer 'why them?' in a room you're not in — arm them with a differentiation they can repeat.",
+        "next_move": "Compress your differentiation into one sentence tied to this buyer's #1 outcome and test whether the buyer can say it back.",
+        "example_line": "We're the only option where the follow-up is drafted and the CRM updated before the rep hangs up — that's what gets you the pipeline number."
+      }
+    }
+  ]
+}

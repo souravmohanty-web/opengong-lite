@@ -1,0 +1,81 @@
+{
+  "id": "spin",
+  "name": "SPIN Selling",
+  "origin": "Neil Rackham / Huthwaite International, 1988 — from analysis of 35,000+ sales calls.",
+  "summary": "Discovery-question craft: Situation, Problem, Implication, Need-payoff. Rackham's finding: Implication and Need-payoff questions correlate with success in large sales; excessive Situation questions correlate with failure — this pack penalizes situation-question overload.",
+  "motion": "Discovery-heavy consultative selling; a call-quality rubric that layers under any qualification framework.",
+  "traits": [
+    {
+      "id": "situation",
+      "name": "Situation questions (efficient, researched)",
+      "weight": 2,
+      "definition": "Factual context gathered efficiently — pre-researched where possible. Scoring note: FEWER is better; a call dominated by situation questions is a miss.",
+      "classifying_questions": [
+        "Did the rep gather factual context (stack, team, process) efficiently, without interrogating?",
+        "Was situational information clearly pre-researched and confirmed, rather than asked cold and redundantly?",
+        "Was the share of situation questions small relative to problem/implication questions?"
+      ],
+      "met_signals": ["'I saw you use X — still true?' confirmations", "quick transition into problems"],
+      "miss_signals": ["long stretches of census-taking", "questions answerable from the prospect's website"],
+      "coaching": {
+        "why_it_matters": "Every situation question spends buyer patience without building value — Rackham found they correlate with LOSING large deals.",
+        "next_move": "Move three of your situation questions into pre-call research and open the next call by confirming, not asking.",
+        "example_line": "I saw you run a 40-rep SDR team on a mix of dialers — did I get that right? Then let me ask about what's not working."
+      }
+    },
+    {
+      "id": "problem",
+      "name": "Problem questions",
+      "weight": 3,
+      "definition": "Questions that surface difficulties, dissatisfactions, or gaps — in more than one area.",
+      "classifying_questions": [
+        "Did the rep ask questions that surfaced difficulties, dissatisfactions, or gaps?",
+        "Did the buyer state explicit problems in response?",
+        "Did the rep explore more than one problem area rather than stopping at the first?"
+      ],
+      "met_signals": ["buyer names concrete frustrations", "two or more problem areas opened"],
+      "miss_signals": ["straight from context to demo", "problems asserted by the rep, not elicited"],
+      "coaching": {
+        "why_it_matters": "Problems are the raw material of the sale — implied needs you can later develop into explicit ones.",
+        "next_move": "For each area of the prospect's workflow, prepare one 'where does this break down?' question.",
+        "example_line": "Where does the current process most often break down for the team?"
+      }
+    },
+    {
+      "id": "implication",
+      "name": "Implication questions",
+      "weight": 5,
+      "definition": "Extending a stated problem into its consequences — cost, risk, ripple effects on other teams and KPIs — ideally quantified.",
+      "classifying_questions": [
+        "Did the rep extend a stated problem into its consequences (cost, risk, ripple effects on other teams or KPIs)?",
+        "Did the buyer acknowledge the problem is bigger or more urgent than they first framed it?",
+        "Did any implication get quantified?"
+      ],
+      "met_signals": ["'what does that do to...?' chains", "buyer upgrades their own assessment of the problem"],
+      "miss_signals": ["problem noted, immediately answered with a feature", "consequences narrated by the rep instead of asked"],
+      "coaching": {
+        "why_it_matters": "Implication questions are the single strongest predictor of success in large sales — they grow a small admitted problem into one worth paying to fix.",
+        "next_move": "Take the top problem from this call and script three consequence questions: cost, risk, and who else it touches.",
+        "example_line": "When follow-ups slip like that, what does it do to the pipeline the leadership team reports on?"
+      }
+    },
+    {
+      "id": "need_payoff",
+      "name": "Need-payoff questions",
+      "weight": 4,
+      "definition": "Getting the BUYER to articulate the value of solving the problem — the buyer states the payoff, not the rep.",
+      "classifying_questions": [
+        "Did the rep ask what it would mean or be worth if the problem were solved?",
+        "Did the buyer voice explicit needs or benefits in their own words?",
+        "Did the rep let the buyer state the payoff rather than pitching it at them?"
+      ],
+      "met_signals": ["'how would that help?' questions", "buyer describes the better future themselves"],
+      "miss_signals": ["rep narrates ROI while buyer listens", "no bridge from problem to value before the pitch"],
+      "coaching": {
+        "why_it_matters": "Value the buyer articulates themselves is value they defend internally; value you asserted is forgotten by the elevator.",
+        "next_move": "Before demoing anything next call, ask one 'if this were solved, what would it unlock?' question and let the silence work.",
+        "example_line": "If reps got those five hours a week back, what would you have them do with them?"
+      }
+    }
+  ]
+}

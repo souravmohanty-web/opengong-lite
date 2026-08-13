@@ -1,0 +1,13 @@
+# Call: Brightsmile Dental x CallForge — discovery | 2026-08-13
+Sourav (AE, CallForge): Thanks for making time, Maya. Before we dive in — what made you take this call?
+Maya (Head of Patient Services, Brightsmile): Honestly, our front desk misses too many calls. Last month we missed 214 calls across three clinics.
+Sourav (AE, CallForge): 214 missed calls. What happens to those patients today?
+Maya (Head of Patient Services, Brightsmile): Most never call back. We think each booked patient is worth about 300 dollars, so it adds up fast.
+Sourav (AE, CallForge): So roughly 60 thousand dollars a month walking out the door. Who else feels this problem?
+Maya (Head of Patient Services, Brightsmile): Dr. Rao, our owner. She sees the revenue reports. She has asked me twice this quarter what we are doing about it.
+Sourav (AE, CallForge): If you brought a fix to Dr. Rao, what would she need to see to approve it?
+Maya (Head of Patient Services, Brightsmile): A clear payback number. She approves anything with a payback under six months.
+Sourav (AE, CallForge): That's helpful. When you compare options, what will you judge them on?
+Maya (Head of Patient Services, Brightsmile): It has to work with our Dentrix system, and the front desk has to actually use it. Training time killed the last tool we tried.
+Sourav (AE, CallForge): Understood. I'll show you the Dentrix integration next week. Would you be open to walking Dr. Rao through a one-page payback summary before that call?
+Maya (Head of Patient Services, Brightsmile): Send it over. If the math is right I'll put it in front of her on Thursday.

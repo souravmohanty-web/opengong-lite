@@ -1,0 +1,80 @@
+{
+  "id": "snap",
+  "name": "SNAP Selling",
+  "origin": "Jill Konrath — 'SNAP Selling' (2010).",
+  "summary": "Selling to frazzled, overloaded buyers: keep it Simple, be iNvaluable, always Align, raise Priorities. Wins the three buyer decisions — allow access, initiate change, select resources — by being the easiest, most expert, most relevant option on the buyer's crowded desk.",
+  "motion": "Fast-cycle, transactional to mid-market; SDR outreach and early-stage calls with busy buyers.",
+  "traits": [
+    {
+      "id": "simple",
+      "name": "Keep it Simple",
+      "weight": 3,
+      "definition": "Trivially easy next steps and jargon-free, digestible explanations — no overwhelming a distracted buyer with options.",
+      "classifying_questions": [
+        "Did the rep make the next step trivially easy — clear, low-effort asks?",
+        "Was the explanation jargon-free and digestible for a distracted buyer?",
+        "Did they avoid overwhelming the buyer with options, features, or slides?"
+      ],
+      "met_signals": ["one clear ask, one date", "plain-language framing"],
+      "miss_signals": ["three-option proposals on a first call", "acronym soup"],
+      "coaching": {
+        "why_it_matters": "Frazzled buyers default to whatever costs the least mental energy — complexity is a competitor.",
+        "next_move": "Reduce your next-step ask to one sentence a busy person can say yes to from their phone.",
+        "example_line": "One 20-minute working session with your ops lead next Tuesday — I'll bring everything. Yes or no?"
+      }
+    },
+    {
+      "id": "invaluable",
+      "name": "Be iNvaluable",
+      "weight": 4,
+      "definition": "Bringing expertise beyond product info — the buyer learns something useful even if they never buy.",
+      "classifying_questions": [
+        "Did the rep bring expertise or insight beyond product information?",
+        "Did they share relevant knowledge of the buyer's business or peers?",
+        "Would the buyer have learned something valuable even without buying?"
+      ],
+      "met_signals": ["benchmark or peer practice shared", "buyer asks the rep's opinion"],
+      "miss_signals": ["all product, no perspective", "rep can't answer 'what do teams like ours do?'"],
+      "coaching": {
+        "why_it_matters": "Access is granted to experts, not vendors — being invaluable is what earns the second meeting.",
+        "next_move": "Prepare one piece of genuinely useful peer insight for the next touch, offered with no strings.",
+        "example_line": "Whether or not you go with us: the top quartile of teams your size run this exact play — want me to walk you through it?"
+      }
+    },
+    {
+      "id": "align",
+      "name": "Always Align",
+      "weight": 4,
+      "definition": "Connecting everything to the buyer's stated objectives and business outcomes — never product-centric talking points.",
+      "classifying_questions": [
+        "Did the rep connect everything to the buyer's stated objectives and core priorities?",
+        "Did they demonstrate relevance to the buyer's business outcomes rather than product talking points?"
+      ],
+      "met_signals": ["buyer's own goals quoted back and built on", "value framed in the buyer's metric"],
+      "miss_signals": ["pitch identical to any other prospect's", "objectives never asked"],
+      "coaching": {
+        "why_it_matters": "Overloaded buyers filter ruthlessly for relevance — anything not aligned to their objectives is deleted on arrival.",
+        "next_move": "Restate the buyer's #1 objective in their words at the top of your next message, and tie every point to it.",
+        "example_line": "You said the whole year hinges on the Q1 launch — everything I'm about to show you is in service of that date."
+      }
+    },
+    {
+      "id": "priorities",
+      "name": "Raise Priorities",
+      "weight": 4,
+      "definition": "Tying the solution to what is ALREADY a top priority — active initiatives and deadlines — rather than trying to manufacture a new one.",
+      "classifying_questions": [
+        "Did the rep tie the solution to something already a top priority for the buyer?",
+        "Did they create urgency by linking to active initiatives or deadlines?",
+        "Did they keep that priority front-of-mind in the close and next steps?"
+      ],
+      "met_signals": ["solution attached to a named initiative", "next step scheduled against the buyer's deadline"],
+      "miss_signals": ["urgency manufactured from the rep's quarter-end", "priority never established"],
+      "coaching": {
+        "why_it_matters": "Budgets follow existing priorities; creating a brand-new priority from scratch is the slowest sale there is.",
+        "next_move": "Find the buyer's active initiative this maps to and reposition the deal as an accelerant to it.",
+        "example_line": "This isn't a new project — it's the fastest path to the rollout you've already committed to."
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "solution",
+  "name": "Solution Selling (PPVVC)",
+  "origin": "Michael Bosworth (1994) / Keith Eades 'The New Solution Selling' (2003), Sales Performance International. PPVVC is the Eades-era qualification skeleton.",
+  "summary": "Pain, Power, Vision, Value, Control: move the buyer from latent to admitted pain, align with power, co-create a buying vision biased to your differentiators, quantify mutual value, and control the evaluation with a mutual plan.",
+  "motion": "Enterprise/complex, discovery-heavy motions; the parent of much modern consultative selling.",
+  "traits": [
+    {
+      "id": "pain",
+      "name": "Pain (latent -> admitted)",
+      "weight": 5,
+      "definition": "Moving the buyer from latent to admitted pain — the buyer states it explicitly — diagnosing reasons before prescribing, and tracing the pain chain to other stakeholders.",
+      "classifying_questions": [
+        "Did the rep move the buyer from latent to admitted pain (the buyer states it explicitly)?",
+        "Did they diagnose reasons before prescribing anything?",
+        "Did they trace the pain chain to other stakeholders or executives?"
+      ],
+      "met_signals": ["buyer owns the problem out loud", "pain linked to another team's or an exec's pain"],
+      "miss_signals": ["prescription before diagnosis", "pain remains hypothetical ('some teams struggle with...')"],
+      "coaching": {
+        "why_it_matters": "No pain, no change — and un-admitted pain is no pain. The pain chain turns one sponsor's problem into an organizational one.",
+        "next_move": "Get the buyer to state the pain in their own words, then ask whose pain it becomes upstream.",
+        "example_line": "When your reps lose those hours, whose number does that eventually show up in above you?"
+      }
+    },
+    {
+      "id": "power",
+      "name": "Power",
+      "weight": 4,
+      "definition": "Identifying and reaching (or planning access to) the person with power to buy — distinguishing sponsor from power sponsor.",
+      "classifying_questions": [
+        "Did the rep identify the person with power to make this purchase happen?",
+        "Did they distinguish their sponsor from the power sponsor?",
+        "Was access to power gained or credibly planned?"
+      ],
+      "met_signals": ["power sponsor named", "sponsor agrees to broker access"],
+      "miss_signals": ["selling exclusively to a sponsor who can't buy", "access never requested"],
+      "coaching": {
+        "why_it_matters": "Sponsors give you information; only power gives you a decision.",
+        "next_move": "Test your sponsor: ask them to arrange a specific step with the power sponsor and watch what happens.",
+        "example_line": "For this to move, we'll eventually need [the VP] in the room — could you get us thirty minutes together next week?"
+      }
+    },
+    {
+      "id": "vision",
+      "name": "Vision (biased to you)",
+      "weight": 4,
+      "definition": "Helping the buyer visualize specific capabilities ('what if you could...') rather than pitching features — a vision the buyer articulates back, biased toward your differentiators.",
+      "classifying_questions": [
+        "Did the rep help the buyer visualize capabilities ('what if you could...') rather than pitch features?",
+        "Is the created vision biased toward the rep's differentiators?",
+        "Did the buyer articulate the vision back in their own words?"
+      ],
+      "met_signals": ["'what if when a call ended, the CRM just updated itself?' style questions", "buyer repeats the vision as their own"],
+      "miss_signals": ["feature list with no visualization", "vision generic enough that any vendor fits it"],
+      "coaching": {
+        "why_it_matters": "Buyers act on visions they can see themselves in — and evaluate every vendor against whoever authored the vision.",
+        "next_move": "Convert your top two differentiators into 'what if you could...' questions for the next call.",
+        "example_line": "What if every call ended with the summary, the follow-up, and the CRM fields already done — what would that change for the team?"
+      }
+    },
+    {
+      "id": "value",
+      "name": "Value",
+      "weight": 4,
+      "definition": "Value quantified and agreed WITH the buyer — cost of the pain vs value of the capability, in the buyer's numbers.",
+      "classifying_questions": [
+        "Was the value quantified and agreed with the buyer (cost of pain vs value of capability)?",
+        "Was value expressed in the buyer's numbers rather than the rep's benchmarks?"
+      ],
+      "met_signals": ["a value figure computed together on the call", "buyer's own inputs used"],
+      "miss_signals": ["generic ROI slide", "value asserted, never agreed"],
+      "coaching": {
+        "why_it_matters": "Mutual value survives procurement; asserted value dies at the first discount request.",
+        "next_move": "Build the value math live with the buyer's own numbers and get an explicit 'yes, that's roughly right'.",
+        "example_line": "Using your numbers — 12 reps, 5 hours each — that's about $18K a month. Does that math hold up from where you sit?"
+      }
+    },
+    {
+      "id": "control",
+      "name": "Control (mutual plan)",
+      "weight": 3,
+      "definition": "Controlling the buying process: a proposed or maintained evaluation/mutual plan with agreed next steps and timeline governance.",
+      "classifying_questions": [
+        "Did the rep propose or maintain an evaluation or mutual plan?",
+        "Did they secure agreed next steps and timeline governance?"
+      ],
+      "met_signals": ["a written plan referenced or offered", "each step dated with an owner"],
+      "miss_signals": ["buyer fully dictates an opaque process", "next step is 'we'll get back to you'"],
+      "coaching": {
+        "why_it_matters": "Whoever runs the plan runs the deal — an uncontrolled evaluation is one your competitor is controlling.",
+        "next_move": "Send a short mutual plan after this call: steps, owners, dates, and the go-live it all serves.",
+        "example_line": "I'll draft a one-page plan from today through your go-live date — you correct it, and then we both work the same list."
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "spiced",
+  "name": "SPICED",
+  "origin": "Winning by Design (Jacco van der Kooij) — open framework from Revenue Architecture.",
+  "summary": "Situation, Pain, Impact, Critical Event, Decision — built for recurring-revenue businesses and the full customer lifecycle (SDR -> AE -> CS). Note: Critical Event is ONE component (C+E); the deadline must be the buyer's, with a real consequence for missing it.",
+  "motion": "SaaS / recurring revenue, full lifecycle including CS and expansion calls; the leading MEDDIC alternative for PLG and mid-market SaaS.",
+  "traits": [
+    {
+      "id": "situation",
+      "name": "Situation",
+      "weight": 2,
+      "definition": "Key facts confirmed efficiently — research used to validate rather than asking cold.",
+      "classifying_questions": [
+        "Did the rep confirm key facts (stack, team, model) without over-interrogating?",
+        "Did they use research to validate rather than ask cold?"
+      ],
+      "met_signals": ["'I saw you're on X — still right?' confirmations"],
+      "miss_signals": ["long fact-finding interrogation"],
+      "coaching": {
+        "why_it_matters": "Situation earns you the right to ask about pain — but spends buyer patience fast.",
+        "next_move": "Move situation facts into pre-call research; confirm in one breath, then go to pain.",
+        "example_line": "Quick check on what I read: 40 reps, JustCall dialer, HubSpot CRM — did I get that right?"
+      }
+    },
+    {
+      "id": "pain",
+      "name": "Pain",
+      "weight": 4,
+      "definition": "The problems behind the initiative, with the buyer confirming which pain is primary.",
+      "classifying_questions": [
+        "Did the rep uncover the pains behind the initiative?",
+        "Did the buyer confirm which pain is primary?"
+      ],
+      "met_signals": ["multiple pains surfaced and ranked", "buyer names the top one"],
+      "miss_signals": ["single surface pain accepted", "rep guesses the priority"],
+      "coaching": {
+        "why_it_matters": "Solving the wrong pain first is how good products churn — the primary pain sets the success criteria for everything after the sale.",
+        "next_move": "List the pains you heard and ask the buyer to rank them.",
+        "example_line": "I heard three problems: missed follow-ups, no coaching visibility, manual CRM entry. Which one actually hurts most?"
+      }
+    },
+    {
+      "id": "impact",
+      "name": "Impact",
+      "weight": 5,
+      "definition": "The measurable business outcome of solving (or not solving) the pain — rational AND emotional — with the buyer confirming the figure.",
+      "classifying_questions": [
+        "Did the rep quantify the business impact of solving the pain — the number the buyer cares about?",
+        "Did they capture emotional impact as well as rational?",
+        "Did the buyer confirm the impact figure?"
+      ],
+      "met_signals": ["an impact number confirmed by the buyer", "personal/emotional stake acknowledged"],
+      "miss_signals": ["impact in adjectives", "rep's ROI math with no buyer confirmation"],
+      "coaching": {
+        "why_it_matters": "Impact is what SPICED trades on: it's the number that justifies the deal, the success plan, and later the renewal.",
+        "next_move": "Convert the primary pain to a number with the buyer, and ask what it means for them personally.",
+        "example_line": "If follow-ups stopped slipping, what does that do to the pipeline number — and what would that mean for you this year?"
+      }
+    },
+    {
+      "id": "critical_event",
+      "name": "Critical Event",
+      "weight": 4,
+      "definition": "A specific date or event that forces action — with a real consequence for missing it. The event must be the buyer's, not an artificial rep-created deadline.",
+      "classifying_questions": [
+        "Did the rep identify a specific date or event that forces action (board meeting, contract expiry, launch)?",
+        "Did they establish the consequence of missing that date?",
+        "Is the event the buyer's own, not a rep-manufactured deadline?"
+      ],
+      "met_signals": ["a dated buyer event named", "'what happens if you miss it?' asked and answered"],
+      "miss_signals": ["'end of quarter' with no consequence", "urgency borrowed from the rep's quota"],
+      "coaching": {
+        "why_it_matters": "No critical event, no forecastable close date — the deal will slip because nothing breaks if it does.",
+        "next_move": "Hunt the calendar: contract renewals, launches, board dates. Anchor the mutual plan to the first real one.",
+        "example_line": "Is there a date on your side where not having this solved actually breaks something?"
+      }
+    },
+    {
+      "id": "decision",
+      "name": "Decision",
+      "weight": 3,
+      "definition": "The decision process, criteria, and buying committee — validated steps to signature.",
+      "classifying_questions": [
+        "Did the rep map the decision process, criteria, and who's on the buying committee?",
+        "Did they validate the steps to signature rather than assume them?"
+      ],
+      "met_signals": ["committee members and criteria named", "steps to signature confirmed by the buyer"],
+      "miss_signals": ["process assumed from the last deal", "criteria unknown at proposal time"],
+      "coaching": {
+        "why_it_matters": "The decision map is what turns an interested champion into a closed deal without quarter-end surprises.",
+        "next_move": "Ask who's on the committee, what they'll judge on, and what the path to signature looks like — then write it into the mutual plan.",
+        "example_line": "Who else weighs in on this, and what will each of them want to see before they're comfortable?"
+      }
+    }
+  ]
+}
