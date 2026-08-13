@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { escapeHtml, formatTime, buildViewModel } from '../src/viewer.js';
+import { escapeHtml, formatTime, buildViewModel, safeSeekAndPlay } from '../src/viewer.js';
 
 const bundle = () =>
   JSON.parse(readFileSync(new URL('./fixtures/bundle.slice1.json', import.meta.url), 'utf8'));
@@ -89,6 +89,24 @@ test('the gate scorecard counts every status — dropped claims are counted, nev
   assert.deepEqual(vm.counts, { verified: 1, segment_corrected: 1, uncorroborated: 1, blocked_injection: 1 });
   const total = Object.values(vm.counts).reduce((a, b) => a + b, 0);
   assert.equal(total, bundle().claims.length, 'every claim lands in exactly one bucket');
+});
+
+test('audio-optional: a bundle with no audio still yields clickable anchors', () => {
+  const b = bundle();
+  delete b.audio;
+  const vm = buildViewModel(b);
+  const c1 = vm.claims.find((c) => c.id === 'c1');
+  assert.ok(c1.anchor, 'the receipts moment must not depend on audio');
+});
+
+test('audio-optional: safeSeekAndPlay never throws and never blocks the highlight', () => {
+  assert.equal(safeSeekAndPlay(null, 7.2), false, 'no audio element → quiet no-op');
+  assert.equal(safeSeekAndPlay({ error: { code: 4 } }, 7.2), false, 'errored element → quiet no-op');
+  assert.equal(safeSeekAndPlay({ currentTime: 0, play: () => { throw new Error('decode'); } }, 7.2), false, 'sync play failure swallowed');
+  const rejecting = { currentTime: 0, play: () => Promise.reject(new Error('autoplay policy')) };
+  assert.equal(safeSeekAndPlay(rejecting, 7.2), true, 'async rejection swallowed, seek still attempted');
+  assert.equal(rejecting.currentTime, 7.2);
+  assert.equal(safeSeekAndPlay({ currentTime: 0, play: () => {} }, NaN), false, 'bad timestamp → no-op');
 });
 
 test('coverage band is rendered verbatim, never recomputed', () => {

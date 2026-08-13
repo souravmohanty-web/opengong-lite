@@ -144,12 +144,34 @@ export function render(vm, root, audio) {
         txt.innerHTML = `${escapeHtml(raw.slice(0, idx))}<mark>${escapeHtml(claim.anchor.quote)}</mark>${escapeHtml(raw.slice(idx + claim.anchor.quote.length))}`;
       }
       utt.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      if (audio && Number.isFinite(claim.anchor.t_start)) {
-        audio.currentTime = claim.anchor.t_start;
-        audio.play();
-      }
+      safeSeekAndPlay(audio, claim.anchor.t_start);   // bonus layer — can never break the highlight
     });
   });
+}
+
+// Audio is a BONUS layer on the receipts moment, never a dependency: the
+// highlight has already landed by the time this runs, and nothing here can
+// throw past it. Returns whether playback was attempted (DOM-free testable).
+export function safeSeekAndPlay(audio, tStart) {
+  if (!audio || audio.error || !Number.isFinite(tStart)) return false;
+  try {
+    audio.currentTime = tStart;
+    const played = audio.play();
+    played?.catch?.(() => {});          // autoplay policy / decode failure — silently a no-op
+    return true;
+  } catch {
+    return false;                       // seeking an unready element must never surface
+  }
+}
+
+// App-mode footer: if the audio file 404s or dies mid-load, swap the broken
+// player for a quiet note — receipts keep working without it.
+function watchAudio(audio) {
+  if (!audio) return;
+  audio.addEventListener('error', () => {
+    const footer = audio.closest('footer');
+    if (footer) footer.innerHTML = '<span class="audio-note">audio unavailable — click-to-highlight still works</span>';
+  }, { once: true });
 }
 
 // Boot only in a browser; node imports the pure helpers above. Two fuel lines:
@@ -166,6 +188,7 @@ if (typeof document !== 'undefined') {
     }
   } else {
     const audio = document.querySelector('audio');
+    watchAudio(audio);
     fetch('/bundle.json')
       .then((r) => r.json())
       .then((bundle) => render(buildViewModel(bundle), document.getElementById('app'), audio))
