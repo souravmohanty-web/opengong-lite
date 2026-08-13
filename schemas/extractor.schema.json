@@ -27,6 +27,11 @@
     "output_schema": { "type": "object", "$comment": "portability subset only: Anthropic ∩ OpenAI structured-output schema; see registry.js lintPortability" },
     "applies_to": { "type": "array", "items": { "type": "string" } },
     "required_section": { "type": "boolean" },
-    "crm_map": { "type": "object" }
+    "crm_map": { "type": "object" },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" },
+      "$comment": "role:\"tracker\" ONLY — deterministic keyword list scanned in code (src/extract.js), never model output. registry.js rejects this key on any non-tracker role and rejects a tracker missing it."
+    }
   }
 }

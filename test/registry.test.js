@@ -407,6 +407,106 @@ test('claim-context.json is a self-consistent, portable schema fragment', () => 
   );
 });
 
+// ── tracker role (Slice-2: keyword tracker enablement) ───────────────────────
+// A tracker extractor never calls the LLM (src/extract.js dispatches it
+// deterministically) so it has no meaningful output_schema to validate against
+// model output — but the meta-schema still requires the key structurally, so
+// tests supply a trivial, portable-lint-clean stub. `keywords` is validated as
+// config (non-empty string array), not lint'd as a schema.
+function validTrackerDef(overrides = {}) {
+  return {
+    name: 'sample-tracker',
+    version: '1.0.0',
+    title: 'Sample Tracker',
+    description: 'A sample deterministic keyword tracker for registry tests.',
+    enabled: true,
+    role: 'tracker',
+    scope: 'call',
+    prompt: 'Deterministic keyword tracker — no LLM prompt is used; keywords are scanned in code.',
+    evidence_required: false,
+    keywords: ['dialpad', 'aircall'],
+    output_schema: { type: 'object', additionalProperties: false, required: [], properties: {} },
+    ...overrides,
+  };
+}
+
+test('a valid tracker extractor (role:"tracker" + keywords) loads through the registry', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  writeExtractor(extractorsDir, 'sample-tracker.json', validTrackerDef());
+
+  const registry = loadExtractors(extractorsDir, { schemasDir });
+
+  assert.ok(registry['sample-tracker']);
+  assert.equal(registry['sample-tracker'].role, 'tracker');
+  assert.deepEqual(registry['sample-tracker'].keywords, ['dialpad', 'aircall']);
+  assert.ok(Object.isFrozen(registry['sample-tracker']));
+});
+
+test('a tracker with missing "keywords" throws CONFIG_INVALID', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  const def = validTrackerDef();
+  delete def.keywords;
+  writeExtractor(extractorsDir, 'sample-tracker.json', def);
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /keywords/.test(err.message),
+  );
+});
+
+test('a tracker with empty "keywords" throws CONFIG_INVALID', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  writeExtractor(extractorsDir, 'sample-tracker.json', validTrackerDef({ keywords: [] }));
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /keywords/.test(err.message) && /non-empty/.test(err.message),
+  );
+});
+
+test('a tracker whose "keywords" is not an array of strings throws CONFIG_INVALID', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  writeExtractor(extractorsDir, 'sample-tracker.json', validTrackerDef({ keywords: ['dialpad', 5] }));
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /keywords/.test(err.message),
+  );
+});
+
+test('a non-tracker extractor declaring "keywords" throws CONFIG_INVALID (keywords is tracker-only)', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  writeExtractor(extractorsDir, 'sample.json', validDef({ keywords: ['dialpad'] }));
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /keywords/.test(err.message) && /tracker/.test(err.message),
+  );
+});
+
+test('an unrecognized role throws CONFIG_INVALID (role must be a capabilities.json roles key)', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  writeExtractor(extractorsDir, 'sample.json', validDef({ role: 'not-a-real-role' }));
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /role/.test(err.message),
+  );
+});
+
+test('capabilities.json declares roles.tracker as the deterministic provider (no model)', () => {
+  const capabilities = JSON.parse(readFileSync(path.join(DEFAULT_SCHEMAS_DIR, '..', 'capabilities.json'), 'utf8'));
+  assert.ok(capabilities.roles.tracker);
+  assert.equal(capabilities.roles.tracker.provider, 'deterministic');
+  assert.equal('model' in capabilities.roles.tracker, false);
+});
+
 test('extractors/summary.json and extractors/objections.json are self-consistent (name matches, no model key)', () => {
   const extractorsDir = path.join(DEFAULT_SCHEMAS_DIR, '..', 'extractors');
   for (const filename of ['summary.json', 'objections.json']) {

@@ -1,0 +1,13 @@
+{
+  "name": "competitor-tracker",
+  "version": "1.0.0",
+  "title": "Competitor Mentions Tracker",
+  "description": "Deterministic keyword tracker for named competitor mentions — no LLM call, 100% receipts by construction.",
+  "enabled": true,
+  "role": "tracker",
+  "scope": "call",
+  "prompt": "Deterministic keyword tracker — no LLM prompt is used; keywords are scanned in code (src/extract.js).",
+  "evidence_required": false,
+  "keywords": ["dialpad", "aircall"],
+  "output_schema": { "type": "object", "additionalProperties": false, "required": [], "properties": {} }
+}

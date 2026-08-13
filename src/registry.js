@@ -23,6 +23,15 @@ const META = JSON.parse(readFileSync(path.join(DEFAULT_SCHEMAS_DIR, 'extractor.s
 const REQUIRED_KEYS = META.required;
 const ALLOWED_KEYS = Object.keys(META.properties);
 
+// role is "a key into capabilities.json roles" (extractor.schema.json's own
+// $comment) — capabilities.json is that single source of truth, the same
+// pattern META is for ALLOWED_KEYS, so a role can never point at a provider
+// the run has no dispatch for. Slice-2: "tracker" (deterministic, no model)
+// joins transcription/extraction/tts here the moment capabilities.json
+// declares it — no registry.js change needed for the next new role.
+const CAPABILITIES = JSON.parse(readFileSync(path.join(DEFAULT_SCHEMAS_DIR, '..', 'capabilities.json'), 'utf8'));
+const ALLOWED_ROLES = new Set(Object.keys(CAPABILITIES.roles));
+
 // Portability lint keyword blocklist (Anthropic ∩ OpenAI structured-output subset).
 const FORBIDDEN_KEYWORDS = ['allOf', 'not', 'if', 'then', 'else', 'minLength', 'maxLength', 'minimum', 'maximum', 'multipleOf'];
 
@@ -148,6 +157,29 @@ function validateShape(def, filePath) {
     if (!ALLOWED_KEYS.includes(key)) {
       throw new RegistryError(`CONFIG_INVALID: ${filePath} has unknown key "${key}"`);
     }
+  }
+  if (!ALLOWED_ROLES.has(def.role)) {
+    throw new RegistryError(`CONFIG_INVALID: ${filePath} has unknown role "${def.role}" — role must be a key in capabilities.json.roles`);
+  }
+
+  // Slice-2: "keywords" is config for a deterministic tracker (src/extract.js
+  // scans the transcript for it, never the LLM), so it is validated here as
+  // config, not lint'd as a schema. Tracker output SHAPE is fixed by the
+  // dispatch (id/extractor/section/text/evidence, built directly in code) —
+  // there is no model response to validate output_schema against — so a
+  // tracker's output_schema stays required by the meta-schema for structural
+  // uniformity but is otherwise inert; evidence_required should be false.
+  const isTracker = def.role === 'tracker';
+  if ('keywords' in def) {
+    if (!isTracker) {
+      throw new RegistryError(`CONFIG_INVALID: ${filePath} declares "keywords" but role is "${def.role}" — keywords is valid for role:"tracker" only`);
+    }
+    const kw = def.keywords;
+    if (!Array.isArray(kw) || kw.length === 0 || !kw.every((k) => typeof k === 'string' && k.length > 0)) {
+      throw new RegistryError(`CONFIG_INVALID: ${filePath} "keywords" must be a non-empty array of non-empty strings`);
+    }
+  } else if (isTracker) {
+    throw new RegistryError(`CONFIG_INVALID: ${filePath} role is "tracker" but declares no "keywords"`);
   }
 }
 

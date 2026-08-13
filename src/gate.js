@@ -111,7 +111,25 @@ export function normalize(raw) {
 //      collapse numbers, and let a dash-only quote collapse into a lone space).
 // Offsets fold onto the surviving characters exactly as the zero-width entries do,
 // and gaps left by a removed mark collapse so " . " never becomes a double space.
+//
+// Slice-2 (a): the digit-flank guard looks at the nearest NON-PUNCTUATION
+// neighbour on each side, not just the immediate one. Checking only the
+// immediate neighbour let a RUN of marks fuse digits it was built to protect:
+// for "3..30" the first '.' sees ('3', '.') and the second '.' sees ('.', '3')
+// — neither immediate neighbour is a digit on both sides, so both marks
+// stripped and "3..30" fabricated a match to "330". Skipping past adjacent
+// punctuation to find the nearest real neighbour means every mark in a run
+// sitting between two digits is preserved together, so "3..30" and "4,,0"
+// never collapse. A single mark between digits ("3:30", "4.0") was already
+// correct and is unaffected (its nearest non-punct neighbour IS its immediate
+// neighbour). This can only shrink the fabrication surface: it never turns a
+// previously-preserved mark into a stripped one.
 const STRIP_PUNCT = /[.,;:!?'"()[\]{}]/;
+function nearestNonPunct(text, i, step) {
+  let j = i + step;
+  while (j >= 0 && j < text.length && STRIP_PUNCT.test(text[j])) j += step;
+  return text[j];
+}
 function stripPunctMap(n) {
   const text = [];
   const starts = [];
@@ -119,7 +137,9 @@ function stripPunctMap(n) {
   for (let i = 0; i < n.text.length; i++) {
     const ch = n.text[i];
     if (STRIP_PUNCT.test(ch)) {
-      const digitFlanked = /\d/.test(n.text[i - 1] ?? '') && /\d/.test(n.text[i + 1] ?? '');
+      const left = nearestNonPunct(n.text, i, -1);
+      const right = nearestNonPunct(n.text, i, 1);
+      const digitFlanked = /\d/.test(left ?? '') && /\d/.test(right ?? '');
       if (!digitFlanked) continue;
     }
     if (ch === ' ' && text[text.length - 1] === ' ') continue;

@@ -387,6 +387,22 @@ test('G-40 exactly one rendering of the transcript is verified against (F-24)', 
   assert.throws(() => gate(byId(ADV, 'a9'), stale), /hash/i);
 });
 
+test('G-43 speaker_mismatch is a valid context_flag (the gate already emits it — F-8)', () => {
+  const schema = JSON.parse(readFileSync(new URL('../schemas/evidence.json', import.meta.url), 'utf8'));
+  const enumValues = schema.$defs.context_flag.properties.flag.enum;
+  assert.ok(enumValues.includes('speaker_mismatch'), 'context_flag.flag enum must accept speaker_mismatch');
+  // and the actual F-8 output is a member of the schema's declared vocabulary
+  const claim = {
+    id: 'sm2', extractor: 'next_steps', text: 'Rep will walk through total cost.',
+    stance: { polarity: 'positive', modality: 'commitment', attribution: 'first_party', certainty: 'high' },
+    evidence: [{ utterance_id: 2, quote: 'let me show you the total cost picture' }],
+  };
+  const c = gate(claim);
+  const flag = c.context_flags.find((f) => f.flag === 'speaker_mismatch');
+  assert.ok(flag);
+  assert.ok(enumValues.includes(flag.flag));
+});
+
 test('G-42 schemas/evidence.json stays in step with the vocabularies in code', () => {
   const schema = JSON.parse(readFileSync(new URL('../schemas/evidence.json', import.meta.url), 'utf8'));
   const defs = schema.$defs;
@@ -494,6 +510,43 @@ test('FAB-2c "1/2" must never collapse into "12" (slash never stripped)', () => 
 });
 
 test('FAB-2d the honest quote still verifies (stripping only recovers real trailing marks)', () => {
+  assert.equal(anchor('the invoice came to 330 dollars in total.', 0, NUM_T).match_type, 'normalized');
+});
+
+// ── FAB-3: double-mark digit fusion (Slice-2 follow-up (a)) ───────────────────
+// stripPunctMap's digit-flank guard previously checked only the two IMMEDIATE
+// neighbours of a mark: for "3..30" the first '.' sees '3' then '.' (not a
+// digit) and the second '.' sees '.' then '3' — so NEITHER mark reads as
+// digit-flanked and both strip, fusing "3..30" into "330". The guard must
+// look past adjacent punctuation to the nearest NON-PUNCTUATION neighbour on
+// each side, so consecutive marks sitting between two digits all survive.
+
+test('FAB-3a "3..30" must never collapse into "330" (double mark between digits)', () => {
+  assert.equal(anchor('the invoice came to 3..30 dollars in total', 0, NUM_T).match_type, 'none');
+});
+
+test('FAB-3b "4,,0" must never collapse into "40" (double mark between digits)', () => {
+  assert.equal(anchor('we closed exactly 4,,0 seats this quarter', 1, NUM_T).match_type, 'none');
+});
+
+test('FAB-3c "4.,0" must never collapse into "40" (mixed double mark between digits)', () => {
+  assert.equal(anchor('we closed exactly 4.,0 seats this quarter', 1, NUM_T).match_type, 'none');
+});
+
+test('FAB-3d legitimate "3.30" (single mark, verbatim in the transcript) still verifies at stage 2', () => {
+  const t = {
+    utterances: [{ id: 0, text: 'the total was 3.30 today', role: 'rep', role_confidence: 0.9 }],
+    canonical_text: 'the total was 3.30 today',
+  };
+  // quoted with a trailing period the model added — recovered by the strip,
+  // the digit-flanked "3.30" itself is untouched either way
+  assert.equal(anchor('the total was 3.30 today.', 0, t).match_type, 'normalized');
+});
+
+test('FAB-3e no regression: prior single-mark fabrication guards still hold (3:30/4-0/1/2)', () => {
+  assert.equal(anchor('the invoice came to 3:30 dollars in total', 0, NUM_T).match_type, 'none');
+  assert.equal(anchor('we closed exactly 4-0 seats this quarter', 1, NUM_T).match_type, 'none');
+  assert.equal(anchor('about 1/2 users signed up in the trial', 2, NUM_T).match_type, 'none');
   assert.equal(anchor('the invoice came to 330 dollars in total.', 0, NUM_T).match_type, 'normalized');
 });
 

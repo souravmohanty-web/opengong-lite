@@ -162,6 +162,12 @@ export function checkSuppliedIds(data, suppliedIds) {
 const SECTION_KEY = { 'Next steps': 'next_steps' };
 
 export function flattenClaims(extractorName, data) {
+  // Deterministic tracker output (role:"tracker", below) is already fully-formed,
+  // gate-ready claims — runTrackerExtractor built them directly in code instead
+  // of mapping model output, so flattening them is the identity. Checked first
+  // and by SHAPE (data.claims), not by name, so it covers every tracker's own
+  // extractor name without a per-tracker mapping entry here.
+  if (Array.isArray(data?.claims)) return data.claims;
   if (extractorName === 'objections') {
     return (data.objections ?? []).map((o, i) => ({
       id: `objections-${i}`,
@@ -189,6 +195,67 @@ export function flattenClaims(extractorName, data) {
     return claims;
   }
   throw new Error(`flattenClaims: no claim mapping defined for extractor "${extractorName}" (Slice 1 ships objections + summary only)`);
+}
+
+// ── deterministic tracker dispatch (role:"tracker") ──────────────────────────
+// A tracker never touches the LLM: registry.js validates `keywords` as a
+// non-empty array of strings, and this scans the canonical transcript for
+// each one — zero tokens, zero dollars, 100% receipts by construction. Two
+// design choices, made explicit:
+//
+//   WHOLE-WORD, not substring. A substring scan would let "call" fire inside
+//   "aircall"/"recall" and inflate every tracker's hit rate with false
+//   positives — whole-word keeps the match meaningful. `\p{L}\p{N}_` bounds
+//   (Unicode-aware) so a hyphenated or accented neighbour doesn't count as
+//   "inside the word".
+//
+//   The evidence quote is the utterance's FULL raw text, not just the matched
+//   token. gate.js's stage-1 exact match has a floor (MIN_NORMALIZED_QUOTE,
+//   F-3): a quote shorter than the floor only anchors when it equals the
+//   WHOLE utterance verbatim. A short keyword ("gong", "jc") quoted alone
+//   would fall under that floor whenever it sits mid-sentence and MISS every
+//   stage (exact -> normalized -> whole-transcript rescue all require either
+//   the floor or the whole-utterance exception) — the opposite of "verified
+//   by construction". Quoting the whole utterance is still 100% verbatim
+//   (never paraphrased, never trimmed to the keyword) and always satisfies
+//   the whole-utterance exception, so it lands `exact` regardless of keyword
+//   length — with zero changes needed to gate.js's fabrication guards.
+const WORD_CHAR = String.raw`[\p{L}\p{N}_]`;
+function wordBoundaryPattern(keyword) {
+  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`(?<!${WORD_CHAR})${escaped}(?!${WORD_CHAR})`, 'iu');
+}
+
+export function scanTrackerClaims(extractorDef, transcript) {
+  const keywords = extractorDef.keywords ?? [];
+  const claims = [];
+  for (const u of transcript.utterances) {
+    for (const keyword of keywords) {
+      if (!wordBoundaryPattern(keyword).test(u.text)) continue;
+      claims.push({
+        id: `${extractorDef.name}-${u.id}-${keyword}`,
+        extractor: extractorDef.name,
+        section: extractorDef.name,
+        text: `Tracker '${extractorDef.name}' matched: ${keyword}`,
+        evidence: [{ utterance_id: u.id, quote: u.text }],
+      });
+    }
+  }
+  return claims;
+}
+
+// Same result envelope runExtractorCall returns for an LLM extractor
+// (status/extractor/data/attempts/repairsUsed) so run.js's unmodified
+// `flattenClaims(result.extractor, result.data)` loop needs no tracker-aware
+// branch — the generic data.claims check above is what makes that work.
+export function runTrackerExtractor(extractorDef, transcript) {
+  return {
+    status: 'ok',
+    extractor: extractorDef.name,
+    data: { claims: scanTrackerClaims(extractorDef, transcript) },
+    attempts: 1,
+    repairsUsed: 0,
+  };
 }
 
 // ── per-extractor call + repair loop ────────────────────────────────────────
@@ -281,7 +348,20 @@ export async function runExtraction({
 
   if (!extractors.length) return { results: [], systemBlocks, suppliedIds };
 
-  const [first, ...rest] = extractors;
+  // Tracker extractors (role:"tracker") are deterministic and never call
+  // callLlm at all, so they must never be picked as the serialize-first
+  // extractor below — that logic awaits callLlm's FIRST call to release the
+  // fan-out gate, and a tracker never makes one (a tracker-first list would
+  // hang forever waiting for a call that's never coming). Run every tracker
+  // eagerly up front instead — cheap, synchronous, no cache-prefix concerns
+  // since there is no HTTP call to cache — and gate only the LLM extractors.
+  const trackerDefs = extractors.filter((e) => e.role === 'tracker');
+  const llmDefs = extractors.filter((e) => e.role !== 'tracker');
+  const trackerResults = trackerDefs.map((def) => runTrackerExtractor(def, transcript));
+
+  if (!llmDefs.length) return { results: trackerResults, systemBlocks, suppliedIds };
+
+  const [first, ...rest] = llmDefs;
 
   let releaseGate;
   const gate = new Promise((resolve) => { releaseGate = resolve; });
@@ -303,11 +383,11 @@ export async function runExtraction({
     limit(() => runExtractorCall({ extractorDef: def, systemBlocks, suppliedIds, model, callLlm, onCall })));
 
   const settled = await Promise.allSettled([firstPromise, ...restPromises]);
-  const results = settled.map((s) => (s.status === 'fulfilled'
+  const llmResults = settled.map((s) => (s.status === 'fulfilled'
     ? s.value
     : { status: 'failed', reason: s.reason?.name ?? 'internal_error', error: String(s.reason?.message ?? s.reason) }));
 
-  return { results, systemBlocks, suppliedIds };
+  return { results: [...trackerResults, ...llmResults], systemBlocks, suppliedIds };
 }
 
 // ── CLI ──────────────────────────────────────────────────────────────────────

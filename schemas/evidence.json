@@ -75,7 +75,8 @@
             "number_without_unit_anchor",
             "requires_context_missing_support",
             "supporting_evidence_unanchored",
-            "low_role_confidence"
+            "low_role_confidence",
+            "speaker_mismatch"
           ]
         },
         "where": { "enum": ["in_quote", "preceding", null] },

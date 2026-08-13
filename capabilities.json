@@ -22,6 +22,10 @@
         "transient": "retry_capped:2"
       }
     },
+    "tracker": {
+      "provider": "deterministic",
+      "$comment": "keyword trackers (extractor role:\"tracker\") never call an LLM: src/extract.js scans the canonical transcript in code for the extractor's `keywords` array and emits already-anchored claims directly. No model key (never dispatched to any provider), no on_failure (there is no network call to fail), zero tokens, zero cost."
+    },
     "tts": {
       "provider": "pyai",
       "model": "pyai-voice",
