@@ -1,17 +1,18 @@
 {
   "name": "pain",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "Pain & Impact",
-  "description": "What is hurting the buyer today, in their own words, and the consequence they attach to it.",
+  "description": "What is hurting the buyer today, in their own words — with a quote-anchored read of how deep the pain runs (surface friction vs business metric vs personal stake), who it affects, and the consequence they attach to it as a second receipt.",
   "enabled": true,
   "role": "extraction",
   "scope": "call",
   "evidence_required": true,
   "applies_to": ["discovery", "demo", "renewal"],
+  "consumer": ["marketing", "crm"],
   "crm_map": {
     "hubspot": { "property": "ai_pain_points" }
   },
-  "prompt": "List every pain point the buyer expresses about their current situation, one entry per distinct pain.\n\nFor each pain point:\n- evidence: cite the utterance(s) where the buyer expresses it, before you write \"text\".\n- text: the pain in the buyer's exact words wherever a direct quote exists — never rewritten into corporate register, never softened, no converting number words to digits or digits to number words.\n- impact: the consequence the buyer attaches to it, quoted verbatim when spoken (\"we lose deals every week\"). Use an empty string when the buyer states no consequence — never infer one.\n\nA pain point is something hurting them TODAY. A hypothetical (\"it would be bad if…\"), a negated statement (\"we do NOT have that problem\"), or a reported third-party view (\"our old vendor said…\") is not the buyer's pain. Only extract what is actually in the transcript. An empty list is a valid, correct result.",
+  "prompt": "List every pain point the buyer expresses about their current situation — one entry per distinct pain. A pain point is something hurting them TODAY. A hypothetical (\"it would be bad if...\"), a negated statement (\"we do NOT have that problem\"), or a reported third-party view (\"our old vendor said...\") is not the buyer's pain. An empty list is correct when the buyer voiced none.\n\nFor each pain point:\n- evidence: cite the buyer utterance(s), before you write \"text\". The quote that satisfies the layer and who_it_affects reads below must be among the quotes you cite here.\n- text: the pain in the buyer's exact words — never rewritten into corporate register, never softened, no number-word/digit conversion.\n- layer: how deep the pain runs, judged by what the buyer's quote actually names. surface = only a feature, task, or workflow friction is named (\"the dialer drops calls\"); business = the buyer names a business metric affected — revenue, cost, hours, bookings, churn, deals, headcount (\"we lose two deals a week\"); personal = the buyer names a personal stake — their job, their time, their stress, their reputation (\"my team is drowning\", \"this is on me\"). Choose the DEEPEST layer a quote clearly supports; when only friction is stated, it is surface, not business. Use \"unclear\" when no quote fixes the layer.\n- who_it_affects: who the buyer says bears the pain — individual, team, department, company, customers. Assign a value only when a quote names or clearly implies the affected party; otherwise \"unclear\".\n- quantified_impact: ONLY when the buyer states a consequence, capture it as its own receipt — evidence (the utterance) then text (the consequence in the buyer's exact words, e.g. \"we lose deals every week\"). Use null when the buyer states no consequence. Never infer one.\n\nWhen a criterion is not clearly met, assign \"unclear\" rather than the more dramatic reading.",
   "output_schema": {
     "type": "object",
     "additionalProperties": false,
@@ -22,14 +23,33 @@
         "items": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["evidence", "text", "impact"],
+          "required": ["evidence", "text", "layer", "who_it_affects", "quantified_impact"],
           "properties": {
             "evidence": {
               "type": "array",
               "items": { "$ref": "opengong://evidence" }
             },
             "text": { "type": "string" },
-            "impact": { "type": "string" }
+            "layer": {
+              "type": "string",
+              "enum": ["surface", "business", "personal", "unclear"]
+            },
+            "who_it_affects": {
+              "type": "string",
+              "enum": ["individual", "team", "department", "company", "customers", "unclear"]
+            },
+            "quantified_impact": {
+              "type": ["object", "null"],
+              "additionalProperties": false,
+              "required": ["evidence", "text"],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "items": { "$ref": "opengong://evidence" }
+                },
+                "text": { "type": "string" }
+              }
+            }
           }
         }
       }

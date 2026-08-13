@@ -1,0 +1,44 @@
+{
+  "name": "coaching",
+  "version": "0.1.0",
+  "title": "Rep Coaching (STRETCH)",
+  "description": "STRETCH extractor — rep-facing only, never published to a buyer-visible surface or CRM. Each coaching note is anchored to the exact transcript moment it is about (a real receipt); the only non-cited field is `reframe`, an explicitly-generated suggestion that rides on that quoted moment. Assessment is a judgment, but it is internal rep-development, not a claim about the deal.",
+  "enabled": false,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "applies_to": ["discovery", "demo", "negotiation"],
+  "consumer": ["rep", "manager"],
+  "prompt": "Produce rep coaching notes tied to specific moments in the call — one entry per coachable moment. This is internal development feedback for the rep, never shown to the buyer. An empty list is fine when the call offers no clear coaching moment.\n\nFor each note:\n- evidence: cite the exact utterance(s) where the moment happened, before you write \"text\". The note must be about a real, quoted moment — never generic advice with no line to point to.\n- text: what happened at that moment, described plainly and tied to the quote (\"the buyer raised price and the rep moved on without answering\").\n- behavior: which skill area the moment is about — discovery, objection_handling, talk_ratio, next_step, competitor_framing, pricing, rapport, other.\n- assessment: strength = the rep handled it well; missed = the rep let an opportunity or concern pass; improvable = handled but could be better; unclear. Judge only from the cited moment.\n- reframe: a suggested better line the rep could have used, OR an empty string when the assessment is 'strength' and no change is needed. This is generated advice, not a transcript quote — it must stay consistent with the quoted moment and never put words in the buyer's mouth.\n\nWhen the moment does not clearly support an assessment, use \"unclear\" rather than inventing a lesson.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["coaching_notes"],
+    "properties": {
+      "coaching_notes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "text", "behavior", "assessment", "reframe"],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": { "$ref": "opengong://evidence" }
+            },
+            "text": { "type": "string" },
+            "behavior": {
+              "type": "string",
+              "enum": ["discovery", "objection_handling", "talk_ratio", "next_step", "competitor_framing", "pricing", "rapport", "other"]
+            },
+            "assessment": {
+              "type": "string",
+              "enum": ["strength", "missed", "improvable", "unclear"]
+            },
+            "reframe": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

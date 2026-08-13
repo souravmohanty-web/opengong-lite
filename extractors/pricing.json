@@ -1,17 +1,18 @@
 {
   "name": "pricing",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "Budget & Pricing",
-  "description": "Every mention of money: budget, quotes, discount asks, competitor pricing — numbers copied exactly as spoken.",
+  "description": "Every mention of money — budget, quotes, discount asks, competitor pricing — numbers copied exactly as spoken, plus a quote-anchored read of what kind of pricing signal it is. Call-level budget confirmation and buying authority live in buying_stage and stakeholders, not here.",
   "enabled": true,
   "role": "extraction",
   "scope": "call",
   "evidence_required": true,
   "applies_to": ["discovery", "demo", "negotiation", "renewal"],
+  "consumer": ["manager", "marketing", "crm"],
   "crm_map": {
     "hubspot": { "property": "ai_pricing_signals" }
   },
-  "prompt": "List every mention of money or budget on this call, one entry per distinct mention.\n\nFor each mention:\n- evidence: cite the utterance(s), before you write \"text\".\n- kind: the single closest fit — \"budget\" (their spending capacity), \"quote\" (a price offered), \"discount_request\", \"competitor_price\", \"price_objection\", \"other\".\n- text: the mention in the speaker's exact words. CRITICAL: copy numbers character-for-character exactly as the transcript renders them — if it says \"forty\" write \"forty\", if it says \"40\" write \"40\". Converting between digits and number words will cause the claim to be rejected by verification.\n\nOnly extract mentions actually in the transcript. An empty list is a valid, correct result when money never came up — do not stretch non-monetary mentions to fill the list.",
+  "prompt": "List every mention of money or budget on this call — one entry per distinct mention. An empty list is correct when money never came up; do not stretch non-monetary mentions to fill the list.\n\nFor each mention:\n- evidence: cite the utterance(s), before you write \"text\". The line that fixes the pricing_signal read must be among the quotes you cite here.\n- text: the mention in the speaker's exact words. CRITICAL: copy numbers character-for-character exactly as the transcript renders them — if it says \"forty\" write \"forty\", if it says \"40\" write \"40\". Converting between digits and number words will cause the claim to be rejected by verification.\n- kind: the single closest fit — budget (their spending capacity), quote (a price offered), discount_request, competitor_price, price_objection, other.\n- pricing_signal: the buying signal the mention carries, judged by an observable cue in the quote. sticker_shock = the buyer reacts to a price with surprise or resistance (\"that's a lot\", \"whoa\"); comparison = the buyer weighs it against another price or option; packaging_confusion = the buyer asks how tiers, seats, or bundling work; discount_request = the buyer asks for a lower price or a deal; competitor_price_cited = the buyer quotes a competitor's price; none = a neutral money mention carrying no such signal. Use \"unclear\" when a quote does not settle it.\n\nWhen a criterion is not clearly met, assign \"unclear\" rather than the more eventful reading.",
   "output_schema": {
     "type": "object",
     "additionalProperties": false,
@@ -22,17 +23,21 @@
         "items": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["evidence", "kind", "text"],
+          "required": ["evidence", "text", "kind", "pricing_signal"],
           "properties": {
             "evidence": {
               "type": "array",
               "items": { "$ref": "opengong://evidence" }
             },
+            "text": { "type": "string" },
             "kind": {
               "type": "string",
               "enum": ["budget", "quote", "discount_request", "competitor_price", "price_objection", "other"]
             },
-            "text": { "type": "string" }
+            "pricing_signal": {
+              "type": "string",
+              "enum": ["sticker_shock", "comparison", "packaging_confusion", "discount_request", "competitor_price_cited", "none", "unclear"]
+            }
           }
         }
       }

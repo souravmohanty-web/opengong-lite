@@ -27,6 +27,10 @@
     "output_schema": { "type": "object", "$comment": "portability subset only: Anthropic ∩ OpenAI structured-output schema; see registry.js lintPortability" },
     "applies_to": { "type": "array", "items": { "type": "string" } },
     "required_section": { "type": "boolean" },
+    "consumer": {
+      "type": "array",
+      "items": { "type": "string" },
+      "$comment": "Downstream owner(s) of this extractor's signals, PRIMARY FIRST — one or more of \"rep\" | \"manager\" | \"marketing\" | \"crm\". From DiscoveryClaude's hard-won lesson: tag every signal with its consumer from day one, so a rollup never mixes a rep-coaching read into a marketing pattern. Additive + OPTIONAL: deliberately NOT in `required`, so tracker.json (and any pre-existing extractor) still validates without it. registry.js derives ALLOWED_KEYS from Object.keys(this.properties), so declaring the property here is exactly what makes \"consumer\" a permitted top-level key; it is never type-checked at runtime beyond \"is a known key\"." },
     "crm_map": { "type": "object" },
     "keywords": {
       "type": "array",

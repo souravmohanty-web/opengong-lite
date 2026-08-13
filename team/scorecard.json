@@ -1,0 +1,392 @@
+{
+  "$schema_note": "Machine-readable mirror of team/SCORECARD.md, which itself condenses team/plans/master-plan.md §'Stage 2 v2'. Consumed by scripts/scorecard.mjs. Category weights below sum to the judge weights: product_pull 30, demo_magnetism 25, api_gravity 20, loop_depth 15, craft 10 (=100).",
+  "source_docs": ["team/SCORECARD.md", "team/plans/master-plan.md#stage-2-v2"],
+  "categories": {
+    "product_pull": { "label": "Product pull", "weight": 30 },
+    "demo_magnetism": { "label": "Demo magnetism", "weight": 25 },
+    "api_gravity": { "label": "API gravity", "weight": 20 },
+    "loop_depth": { "label": "Loop depth", "weight": 15 },
+    "craft": { "label": "Craft", "weight": 10 }
+  },
+  "gates": [
+    {
+      "id": "A",
+      "name": "demo-spine",
+      "trigger": "click→audio latency check red OR airplane-mode full run red",
+      "effect": "Demo magnetism capped at 12/25; total capped at 65",
+      "metrics": ["dm-3.1-click-audio-latency", "dm-3.3-airplane-mode"]
+    },
+    {
+      "id": "B",
+      "name": "honesty kill switch",
+      "trigger": "any banned overclaim phrase found OR DATA-FLOW.md missing/incomplete (undocumented network call)",
+      "effect": "Craft forced to 0",
+      "metrics": ["cr-6.7a-banned-phrase-zero", "cr-6.7b-data-flow-complete"]
+    },
+    {
+      "id": "C",
+      "name": "trust floor",
+      "trigger": "precision on golden call <80% OR labels.json missing",
+      "effect": "Product pull capped at 15/30",
+      "metrics": ["pp-2.6-precision-golden-call"]
+    }
+  ],
+  "metrics": [
+    {
+      "id": "pp-2.1-ambiguity-traps",
+      "dimension": "product_pull",
+      "weight": 4,
+      "target": "12 planted ambiguous terms (SCORECARD 2.1) typed correctly or confidence:low; any confident-wrong = red",
+      "band_thresholds": { "green": "all 12 resolve or demote correctly", "red": "any confident-wrong label" },
+      "method": "needs a seeded ambiguity fixture + expected-label file — not yet built",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "pp-2.2-negation-hypothetical-reported",
+      "dimension": "product_pull",
+      "weight": 4,
+      "target": "9 negation/hypothetical/reported-speech trap lines (SCORECARD 2.2) yield 0 asserted claims",
+      "band_thresholds": { "green": "0/9 traps produce a wrong assertion", "red": "any trap line asserted as fact" },
+      "method": "gate.test.js already covers single-fixture cases (G-29..G-33, F7-01/02); the full 9-line planted trap set is not assembled as one scored fixture yet",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "pp-2.3-coreference",
+      "dimension": "product_pull",
+      "weight": 3,
+      "target": "6 coreference cases (SCORECARD 2.3) resolve to a named referent + establishing line, else demoted",
+      "band_thresholds": { "green": "6/6 resolve or demote correctly", "red": "any unresolved pronoun shipped as a named claim" },
+      "method": "needs a pronoun-heavy fixture with expected referents — not yet built",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "pp-2.4-context-windows",
+      "dimension": "product_pull",
+      "weight": 3,
+      "target": "100% of claims render prev/next turn; sarcasm fixture reads right (SCORECARD 2.4)",
+      "band_thresholds": { "green": "Aakash confirms the sarcasm fixture reads correctly with neighbors shown", "red": "sarcasm fixture misreads" },
+      "method": "human read (Aakash) over the receipts viewer",
+      "grader": "human",
+      "gate": null
+    },
+    {
+      "id": "pp-2.5-absence-honesty",
+      "dimension": "product_pull",
+      "weight": 3,
+      "target": "quiet call → ≥3 coverage records, 0 fake claims (SCORECARD 2.5)",
+      "band_thresholds": { "green": ">=3 coverage records, 0 fabricated claims", "red": "any fabricated claim on a quiet call" },
+      "method": "needs a quiet-call fixture run through the pipeline — not yet built",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "pp-2.6-precision-golden-call",
+      "dimension": "product_pull",
+      "weight": 5,
+      "target": "precision on hand-labeled golden call ≥90% (n≥8) (SCORECARD 2.6, bold, UNOWNED)",
+      "band_thresholds": { "green": ">=90% precision", "yellow": "80-89% precision", "red": "<80% precision or no labels.json" },
+      "method": "scan for team/labels.json or labels.json at repo root; compute precision if found, else pending — this is the Gate C input",
+      "grader": "pending-samples",
+      "gate": "C"
+    },
+    {
+      "id": "pp-2.7-degradation-ladder",
+      "dimension": "product_pull",
+      "weight": 3,
+      "target": "mono/noisy/non-English each labeled inferred / warned / refused (SCORECARD 2.7)",
+      "band_thresholds": { "green": "one fixture per degraded mode, correctly labeled", "red": "silent garbage on any degraded mode" },
+      "method": "needs one fixture per degraded mode scored against expected labels — not yet built",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "pp-2.8-cold-start-5min",
+      "dimension": "product_pull",
+      "weight": 3,
+      "target": "cold clone → cited claim ≤5:00, zero keys, README only (SCORECARD 2.8, bold)",
+      "band_thresholds": { "green": "stranger reaches a cited claim in <=5:00 with zero keys", "red": ">5:00 or a key was required" },
+      "method": "stranger + stopwatch, README-only",
+      "grader": "human",
+      "gate": null
+    },
+    {
+      "id": "pp-2.9-no-bot-banned-phrases",
+      "dimension": "product_pull",
+      "weight": 2,
+      "target": "no-bot-in-meetings line present in README; banned overclaim phrases = 0 (SCORECARD 2.9)",
+      "band_thresholds": { "green": "no-bot language present AND 0 banned phrases", "red": "no-bot language missing OR any banned phrase" },
+      "method": "grep README.md for recordings-not-bot language + shares the banned-phrase grep also used for Gate B",
+      "grader": "auto",
+      "gate": null
+    },
+
+    {
+      "id": "dm-3.1-click-audio-latency",
+      "dimension": "demo_magnetism",
+      "weight": 6,
+      "target": "click→audio ≤300ms median (10 clicks), ≥10 logged rehearsals (SCORECARD 3.1, bold)",
+      "band_thresholds": { "green": "median <=300ms over >=10 logged rehearsals", "red": "median >300ms or <10 rehearsals logged" },
+      "method": "perf log + REHEARSALS.md — Sourav, rehearsal clock",
+      "grader": "human",
+      "gate": "A"
+    },
+    {
+      "id": "dm-3.2-refusal-states-in-bundle",
+      "dimension": "demo_magnetism",
+      "weight": 5,
+      "target": "both refusal states (demoted fake claim + quarantined injection) present in the committed demo bundle (SCORECARD 3.2)",
+      "band_thresholds": { "green": "committed bundle contains both a demoted/uncorroborated claim and a blocked_injection claim", "red": "either state missing from the committed bundle" },
+      "method": "parse test/fixtures/bundle.slice1.json claim.status values",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "dm-3.3-airplane-mode",
+      "dimension": "demo_magnetism",
+      "weight": 6,
+      "target": "full main-act run in airplane mode = clean pass (SCORECARD 3.3)",
+      "band_thresholds": { "green": "wifi off, full run clean", "red": "any beat requires network" },
+      "method": "Sourav, wifi off, full run",
+      "grader": "human",
+      "gate": "A"
+    },
+    {
+      "id": "dm-3.4-cross-call-search",
+      "dimension": "demo_magnetism",
+      "weight": 4,
+      "target": "3 planted cross-call searches hit in ≤2s (SCORECARD 3.4)",
+      "band_thresholds": { "green": "3/3 planted searches hit in <=2s", "red": "any planted search misses or is slow" },
+      "method": "needs the planted 5-call sample deal arc with known searchable facts — samples/ does not have the planted arc wired yet",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "dm-3.5-dry-run-checklist",
+      "dimension": "demo_magnetism",
+      "weight": 2,
+      "target": "dry-run checklist 5/5 (SCORECARD 3.5)",
+      "band_thresholds": { "green": "5/5 at the 17:00 dry run", "red": "<5/5" },
+      "method": "Aakash, 17:00 dry run checklist",
+      "grader": "human",
+      "gate": null
+    },
+    {
+      "id": "dm-bonus-demo-command-exists",
+      "dimension": "demo_magnetism",
+      "weight": 1,
+      "target": "a zero-network `npm run demo` command exists (supporting evidence for 3.3 zero-network determinism)",
+      "band_thresholds": { "green": "package.json declares a demo script pointing at the offline server", "red": "no demo script" },
+      "method": "read package.json scripts.demo",
+      "grader": "auto",
+      "gate": null,
+      "bonus": true
+    },
+    {
+      "id": "dm-bonus-tier1-export-works",
+      "dimension": "demo_magnetism",
+      "weight": 1,
+      "target": "tier-1 export produces a self-contained HTML file from a committed bundle (supporting evidence for demo deliverability)",
+      "band_thresholds": { "green": "src/export.js tier1Html() succeeds on test/fixtures/bundle.slice1.json", "red": "export throws or produces empty/invalid output" },
+      "method": "import src/export.js and call tier1Html() in-process against the committed fixture bundle",
+      "grader": "auto",
+      "gate": null,
+      "bonus": true
+    },
+
+    {
+      "id": "ag-4.1-both-direction-minutes",
+      "dimension": "api_gravity",
+      "weight": 5,
+      "target": "PyAI Speak + Hear minutes ≥3600s each, stamped in run records (SCORECARD 4.1)",
+      "band_thresholds": { "green": ">=3600s logged in each direction across run records", "red": "logged but under threshold", "pending": "no tts_seconds/hear_seconds field found yet" },
+      "method": "scan runs/*/run.json for tts_seconds/hear_seconds-style fields",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "ag-4.2-frictionless-cold-start",
+      "dimension": "api_gravity",
+      "weight": 5,
+      "target": "self-minting sandbox key, 0 manual steps to first authed 200 (SCORECARD 4.2)",
+      "band_thresholds": { "green": "mint flow exists and is wired with no required interactive input", "red": "mint flow missing or requires manual input" },
+      "method": "static check: src/pyai.js exports mintSandboxKey, ensureKey calls it automatically, no readline/prompt code path",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "ag-4.3-recurring-loop",
+      "dimension": "api_gravity",
+      "weight": 5,
+      "target": "new-extractor → 5-call corpus re-run ≤120s, one command (SCORECARD 4.3)",
+      "band_thresholds": { "green": "measured re-run of a 5-call corpus completes in <=120s", "red": ">120s" },
+      "method": "needs a 5-call sample corpus to re-run — samples/ does not have 5 calls wired for this yet",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "ag-4.4-cost-stamped",
+      "dimension": "api_gravity",
+      "weight": 5,
+      "target": "cost per call logged (not estimated), 100% stamped in run records (SCORECARD 4.4)",
+      "band_thresholds": { "green": "100% of context_ledger entries across all runs/*/run.json have a non-null numeric cost_usd", "red": "any entry missing cost_usd", "pending": "no run records found" },
+      "method": "scan runs/*/run.json context_ledger[].cost_usd",
+      "grader": "auto",
+      "gate": null
+    },
+
+    {
+      "id": "ld-5.1-quote-gate-fabrication",
+      "dimension": "loop_depth",
+      "weight": 3,
+      "target": "adversarial quotes land correctly, 0 digit-folds accepted (SCORECARD 5.1 / F-21)",
+      "band_thresholds": { "green": "full test/gate.test.js suite green AND digit-fold test (G-06) green", "red": "any gate.test.js failure or G-06 fails" },
+      "method": "node --test test/gate.test.js; require 0 failures and G-06 specifically passing",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "ld-5.2-fabricated-id-rejection",
+      "dimension": "loop_depth",
+      "weight": 3,
+      "target": "fabricated-ID → whole response rejected (SCORECARD 5.2)",
+      "band_thresholds": { "green": "EX-11 and EX-12 (test/extract.mock.test.js) both green", "red": "either fails" },
+      "method": "node --test test/extract.mock.test.js; check EX-11/EX-12",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "ld-5.3-injection-layered-defense",
+      "dimension": "loop_depth",
+      "weight": 3,
+      "target": "injection: in transcript=1, in email=0, in exports=0, raw script tags=0 (SCORECARD 5.3)",
+      "band_thresholds": { "green": "full test/injection.test.js suite green", "red": "any injection.test.js failure" },
+      "method": "node --test test/injection.test.js",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "ld-5.4-readme-limits-footer",
+      "dimension": "loop_depth",
+      "weight": 3,
+      "target": "README names ≥3 limits + dropped-count in footer (SCORECARD 5.4)",
+      "band_thresholds": { "green": ">=3 limitation bullets in README AND a dropped-count footer feature exists in src/", "red": "either condition fails" },
+      "method": "grep README.md 'Known limitations' bullets (count >=3) AND grep src/*.js for a dropped-count footer feature",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "ld-5.5-operational-spine",
+      "dimension": "loop_depth",
+      "weight": 3,
+      "target": "kill-9 sweeper + $0.001-budget refusal with 0 fetches + write-ahead run records (SCORECARD 5.5)",
+      "band_thresholds": { "green": "R-04, R-05, R-06, R-07 (test/run.test.js) all green", "red": "any of R-04/R-05/R-06/R-07 fails" },
+      "method": "node --test test/run.test.js; check R-04 (budget refusal), R-05 (write-ahead), R-06 (crash sweep), R-07 (fresh heartbeat)",
+      "grader": "auto",
+      "gate": null
+    },
+
+    {
+      "id": "cr-6.1-self-describing-fields",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "8 self-describing fields on 100% of claims (SCORECARD 6.1)",
+      "band_thresholds": { "green": "every stored claim carries all 8 fields (speaker, role, timestamps, surrounding-utterance ids, confidence, provenance, model, prompt_version)", "red": "any claim missing a field" },
+      "method": "needs a claim-schema field audit against a real bundle — not built into this runner yet",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "cr-6.2-stable-ids-crm-map",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "stable IDs, no vendor GUIDs, crm_map present (SCORECARD 6.2)",
+      "band_thresholds": { "green": "own stable enums used everywhere, crm_map block present per extractor", "red": "a vendor GUID used as canon anywhere" },
+      "method": "needs a scan across extractors/*.json for crm_map + an ID-stability check — not built into this runner yet",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "cr-6.3-append-only-reruns",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "re-run appends never overwrites (SCORECARD 6.3)",
+      "band_thresholds": { "green": "re-running the pipeline on an already-run call appends rather than overwrites prior results", "red": "a re-run overwrites prior results" },
+      "method": "needs a same-call double-run fixture — not built into this runner yet",
+      "grader": "pending-samples",
+      "gate": null
+    },
+    {
+      "id": "cr-6.4a-zero-prod-deps",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "0 production dependencies (SCORECARD 6.4)",
+      "band_thresholds": { "green": "npm ls --omit=dev --depth=0 lists 0 dependencies", "red": "any prod dependency present" },
+      "method": "npm ls --omit=dev --depth=0 --json",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "cr-6.4b-tests-pass-offline",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "full test suite passes offline (SCORECARD 6.4)",
+      "band_thresholds": { "green": "0 failures across all test/*.test.js (excluding this runner's own test)", "red": "any failure" },
+      "method": "node --test --test-reporter=tap over test/*.test.js, excluding test/scorecard.test.js to avoid self-recursion",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "cr-6.5-canonical-text-source",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "one canonical text source: result.text grep in src/ = 0 outside transcript.js (SCORECARD 6.5 / F-21)",
+      "band_thresholds": { "green": "0 matches for result.text in src/ outside transcript.js", "red": "any match outside transcript.js" },
+      "method": "grep -rn result\\.text src/*.js, excluding src/transcript.js",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "cr-6.6-gitleaks-ci",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "gitleaks 0 + CI green (SCORECARD 6.6, gitleaks half)",
+      "band_thresholds": { "green": "a gitleaks job is present in .github/workflows/*.yml", "red": "no gitleaks job in CI" },
+      "method": "grep .github/workflows/*.yml for a gitleaks job",
+      "grader": "auto",
+      "gate": null
+    },
+    {
+      "id": "cr-6.7a-banned-phrase-zero",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "zero overclaims: 'fully local' / '100% private' / 'no data leaves' never asserted (SCORECARD 6.7)",
+      "band_thresholds": { "green": "0 unguarded hits across README.md + DATA-FLOW.md", "red": "any unguarded (non-negated) hit" },
+      "method": "case-insensitive phrase grep over README.md + DATA-FLOW.md, with a same-line negation-cue filter (not/isn't/doesn't/never/n't) to skip legitimate disclaiming sentences",
+      "grader": "auto",
+      "gate": "B"
+    },
+    {
+      "id": "cr-6.7b-data-flow-complete",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "DATA-FLOW.md rows == fetch sites; every cited call-site file:line resolves (SCORECARD 6.7)",
+      "band_thresholds": { "green": "DATA-FLOW.md exists and every table row's call-site citation resolves to a real line matching a fetch-family call", "red": "DATA-FLOW.md missing, or any citation fails to resolve/match" },
+      "method": "parse the 'Every outbound network call' table in DATA-FLOW.md, resolve each row's final file:line citation, check it matches /fetch\\w*\\(/",
+      "grader": "auto",
+      "gate": "B"
+    },
+    {
+      "id": "cr-license-mit",
+      "dimension": "craft",
+      "weight": 1,
+      "target": "MIT LICENSE present at repo root",
+      "band_thresholds": { "green": "LICENSE file exists and contains 'MIT License'", "red": "missing or wrong license" },
+      "method": "read LICENSE, check for 'MIT License' text",
+      "grader": "auto",
+      "gate": null
+    }
+  ]
+}

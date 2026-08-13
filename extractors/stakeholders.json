@@ -1,0 +1,65 @@
+{
+  "name": "stakeholders",
+  "version": "1.0.0",
+  "title": "Buying Committee",
+  "description": "Who is in the deal — every person named or present, their role in the decision judged by an observable quote (economic buyer, champion, blocker), and whether they were on the call or only referenced. Plus a call-level read of single- vs multi-threaded. 'My VP has to approve' is a real receipt; a role you cannot cite is a coverage record, not a claim.",
+  "enabled": true,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "applies_to": ["discovery", "demo", "negotiation", "renewal"],
+  "consumer": ["rep", "manager", "crm"],
+  "crm_map": {
+    "hubspot": { "property": "ai_buying_committee" }
+  },
+  "prompt": "Identify every person in the deal — anyone named, referenced, or speaking who has a role in the decision — one entry per person. Do not invent stakeholders; an empty list is correct when only the primary buyer appears and no one else is named.\n\nFor each stakeholder:\n- evidence: cite the utterance(s) that name or reveal this person, before you write \"text\". The line that establishes the role_signal below must be among the quotes you cite.\n- text: who they are, in the speaker's exact words (\"my VP\", \"our head of ops Priya\") — no paraphrase.\n- role_signal: their role in the decision, judged by an observable cue in the quote. economic_buyer = holds budget or final approval (\"I sign off\", \"it's my budget\", \"my VP has to approve\" makes the VP the economic_buyer); champion = advocates for the purchase internally (\"I'll push for this\"); blocker = resists or gatekeeps (\"legal won't allow it\", \"our IT will push back\"); influencer = gives input without authority; user = would use the product day to day; unclear = a person is named but their role is not stated. Assign a decision role only when a quote supports it; otherwise \"unclear\".\n- present_on_call: on_call = this person speaks or is directly addressed on the call; referenced = named but not present; unclear.\n\nThen give one call-level `threading` read (single- vs multi-threaded), following the basis rule: basis \"cited\" needs a quote in evidence; \"inferred\" is your read with empty evidence; \"absent\" when the call says nothing about it. single_threaded = only one buyer-side person is in the deal; multi_threaded = two or more buyer-side people are involved (named or present); unclear.\n\nCopy quotes character-for-character, no number-word/digit conversion. When a criterion is not clearly met, use \"unclear\" over a guess.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["stakeholders", "threading"],
+    "properties": {
+      "stakeholders": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "text", "role_signal", "present_on_call"],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": { "$ref": "opengong://evidence" }
+            },
+            "text": { "type": "string" },
+            "role_signal": {
+              "type": "string",
+              "enum": ["economic_buyer", "champion", "blocker", "influencer", "user", "unclear"]
+            },
+            "present_on_call": {
+              "type": "string",
+              "enum": ["on_call", "referenced", "unclear"]
+            }
+          }
+        }
+      },
+      "threading": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["value", "basis", "evidence"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": ["single_threaded", "multi_threaded", "unclear"]
+          },
+          "basis": {
+            "type": "string",
+            "enum": ["cited", "inferred", "absent"]
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "$ref": "opengong://evidence" }
+          }
+        }
+      }
+    }
+  }
+}

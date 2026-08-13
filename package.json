@@ -13,6 +13,7 @@
     "demo": "node src/server.js",
     "test": "node --test",
     "extract": "node src/extract.js --fixture stereo",
-    "run": "node src/extract.js --fixture stereo"
+    "run": "node src/extract.js --fixture stereo",
+    "scorecard": "node scripts/scorecard.mjs"
   }
 }

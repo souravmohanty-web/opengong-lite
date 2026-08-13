@@ -1,19 +1,20 @@
 {
   "name": "next_steps",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "Next Steps",
-  "description": "Every concrete commitment or agreed action, with which side owns it and the spoken due timeframe.",
+  "description": "Every concrete commitment agreed on the call — which side owns it, what kind of step it is, how firm the commitment sounded (judged by the actual words), and the spoken due date verbatim.",
   "enabled": true,
   "role": "extraction",
   "scope": "call",
   "evidence_required": true,
   "required_section": true,
   "applies_to": ["all"],
+  "consumer": ["rep", "crm"],
   "crm_map": {
     "hubspot": { "property": "ai_next_action" },
     "salesforce": { "field": "AI_Next_Action__c" }
   },
-  "prompt": "List every concrete next step that was actually agreed or promised on this call, one entry per action.\n\nFor each next step:\n- evidence: cite the utterance(s) where the action is agreed or promised, before you write \"text\".\n- text: the action, stated from the owner's side, <=240 characters. Quote the speaker's exact words for what was promised wherever a direct quote exists — do not convert number words to digits or digits to number words.\n- owner: which side owns the action — \"rep\", \"buyer\", \"joint\" only when both sides explicitly share it, else \"unknown\". Never guess an owner the transcript does not support.\n- due: the spoken timeframe copied verbatim (\"by friday\", \"next quarter\"). Use an empty string when no timeframe was spoken — never invent one.\n\nA vague intention (\"we should look into that sometime\") is not a next step. Only extract actions that are actually in the transcript. An empty list is a valid, correct result when nothing was agreed.",
+  "prompt": "List every concrete next step actually agreed or promised on this call — one entry per action. A vague intention (\"we should look into that sometime\") is not a next step. An empty list is correct when nothing was agreed.\n\nFor each next step:\n- evidence: cite the utterance(s) where the action is agreed or promised, before you write \"text\". The words that fix the type and commitment reads below (a date, a hedge, a firm yes) must be among the quotes you cite here.\n- text: the action, stated from the owner's side, <=240 characters. Quote the speaker's exact words for what was promised wherever a direct quote exists — no number-word/digit conversion.\n- type: the kind of step, judged by the quote. concrete_date = a specific date, day, or deadline is named (\"Friday\", \"next Tuesday\", \"by the 15th\"); send_info = a promise to send material, a link, a quote, or a document; soft_followup = a vague agreement to reconnect with no date (\"let's touch base\", \"circle back\"); no_next_step = the parties explicitly agreed on nothing further. Use \"unclear\" when none clearly fits.\n- owner: which side owns the action — rep, buyer, joint only when both explicitly share it, else unknown. Never guess an owner the transcript does not support.\n- commitment: how firm it sounded, judged by the modal words in the quote. firm = an unhedged commitment or a named date (\"I will send it Friday\", \"yes, we'll do that\"); tentative = hedged with a modal or condition (\"probably\", \"might\", \"let me check\", \"if I can\"). Use \"unclear\" when the words do not settle it. Do not upgrade a hedge to firm because the deal feels positive.\n- due: the spoken timeframe copied verbatim (\"by friday\", \"next quarter\"). Use an empty string when no timeframe was spoken — never invent one.",
   "output_schema": {
     "type": "object",
     "additionalProperties": false,
@@ -24,16 +25,24 @@
         "items": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["evidence", "text", "owner", "due"],
+          "required": ["evidence", "text", "type", "owner", "commitment", "due"],
           "properties": {
             "evidence": {
               "type": "array",
               "items": { "$ref": "opengong://evidence" }
             },
             "text": { "type": "string" },
+            "type": {
+              "type": "string",
+              "enum": ["concrete_date", "send_info", "soft_followup", "no_next_step", "unclear"]
+            },
             "owner": {
               "type": "string",
               "enum": ["rep", "buyer", "joint", "unknown"]
+            },
+            "commitment": {
+              "type": "string",
+              "enum": ["firm", "tentative", "unclear"]
             },
             "due": { "type": "string" }
           }

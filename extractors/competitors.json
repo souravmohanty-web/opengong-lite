@@ -1,17 +1,18 @@
 {
   "name": "competitors",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "Competition",
-  "description": "Every competitor mention, with the buyer's actual relationship to it — an active user is not the same signal as someone migrating away.",
+  "description": "Every competitor mention, with the buyer's actual relationship to it and — when the buyer says it — the quote naming why they'd switch. An active user and someone migrating away are opposite signals; the schema keeps them separate.",
   "enabled": true,
   "role": "extraction",
   "scope": "call",
   "evidence_required": true,
   "applies_to": ["all"],
+  "consumer": ["marketing", "crm"],
   "crm_map": {
     "hubspot": { "property": "ai_competitor_signals" }
   },
-  "prompt": "List every mention of a competing product or vendor, one entry per mention.\n\nFor each mention:\n- evidence: cite the utterance(s), before you write \"text\".\n- competitor: the competitor's name exactly as spoken in the transcript (lowercase if the transcript is lowercase). Never normalize to an official brand spelling the transcript doesn't contain.\n- relationship: the buyer's actual relationship — \"active_user\" (using it today), \"migrating_from\" (leaving it), \"evaluating\" (considering it), \"mentioned\" (came up without a stated relationship). Distinguish carefully: an active user and someone migrating away are opposite signals.\n- text: the mention in the speaker's exact words — no digit/number-word conversion, no paraphrase.\n\nOnly extract mentions actually in the transcript. A generic reference to \"other tools\" with no identifiable product is not a competitor mention. An empty list is a valid, correct result.",
+  "prompt": "List every mention of a competing product or vendor — one entry per mention. A generic reference to \"other tools\" with no identifiable product is not a competitor mention. An empty list is correct when none came up.\n\nFor each mention:\n- evidence: cite the utterance(s), before you write \"text\". The line that establishes the relationship value below must be among the quotes you cite here — the label rides on it.\n- text: the mention in the speaker's exact words — no digit/number-word conversion, no paraphrase.\n- competitor: the competitor's name exactly as spoken (lowercase if the transcript is lowercase). Never normalize to an official brand spelling the transcript does not contain.\n- relationship: the buyer's actual relationship, judged by an observable cue in the quote. active_user = present-tense usage today (\"we use X\", \"we're on X\"); migrating_from = language of leaving (\"moving off X\", \"replacing X\", \"X isn't working\"); evaluating = considering it now (\"we're also looking at X\", \"demoing X\"); mentioned = named with no stated relationship. When the cue is not clearly one of these, use \"mentioned\" rather than guessing a stronger signal.\n- switching_trigger: ONLY when the buyer states a reason they would leave (or joined) that competitor, capture it as its own receipt — evidence (the utterance) then text (the buyer's exact words, e.g. \"their support is terrible\"). Use null when the buyer names no such reason. Do not infer a trigger from tone.\n\nDo not classify the competitor as direct/adjacent and do not rate the buyer's sentiment — those are not reliably readable from a single transcript and this extractor does not emit them. Report only what a quote supports.",
   "output_schema": {
     "type": "object",
     "additionalProperties": false,
@@ -22,18 +23,30 @@
         "items": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["evidence", "competitor", "relationship", "text"],
+          "required": ["evidence", "text", "competitor", "relationship", "switching_trigger"],
           "properties": {
             "evidence": {
               "type": "array",
               "items": { "$ref": "opengong://evidence" }
             },
+            "text": { "type": "string" },
             "competitor": { "type": "string" },
             "relationship": {
               "type": "string",
               "enum": ["active_user", "migrating_from", "evaluating", "mentioned"]
             },
-            "text": { "type": "string" }
+            "switching_trigger": {
+              "type": ["object", "null"],
+              "additionalProperties": false,
+              "required": ["evidence", "text"],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "items": { "$ref": "opengong://evidence" }
+                },
+                "text": { "type": "string" }
+              }
+            }
           }
         }
       }

@@ -1,0 +1,80 @@
+{
+  "name": "buying_stage",
+  "version": "1.0.0",
+  "title": "Buying Stage",
+  "description": "A call-level read of where the deal is, how urgent it is, and what triggered the search — each dimension carrying its own grounding quote when one exists, and honestly marked as inferred or absent when it does not. Derived enums only, never a per-line claim: a stage read you cannot cite is a coverage record, not a receipt.",
+  "enabled": true,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "applies_to": ["discovery", "demo", "negotiation", "renewal"],
+  "consumer": ["manager", "crm"],
+  "crm_map": {
+    "hubspot": { "property": "ai_buying_stage" }
+  },
+  "prompt": "Read the whole call and report three call-level dimensions. Each is a derived judgment, so each carries a `basis` that says honestly whether a quote backs it:\n- basis \"cited\": a specific quote satisfies the value's criterion — put that quote in `evidence`.\n- basis \"inferred\": the value is your best read from the call as a whole, with no single line that proves it — `evidence` must be empty.\n- basis \"absent\": the call gives you nothing to decide this dimension — value is the neutral option (none/unclear) and `evidence` is empty.\nNever set basis \"cited\" without a quote in `evidence`. Never put a quote in `evidence` unless it genuinely satisfies the criterion.\n\nstage.value — where the deal is, by the buyer's language: awareness = just learning what the product does; evaluating = actively comparing options or running a trial; shortlist = down to a small set of vendors; negotiation = discussing terms, contract, or final price; committed = states intent to buy or a purchase timeline; not_buying = says they will not proceed; unclear.\nurgency.value — high = the buyer names a deadline or time pressure; medium = a soft timeframe with no hard date; low = explicitly no rush; none = urgency never comes up; unclear.\ntrigger_event.value — what set off the search: contract_expiry, tool_failure (current tool broke or fell short), growth (scaling/hiring), compliance (a rule or audit), budget_cycle, none (no trigger stated), unclear.\n\nWhen no criterion is clearly met, prefer unclear/none with basis inferred or absent over a confident guess. Copy any quote character-for-character, no number-word/digit conversion.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["stage", "urgency", "trigger_event"],
+    "properties": {
+      "stage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["value", "basis", "evidence"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": ["awareness", "evaluating", "shortlist", "negotiation", "committed", "not_buying", "unclear"]
+          },
+          "basis": {
+            "type": "string",
+            "enum": ["cited", "inferred", "absent"]
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "$ref": "opengong://evidence" }
+          }
+        }
+      },
+      "urgency": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["value", "basis", "evidence"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": ["high", "medium", "low", "none", "unclear"]
+          },
+          "basis": {
+            "type": "string",
+            "enum": ["cited", "inferred", "absent"]
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "$ref": "opengong://evidence" }
+          }
+        }
+      },
+      "trigger_event": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["value", "basis", "evidence"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": ["contract_expiry", "tool_failure", "growth", "compliance", "budget_cycle", "none", "unclear"]
+          },
+          "basis": {
+            "type": "string",
+            "enum": ["cited", "inferred", "absent"]
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "$ref": "opengong://evidence" }
+          }
+        }
+      }
+    }
+  }
+}
