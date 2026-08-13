@@ -4,8 +4,8 @@ Status values: `blocked` / `ready` / `claimed:<session>` / `in-progress:<session
 
 | Phase | Hours | Deliverable | Exit test | Status | Owner |
 |---|---|---|---|---|---|
-| 0. Skeleton | 1 | Repo, LICENSE, key-mint flow, committed fixtures, `capabilities.json`, gitleaks CI | `npm start` mints a key cold | **ready** — git init done (`5d24bd6`); D1 only affects the public name, dir stays `opengong-lite/` | assigned: projects-2f (claim to start) |
-| 1. Ingest | 3 | Upload → job → poll → canonical transcript (stereo happy path + mono fallback layer) | Golden tests against fixtures pass | blocked: Phase 0 | assigned: projects-2f |
+| 0. Skeleton | 1 | Repo, LICENSE, key-mint flow, committed fixtures, `capabilities.json`, gitleaks CI | `npm start` mints a key cold | **in-progress:projects-2f** (claimed Aug 13 ~13:30) | projects-2f |
+| 1. Ingest | 3 | Upload → job → poll → canonical transcript (stereo happy path + mono fallback layer) | Golden tests against fixtures pass | claimed:projects-2f (starts when Phase 0 done) | projects-2f |
 | 2. Extraction + gate | 5 | Extractor registry, LLM calls, full gate chain, run records, named exits, budgets | Planted-fake-quote test lands in uncorroborated bucket | **blocked: gate-chain owner unnamed (guardrail)** | unassigned |
 | 3. Notes UI + receipts | 5 | Notes page: click claim → highlight segment → play timestamp; exports; share tiers 1–2 | The "oh damn" interaction works | blocked: Phase 2 | unassigned |
 | 4. Content + trust | 4 | DEAL-STATE.md + 5 scripted calls + stereo TTS, DATA-FLOW.md, README | Cross-call search finds planted facts | blocked: D2 (deal arc) | unassigned (content owner = D5) |

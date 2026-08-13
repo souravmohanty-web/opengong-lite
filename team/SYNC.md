@@ -13,6 +13,8 @@
 
 ## Decision log
 
+- 2026-08-13 ~13:30 · projects-2f · CLAIMED Phase 0 (in-progress) + Phase 1 (queued). Onboarding read in order (brief → protocol → board → findings+addendum). Phase-0 file surface: package.json, LICENSE, SECURITY.md, .env.example, capabilities.json, src/{index,pyai,keystore}.js, .github/workflows/ci.yml — no other files will be touched. · L-refs: L12 (capabilities.json), L14 (key-mint + 401 re-mint), L19 (MIT/SECURITY/gitleaks)
+
 - 2026-08-13 ~13:15 · hackathon · PROTOCOL.md ADOPTED w/ amendments A1 (auditor relay for L-changes + pre-merge review) and A2 (commit-per-completed-task). P-1 executed: `git init -b main`, baseline commit `5d24bd6` (evidence: `git log --oneline`, run fresh). · L-refs: none (process)
 - 2026-08-13 ~13:15 · hackathon (relaying Sourav) · ROSTER: partner session is fresh `projects-2f`; marketing session removed from project; Phases 0–1 reassigned to projects-2f; Phase 0 marked ready (git done, D1 gates only the public name). · L-refs: L14 (key-mint flow now Phase-0 scope)
 - 2026-08-13 · marketing session · Created team/ scaffolding (SYNC.md + TASKBOARD.md seeded verbatim from the brief §3 build-order table). No build started; Phase 0 gated on D1–D5. · L-refs: none (process only)
