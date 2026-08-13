@@ -100,22 +100,27 @@ export function normalize(raw) {
 }
 
 // F-2 (L7): used at STAGE 2 ONLY. Canonical STT text is unpunctuated, so removing
-// model-added marks from BOTH sides before comparison cannot manufacture a false
-// positive — it only recovers punctuation the model added that would otherwise be
-// fatal to normalized containment. A '.' or ',' sitting BETWEEN two digits is kept,
-// so "4.0" can never collapse into "40" (no number fabrication). Offsets fold onto
-// the surviving characters exactly as the zero-width entries already do, and gaps
-// left by a removed mark collapse so " - " never becomes a double space.
+// the marks a model actually ADDS — sentence punctuation and matched quotes/parens/
+// apostrophes — from BOTH sides before comparison recovers otherwise-fatal marks
+// without manufacturing a false positive. It is a WHITELIST, not a blacklist: only
+// the class below is stripped. Two fabrication guards are load-bearing here:
+//   1. A stripped mark FLANKED BY DIGITS on both sides is always PRESERVED, so
+//      "4.0"/"3:30"/"1,000" can never fold into a different number.
+//   2. '-' and '/' are NOT in the class at all, so "4-0"/"1/2" stay distinct from
+//      "40"/"12" (blacklisting the whole non-alnum class had let dashes and slashes
+//      collapse numbers, and let a dash-only quote collapse into a lone space).
+// Offsets fold onto the surviving characters exactly as the zero-width entries do,
+// and gaps left by a removed mark collapse so " . " never becomes a double space.
+const STRIP_PUNCT = /[.,;:!?'"()[\]{}]/;
 function stripPunctMap(n) {
   const text = [];
   const starts = [];
   const ends = [];
   for (let i = 0; i < n.text.length; i++) {
     const ch = n.text[i];
-    if (/[^\p{L}\p{N}\s%$]/u.test(ch)) {
-      const decimal = (ch === '.' || ch === ',')
-        && /\d/.test(n.text[i - 1] ?? '') && /\d/.test(n.text[i + 1] ?? '');
-      if (!decimal) continue;
+    if (STRIP_PUNCT.test(ch)) {
+      const digitFlanked = /\d/.test(n.text[i - 1] ?? '') && /\d/.test(n.text[i + 1] ?? '');
+      if (!digitFlanked) continue;
     }
     if (ch === ' ' && text[text.length - 1] === ' ') continue;
     text.push(ch);
@@ -246,6 +251,11 @@ export function anchor(quote, citedId, transcript, opts = {}) {
   //    Floor (F-3): a quote shorter than the normalized floor may anchor here ONLY
   //    when it is the WHOLE utterance (a real short line like "sure"), never a lone
   //    fragment such as "i" lifted from the middle of a longer turn.
+  //    N-1 (Slice-2 follow-up, non-blocking): this exception is evaluated per-id in
+  //    the ±1 loop, so a short fragment citing id N could weak-anchor to a neighbour
+  //    whose WHOLE text happens to equal that fragment. That is an exact_pm1 the
+  //    interpretation gate then demotes (cross-speaker flag / short-answer context) —
+  //    a demotion, not a fabrication — so it is left for Slice 2.
   for (const id of ids) {
     const utext = transcript.utterances[id].text;
     const at = utext.indexOf(trimmed);
@@ -263,11 +273,13 @@ export function anchor(quote, citedId, transcript, opts = {}) {
 
   // 2. normalized containment, same window, with offsets mapped back to raw.
   //    Punctuation is stripped from BOTH sides here only (F-2/L7); stage 1 stays strict.
-  if (nq.length >= MIN_NORMALIZED_QUOTE) {
-    const nqStripped = stripPunctMap(normalizeWithMap(trimmed)).text;
+  //    The FLOOR is applied to the STRIPPED query, so a punctuation-only quote that
+  //    collapses to empty/whitespace (FAB-1) never reaches indexOf.
+  const nqStripped = stripPunctMap(normalizeWithMap(trimmed)).text.trim();
+  if (nqStripped.length >= MIN_NORMALIZED_QUOTE) {
     for (const id of ids) {
       const n = stripPunctMap(normalizeWithMap(transcript.utterances[id].text));
-      const at = nqStripped ? n.text.indexOf(nqStripped) : -1;
+      const at = n.text.indexOf(nqStripped);
       if (at !== -1) {
         return hit(transcript, id, citedId, supplied,
           n.starts[at], n.ends[at + nqStripped.length - 1], 'normalized');

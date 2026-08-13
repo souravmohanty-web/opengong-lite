@@ -453,6 +453,50 @@ test('F2-05 no number fabrication: "4.0" never collapses into "40" (decimal punc
   assert.equal(anchor('the final number is 40 seats', 8, T).match_type, 'normalized');
 });
 
+// ── F-2 fabrication guards (FAB-1 / FAB-2): stage-2 strip must not manufacture hits ──
+
+const FAB_T = {
+  utterances: [{ id: 0, text: 'hello world how are you today my good friend' }],
+  canonical_text: 'hello world how are you today my good friend',
+};
+
+test('FAB-1a a dash-only quote never anchors (dashes are never stripped)', () => {
+  const e = anchor('- - - - - - - - -', 0, FAB_T);
+  assert.equal(e.match_type, 'none');
+});
+
+test('FAB-1b a punctuation-only quote that strips to whitespace never anchors', () => {
+  // periods ARE stripped; the residue must not collapse to a lone space that
+  // indexOf-hits any utterance with a space
+  const e = anchor('. . . . . . . . . . .', 0, FAB_T);
+  assert.equal(e.match_type, 'none');
+});
+
+const NUM_T = {
+  utterances: [
+    { id: 0, text: 'the invoice came to 330 dollars in total', role: 'rep', role_confidence: 0.9 },
+    { id: 1, text: 'we closed exactly 40 seats this quarter', role: 'rep', role_confidence: 0.9 },
+    { id: 2, text: 'about 12 users signed up in the trial', role: 'rep', role_confidence: 0.9 },
+  ],
+  canonical_text: 'the invoice came to 330 dollars in total\nwe closed exactly 40 seats this quarter\nabout 12 users signed up in the trial',
+};
+
+test('FAB-2a "3:30" must never collapse into "330" (colon kept between digits)', () => {
+  assert.equal(anchor('the invoice came to 3:30 dollars in total', 0, NUM_T).match_type, 'none');
+});
+
+test('FAB-2b "4-0" must never collapse into "40" (dash never stripped)', () => {
+  assert.equal(anchor('we closed exactly 4-0 seats this quarter', 1, NUM_T).match_type, 'none');
+});
+
+test('FAB-2c "1/2" must never collapse into "12" (slash never stripped)', () => {
+  assert.equal(anchor('about 1/2 users signed up in the trial', 2, NUM_T).match_type, 'none');
+});
+
+test('FAB-2d the honest quote still verifies (stripping only recovers real trailing marks)', () => {
+  assert.equal(anchor('the invoice came to 330 dollars in total.', 0, NUM_T).match_type, 'normalized');
+});
+
 // ── F-3: floor before any stage — a lone character never anchors exact ─────────
 
 test('F3-01 a 1-char quote never verifies as exact (floor applies at stage 1)', () => {
