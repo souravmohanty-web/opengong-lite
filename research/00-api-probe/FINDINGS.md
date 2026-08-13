@@ -47,3 +47,10 @@ Live probes against `https://api.pyai.com/v1` with a self-minted sandbox key. Ra
 3. **A repunctuation/formatting pass is required** for human-readable transcript display (LLM formats for display; raw text remains ground truth for evidence matching).
 4. **Receipt gate = normalized containment match** (lowercase, strip punctuation, collapse whitespace, fold number words) against raw transcript, not display text.
 5. Speaker names: **content-inferred roles (Rep/Prospect) with confidence, never invented names** — pending real-audio diarization test.
+
+> **CORRECTION (locked ruling L7, audit A-005–A-008): digit/number-word folding is
+> FORBIDDEN in the gate; verification runs against the exact prompt-rendered canonical
+> text.** See `DECISION-BRIEF.md` L7. This supersedes item 4 above and the same
+> recommendation in the "What is CONFIRMED" item 7 earlier in this file — both predate the
+> locked ruling. Left in place rather than deleted, per the append-only spirit of this
+> lane's research trail; do not implement digit-folding in the gate.

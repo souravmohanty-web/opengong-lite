@@ -7,6 +7,16 @@
 
 Status values: `blocked` / `ready` / `claimed:<session>` / `in-progress:<session>` / `done (exit test passed)`
 
+> **CORRECTION (cleanup pass, 2026-08-13 evening):** the "Ingest" row below says the
+> Phase-1 code is "UNCOMMITTED per freeze order." That is no longer true — `git log --
+> src/ingest.js src/transcript.js test/ingest.test.js test/transcript.golden.test.js`
+> shows all four files landed in commit `36e8ce2` ("Fold Aakash findings...; commit master
+> plan"), part of the master plan's "PUSH EVERYTHING NOW" step. The row text is left as-is
+> below (history, not rewritten) — treat the commit as the current fact and `team/SYNC.md`
+> top entries as the live status; the formal APPROVE/REJECT decision in
+> `team/plans/phase-1-ingest.md` was never explicitly checked off even though the files
+> are now in the repo.
+
 | Phase | Hours | Deliverable | Exit test | Status | Owner |
 |---|---|---|---|---|---|
 | 0. Skeleton | 1 | Repo, LICENSE, key-mint flow, committed fixtures, `capabilities.json`, gitleaks CI | `npm start` mints a key cold | **done (exit test passed)** — cold `npm start` minted `pyai_test_…FDCw` live, `/voices` → 144, warm restart reuses key; `npm test` 3/3 | projects-2f |

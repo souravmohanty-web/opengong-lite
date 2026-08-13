@@ -13,6 +13,18 @@
 
 ## Decision log
 
+- 2026-08-13 evening · cleanup/coherence agent · **CORRECTION, not a decision:** the
+  ~14:10 entry below states Phase-1 (`src/{ingest,transcript}.js` + tests) was "left
+  UNCOMMITTED per freeze order." That is stale — `git log` shows all four files were
+  swept into commit `36e8ce2` ("Fold Aakash findings...; commit master plan") when the
+  master plan's "PUSH EVERYTHING NOW" step ran. The code is now in the repo on `main`.
+  The formal APPROVE/REJECT checkbox in `team/plans/phase-1-ingest.md` was never
+  explicitly marked — Sourav should confirm whether the commit itself counts as approval.
+  History below is left unedited; this entry is the correction. Added START-HERE.md,
+  `team/plans/INDEX.md`, `research/README.md` and fixed the stale digit-folding note in
+  `research/00-api-probe/FINDINGS.md` (L7 correction) in the same pass — see the agent's
+  final report for the full file list. · L-refs: none (process/hygiene)
+
 - 2026-08-13 ~16:30 · hackathon (per Sourav) · Aakash's preliminary findings folded in (research/11: two inbox files + SYNTHESIS.md with the PM-spec ruling — receipts foundation kept, action layer adopted on top, pasted-transcript ingestion rejected for API-gravity reasons). Master plan committed at team/plans/master-plan.md (8-stage roadmap, Stage-2 v2 sub-parameters, Stages 5/6 designs, 3 mechanisms deep in v1, real-call calibration directive, privacy rule for the SDR CSV). Pushing all planning artifacts to origin per Sourav; isolated cleanup/coherence agent runs next; BUILD REMAINS GATED (Saritha bake-off + Sourav final gate). · L-refs: L5, L8, L12, L15, L18
 
 - 2026-08-13 ~16:00 · projects-2f (filing for hackathon teardown agent) · anarlog/Hyprnote teardown receipts FILED as CONFIRMED in research/11 (Aakash's lane — he hadn't claimed yet, so filed directly per relay; he inherits and promotes). Headline: citation is architecturally impossible in their enhance path (only {text, speaker} reaches the prompt), yet they built a working evidence-ID citation engine and pointed it at speaker labeling — "provenance as a diarization problem, not a trust problem." Also: demo-plan constraint noted in phase-3-ui.md (never cut click→highlight→audio / uncorroborated bucket / injection line; tier-1 export is the de-risk). · L-refs: supports the §1 wedge; L17

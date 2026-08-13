@@ -132,6 +132,10 @@ Contextual word-sense disambiguation (2.1) · negation/hypothetical/reported spe
 2. **Evals + feedback loop (~2h), BACKGROUND:** mark-a-claim-wrong → logged to evals file with evidence → `evals` replay command reports precision drift → documented fix cycle. Runs quietly; surfaced only on demand (a small "was this right?" affordance, no dashboards in the main flow).
 3. **CRM gold standards (~2.5h):** deal-outcomes file (stage, amount, industry, persona; CSV-importable) + won/lost pattern report + sample arc gets outcomes. Demo-mode labeled honestly (5 fictional calls = illustrative, never statistics).
 
+
+## Mechanism #4 — Control Room (internal ops console; Sourav, 2026-08-13 evening)
+Internal-only surface (never end-user): gate pass-rate trends, interpretation-flag mix, precision vs golden labels, feedback/mark-wrong rates, latency p50/p90 per stage, cost per call + cache economics (silent-miss alarm), exit-reason distribution, drift watch (fixture re-run diff), and OUTCOME-CORRELATION thresholds (call score → eventual deal stage; on breach: written optimization proposal, never auto-change — DiscoveryClaude v5.3 reconciliation pattern). Thresholds live in control-room.json as data. v1 = ~1.5h aggregation page over existing run records, background per the simplicity principle. Full design: team/plans/control-room.md.
+
 ## Real-call grounding for Stages 5 & 6 (Sourav's directive, 2026-08-13)
 Source: `~/Downloads/SDR_Meeting_transcript.csv` — ~6,000 rows of REAL calls with CRM columns (company, industry, job title, deal_stage, deal_amount, transcript content). Uses:
 1. **Representative-call selection:** score rows for coverage (objections + pricing + competitor + next-steps + typical length + multi-topic); pick 2-3 that cover the most recurring cases. These become the calibration calls for the extractor catalog (Stage 5) and the token/context math + ambiguity-class mining (Stage 6 — first row already confirms real Hinglish code-switching).

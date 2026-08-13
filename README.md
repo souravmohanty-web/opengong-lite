@@ -35,9 +35,8 @@ research/00–05           audited research lineage (API probes w/ live fixtures
 research/10, 11          open research lanes (reasoning model; competitive intel)
 audit/                   standing-auditor log (A-001…)
 team/                    protocol, onboarding, taskboard, sync log, plans/
-src/, test/              Phase-0 skeleton (key mint + CI); further code frozen pending
-                         master-plan approval — some built work exists only on Sourav's
-                         machine awaiting review (see team/plans/phase-1-ingest.md)
+src/, test/              Phase-0 skeleton + Phase-1 ingest (committed; tests green);
+                         further build frozen pending master-plan final gate
 capabilities.json        role → model map (extractors declare roles, never models)
 ```
 
