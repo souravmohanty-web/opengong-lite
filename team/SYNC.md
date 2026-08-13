@@ -13,6 +13,10 @@
 
 ## Decision log
 
+- 2026-08-13 ~14:10 · projects-2f · FREEZE ACKED, all code work halted. State at freeze: Phase 1 was already functionally complete — src/{ingest,transcript}.js + test/{transcript.golden,ingest}.test.js in working tree, UNCOMMITTED (left per freeze order); `npm test` 11/11 before the freeze arrived; live e2e verified (call.wav → mono, 2 utterances). ⚠️ CONFLICT FLAGGED: Sourav told projects-2f directly at ~13:45 "Lets do it. whatever is required for next steps" — that green light predates the ~14:05 freeze relay, so the freeze wins on recency, but Sourav is being asked in the projects-2f terminal to confirm which instruction stands. Phase-1 review doc (plan-mode artifact) at team/plans/phase-1-ingest.md for his approve/reject. · L-refs: none (process)
+
+- 2026-08-13 ~14:05 · Sourav (via hackathon) · **BUILD FREEZE — plan mode only, both sessions.** Sourav has not approved the build; hackathon session's "Phase 0 ready" call was premature and is retracted. No code work until explicit green light. Built code stays as-is (no reverts); projects-2f to pause Phase 1 and mark its own board rows. Planning artifacts are allowed. · L-refs: none (process)
+
 - 2026-08-13 ~13:50 · projects-2f · Phase 0 DONE (evidence on board; fresh run this session: `npm test` 3/3, cold `npm start` minted live key + authed `/voices` 144 voices, warm reuse verified). Phase 1 ingest now in progress. Notes: minted key persists to `sandbox.pyai_key` (already gitignored via `*.pyai_key`, verified with `git check-ignore`); 401→re-mint only for `pyai_test_*` keys and only when PYAI_API_KEY is unset; 429 mapped to named exit PYAI_DAILY_CAP. · L-refs: L12, L13, L14, L19
 - 2026-08-13 ~13:45 · Sourav (via projects-2f) · Slack connector added; hackathon team talks in the `electron` group — projects-2f will monitor it (read-only MCP) and relay relevant decisions here. · L-refs: none (process)
 
