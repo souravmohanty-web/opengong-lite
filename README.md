@@ -80,7 +80,7 @@ This is not hypothetical. PyAI's own Recap summarizer ran on sample call 3 and r
 that the buyer was switching "for $15 per seat." The call says twenty eight per month.
 The incumbent countered with twenty two. The buyer asked for fifteen *off*. Recap fused a
 discount ask into a price nobody spoke. The gate went looking for that quote, failed to
-find it, marked the claim uncorroborated, and the follow-up email came out composed from
+find it, marked the note "not found in the call", and the follow-up email came out composed from
 the two objections that did verify. Raw API responses, timings, and the mapping code are
 in `research/00-api-probe/live-recap-run/`.
 
