@@ -1,0 +1,35 @@
+{
+  "next_steps": [
+    {
+      "evidence": [
+        { "utterance_id": 6, "quote": "i'll send you our sot report and the tcpa one paper for your office manager both by friday" }
+      ],
+      "text": "Rep committed to send the SOC 2 report and the TCPA one-pager to the office manager, both by Friday.",
+      "type": "send_info",
+      "owner": "rep",
+      "commitment": "firm",
+      "due": "Friday"
+    },
+    {
+      "evidence": [
+        { "utterance_id": 7, "quote": "pull our call volume report from ringcak so you can size this properly" },
+        { "utterance_id": 7, "quote": "i can get that to you early next week" }
+      ],
+      "text": "Buyer to pull the RingHawk call-volume report and send it so the rep can size the deal, early next week.",
+      "type": "send_info",
+      "owner": "buyer",
+      "commitment": "firm",
+      "due": "early next week"
+    },
+    {
+      "evidence": [
+        { "utterance_id": 13, "quote": "and then let's talk numbers" }
+      ],
+      "text": "Once the documents are exchanged, both sides move to pricing.",
+      "type": "soft_followup",
+      "owner": "joint",
+      "commitment": "tentative",
+      "due": "after documents exchanged"
+    }
+  ]
+}

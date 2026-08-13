@@ -1,0 +1,32 @@
+{
+  "objections": [
+    {
+      "evidence": [
+        { "utterance_id": 3, "quote": "he's going to see a six gap per seat and ask me why" }
+      ],
+      "text": "Buyer must justify the six-per-seat gap to Dr Mehta, who signs the checks.",
+      "category": "authority",
+      "handling": "addressed",
+      "objection_status": "left_open",
+      "rep_response": {
+        "evidence": [
+          { "utterance_id": 4, "quote": "ten bookings a week recovered after hours pays that gap at one location let alone five" } ],
+        "text": "Rep reframes on ROI: ten recovered bookings a week pays the gap at one location, let alone five."
+      }
+    },
+    {
+      "evidence": [
+        { "utterance_id": 9, "quote": "the old vendor told us back in the day that porting numbers takes months if that's true it blows up your weekend cutover story" }
+      ],
+      "text": "Porting fear, attributed to the OLD VENDOR (reported speech, not the buyer's own finding): they claimed porting numbers takes months.",
+      "category": "trust",
+      "handling": "addressed",
+      "objection_status": "left_open",
+      "rep_response": {
+        "evidence": [
+          { "utterance_id": 10, "quote": "the port request paperwork goes in on day one and i'll show you real time lines from practices your size" } ],
+        "text": "Rep rebuts: paperwork goes in day one and offers real timelines from same-size practices."
+      }
+    }
+  ]
+}

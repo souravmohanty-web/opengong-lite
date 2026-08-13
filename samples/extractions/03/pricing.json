@@ -1,0 +1,34 @@
+{
+  "pricing_mentions": [
+    {
+      "evidence": [ { "utterance_id": 0, "quote": "here's where we land twenty eight per month all five locations routing texting and the recall tooling included" } ],
+      "text": "CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.",
+      "kind": "quote",
+      "pricing_signal": "none"
+    },
+    {
+      "evidence": [ { "utterance_id": 1, "quote": "ring hawk came back the moment they smelled a switch and offered twenty two to renew" } ],
+      "text": "RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.",
+      "kind": "competitor_price",
+      "pricing_signal": "competitor_price_cited"
+    },
+    {
+      "evidence": [ { "utterance_id": 3, "quote": "he's going to see a six gap per seat and ask me why" } ],
+      "text": "Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr Mehta will question.",
+      "kind": "price_objection",
+      "pricing_signal": "comparison"
+    },
+    {
+      "evidence": [ { "utterance_id": 5, "quote": "can you do fifteen that gets me close enough that the conversation is about service not price" } ],
+      "text": "Buyer asks for fifteen off so the decision is about service, not price.",
+      "kind": "discount_request",
+      "pricing_signal": "discount_request"
+    },
+    {
+      "evidence": [ { "utterance_id": 6, "quote": "i can match their twenty two if you commit today" } ],
+      "text": "Rep agreed to match RingHawk's twenty two renewal price if the buyer commits today.",
+      "kind": "quote",
+      "pricing_signal": "competitor_price_cited"
+    }
+  ]
+}

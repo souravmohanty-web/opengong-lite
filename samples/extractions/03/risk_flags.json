@@ -1,0 +1,17 @@
+{
+  "buyer_posture": {
+    "value": "mixed",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 9, "quote": "one thing that spooked me" } ]
+  },
+  "transcript_quality": {
+    "value": "some_gaps",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 7, "quote": "lehi tamming matters here" } ]
+  },
+  "anomaly": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

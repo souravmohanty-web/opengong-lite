@@ -1,0 +1,21 @@
+{
+  "stakeholders": [
+    {
+      "evidence": [ { "utterance_id": 1, "quote": "doctor meta looked at it last night" } ],
+      "text": "Dr Mehta, the economic buyer, reviewed the proposal himself and is set to sign; referenced, not on the call.",
+      "role_signal": "economic_buyer",
+      "present_on_call": "referenced"
+    },
+    {
+      "evidence": [ { "utterance_id": 6, "quote": "i'll set up the training live review for your office manager" } ],
+      "text": "Office manager will get the training live-review as part of onboarding; referenced, not on the call.",
+      "role_signal": "influencer",
+      "present_on_call": "referenced"
+    }
+  ],
+  "threading": {
+    "value": "single_threaded",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 7, "quote": "i'll have doctor meta sign early next week" } ]
+  }
+}

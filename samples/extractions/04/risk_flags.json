@@ -1,0 +1,17 @@
+{
+  "buyer_posture": {
+    "value": "mixed",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 1, "quote": "it never showed up she asked me twice" } ]
+  },
+  "transcript_quality": {
+    "value": "some_gaps",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 7, "quote": "contest tenab again lost two receptions this month" } ]
+  },
+  "anomaly": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

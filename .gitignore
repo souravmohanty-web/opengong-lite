@@ -5,3 +5,4 @@ node_modules/
 *.pyai_key
 .DS_Store
 runs/
+samples/audio/*.wav

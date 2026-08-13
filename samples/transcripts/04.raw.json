@@ -1,0 +1,1790 @@
+{
+  "job_id": "job_y2S2bUPp0Wohvh7w4MxDDFYy",
+  "status": "completed",
+  "created_at": 1786618423607,
+  "updated_at": 1786618425188,
+  "result": {
+    "text": "[speaker_1] for a whole quick check in before we talk pilot you got the soc report\n[speaker_2] got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice\n[speaker_1] you're right that one's on me it goes out today and i'll send it directly to her so it doesn't root through you\n[speaker_2] please because the texting piece is her favorite part of this whole thing and right now she's the one selling it internally not me\n[speaker_1] noted today and thank you for the volume report that's what let us ship the pilot here's the idea two locations your busiest and your smallest running live before you commit the other three\n[speaker_2] two locations i can defend to doctor meta without a fight which too is my call though\n[speaker_1] completely your call what's changed on your side since we talked\n[speaker_2] contest tenab again lost two receptions this month every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost\n[speaker_1] for what it's worth new stuff get one screen with ring and subtext the pilot will show that faster than i can say it\n[speaker_2] good so tcpa paper today palate proposal on paper this week and the sharper number you owe me from last time comes with it\n[speaker_1] all three you'll have the proposal and the number together",
+    "words": [
+      {
+        "end": 0.08,
+        "word": "for",
+        "start": 0,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 0.24,
+        "word": "a",
+        "start": 0.16,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 0.4,
+        "word": "whole",
+        "start": 0.24,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 0.64,
+        "word": "quick",
+        "start": 0.48,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 0.8,
+        "word": "check",
+        "start": 0.64,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 1.04,
+        "word": "in",
+        "start": 0.88,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 1.12,
+        "word": "before",
+        "start": 1.04,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 1.2,
+        "word": "we",
+        "start": 1.12,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 1.36,
+        "word": "talk",
+        "start": 1.2,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 1.84,
+        "word": "pilot",
+        "start": 1.52,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 2,
+        "word": "you",
+        "start": 1.92,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 2.08,
+        "word": "got",
+        "start": 2,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 2.16,
+        "word": "the",
+        "start": 2.08,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 2.56,
+        "word": "soc",
+        "start": 2.16,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 3.36,
+        "word": "report",
+        "start": 2.72,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 3.36,
+        "word": "got",
+        "start": 3.2800000000000002,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 3.6,
+        "word": "the",
+        "start": 3.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 4.08,
+        "word": "soctu",
+        "start": 3.6,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 4.48,
+        "word": "yes",
+        "start": 4.24,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 4.8,
+        "word": "forwarded",
+        "start": 4.48,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 4.88,
+        "word": "it",
+        "start": 4.8,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 5.04,
+        "word": "to",
+        "start": 4.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 5.12,
+        "word": "our",
+        "start": 5.04,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 5.28,
+        "word": "it",
+        "start": 5.12,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 5.68,
+        "word": "guy",
+        "start": 5.44,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 6.4,
+        "word": "already",
+        "start": 5.68,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 6.96,
+        "word": "but",
+        "start": 6.72,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 7.44,
+        "word": "maya",
+        "start": 6.96,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 7.76,
+        "word": "you",
+        "start": 7.6000000000000005,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 8.08,
+        "word": "promised",
+        "start": 7.76,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 8.24,
+        "word": "my",
+        "start": 8.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 8.56,
+        "word": "office",
+        "start": 8.24,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 8.96,
+        "word": "manager",
+        "start": 8.56,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 9.040000000000001,
+        "word": "a",
+        "start": 8.96,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 9.68,
+        "word": "tcpa",
+        "start": 9.040000000000001,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 9.76,
+        "word": "one",
+        "start": 9.68,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 10.4,
+        "word": "pager",
+        "start": 9.92,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 10.48,
+        "word": "by",
+        "start": 10.4,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 10.88,
+        "word": "friday",
+        "start": 10.48,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 11.36,
+        "word": "and",
+        "start": 11.200000000000001,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 11.52,
+        "word": "it",
+        "start": 11.36,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 11.68,
+        "word": "never",
+        "start": 11.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 12.08,
+        "word": "showed",
+        "start": 11.68,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 12.32,
+        "word": "up",
+        "start": 12.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 12.8,
+        "word": "she",
+        "start": 12.64,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 13.120000000000001,
+        "word": "asked",
+        "start": 12.8,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 13.280000000000001,
+        "word": "me",
+        "start": 13.120000000000001,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 13.84,
+        "word": "twice",
+        "start": 13.280000000000001,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 14.32,
+        "word": "you're",
+        "start": 14,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 14.64,
+        "word": "right",
+        "start": 14.32,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 14.8,
+        "word": "that",
+        "start": 14.64,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 15.120000000000001,
+        "word": "one's",
+        "start": 14.8,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 15.36,
+        "word": "on",
+        "start": 15.120000000000001,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 15.6,
+        "word": "me",
+        "start": 15.36,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 15.76,
+        "word": "it",
+        "start": 15.6,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 16,
+        "word": "goes",
+        "start": 15.76,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 16.240000000000002,
+        "word": "out",
+        "start": 16,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 16.56,
+        "word": "today",
+        "start": 16.240000000000002,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 17.04,
+        "word": "and",
+        "start": 16.88,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 17.36,
+        "word": "i'll",
+        "start": 17.04,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 17.52,
+        "word": "send",
+        "start": 17.36,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 17.68,
+        "word": "it",
+        "start": 17.52,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 18,
+        "word": "directly",
+        "start": 17.68,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 18.240000000000002,
+        "word": "to",
+        "start": 18,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 18.400000000000002,
+        "word": "her",
+        "start": 18.240000000000002,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 18.56,
+        "word": "so",
+        "start": 18.400000000000002,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 18.64,
+        "word": "it",
+        "start": 18.56,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 18.96,
+        "word": "doesn't",
+        "start": 18.64,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 19.2,
+        "word": "root",
+        "start": 18.96,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 19.52,
+        "word": "through",
+        "start": 19.28,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 19.84,
+        "word": "you",
+        "start": 19.52,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 20.400000000000002,
+        "word": "please",
+        "start": 20,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 20.56,
+        "word": "because",
+        "start": 20.400000000000002,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 20.72,
+        "word": "the",
+        "start": 20.56,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 21.04,
+        "word": "texting",
+        "start": 20.72,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 21.28,
+        "word": "piece",
+        "start": 21.04,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 21.36,
+        "word": "is",
+        "start": 21.28,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 21.52,
+        "word": "her",
+        "start": 21.36,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 21.84,
+        "word": "favorite",
+        "start": 21.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 22,
+        "word": "part",
+        "start": 21.84,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 22.16,
+        "word": "of",
+        "start": 22,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 22.32,
+        "word": "this",
+        "start": 22.16,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 22.72,
+        "word": "whole",
+        "start": 22.32,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 22.96,
+        "word": "thing",
+        "start": 22.72,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 23.44,
+        "word": "and",
+        "start": 23.28,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 23.6,
+        "word": "right",
+        "start": 23.44,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 23.84,
+        "word": "now",
+        "start": 23.6,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 24.080000000000002,
+        "word": "she's",
+        "start": 23.84,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 24.240000000000002,
+        "word": "the",
+        "start": 24.080000000000002,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 24.400000000000002,
+        "word": "one",
+        "start": 24.240000000000002,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 24.72,
+        "word": "selling",
+        "start": 24.400000000000002,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 24.88,
+        "word": "it",
+        "start": 24.72,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 25.52,
+        "word": "internally",
+        "start": 24.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 25.84,
+        "word": "not",
+        "start": 25.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 26.16,
+        "word": "me",
+        "start": 25.84,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 26.8,
+        "word": "noted",
+        "start": 26.32,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 27.04,
+        "word": "today",
+        "start": 26.8,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 27.2,
+        "word": "and",
+        "start": 27.04,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 27.36,
+        "word": "thank",
+        "start": 27.2,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 27.44,
+        "word": "you",
+        "start": 27.36,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 27.52,
+        "word": "for",
+        "start": 27.44,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 27.6,
+        "word": "the",
+        "start": 27.52,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 28.080000000000002,
+        "word": "volume",
+        "start": 27.6,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 28.560000000000002,
+        "word": "report",
+        "start": 28.080000000000002,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 29.52,
+        "word": "that's",
+        "start": 29.2,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 29.76,
+        "word": "what",
+        "start": 29.52,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 29.84,
+        "word": "let",
+        "start": 29.76,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 30.080000000000002,
+        "word": "us",
+        "start": 29.92,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 30.32,
+        "word": "ship",
+        "start": 30.080000000000002,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 30.400000000000002,
+        "word": "the",
+        "start": 30.32,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 30.72,
+        "word": "pilot",
+        "start": 30.400000000000002,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 30.96,
+        "word": "here's",
+        "start": 30.8,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 31.04,
+        "word": "the",
+        "start": 30.96,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 31.44,
+        "word": "idea",
+        "start": 31.04,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 31.68,
+        "word": "two",
+        "start": 31.44,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 32.160000000000004,
+        "word": "locations",
+        "start": 31.68,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 32.32,
+        "word": "your",
+        "start": 32.160000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 32.8,
+        "word": "busiest",
+        "start": 32.4,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 32.88,
+        "word": "and",
+        "start": 32.8,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 33.04,
+        "word": "your",
+        "start": 32.88,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 33.68,
+        "word": "smallest",
+        "start": 33.04,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 34.08,
+        "word": "running",
+        "start": 33.68,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 34.480000000000004,
+        "word": "live",
+        "start": 34.08,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 34.64,
+        "word": "before",
+        "start": 34.480000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 34.88,
+        "word": "you",
+        "start": 34.64,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 35.2,
+        "word": "commit",
+        "start": 34.88,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 35.44,
+        "word": "the",
+        "start": 35.2,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 35.68,
+        "word": "other",
+        "start": 35.44,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 36,
+        "word": "three",
+        "start": 35.68,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 36.160000000000004,
+        "word": "two",
+        "start": 36.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 36.72,
+        "word": "locations",
+        "start": 36.32,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 36.88,
+        "word": "i",
+        "start": 36.72,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 36.96,
+        "word": "can",
+        "start": 36.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 37.28,
+        "word": "defend",
+        "start": 36.96,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 37.36,
+        "word": "to",
+        "start": 37.28,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 37.6,
+        "word": "doctor",
+        "start": 37.36,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 38.08,
+        "word": "meta",
+        "start": 37.6,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 38.32,
+        "word": "without",
+        "start": 38.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 38.4,
+        "word": "a",
+        "start": 38.32,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 38.88,
+        "word": "fight",
+        "start": 38.4,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 39.52,
+        "word": "which",
+        "start": 39.2,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 39.76,
+        "word": "too",
+        "start": 39.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 40,
+        "word": "is",
+        "start": 39.76,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 40.160000000000004,
+        "word": "my",
+        "start": 40,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 40.4,
+        "word": "call",
+        "start": 40.160000000000004,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 41.2,
+        "word": "though",
+        "start": 40.64,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 41.84,
+        "word": "completely",
+        "start": 41.36,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 41.92,
+        "word": "your",
+        "start": 41.84,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 42.24,
+        "word": "call",
+        "start": 42.08,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 42.480000000000004,
+        "word": "what's",
+        "start": 42.32,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 42.800000000000004,
+        "word": "changed",
+        "start": 42.480000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 42.88,
+        "word": "on",
+        "start": 42.800000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 42.96,
+        "word": "your",
+        "start": 42.88,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 43.28,
+        "word": "side",
+        "start": 42.96,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 43.52,
+        "word": "since",
+        "start": 43.28,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 43.68,
+        "word": "we",
+        "start": 43.52,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 44.160000000000004,
+        "word": "talked",
+        "start": 43.68,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 44.4,
+        "word": "contest",
+        "start": 44.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 44.800000000000004,
+        "word": "tenab",
+        "start": 44.480000000000004,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 45.04,
+        "word": "again",
+        "start": 44.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 45.28,
+        "word": "lost",
+        "start": 45.12,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 45.44,
+        "word": "two",
+        "start": 45.28,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 46,
+        "word": "receptions",
+        "start": 45.44,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 46.160000000000004,
+        "word": "this",
+        "start": 46,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 46.56,
+        "word": "month",
+        "start": 46.160000000000004,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 46.88,
+        "word": "every",
+        "start": 46.56,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 47.04,
+        "word": "new",
+        "start": 46.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 47.36,
+        "word": "hire",
+        "start": 47.04,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 47.52,
+        "word": "has",
+        "start": 47.44,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 47.6,
+        "word": "to",
+        "start": 47.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 47.84,
+        "word": "lend",
+        "start": 47.6,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 48.4,
+        "word": "ringhawks",
+        "start": 47.84,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 48.88,
+        "word": "fifteen",
+        "start": 48.56,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 49.52,
+        "word": "screens",
+        "start": 48.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 49.68,
+        "word": "and",
+        "start": 49.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 50.160000000000004,
+        "word": "honestly",
+        "start": 49.68,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 50.480000000000004,
+        "word": "training",
+        "start": 50.160000000000004,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 50.72,
+        "word": "time",
+        "start": 50.480000000000004,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 50.800000000000004,
+        "word": "is",
+        "start": 50.72,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 51.2,
+        "word": "becoming",
+        "start": 50.800000000000004,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 51.36,
+        "word": "its",
+        "start": 51.2,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 51.6,
+        "word": "own",
+        "start": 51.36,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 52.24,
+        "word": "cost",
+        "start": 51.6,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 52.4,
+        "word": "for",
+        "start": 52.160000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 52.56,
+        "word": "what",
+        "start": 52.4,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 52.72,
+        "word": "it's",
+        "start": 52.56,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 52.96,
+        "word": "worth",
+        "start": 52.72,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 53.120000000000005,
+        "word": "new",
+        "start": 53.04,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 53.36,
+        "word": "stuff",
+        "start": 53.28,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 53.68,
+        "word": "get",
+        "start": 53.52,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 53.84,
+        "word": "one",
+        "start": 53.68,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 54.24,
+        "word": "screen",
+        "start": 53.84,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 54.56,
+        "word": "with",
+        "start": 54.24,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 55.28,
+        "word": "ring",
+        "start": 54.88,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 55.44,
+        "word": "and",
+        "start": 55.28,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 56.32,
+        "word": "subtext",
+        "start": 55.6,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 56.480000000000004,
+        "word": "the",
+        "start": 56.32,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 56.88,
+        "word": "pilot",
+        "start": 56.480000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 57.04,
+        "word": "will",
+        "start": 56.88,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 57.2,
+        "word": "show",
+        "start": 57.04,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 57.36,
+        "word": "that",
+        "start": 57.2,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 57.76,
+        "word": "faster",
+        "start": 57.36,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 57.92,
+        "word": "than",
+        "start": 57.76,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 58,
+        "word": "i",
+        "start": 57.92,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 58.24,
+        "word": "can",
+        "start": 58,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 58.480000000000004,
+        "word": "say",
+        "start": 58.24,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 58.800000000000004,
+        "word": "it",
+        "start": 58.480000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 58.96,
+        "word": "good",
+        "start": 58.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 59.36,
+        "word": "so",
+        "start": 59.2,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 59.84,
+        "word": "tcpa",
+        "start": 59.36,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 60.160000000000004,
+        "word": "paper",
+        "start": 59.92,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 60.24,
+        "word": "today",
+        "start": 60.160000000000004,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 60.64,
+        "word": "palate",
+        "start": 60.4,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 61.04,
+        "word": "proposal",
+        "start": 60.64,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 61.2,
+        "word": "on",
+        "start": 61.04,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 61.44,
+        "word": "paper",
+        "start": 61.2,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 61.52,
+        "word": "this",
+        "start": 61.44,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 62.4,
+        "word": "week",
+        "start": 61.52,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 62.96,
+        "word": "and",
+        "start": 62.72,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 63.2,
+        "word": "the",
+        "start": 62.96,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 63.6,
+        "word": "sharper",
+        "start": 63.2,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 64,
+        "word": "number",
+        "start": 63.76,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 64.08,
+        "word": "you",
+        "start": 64,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 64.4,
+        "word": "owe",
+        "start": 64.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 64.64,
+        "word": "me",
+        "start": 64.4,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 64.88,
+        "word": "from",
+        "start": 64.64,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 65.12,
+        "word": "last",
+        "start": 64.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 65.36,
+        "word": "time",
+        "start": 65.12,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 65.6,
+        "word": "comes",
+        "start": 65.36,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 65.92,
+        "word": "with",
+        "start": 65.6,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 66.24,
+        "word": "it",
+        "start": 65.92,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "end": 66.48,
+        "word": "all",
+        "start": 66.32000000000001,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 66.8,
+        "word": "three",
+        "start": 66.64,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 67.2,
+        "word": "you'll",
+        "start": 66.96000000000001,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 67.36,
+        "word": "have",
+        "start": 67.2,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 67.44,
+        "word": "the",
+        "start": 67.36,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 67.84,
+        "word": "proposal",
+        "start": 67.44,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 68,
+        "word": "and",
+        "start": 67.84,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 68.16,
+        "word": "the",
+        "start": 68,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 68.4,
+        "word": "number",
+        "start": 68.16,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "end": 68.8,
+        "word": "together",
+        "start": 68.4,
+        "channel": 0,
+        "speaker": "speaker_1"
+      }
+    ],
+    "segments": [
+      {
+        "id": 0,
+        "end": 3.36,
+        "text": "for a whole quick check in before we talk pilot you got the soc report",
+        "start": 0,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "id": 1,
+        "end": 13.84,
+        "text": "got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice",
+        "start": 3.2800000000000002,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "id": 2,
+        "end": 19.84,
+        "text": "you're right that one's on me it goes out today and i'll send it directly to her so it doesn't root through you",
+        "start": 14,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "id": 3,
+        "end": 26.16,
+        "text": "please because the texting piece is her favorite part of this whole thing and right now she's the one selling it internally not me",
+        "start": 20,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "id": 4,
+        "end": 36,
+        "text": "noted today and thank you for the volume report that's what let us ship the pilot here's the idea two locations your busiest and your smallest running live before you commit the other three",
+        "start": 26.32,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "id": 5,
+        "end": 41.2,
+        "text": "two locations i can defend to doctor meta without a fight which too is my call though",
+        "start": 36.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "id": 6,
+        "end": 44.160000000000004,
+        "text": "completely your call what's changed on your side since we talked",
+        "start": 41.36,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "id": 7,
+        "end": 52.24,
+        "text": "contest tenab again lost two receptions this month every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost",
+        "start": 44.08,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "id": 8,
+        "end": 58.800000000000004,
+        "text": "for what it's worth new stuff get one screen with ring and subtext the pilot will show that faster than i can say it",
+        "start": 52.160000000000004,
+        "channel": 0,
+        "speaker": "speaker_1"
+      },
+      {
+        "id": 9,
+        "end": 66.24,
+        "text": "good so tcpa paper today palate proposal on paper this week and the sharper number you owe me from last time comes with it",
+        "start": 58.88,
+        "channel": 1,
+        "speaker": "speaker_2"
+      },
+      {
+        "id": 10,
+        "end": 68.8,
+        "text": "all three you'll have the proposal and the number together",
+        "start": 66.32000000000001,
+        "channel": 0,
+        "speaker": "speaker_1"
+      }
+    ],
+    "speakers": 2,
+    "audio_seconds": 69.12
+  }
+}

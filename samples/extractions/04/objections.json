@@ -1,0 +1,19 @@
+{
+  "objections": [
+    {
+      "evidence": [
+        { "utterance_id": 1, "quote": "you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice" }
+      ],
+      "text": "Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.",
+      "category": "trust",
+      "handling": "accepted",
+      "objection_status": "left_open",
+      "rep_response": {
+        "evidence": [
+          { "utterance_id": 2, "quote": "you're right that one's on me it goes out today and i'll send it directly to her so it doesn't root through you" }
+        ],
+        "text": "Rep owns the miss: it goes out today, sent directly to the office manager so it doesn't route through Rahul."
+      }
+    }
+  ]
+}

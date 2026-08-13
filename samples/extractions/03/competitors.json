@@ -1,0 +1,18 @@
+{
+  "competitor_mentions": [
+    {
+      "evidence": [
+        { "utterance_id": 1, "quote": "ring hawk came back the moment they smelled a switch and offered twenty two to renew" }
+      ],
+      "text": "RingHawk counter-offered twenty two to keep the account, and its renewal falls in November.",
+      "competitor": "RingHawk",
+      "relationship": "active_user",
+      "switching_trigger": {
+        "evidence": [
+          { "utterance_id": 7, "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me" }
+        ],
+        "text": "November auto-renew is the forcing function: buyer must decide before it locks."
+      }
+    }
+  ]
+}

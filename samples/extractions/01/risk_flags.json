@@ -1,0 +1,17 @@
+{
+  "buyer_posture": {
+    "value": "guarded",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 10, "quote": "i got burned once switching software and i'm not doing that dance again without proof it works" } ]
+  },
+  "transcript_quality": {
+    "value": "some_gaps",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 8, "quote": "we asked ring hog for after hours routing last year" } ]
+  },
+  "anomaly": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

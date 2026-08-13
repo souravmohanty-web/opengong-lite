@@ -1,0 +1,17 @@
+{
+  "stage": {
+    "value": "evaluating",
+    "basis": "inferred",
+    "evidence": [ { "utterance_id": 1, "quote": "i've been meaning to look at this for a while so your timing is decent" } ]
+  },
+  "urgency": {
+    "value": "medium",
+    "basis": "inferred",
+    "evidence": [ { "utterance_id": 16, "quote": "do it thursday before the lunch rush" } ]
+  },
+  "trigger_event": {
+    "value": "tool_failure",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 3, "quote": "the system works until it doesn't" } ]
+  }
+}

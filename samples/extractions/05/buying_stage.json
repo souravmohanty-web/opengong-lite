@@ -1,0 +1,17 @@
+{
+  "stage": {
+    "value": "committed",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 7, "quote": "then we're done negotiating send the agreement over" } ]
+  },
+  "urgency": {
+    "value": "high",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 7, "quote": "i'll have doctor meta sign early next week" } ]
+  },
+  "trigger_event": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

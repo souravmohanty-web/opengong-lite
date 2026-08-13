@@ -1,0 +1,17 @@
+{
+  "buyer_posture": {
+    "value": "open",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 1, "quote": "that's genuinely useful" } ]
+  },
+  "transcript_quality": {
+    "value": "some_gaps",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 7, "quote": "pull our call volume report from ringcak so you can size this properly" } ]
+  },
+  "anomaly": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

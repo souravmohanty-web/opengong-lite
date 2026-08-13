@@ -1,0 +1,19 @@
+{
+  "competitor_mentions": [
+    {
+      "evidence": [
+        { "utterance_id": 3, "quote": "and have been for about three years" },
+        { "utterance_id": 12, "quote": "they bumped the price again this year and the service got worse" }
+      ],
+      "text": "Brightsmile runs all five locations on RingHawk and has for about three years, and is now unhappy: the incumbent bumped price again while service got worse.",
+      "competitor": "RingHawk",
+      "relationship": "active_user",
+      "switching_trigger": {
+        "evidence": [
+          { "utterance_id": 8, "quote": "the support tickets go nowhere you wait four days and get a reply asking you to restart the router" }
+        ],
+        "text": "Ignored support tickets: four-day replies telling them to restart the router."
+      }
+    }
+  ]
+}

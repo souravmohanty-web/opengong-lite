@@ -1,0 +1,31 @@
+{
+  "sections": [
+    {
+      "title": "Outcome",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 2, "quote": "you're right that one's on me it goes out today" } ],
+          "text": "SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations."
+        }
+      ]
+    },
+    {
+      "title": "Pain points",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 7, "quote": "lost two receptions this month every new hire has to lend ringhawks fifteen screens" } ],
+          "text": "Front-desk churn: lost two receptionists this month; RingHawk's fifteen screens make training a cost."
+        }
+      ]
+    },
+    {
+      "title": "Next steps",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 9, "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it" } ],
+          "text": "Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week."
+        }
+      ]
+    }
+  ]
+}

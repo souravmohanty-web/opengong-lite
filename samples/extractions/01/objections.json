@@ -1,0 +1,19 @@
+{
+  "objections": [
+    {
+      "evidence": [
+        { "utterance_id": 10, "quote": "we do not have a budget problem honestly it's a trust problem i got burned once switching software and i'm not doing that dance again without proof it works" }
+      ],
+      "text": "It is not a budget problem, it is a trust problem: 'i got burned once switching software and i'm not doing that dance again without proof it works.'",
+      "category": "trust",
+      "handling": "deflected",
+      "objection_status": "left_open",
+      "rep_response": {
+        "evidence": [
+          { "utterance_id": 11, "quote": "what is your ringhawk renewal look like" }
+        ],
+        "text": "Rep pivots to the RingHawk renewal instead of answering the trust concern head-on."
+      }
+    }
+  ]
+}

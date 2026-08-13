@@ -1,0 +1,1003 @@
+{
+  "format": "opengong.bundle.v1",
+  "call": {
+    "id": "04",
+    "title": "Commitment check — the ledger moment"
+  },
+  "audio": null,
+  "transcript": {
+    "mode": "diarized",
+    "speakers": 2,
+    "utterances": [
+      {
+        "id": 0,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 0,
+        "end": 3.36,
+        "text": "for a whole quick check in before we talk pilot you got the soc report"
+      },
+      {
+        "id": 1,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 3.2800000000000002,
+        "end": 13.84,
+        "text": "got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice"
+      },
+      {
+        "id": 2,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 14,
+        "end": 19.84,
+        "text": "you're right that one's on me it goes out today and i'll send it directly to her so it doesn't root through you"
+      },
+      {
+        "id": 3,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 20,
+        "end": 26.16,
+        "text": "please because the texting piece is her favorite part of this whole thing and right now she's the one selling it internally not me"
+      },
+      {
+        "id": 4,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 26.32,
+        "end": 36,
+        "text": "noted today and thank you for the volume report that's what let us ship the pilot here's the idea two locations your busiest and your smallest running live before you commit the other three"
+      },
+      {
+        "id": 5,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 36.08,
+        "end": 41.2,
+        "text": "two locations i can defend to doctor meta without a fight which too is my call though"
+      },
+      {
+        "id": 6,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 41.36,
+        "end": 44.160000000000004,
+        "text": "completely your call what's changed on your side since we talked"
+      },
+      {
+        "id": 7,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 44.08,
+        "end": 52.24,
+        "text": "contest tenab again lost two receptions this month every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost"
+      },
+      {
+        "id": 8,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 52.160000000000004,
+        "end": 58.800000000000004,
+        "text": "for what it's worth new stuff get one screen with ring and subtext the pilot will show that faster than i can say it"
+      },
+      {
+        "id": 9,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 58.88,
+        "end": 66.24,
+        "text": "good so tcpa paper today palate proposal on paper this week and the sharper number you owe me from last time comes with it"
+      },
+      {
+        "id": 10,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 66.32000000000001,
+        "end": 68.8,
+        "text": "all three you'll have the proposal and the number together"
+      }
+    ]
+  },
+  "claims": [
+    {
+      "id": "tracker-0-pilot",
+      "extractor": "tracker",
+      "section": "tracker",
+      "text": "Tracker 'tracker' matched: pilot",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 0,
+          "quote": "for a whole quick check in before we talk pilot you got the soc report",
+          "match_type": "exact",
+          "t_start": 0,
+          "t_end": 3.36,
+          "char_start": 0,
+          "char_end": 70
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "tracker-1-tcpa",
+      "extractor": "tracker",
+      "section": "tracker",
+      "text": "Tracker 'tracker' matched: tcpa",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 1,
+          "quote": "got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice",
+          "match_type": "exact",
+          "t_start": 3.2800000000000002,
+          "t_end": 13.84,
+          "char_start": 0,
+          "char_end": 161
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "one",
+          "utterance_id": 1
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "tracker-4-pilot",
+      "extractor": "tracker",
+      "section": "tracker",
+      "text": "Tracker 'tracker' matched: pilot",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 4,
+          "quote": "noted today and thank you for the volume report that's what let us ship the pilot here's the idea two locations your busiest and your smallest running live before you commit the other three",
+          "match_type": "exact",
+          "t_start": 26.32,
+          "t_end": 36,
+          "char_start": 0,
+          "char_end": 189
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "two",
+          "utterance_id": 4
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "tracker-8-pilot",
+      "extractor": "tracker",
+      "section": "tracker",
+      "text": "Tracker 'tracker' matched: pilot",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 8,
+          "quote": "for what it's worth new stuff get one screen with ring and subtext the pilot will show that faster than i can say it",
+          "match_type": "exact",
+          "t_start": 52.160000000000004,
+          "t_end": 58.800000000000004,
+          "char_start": 0,
+          "char_end": 116
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "one",
+          "utterance_id": 8
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "tracker-9-tcpa",
+      "extractor": "tracker",
+      "section": "tracker",
+      "text": "Tracker 'tracker' matched: tcpa",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "good so tcpa paper today palate proposal on paper this week and the sharper number you owe me from last time comes with it",
+          "match_type": "exact",
+          "t_start": 58.88,
+          "t_end": 66.24,
+          "char_start": 0,
+          "char_end": 122
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "buying_stage-stage",
+      "extractor": "buying_stage",
+      "section": "buying_stage",
+      "text": "Buying stage: negotiation",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 5,
+          "quote": "two locations i can defend to doctor meta without a fight",
+          "match_type": "exact",
+          "t_start": 36.08,
+          "t_end": 41.2,
+          "char_start": 0,
+          "char_end": 57
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "two",
+          "utterance_id": 5
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "buying_stage-urgency",
+      "extractor": "buying_stage",
+      "section": "buying_stage",
+      "text": "Urgency: medium",
+      "basis": "inferred",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it",
+          "match_type": "exact",
+          "t_start": 58.88,
+          "t_end": 66.24,
+          "char_start": 25,
+          "char_end": 122
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "competitors-0",
+      "extractor": "competitors",
+      "section": "competitors",
+      "text": "RingHawk's fifteen-screen UI (spoken 'ringhawks') is now a training burden as front-desk staff churn.",
+      "competitor": "RingHawk",
+      "relationship": "active_user",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "every new hire has to lend ringhawks fifteen screens",
+          "match_type": "exact",
+          "t_start": 44.08,
+          "t_end": 52.24,
+          "char_start": 51,
+          "char_end": 103
+        },
+        {
+          "utterance_id": 7,
+          "quote": "training time is becoming its own cost",
+          "match_type": "exact",
+          "t_start": 44.08,
+          "t_end": 52.24,
+          "char_start": 117,
+          "char_end": 155
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "fifteen",
+          "utterance_id": 7
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "next_steps-0",
+      "extractor": "next_steps",
+      "section": "next_steps",
+      "text": "Rep to send the overdue TCPA one-pager today, directly to the office manager.",
+      "type": "send_info",
+      "owner": "rep",
+      "commitment": "firm",
+      "due": "today",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 2,
+          "quote": "it goes out today and i'll send it directly to her so it doesn't root through you",
+          "match_type": "exact",
+          "t_start": 14,
+          "t_end": 19.84,
+          "char_start": 30,
+          "char_end": 111
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": true,
+      "context_flags": [
+        {
+          "flag": "requires_context_missing_support",
+          "where": null,
+          "cue": null,
+          "utterance_id": null
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "next_steps-1",
+      "extractor": "next_steps",
+      "section": "next_steps",
+      "text": "Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.",
+      "type": "send_info",
+      "owner": "rep",
+      "commitment": "firm",
+      "due": "this week",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it",
+          "match_type": "exact",
+          "t_start": 58.88,
+          "t_end": 66.24,
+          "char_start": 25,
+          "char_end": 122
+        },
+        {
+          "utterance_id": 10,
+          "quote": "you'll have the proposal and the number together",
+          "match_type": "exact",
+          "t_start": 66.32000000000001,
+          "t_end": 68.8,
+          "char_start": 10,
+          "char_end": 58
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "objections-0",
+      "extractor": "objections",
+      "section": "objections",
+      "text": "Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.",
+      "category": "trust",
+      "handling": "accepted",
+      "objection_status": "left_open",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 1,
+          "quote": "you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice",
+          "match_type": "exact",
+          "t_start": 3.2800000000000002,
+          "t_end": 13.84,
+          "char_start": 62,
+          "char_end": 161
+        },
+        {
+          "utterance_id": 2,
+          "quote": "you're right that one's on me it goes out today and i'll send it directly to her so it doesn't root through you",
+          "match_type": "exact",
+          "t_start": 14,
+          "t_end": 19.84,
+          "char_start": 0,
+          "char_end": 111
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "one",
+          "utterance_id": 1
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "pain-0",
+      "extractor": "pain",
+      "section": "pain",
+      "text": "Front-desk churn is now a cost center: every new hire must learn RingHawk's fifteen screens, so training time is its own cost.",
+      "layer": "business",
+      "who_it_affects": "department",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost",
+          "match_type": "exact",
+          "t_start": 44.08,
+          "t_end": 52.24,
+          "char_start": 51,
+          "char_end": 155
+        },
+        {
+          "utterance_id": 7,
+          "quote": "lost two receptions this month",
+          "match_type": "exact",
+          "t_start": 44.08,
+          "t_end": 52.24,
+          "char_start": 20,
+          "char_end": 50
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": true,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "fifteen",
+          "utterance_id": 7
+        },
+        {
+          "flag": "requires_context_missing_support",
+          "where": null,
+          "cue": null,
+          "utterance_id": null
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "pricing-0",
+      "extractor": "pricing",
+      "section": "pricing",
+      "text": "Buyer is still owed the sharper number from the pricing call; it will land with the proposal.",
+      "kind": "other",
+      "pricing_signal": "none",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "the sharper number you owe me from last time comes with it",
+          "match_type": "exact",
+          "t_start": 58.88,
+          "t_end": 66.24,
+          "char_start": 64,
+          "char_end": 122
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "risk_flags-buyer_posture",
+      "extractor": "risk_flags",
+      "section": "risk_flags",
+      "text": "Buyer posture: mixed",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 1,
+          "quote": "it never showed up she asked me twice",
+          "match_type": "exact",
+          "t_start": 3.2800000000000002,
+          "t_end": 13.84,
+          "char_start": 124,
+          "char_end": 161
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": true,
+      "context_flags": [
+        {
+          "flag": "requires_context_missing_support",
+          "where": null,
+          "cue": null,
+          "utterance_id": null
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "risk_flags-transcript_quality",
+      "extractor": "risk_flags",
+      "section": "risk_flags",
+      "text": "Transcript quality: some_gaps",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "contest tenab again lost two receptions this month",
+          "match_type": "exact",
+          "t_start": 44.08,
+          "t_end": 52.24,
+          "char_start": 0,
+          "char_end": 50
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "two",
+          "utterance_id": 7
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "stakeholders-0",
+      "extractor": "stakeholders",
+      "section": "stakeholders",
+      "text": "Office manager has become the internal champion, selling the deal internally; referenced, not on the call.",
+      "role_signal": "champion",
+      "present_on_call": "referenced",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 3,
+          "quote": "she's the one selling it internally not me",
+          "match_type": "exact",
+          "t_start": 20,
+          "t_end": 26.16,
+          "char_start": 88,
+          "char_end": 130
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "one",
+          "utterance_id": 3
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "stakeholders-1",
+      "extractor": "stakeholders",
+      "section": "stakeholders",
+      "text": "Dr Mehta remains the economic buyer Rahul must satisfy; referenced, not on the call.",
+      "role_signal": "economic_buyer",
+      "present_on_call": "referenced",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 5,
+          "quote": "i can defend to doctor meta without a fight",
+          "match_type": "exact",
+          "t_start": 36.08,
+          "t_end": 41.2,
+          "char_start": 14,
+          "char_end": 57
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "stakeholders-threading",
+      "extractor": "stakeholders",
+      "section": "stakeholders",
+      "text": "Threading: single_threaded",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 3,
+          "quote": "she's the one selling it internally not me",
+          "match_type": "exact",
+          "t_start": 20,
+          "t_end": 26.16,
+          "char_start": 88,
+          "char_end": 130
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "one",
+          "utterance_id": 3
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "summary-0-0",
+      "extractor": "summary",
+      "section": "summary",
+      "title": "Outcome",
+      "text": "SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 2,
+          "quote": "you're right that one's on me it goes out today",
+          "match_type": "exact",
+          "t_start": 14,
+          "t_end": 19.84,
+          "char_start": 0,
+          "char_end": 47
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "summary-1-0",
+      "extractor": "summary",
+      "section": "summary",
+      "title": "Pain points",
+      "text": "Front-desk churn: lost two receptionists this month; RingHawk's fifteen screens make training a cost.",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "lost two receptions this month every new hire has to lend ringhawks fifteen screens",
+          "match_type": "exact",
+          "t_start": 44.08,
+          "t_end": 52.24,
+          "char_start": 20,
+          "char_end": 103
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "two",
+          "utterance_id": 7
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "summary-2-0",
+      "extractor": "summary",
+      "section": "next_steps",
+      "title": "Next steps",
+      "text": "Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it",
+          "match_type": "exact",
+          "t_start": 58.88,
+          "t_end": 66.24,
+          "char_start": 25,
+          "char_end": 122
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    }
+  ],
+  "notes": {
+    "coverage": {
+      "band": "SHIPPED",
+      "ratio": 1,
+      "stats": {
+        "total": 21,
+        "attempted": 21,
+        "verified": 21,
+        "segment_corrected": 0,
+        "uncorroborated": 0,
+        "blocked_injection": 0,
+        "corroborated": 21
+      },
+      "required_sections": [
+        {
+          "section": "summary",
+          "attempted": 2,
+          "corroborated": 2
+        },
+        {
+          "section": "next_steps",
+          "attempted": 3,
+          "corroborated": 3
+        }
+      ],
+      "extractor_failures": []
+    },
+    "sections": [
+      {
+        "title": "tracker",
+        "blocks": [
+          {
+            "text": "Tracker 'tracker' matched: pilot",
+            "claim_ids": [
+              "tracker-0-pilot"
+            ]
+          },
+          {
+            "text": "Tracker 'tracker' matched: tcpa",
+            "claim_ids": [
+              "tracker-1-tcpa"
+            ]
+          },
+          {
+            "text": "Tracker 'tracker' matched: pilot",
+            "claim_ids": [
+              "tracker-4-pilot"
+            ]
+          },
+          {
+            "text": "Tracker 'tracker' matched: pilot",
+            "claim_ids": [
+              "tracker-8-pilot"
+            ]
+          },
+          {
+            "text": "Tracker 'tracker' matched: tcpa",
+            "claim_ids": [
+              "tracker-9-tcpa"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "buying_stage",
+        "blocks": [
+          {
+            "text": "Buying stage: negotiation",
+            "claim_ids": [
+              "buying_stage-stage"
+            ]
+          },
+          {
+            "text": "Urgency: medium",
+            "claim_ids": [
+              "buying_stage-urgency"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "competitors",
+        "blocks": [
+          {
+            "text": "RingHawk's fifteen-screen UI (spoken 'ringhawks') is now a training burden as front-desk staff churn.",
+            "claim_ids": [
+              "competitors-0"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Next steps",
+        "blocks": [
+          {
+            "text": "Rep to send the overdue TCPA one-pager today, directly to the office manager.",
+            "claim_ids": [
+              "next_steps-0"
+            ]
+          },
+          {
+            "text": "Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.",
+            "claim_ids": [
+              "next_steps-1"
+            ]
+          },
+          {
+            "text": "Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.",
+            "claim_ids": [
+              "summary-2-0"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Objections",
+        "blocks": [
+          {
+            "text": "Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.",
+            "claim_ids": [
+              "objections-0"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "pain",
+        "blocks": [
+          {
+            "text": "Front-desk churn is now a cost center: every new hire must learn RingHawk's fifteen screens, so training time is its own cost.",
+            "claim_ids": [
+              "pain-0"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "pricing",
+        "blocks": [
+          {
+            "text": "Buyer is still owed the sharper number from the pricing call; it will land with the proposal.",
+            "claim_ids": [
+              "pricing-0"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "risk_flags",
+        "blocks": [
+          {
+            "text": "Buyer posture: mixed",
+            "claim_ids": [
+              "risk_flags-buyer_posture"
+            ]
+          },
+          {
+            "text": "Transcript quality: some_gaps",
+            "claim_ids": [
+              "risk_flags-transcript_quality"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "stakeholders",
+        "blocks": [
+          {
+            "text": "Office manager has become the internal champion, selling the deal internally; referenced, not on the call.",
+            "claim_ids": [
+              "stakeholders-0"
+            ]
+          },
+          {
+            "text": "Dr Mehta remains the economic buyer Rahul must satisfy; referenced, not on the call.",
+            "claim_ids": [
+              "stakeholders-1"
+            ]
+          },
+          {
+            "text": "Threading: single_threaded",
+            "claim_ids": [
+              "stakeholders-threading"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Summary",
+        "blocks": [
+          {
+            "text": "SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.",
+            "claim_ids": [
+              "summary-0-0"
+            ]
+          },
+          {
+            "text": "Front-desk churn: lost two receptionists this month; RingHawk's fifteen screens make training a cost.",
+            "claim_ids": [
+              "summary-1-0"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "transcription_model": "pyai-hear",
+    "extraction_model": "offline-author",
+    "note": "offline extraction (author=agent, gate-verified)"
+  }
+}

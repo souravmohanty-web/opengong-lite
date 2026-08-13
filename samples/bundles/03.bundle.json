@@ -1,0 +1,988 @@
+{
+  "format": "opengong.bundle.v1",
+  "call": {
+    "id": "03",
+    "title": "Pricing — quote vs RingHawk renewal counter"
+  },
+  "audio": null,
+  "transcript": {
+    "mode": "diarized",
+    "speakers": 2,
+    "utterances": [
+      {
+        "id": 0,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 0,
+        "end": 8.96,
+        "text": "got your call volume report thanks based on that here's where we land twenty eight per month all five locations routing texting and the recall tooling included"
+      },
+      {
+        "id": 1,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 8.96,
+        "end": 16.080000000000002,
+        "text": "twenty eight archer so here's my problem may i ring hawk came back the moment they smelled a switch and offered twenty two to renew"
+      },
+      {
+        "id": 2,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 16.080000000000002,
+        "end": 20.32,
+        "text": "it is kind of a three years of ignored tickets what does that tell you about the next three years"
+      },
+      {
+        "id": 3,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 20.96,
+        "end": 29.68,
+        "text": "i know i know but i answered to doctor meta on the and he signs the checks he's going to see a six gap per seat and ask me why"
+      },
+      {
+        "id": 4,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 29.76,
+        "end": 35.92,
+        "text": "then let's give you the answer ten bookings a week recovered after hours pays that gap at one location let alone five"
+      },
+      {
+        "id": 5,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 36.08,
+        "end": 43.68,
+        "text": "math works on me on him soda tough can you do fifteen that gets me close enough that the conversation is about service not price"
+      },
+      {
+        "id": 6,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 43.68,
+        "end": 52.800000000000004,
+        "text": "fifteen across the board and i then i can't what i can do is sharpen it if we commit to a pilot structure let me come back to you on exact numbers"
+      },
+      {
+        "id": 7,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 52.72,
+        "end": 60.160000000000004,
+        "text": "lehi tamming matters here the ringhawk renewal is november and if i'm switching i need to know before they auto renew me"
+      },
+      {
+        "id": 8,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 60.4,
+        "end": 63.68,
+        "text": "understood that's how clock then anything else standing between you and the yes"
+      },
+      {
+        "id": 9,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 63.84,
+        "end": 71.84,
+        "text": "one thing that spooked me the old vendor told us back in the day that porting numbers takes months if that's true it blows up your weekend cutover story"
+      },
+      {
+        "id": 10,
+        "speaker": "speaker_1",
+        "channel": 0,
+        "role": null,
+        "role_confidence": null,
+        "start": 71.84,
+        "end": 80.4,
+        "text": "it's not true and i'll prove it rather than argue the port request paperwork goes in on day one and i'll show you real time lines from practices your size"
+      },
+      {
+        "id": 11,
+        "speaker": "speaker_2",
+        "channel": 1,
+        "role": null,
+        "role_confidence": null,
+        "start": 80.48,
+        "end": 85.84,
+        "text": "let's do that bring me a sharper number and the porting proof now and then i take it to doctor meta"
+      }
+    ]
+  },
+  "claims": [
+    {
+      "id": "tracker-6-pilot",
+      "extractor": "tracker",
+      "section": "tracker",
+      "text": "Tracker 'tracker' matched: pilot",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 6,
+          "quote": "fifteen across the board and i then i can't what i can do is sharpen it if we commit to a pilot structure let me come back to you on exact numbers",
+          "match_type": "exact",
+          "t_start": 43.68,
+          "t_end": 52.800000000000004,
+          "char_start": 0,
+          "char_end": 146
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "double_negation",
+          "where": "in_quote",
+          "cue": "can't",
+          "utterance_id": 6
+        },
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "fifteen",
+          "utterance_id": 6
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "tracker-7-ringhawk",
+      "extractor": "tracker",
+      "section": "tracker",
+      "text": "Tracker 'tracker' matched: ringhawk",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "lehi tamming matters here the ringhawk renewal is november and if i'm switching i need to know before they auto renew me",
+          "match_type": "exact",
+          "t_start": 52.72,
+          "t_end": 60.160000000000004,
+          "char_start": 0,
+          "char_end": 120
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "buying_stage-stage",
+      "extractor": "buying_stage",
+      "section": "buying_stage",
+      "text": "Buying stage: negotiation",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 5,
+          "quote": "can you do fifteen that gets me close enough that the conversation is about service not price",
+          "match_type": "exact",
+          "t_start": 36.08,
+          "t_end": 43.68,
+          "char_start": 35,
+          "char_end": 128
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "fifteen",
+          "utterance_id": 5
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "buying_stage-urgency",
+      "extractor": "buying_stage",
+      "section": "buying_stage",
+      "text": "Urgency: high",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me",
+          "match_type": "exact",
+          "t_start": 52.72,
+          "t_end": 60.160000000000004,
+          "char_start": 26,
+          "char_end": 120
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "buying_stage-trigger",
+      "extractor": "buying_stage",
+      "section": "buying_stage",
+      "text": "Trigger event: contract_expiry",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "the ringhawk renewal is november",
+          "match_type": "exact",
+          "t_start": 52.72,
+          "t_end": 60.160000000000004,
+          "char_start": 26,
+          "char_end": 58
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": true,
+      "context_flags": [
+        {
+          "flag": "requires_context_missing_support",
+          "where": null,
+          "cue": null,
+          "utterance_id": null
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "competitors-0",
+      "extractor": "competitors",
+      "section": "competitors",
+      "text": "RingHawk counter-offered twenty two to keep the account, and its renewal falls in November.",
+      "competitor": "RingHawk",
+      "relationship": "active_user",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 1,
+          "quote": "ring hawk came back the moment they smelled a switch and offered twenty two to renew",
+          "match_type": "exact",
+          "t_start": 8.96,
+          "t_end": 16.080000000000002,
+          "char_start": 47,
+          "char_end": 131
+        },
+        {
+          "utterance_id": 7,
+          "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me",
+          "match_type": "exact",
+          "t_start": 52.72,
+          "t_end": 60.160000000000004,
+          "char_start": 26,
+          "char_end": 120
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "twenty",
+          "utterance_id": 1
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "next_steps-0",
+      "extractor": "next_steps",
+      "section": "next_steps",
+      "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr Mehta.",
+      "type": "send_info",
+      "owner": "rep",
+      "commitment": "firm",
+      "due": "before the November renewal",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 11,
+          "quote": "bring me a sharper number and the porting proof now and then i take it to doctor meta",
+          "match_type": "exact",
+          "t_start": 80.48,
+          "t_end": 85.84,
+          "char_start": 14,
+          "char_end": 99
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "objections-0",
+      "extractor": "objections",
+      "section": "objections",
+      "text": "Buyer must justify the six-per-seat gap to Dr Mehta, who signs the checks.",
+      "category": "authority",
+      "handling": "addressed",
+      "objection_status": "left_open",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 3,
+          "quote": "he's going to see a six gap per seat and ask me why",
+          "match_type": "exact",
+          "t_start": 20.96,
+          "t_end": 29.68,
+          "char_start": 75,
+          "char_end": 126
+        },
+        {
+          "utterance_id": 4,
+          "quote": "ten bookings a week recovered after hours pays that gap at one location let alone five",
+          "match_type": "exact",
+          "t_start": 29.76,
+          "t_end": 35.92,
+          "char_start": 31,
+          "char_end": 117
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "one",
+          "utterance_id": 4
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "objections-1",
+      "extractor": "objections",
+      "section": "objections",
+      "text": "Porting fear, attributed to the OLD VENDOR (reported speech, not the buyer's own finding): they claimed porting numbers takes months.",
+      "category": "trust",
+      "handling": "addressed",
+      "objection_status": "left_open",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "the old vendor told us back in the day that porting numbers takes months if that's true it blows up your weekend cutover story",
+          "match_type": "exact",
+          "t_start": 63.84,
+          "t_end": 71.84,
+          "char_start": 26,
+          "char_end": 152
+        },
+        {
+          "utterance_id": 10,
+          "quote": "the port request paperwork goes in on day one and i'll show you real time lines from practices your size",
+          "match_type": "exact",
+          "t_start": 71.84,
+          "t_end": 80.4,
+          "char_start": 50,
+          "char_end": 154
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "pricing-0",
+      "extractor": "pricing",
+      "section": "pricing",
+      "text": "CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.",
+      "kind": "quote",
+      "pricing_signal": "none",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 0,
+          "quote": "here's where we land twenty eight per month all five locations routing texting and the recall tooling included",
+          "match_type": "exact",
+          "t_start": 0,
+          "t_end": 8.96,
+          "char_start": 49,
+          "char_end": 159
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "pricing-1",
+      "extractor": "pricing",
+      "section": "pricing",
+      "text": "RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.",
+      "kind": "competitor_price",
+      "pricing_signal": "competitor_price_cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 1,
+          "quote": "ring hawk came back the moment they smelled a switch and offered twenty two to renew",
+          "match_type": "exact",
+          "t_start": 8.96,
+          "t_end": 16.080000000000002,
+          "char_start": 47,
+          "char_end": 131
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "twenty",
+          "utterance_id": 1
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "pricing-2",
+      "extractor": "pricing",
+      "section": "pricing",
+      "text": "Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr Mehta will question.",
+      "kind": "price_objection",
+      "pricing_signal": "comparison",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 3,
+          "quote": "he's going to see a six gap per seat and ask me why",
+          "match_type": "exact",
+          "t_start": 20.96,
+          "t_end": 29.68,
+          "char_start": 75,
+          "char_end": 126
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "pricing-3",
+      "extractor": "pricing",
+      "section": "pricing",
+      "text": "Buyer asks for fifteen off so the decision is about service, not price.",
+      "kind": "discount_request",
+      "pricing_signal": "discount_request",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 5,
+          "quote": "can you do fifteen that gets me close enough that the conversation is about service not price",
+          "match_type": "exact",
+          "t_start": 36.08,
+          "t_end": 43.68,
+          "char_start": 35,
+          "char_end": 128
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "fifteen",
+          "utterance_id": 5
+        }
+      ],
+      "interpretation_confidence": "medium"
+    },
+    {
+      "id": "pricing-4",
+      "extractor": "pricing",
+      "section": "pricing",
+      "text": "Rep agreed to match RingHawk's twenty two renewal price if the buyer commits today.",
+      "kind": "quote",
+      "pricing_signal": "competitor_price_cited",
+      "status": "uncorroborated",
+      "evidence": [
+        {
+          "utterance_id": 6,
+          "quote": "i can match their twenty two if you commit today",
+          "match_type": "none",
+          "reason": "not_found_in_transcript",
+          "t_start": 43.68,
+          "t_end": 52.800000000000004
+        }
+      ],
+      "rejected_evidence": [
+        {
+          "utterance_id": 6,
+          "quote": "i can match their twenty two if you commit today",
+          "match_type": "none",
+          "reason": "not_found_in_transcript"
+        }
+      ],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": null
+    },
+    {
+      "id": "risk_flags-buyer_posture",
+      "extractor": "risk_flags",
+      "section": "risk_flags",
+      "text": "Buyer posture: mixed",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 9,
+          "quote": "one thing that spooked me",
+          "match_type": "exact",
+          "t_start": 63.84,
+          "t_end": 71.84,
+          "char_start": 0,
+          "char_end": 25
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": true,
+      "context_flags": [
+        {
+          "flag": "number_without_unit_anchor",
+          "where": "in_quote",
+          "cue": "one",
+          "utterance_id": 9
+        },
+        {
+          "flag": "requires_context_missing_support",
+          "where": null,
+          "cue": null,
+          "utterance_id": null
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "risk_flags-transcript_quality",
+      "extractor": "risk_flags",
+      "section": "risk_flags",
+      "text": "Transcript quality: some_gaps",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "lehi tamming matters here",
+          "match_type": "exact",
+          "t_start": 52.72,
+          "t_end": 60.160000000000004,
+          "char_start": 0,
+          "char_end": 25
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": true,
+      "context_flags": [
+        {
+          "flag": "requires_context_missing_support",
+          "where": null,
+          "cue": null,
+          "utterance_id": null
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "stakeholders-0",
+      "extractor": "stakeholders",
+      "section": "stakeholders",
+      "text": "Dr Mehta is the economic buyer who signs the checks; referenced, never on these calls.",
+      "role_signal": "economic_buyer",
+      "present_on_call": "referenced",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 3,
+          "quote": "i answered to doctor meta on the and he signs the checks",
+          "match_type": "exact",
+          "t_start": 20.96,
+          "t_end": 29.68,
+          "char_start": 18,
+          "char_end": 74
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "stakeholders-threading",
+      "extractor": "stakeholders",
+      "section": "stakeholders",
+      "text": "Threading: single_threaded",
+      "basis": "cited",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 11,
+          "quote": "i take it to doctor meta",
+          "match_type": "exact",
+          "t_start": 80.48,
+          "t_end": 85.84,
+          "char_start": 75,
+          "char_end": 99
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": true,
+      "context_flags": [
+        {
+          "flag": "requires_context_missing_support",
+          "where": null,
+          "cue": null,
+          "utterance_id": null
+        }
+      ],
+      "interpretation_confidence": "low"
+    },
+    {
+      "id": "summary-0-0",
+      "extractor": "summary",
+      "section": "summary",
+      "title": "Outcome",
+      "text": "Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 0,
+          "quote": "here's where we land twenty eight per month all five locations routing texting and the recall tooling included",
+          "match_type": "exact",
+          "t_start": 0,
+          "t_end": 8.96,
+          "char_start": 49,
+          "char_end": 159
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "summary-1-0",
+      "extractor": "summary",
+      "section": "summary",
+      "title": "Key takeaways",
+      "text": "RingHawk renews in November: the buyer needs a decision before the auto-renew locks.",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 7,
+          "quote": "the ringhawk renewal is november and if i'm switching i need to know before they auto renew me",
+          "match_type": "exact",
+          "t_start": 52.72,
+          "t_end": 60.160000000000004,
+          "char_start": 26,
+          "char_end": 120
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    },
+    {
+      "id": "summary-2-0",
+      "extractor": "summary",
+      "section": "next_steps",
+      "title": "Next steps",
+      "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr Mehta.",
+      "status": "verified",
+      "evidence": [
+        {
+          "utterance_id": 11,
+          "quote": "bring me a sharper number and the porting proof now and then i take it to doctor meta",
+          "match_type": "exact",
+          "t_start": 80.48,
+          "t_end": 85.84,
+          "char_start": 14,
+          "char_end": 99
+        }
+      ],
+      "rejected_evidence": [],
+      "supporting_evidence": [],
+      "rejected_supporting_evidence": [],
+      "requires_context": false,
+      "context_flags": [],
+      "interpretation_confidence": "high"
+    }
+  ],
+  "notes": {
+    "coverage": {
+      "band": "SHIPPED",
+      "ratio": 0.9523809523809523,
+      "stats": {
+        "total": 21,
+        "attempted": 21,
+        "verified": 20,
+        "segment_corrected": 0,
+        "uncorroborated": 1,
+        "blocked_injection": 0,
+        "corroborated": 20
+      },
+      "required_sections": [
+        {
+          "section": "summary",
+          "attempted": 2,
+          "corroborated": 2
+        },
+        {
+          "section": "next_steps",
+          "attempted": 2,
+          "corroborated": 2
+        }
+      ],
+      "extractor_failures": []
+    },
+    "sections": [
+      {
+        "title": "tracker",
+        "blocks": [
+          {
+            "text": "Tracker 'tracker' matched: pilot",
+            "claim_ids": [
+              "tracker-6-pilot"
+            ]
+          },
+          {
+            "text": "Tracker 'tracker' matched: ringhawk",
+            "claim_ids": [
+              "tracker-7-ringhawk"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "buying_stage",
+        "blocks": [
+          {
+            "text": "Buying stage: negotiation",
+            "claim_ids": [
+              "buying_stage-stage"
+            ]
+          },
+          {
+            "text": "Urgency: high",
+            "claim_ids": [
+              "buying_stage-urgency"
+            ]
+          },
+          {
+            "text": "Trigger event: contract_expiry",
+            "claim_ids": [
+              "buying_stage-trigger"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "competitors",
+        "blocks": [
+          {
+            "text": "RingHawk counter-offered twenty two to keep the account, and its renewal falls in November.",
+            "claim_ids": [
+              "competitors-0"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Next steps",
+        "blocks": [
+          {
+            "text": "Rep to bring a sharper number and the porting proof; buyer will then take it to Dr Mehta.",
+            "claim_ids": [
+              "next_steps-0"
+            ]
+          },
+          {
+            "text": "Rep to bring a sharper number and porting proof; buyer takes it to Dr Mehta.",
+            "claim_ids": [
+              "summary-2-0"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Objections",
+        "blocks": [
+          {
+            "text": "Buyer must justify the six-per-seat gap to Dr Mehta, who signs the checks.",
+            "claim_ids": [
+              "objections-0"
+            ]
+          },
+          {
+            "text": "Porting fear, attributed to the OLD VENDOR (reported speech, not the buyer's own finding): they claimed porting numbers takes months.",
+            "claim_ids": [
+              "objections-1"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "pricing",
+        "blocks": [
+          {
+            "text": "CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.",
+            "claim_ids": [
+              "pricing-0"
+            ]
+          },
+          {
+            "text": "RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.",
+            "claim_ids": [
+              "pricing-1"
+            ]
+          },
+          {
+            "text": "Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr Mehta will question.",
+            "claim_ids": [
+              "pricing-2"
+            ]
+          },
+          {
+            "text": "Buyer asks for fifteen off so the decision is about service, not price.",
+            "claim_ids": [
+              "pricing-3"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "risk_flags",
+        "blocks": [
+          {
+            "text": "Buyer posture: mixed",
+            "claim_ids": [
+              "risk_flags-buyer_posture"
+            ]
+          },
+          {
+            "text": "Transcript quality: some_gaps",
+            "claim_ids": [
+              "risk_flags-transcript_quality"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "stakeholders",
+        "blocks": [
+          {
+            "text": "Dr Mehta is the economic buyer who signs the checks; referenced, never on these calls.",
+            "claim_ids": [
+              "stakeholders-0"
+            ]
+          },
+          {
+            "text": "Threading: single_threaded",
+            "claim_ids": [
+              "stakeholders-threading"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Summary",
+        "blocks": [
+          {
+            "text": "Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.",
+            "claim_ids": [
+              "summary-0-0"
+            ]
+          },
+          {
+            "text": "RingHawk renews in November: the buyer needs a decision before the auto-renew locks.",
+            "claim_ids": [
+              "summary-1-0"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "transcription_model": "pyai-hear",
+    "extraction_model": "offline-author",
+    "note": "offline extraction (author=agent, gate-verified)"
+  }
+}

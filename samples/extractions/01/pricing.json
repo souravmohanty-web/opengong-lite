@@ -1,0 +1,16 @@
+{
+  "pricing_mentions": [
+    {
+      "evidence": [ { "utterance_id": 10, "quote": "we do not have a budget problem" } ],
+      "text": "Buyer states budget is not the blocker: 'we do not have a budget problem.'",
+      "kind": "budget",
+      "pricing_signal": "none"
+    },
+    {
+      "evidence": [ { "utterance_id": 12, "quote": "it's just too expensive for what we're getting they bumped the price again this year" } ],
+      "text": "The RingHawk renewal is 'too expensive for what we're getting' -- here 'it' refers to the incumbent renewal, not CallForge's price.",
+      "kind": "competitor_price",
+      "pricing_signal": "comparison"
+    }
+  ]
+}

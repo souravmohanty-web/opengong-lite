@@ -1,0 +1,17 @@
+{
+  "buyer_posture": {
+    "value": "open",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 9, "quote": "i'll be your reference customer" } ]
+  },
+  "transcript_quality": {
+    "value": "some_gaps",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 9, "quote": "get my after ask patients booking again" } ]
+  },
+  "anomaly": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

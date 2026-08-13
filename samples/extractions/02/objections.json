@@ -1,0 +1,19 @@
+{
+  "objections": [
+    {
+      "evidence": [
+        { "utterance_id": 9, "quote": "we cannot be down during patient hours at all if switching means two dead days of phones the deal is off before it starts" }
+      ],
+      "text": "Downtime is a dealbreaker: 'we cannot be down during patient hours at all -- if switching means two dead days of phones the deal is off before it starts.'",
+      "category": "timing",
+      "handling": "addressed",
+      "objection_status": "left_open",
+      "rep_response": {
+        "evidence": [
+          { "utterance_id": 10, "quote": "numbers port in the background and the old system stays live until the new one answers nobody's phones go dark on a tuesday" }
+        ],
+        "text": "Rep answers directly: numbers port in the background and the old system stays live until the new one answers, so phones never go dark on a weekday."
+      }
+    }
+  ]
+}

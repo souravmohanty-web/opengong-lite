@@ -1,0 +1,16 @@
+{
+  "pricing_mentions": [
+    {
+      "evidence": [ { "utterance_id": 0, "quote": "we landed at twenty six per seat with the recall tooling included" } ],
+      "text": "Final landed price: twenty six per seat, recall tooling included, on a two-location ninety-day pilot.",
+      "kind": "quote",
+      "pricing_signal": "none"
+    },
+    {
+      "evidence": [ { "utterance_id": 1, "quote": "twenty six i can sell doctor meta looked at it last night" } ],
+      "text": "Buyer can sell twenty six internally; Dr Mehta reviewed it the night before.",
+      "kind": "other",
+      "pricing_signal": "none"
+    }
+  ]
+}

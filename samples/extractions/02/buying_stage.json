@@ -1,0 +1,17 @@
+{
+  "stage": {
+    "value": "evaluating",
+    "basis": "inferred",
+    "evidence": [ { "utterance_id": 1, "quote": "that's the part we lose today that's genuinely useful" } ]
+  },
+  "urgency": {
+    "value": "medium",
+    "basis": "inferred",
+    "evidence": [ { "utterance_id": 13, "quote": "and then let's talk numbers" } ]
+  },
+  "trigger_event": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

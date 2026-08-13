@@ -1,0 +1,15 @@
+{
+  "stakeholders": [
+    {
+      "evidence": [ { "utterance_id": 3, "quote": "i answered to doctor meta on the and he signs the checks" } ],
+      "text": "Dr Mehta is the economic buyer who signs the checks; referenced, never on these calls.",
+      "role_signal": "economic_buyer",
+      "present_on_call": "referenced"
+    }
+  ],
+  "threading": {
+    "value": "single_threaded",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 11, "quote": "i take it to doctor meta" } ]
+  }
+}

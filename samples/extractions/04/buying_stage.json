@@ -1,0 +1,17 @@
+{
+  "stage": {
+    "value": "negotiation",
+    "basis": "cited",
+    "evidence": [ { "utterance_id": 5, "quote": "two locations i can defend to doctor meta without a fight" } ]
+  },
+  "urgency": {
+    "value": "medium",
+    "basis": "inferred",
+    "evidence": [ { "utterance_id": 9, "quote": "palate proposal on paper this week and the sharper number you owe me from last time comes with it" } ]
+  },
+  "trigger_event": {
+    "value": "none",
+    "basis": "absent",
+    "evidence": []
+  }
+}

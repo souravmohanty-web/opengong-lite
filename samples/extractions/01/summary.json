@@ -1,0 +1,31 @@
+{
+  "sections": [
+    {
+      "title": "Outcome",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 15, "quote": "a proper demo thirty minutes i'll show you the after hours routing and the compliant texting flow live" } ],
+          "text": "Discovery landed a 30-minute demo of after-hours routing and compliant texting."
+        }
+      ]
+    },
+    {
+      "title": "Pain points",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 5, "quote": "we lose maybe ten bookings a week that way" } ],
+          "text": "About ten bookings a week are lost after hours; calls also drop mid-transfer a few times a day."
+        }
+      ]
+    },
+    {
+      "title": "Next steps",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 17, "quote": "i'll bring the routing demo and the texting flow no slides" } ],
+          "text": "Rep to run the demo Thursday: routing plus texting, no slides."
+        }
+      ]
+    }
+  ]
+}

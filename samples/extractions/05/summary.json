@@ -1,0 +1,40 @@
+{
+  "sections": [
+    {
+      "title": "Outcome",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 0, "quote": "two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included" } ],
+          "text": "Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included."
+        }
+      ]
+    },
+    {
+      "title": "Key takeaways",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 8, "quote": "smart cutover happens on a weekend like we your phones never go dark on a patient day" } ],
+          "text": "Cutover happens on a weekend so phones never go dark on a patient day."
+        }
+      ]
+    },
+    {
+      "title": "Interests",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 5, "quote": "the core recording can we use those for training the new front desk hires" } ],
+          "text": "Buyer wants to use call recordings to train new front-desk hires and sees it fixing churn."
+        }
+      ]
+    },
+    {
+      "title": "Next steps",
+      "blocks": [
+        {
+          "evidence": [ { "utterance_id": 7, "quote": "i'll have doctor meta sign early next week and let's aim the cutover for the weekend after" } ],
+          "text": "Rep sends the agreement this afternoon; Dr Mehta signs early next week; cutover the weekend after."
+        }
+      ]
+    }
+  ]
+}

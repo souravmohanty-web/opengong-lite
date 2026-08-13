@@ -1,0 +1,194 @@
+{
+  "schema_version": "1",
+  "run_id": "offline_01",
+  "call_id": "01",
+  "status": "COMPLETED",
+  "exit_reason": "SHIPPED",
+  "exit_class": "SHIPPED",
+  "exit_code": 0,
+  "started_at": "2026-08-13T11:20:32.210Z",
+  "completed_at": "2026-08-13T11:20:32.210Z",
+  "heartbeat_at": "2026-08-13T11:20:32.210Z",
+  "current_stage": "bundle",
+  "extractors_planned": [
+    "buying_stage",
+    "competitors",
+    "next_steps",
+    "objections",
+    "pain",
+    "pricing",
+    "risk_flags",
+    "stakeholders",
+    "summary",
+    "tracker"
+  ],
+  "budget": {
+    "limit_usd": 0,
+    "spent_usd": 0,
+    "decisions": []
+  },
+  "context_ledger": [
+    {
+      "extractor": "buying_stage",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "competitors",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "next_steps",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "objections",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "pain",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "pricing",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "risk_flags",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "stakeholders",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    },
+    {
+      "extractor": "summary",
+      "attempt": 1,
+      "repair": false,
+      "model": "offline-author",
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0
+      },
+      "cost_usd": 0,
+      "cache_action": "offline",
+      "decided_by": "offline_author",
+      "why": "offline extraction (author=agent, gate-verified)"
+    }
+  ],
+  "cache_misses_unexpected": 0,
+  "transcript_hash": "sha256:d8f34b043a58b632c43fad10d8ccf24aee4a5c9e404ae3c646a53d0df27ecc5d",
+  "coverage_band": "SHIPPED",
+  "coverage_ratio": 1,
+  "coverage_stats": {
+    "total": 24,
+    "attempted": 24,
+    "verified": 24,
+    "segment_corrected": 0,
+    "uncorroborated": 0,
+    "blocked_injection": 0,
+    "corroborated": 24
+  },
+  "extractor_failures": [],
+  "provenance": {
+    "transcription_model": "pyai-hear",
+    "extraction": "offline extraction (author=agent, gate-verified)"
+  }
+}
