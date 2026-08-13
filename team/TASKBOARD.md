@@ -11,6 +11,8 @@ Status values: `blocked` / `ready` / `claimed:<session>` / `in-progress:<session
 | 4. Content + trust | 4 | DEAL-STATE.md + 5 scripted calls + stereo TTS, DATA-FLOW.md, README | Cross-call search finds planted facts | blocked: D2 (deal arc) | unassigned (content owner = D5) |
 | 5. Hardening + demo | 4 | Injection demo beat, cached demo path, screenshot/clip, stranger runs setup cold | 5-min setup verified by a stranger | blocked: Phases 2–4 | unassigned (demo owner = D5) |
 | Buffer | ~6 | Absorbs whatever the plan got wrong | — | — | — |
+| R-10. Reasoning-model lane | — | Extraction model bake-off → `capabilities.json` roles.extraction + L-decision | Quote-fidelity eval run against fixtures, results as fixtures in lane dir | ready (research lanes exempt from build freeze) | Saritha (`research/10-reasoning-model/`) |
+| R-11. Competitive-intel lane | — | Wedge receipts, README "hate this if" boundaries, demo beats | Claims sourced w/ evidence files; OSS prompt-wish receipts found | ready (research lanes exempt from build freeze) | Aakash (`research/11-competitive-intel/`) |
 
 **Standing auditor orphan findings (route via hackathon session):**
 - F-4: prompt-injection threat model needs a named owner (→ D5)
