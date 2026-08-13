@@ -6,3 +6,4 @@ node_modules/
 .DS_Store
 runs/
 samples/audio/*.wav
+team/score-run.json
