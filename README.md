@@ -82,10 +82,11 @@ sandbox key self-mints for live runs.
 ## Roadmap (named, not promised)
 
 - **Connect your CRM, pick a recording** — the read side of CRM integration. Ingestion
-  today is upload + URL; every call already carries a `source` block (external
-  call/contact/deal ids) and every extractor a `crm_map` block, so listing and pulling
-  recordings from HubSpot/Salesforce/JustCall is an adapter + config, not a rebuild.
-- **CRM write-back** — the same `crm_map` plumbing in the other direction
+  today is upload + URL. We researched the real call/next-step field names across
+  HubSpot, Salesforce, and JustCall, and each extractor declares its target field — so
+  CRM-connect is two adapters (read a recording's ids from the CRM when you pick it;
+  write our fields back via the declared mapping), additive config on the receipts core.
+- **CRM write-back** — the declared `crm_map` mappings in the other direction
   (`ai_next_action` and friends), approval-gated, append-never-replace.
 - **Live capture** — the ingest input is shaped to accept a Vexa-style
   `meeting.completed` webhook payload unchanged.
