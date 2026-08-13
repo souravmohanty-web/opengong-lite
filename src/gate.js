@@ -99,6 +99,32 @@ export function normalize(raw) {
   return normalizeWithMap(raw).text;
 }
 
+// F-2 (L7): used at STAGE 2 ONLY. Canonical STT text is unpunctuated, so removing
+// model-added marks from BOTH sides before comparison cannot manufacture a false
+// positive — it only recovers punctuation the model added that would otherwise be
+// fatal to normalized containment. A '.' or ',' sitting BETWEEN two digits is kept,
+// so "4.0" can never collapse into "40" (no number fabrication). Offsets fold onto
+// the surviving characters exactly as the zero-width entries already do, and gaps
+// left by a removed mark collapse so " - " never becomes a double space.
+function stripPunctMap(n) {
+  const text = [];
+  const starts = [];
+  const ends = [];
+  for (let i = 0; i < n.text.length; i++) {
+    const ch = n.text[i];
+    if (/[^\p{L}\p{N}\s%$]/u.test(ch)) {
+      const decimal = (ch === '.' || ch === ',')
+        && /\d/.test(n.text[i - 1] ?? '') && /\d/.test(n.text[i + 1] ?? '');
+      if (!decimal) continue;
+    }
+    if (ch === ' ' && text[text.length - 1] === ' ') continue;
+    text.push(ch);
+    starts.push(n.starts[i]);
+    ends.push(n.ends[i]);
+  }
+  return { text: text.join(''), starts, ends };
+}
+
 function tokenize(normalized) {
   const tokens = [];
   const re = /[^ ]+/g;
@@ -178,6 +204,35 @@ function ownerOf(ranges, rawIndex) {
   return ranges.findIndex((r) => rawIndex >= r.start && rawIndex < r.end);
 }
 
+// F-10: the whole-transcript rescue normalizes canonical_text and recomputes the
+// utterance ranges on every item. On a 4000-utterance × 2000-claim run that is
+// thousands of redundant passes over the same immutable transcript. Memoize by
+// object identity — assertCanonical() guarantees the transcript did not change
+// under the claims, and a structuredClone (a distinct object) simply misses the
+// cache, so purity is preserved.
+const canonCache = new WeakMap();
+function canonicalData(transcript) {
+  let data = canonCache.get(transcript);
+  if (!data) {
+    data = { canon: normalizeWithMap(transcript.canonical_text), ranges: utteranceRanges(transcript) };
+    canonCache.set(transcript, data);
+  }
+  return data;
+}
+
+// F-8: in a 1:1 stereo call, the ±1 neighbour is always the OTHER speaker, so a
+// hit one line off the cited id can be a silent cross-speaker attribution. Compare
+// role first (speaker as fallback); a genuine divergence is recorded and demoted.
+function crossesSpeaker(transcript, citedId, id) {
+  if (!Number.isInteger(citedId)) return false;
+  const cited = transcript.utterances[citedId];
+  const found = transcript.utterances[id];
+  if (!cited || !found) return false;
+  const keyCited = cited.role ?? cited.speaker ?? null;
+  const keyFound = found.role ?? found.speaker ?? null;
+  return keyCited != null && keyFound != null && keyCited !== keyFound;
+}
+
 export function anchor(quote, citedId, transcript, opts = {}) {
   const supplied = typeof quote === 'string' ? quote : '';
   const trimmed = supplied.trim();
@@ -187,23 +242,35 @@ export function anchor(quote, citedId, transcript, opts = {}) {
 
   const ids = windowIds(citedId, transcript.utterances.length);
 
-  // 1. exact indexOf inside the cited utterance +/-1
+  // 1. exact indexOf inside the cited utterance +/-1 (case-sensitive, strict).
+  //    Floor (F-3): a quote shorter than the normalized floor may anchor here ONLY
+  //    when it is the WHOLE utterance (a real short line like "sure"), never a lone
+  //    fragment such as "i" lifted from the middle of a longer turn.
   for (const id of ids) {
-    const at = transcript.utterances[id].text.indexOf(trimmed);
-    if (at !== -1) {
-      return hit(transcript, id, citedId, supplied, at, at + trimmed.length,
-        id === citedId ? 'exact' : 'exact_pm1');
+    const utext = transcript.utterances[id].text;
+    const at = utext.indexOf(trimmed);
+    if (at === -1) continue;
+    if (nq.length < MIN_NORMALIZED_QUOTE && trimmed !== utext.trim()) continue;
+    const matchType = id === citedId ? 'exact' : 'exact_pm1';
+    const evidence = hit(transcript, id, citedId, supplied, at, at + trimmed.length, matchType);
+    // F-8: a ±1 hit on a different speaker/role is a real cross-speaker risk in
+    // stereo — record the correction so the interpretation gate can demote it.
+    if (matchType === 'exact_pm1' && crossesSpeaker(transcript, citedId, id)) {
+      evidence.claimed_utterance_id = Number.isInteger(citedId) ? citedId : null;
     }
+    return evidence;
   }
 
-  // 2. normalized containment, same window, with offsets mapped back to raw
+  // 2. normalized containment, same window, with offsets mapped back to raw.
+  //    Punctuation is stripped from BOTH sides here only (F-2/L7); stage 1 stays strict.
   if (nq.length >= MIN_NORMALIZED_QUOTE) {
+    const nqStripped = stripPunctMap(normalizeWithMap(trimmed)).text;
     for (const id of ids) {
-      const n = normalizeWithMap(transcript.utterances[id].text);
-      const at = n.text.indexOf(nq);
+      const n = stripPunctMap(normalizeWithMap(transcript.utterances[id].text));
+      const at = nqStripped ? n.text.indexOf(nqStripped) : -1;
       if (at !== -1) {
         return hit(transcript, id, citedId, supplied,
-          n.starts[at], n.ends[at + nq.length - 1], 'normalized');
+          n.starts[at], n.ends[at + nqStripped.length - 1], 'normalized');
       }
     }
   }
@@ -212,8 +279,7 @@ export function anchor(quote, citedId, transcript, opts = {}) {
   if (nq.length < RESCUE_MIN_CHARS && tokenize(nq).length < RESCUE_MIN_TOKENS) {
     return miss(supplied, citedId, 'quote_too_short_for_rescue');
   }
-  const canon = normalizeWithMap(transcript.canonical_text);
-  const ranges = utteranceRanges(transcript);
+  const { canon, ranges } = canonicalData(transcript);
   const occurrences = [];
   for (let at = canon.text.indexOf(nq); at !== -1; at = canon.text.indexOf(nq, at + 1)) {
     const rawStart = canon.starts[at];
@@ -286,10 +352,13 @@ const ACKS = new Set(['yes', 'yeah', 'yep', 'yup', 'sure', 'ok', 'okay', 'right'
 const PRONOUNS = new Set(['it', 'they', 'them', 'that', 'this', 'those', 'these', 'he', 'she',
   'him', 'her', 'its', 'their', 'theirs']);
 
-const AFFIRMATIVE = new Set(['affirmative', 'positive', 'asserted']);
-const COMMITTED = new Set(['committed', 'commitment', 'actual', 'asserted', 'factual']);
-const FIRST_PARTY = new Set(['first_party', 'self', 'speaker', 'direct']);
-const CERTAIN = new Set(['certain', 'high', 'confident', 'definite']);
+// These are the stance values the model actually declares — the exact enums in
+// schemas/claim-context.json (F-14). A mismatch fires only against the asserted
+// stance, never invents one.
+const AFFIRMATIVE = new Set(['positive']);
+const COMMITTED = new Set(['commitment']);
+const FIRST_PARTY = new Set(['first_party']);
+const CERTAIN = new Set(['high']);
 
 const HARD_FLAGS = new Set([
   'negation_polarity_mismatch', 'double_negation', 'requires_context_missing_support',
@@ -314,7 +383,19 @@ function cueScope(transcript, evidence) {
   const to = inside[inside.length - 1] + 1;
   const quoted = tokens.filter((t) => t.end > from && t.start < to);
   const before = tokens.filter((t) => t.end <= from);
-  return { utterance: u, tokens, quoted, lead: before.slice(-CONTEXT_TOKENS_BEFORE) };
+  let lead = before.slice(-CONTEXT_TOKENS_BEFORE);
+  // F-7: when the quote begins within the first few tokens of its utterance, the
+  // negation/hedge that scopes it can sit at the END of the PREVIOUS turn (a
+  // stripped cross-turn negation). Borrow just enough tail tokens to fill the lead
+  // window. Residual gap (README limitation): a cue more than CONTEXT_TOKENS_BEFORE
+  // tokens back, or two turns away, is still not seen — the cue lexicons are a
+  // disagreement detector, not a parser.
+  if (before.length < CONTEXT_TOKENS_BEFORE && evidence.utterance_id > 0) {
+    const prev = transcript.utterances[evidence.utterance_id - 1];
+    const prevTokens = tokenize(normalizeWithMap(prev.text).text);
+    lead = [...prevTokens.slice(-(CONTEXT_TOKENS_BEFORE - before.length)), ...lead];
+  }
+  return { utterance: u, tokens, quoted, lead };
 }
 
 function cueHits(scope, cues) {
@@ -390,6 +471,12 @@ export function contextCheck(claim, transcript, evidence, supporting = [], rejec
       add('hedge_certainty_mismatch', hedges[0], id);
     }
     for (const f of numberFlags(scope, claim ?? {})) add(f.flag, f, id);
+
+    // F-8: a cross-speaker ±1 correction (recorded by the anchor ladder as an
+    // exact_pm1 that carries a claimed_utterance_id) demotes interpretation.
+    if (item.match_type === 'exact_pm1' && Number.isInteger(item.claimed_utterance_id)) {
+      add('speaker_mismatch', { where: 'in_quote', cue: null }, id);
+    }
 
     const words = scope.quoted.map((t) => strip(t.text)).filter(Boolean);
     if (words.length <= SHORT_ANSWER_TOKENS || ACKS.has(words[0]) || PRONOUNS.has(words[0])) {
@@ -488,8 +575,22 @@ export function gradeRun(claims = [], opts = {}) {
   });
   const unproven = sections.some((s) => s.attempted >= 1 && s.corroborated === 0);
 
+  // F-1b: a required section whose ONLY claims were injection-blocked was not quietly
+  // absent — it was emptied by a poisoned call, and must never read SHIPPED. (A
+  // section with any surviving uncorroborated attempt is already caught by `unproven`.)
+  const emptiedByBlocking = requiredSections.some((section) => {
+    const all = claims.filter((c) => sectionOf(c) === section);
+    if (!all.length) return false;
+    const survived = all.filter((c) => c.status !== 'blocked_injection');
+    return survived.length === 0; // every claim in a required section was blocked
+  });
+  // F-9: a whole run with nothing attempted but something blocked is a poisoned call,
+  // not a quiet call — SHIPPED-with-ratio-1 would launder the poisoning.
+  const poisonedQuietCall = stats.attempted === 0 && stats.blocked_injection > 0;
+
   let band;
   if (unproven) band = 'GATE_BLOCKED_UNPROVEN_CLAIMS';
+  else if (emptiedByBlocking || poisonedQuietCall) band = 'PARTIAL_CLAIMS_DROPPED';
   else if (extractorFailures.length) band = 'PARTIAL_EXTRACTORS_FAILED';
   else if (ratio < 0.50) band = 'PARTIAL_LOW_COVERAGE';
   else if (ratio < 0.80) band = 'PARTIAL_CLAIMS_DROPPED';

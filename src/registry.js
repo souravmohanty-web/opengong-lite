@@ -69,7 +69,10 @@ function lintPortability(schema, resolve, seenRefs, atPath) {
     throw new RegistryError(`CONFIG_INVALID: minItems must be 0 or 1 at ${atPath}, got ${schema.minItems}`);
   }
 
-  if (schema.type === 'object' && schema.properties) {
+  // F-5: an object node is recognized by having `properties`, whether its `type` is
+  // "object", absent, or a union like ["object","null"] / ["object"]. A claim-bearing
+  // object hidden under a typeless or union parent must not slip past the lint.
+  if (isObjectNode(schema)) {
     const keys = Object.keys(schema.properties);
     if (schema.additionalProperties !== false) {
       throw new RegistryError(`CONFIG_INVALID: object at ${atPath} must set additionalProperties:false`);
@@ -80,9 +83,18 @@ function lintPortability(schema, resolve, seenRefs, atPath) {
     }
     for (const key of keys) lintPortability(schema.properties[key], resolve, seenRefs, `${atPath}.${key}`);
   }
-  if (schema.type === 'array' && schema.items) {
-    lintPortability(schema.items, resolve, seenRefs, `${atPath}[]`);
+  // F-5: recurse through both list `items` and tuple `prefixItems`, any/absent type.
+  if (schema.items) lintPortability(schema.items, resolve, seenRefs, `${atPath}[]`);
+  if (Array.isArray(schema.prefixItems)) {
+    schema.prefixItems.forEach((it, i) => lintPortability(it, resolve, seenRefs, `${atPath}[${i}]`));
   }
+}
+
+// An object schema for lint purposes: it declares `properties`. That covers a plain
+// `type:"object"`, a typeless node, and union types like ["object","null"] /
+// ["object"] — all of which carry their claim-bearing shape in `properties`.
+function isObjectNode(schema) {
+  return !!(schema.properties && typeof schema.properties === 'object');
 }
 
 // ---- evidence-reachability lint: evidence_required:true -> every claim-bearing
@@ -95,7 +107,10 @@ function lintEvidenceReachability(schema, resolve, atPath) {
     lintEvidenceReachability(resolve(schema.$ref, atPath), resolve, `${atPath}->${schema.$ref}`);
     return;
   }
-  if (schema.type === 'object' && schema.properties) {
+  // F-5: same typeless/union/prefixItems recursion as the portability lint — a
+  // claim-bearing object hidden under a typeless or union parent must still require
+  // evidence-before-text.
+  if (isObjectNode(schema)) {
     const keys = Object.keys(schema.properties);
     if (keys.includes('text')) {
       const evIdx = keys.indexOf('evidence');
@@ -113,8 +128,9 @@ function lintEvidenceReachability(schema, resolve, atPath) {
     }
     for (const key of keys) lintEvidenceReachability(schema.properties[key], resolve, `${atPath}.${key}`);
   }
-  if (schema.type === 'array' && schema.items) {
-    lintEvidenceReachability(schema.items, resolve, `${atPath}[]`);
+  if (schema.items) lintEvidenceReachability(schema.items, resolve, `${atPath}[]`);
+  if (Array.isArray(schema.prefixItems)) {
+    schema.prefixItems.forEach((it, i) => lintEvidenceReachability(it, resolve, `${atPath}[${i}]`));
   }
 }
 

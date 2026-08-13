@@ -3,21 +3,21 @@
     "id": "n1",
     "extractor": "summary",
     "text": "The rep opened by walking the buyer through how the dialer handles compliance.",
-    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "stance": { "polarity": "positive", "modality": "commitment", "attribution": "first_party", "certainty": "high" },
     "evidence": [{ "utterance_id": 0, "quote": "i wanted to walk you through how our dialer handles compliance" }]
   },
   {
     "id": "n2",
     "extractor": "next_steps",
     "text": "The rep will show the total cost picture including answering machine detection.",
-    "stance": { "polarity": "affirmative", "modality": "committed", "attribution": "first_party", "certainty": "certain" },
+    "stance": { "polarity": "positive", "modality": "commitment", "attribution": "first_party", "certainty": "high" },
     "evidence": [{ "utterance_id": 3, "quote": "let me show you the total cost picture including the answering machine detection" }]
   },
   {
     "id": "n3",
     "extractor": "next_steps",
     "text": "The rep will send the security questionnaire and the mutual NDA tomorrow morning.",
-    "stance": { "polarity": "affirmative", "modality": "committed", "attribution": "first_party", "certainty": "certain" },
+    "stance": { "polarity": "positive", "modality": "commitment", "attribution": "first_party", "certainty": "high" },
     "evidence": [{ "utterance_id": 10, "quote": "i will send over the security questionnaire and the mutual nda tomorrow morning" }]
   }
 ]

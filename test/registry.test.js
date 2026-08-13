@@ -287,6 +287,92 @@ test('portability lint rejects a cyclic $ref chain across schema files', () => {
   );
 });
 
+test('F5 evidence-reachability recurses through a UNION-type parent (type:["object","null"])', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  const def = validDef();
+  def.output_schema = {
+    type: 'object',
+    additionalProperties: false,
+    required: ['wrap'],
+    properties: {
+      wrap: {
+        type: ['object', 'null'], // union parent — must still be entered
+        additionalProperties: false,
+        required: ['text'],
+        properties: { text: { type: 'string' } }, // claim-bearing, but no "evidence"
+      },
+    },
+  };
+  writeExtractor(extractorsDir, 'sample.json', def);
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /has no "evidence" property/.test(err.message),
+  );
+});
+
+test('F5 portability lint recurses through a TYPELESS parent to catch a forbidden keyword', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  const def = validDef();
+  def.output_schema = {
+    type: 'object',
+    additionalProperties: false,
+    required: ['wrap'],
+    properties: {
+      wrap: {
+        // no "type" at all — a typeless object node
+        additionalProperties: false,
+        required: ['evidence', 'text'],
+        properties: {
+          evidence: { type: 'array', items: { $ref: 'opengong://evidence' } },
+          text: { type: 'string', minLength: 5 }, // forbidden keyword hidden here
+        },
+      },
+    },
+  };
+  writeExtractor(extractorsDir, 'sample.json', def);
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /forbidden schema keyword "minLength"/.test(err.message),
+  );
+});
+
+test('F5 evidence-reachability recurses through array prefixItems (tuple schemas)', () => {
+  const extractorsDir = tmpDir('opengong-extractors-');
+  const schemasDir = makeSchemasDir();
+  const def = validDef();
+  def.output_schema = {
+    type: 'object',
+    additionalProperties: false,
+    required: ['rows'],
+    properties: {
+      rows: {
+        type: 'array',
+        prefixItems: [
+          {
+            type: 'object',
+            additionalProperties: false,
+            required: ['text', 'evidence'], // text BEFORE evidence -> order violation
+            properties: {
+              text: { type: 'string' },
+              evidence: { type: 'array', items: { $ref: 'opengong://evidence' } },
+            },
+          },
+        ],
+      },
+    },
+  };
+  writeExtractor(extractorsDir, 'sample.json', def);
+
+  assert.throws(
+    () => loadExtractors(extractorsDir, { schemasDir }),
+    (err) => err instanceof RegistryError && /must precede "text"/.test(err.message),
+  );
+});
+
 test('a frozen registry cannot be mutated', () => {
   const extractorsDir = tmpDir('opengong-extractors-');
   const schemasDir = makeSchemasDir();

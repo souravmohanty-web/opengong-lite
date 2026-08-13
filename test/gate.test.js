@@ -235,8 +235,36 @@ test('G-26 a quiet call with zero attempted claims is a valid SHIPPED with ratio
   assert.equal(g.stats.attempted, 0);
   assert.equal(g.ratio, 1);
   assert.equal(g.band, 'SHIPPED');
+});
+
+test('G-26b a poisoned call (nothing attempted, something blocked) is PARTIAL, never SHIPPED (F-9)', () => {
+  // summary is a required section; its only claim was injection-blocked, so the run
+  // was emptied by poisoning, not quiet.
   const onlyBlocked = gradeRun(claims([['summary', 'blocked_injection']]));
-  assert.equal(onlyBlocked.band, 'SHIPPED');
+  assert.equal(onlyBlocked.stats.attempted, 0);
+  assert.equal(onlyBlocked.stats.blocked_injection, 1);
+  assert.equal(onlyBlocked.band, 'PARTIAL_CLAIMS_DROPPED');
+
+  // blocked only in a NON-required section, still nothing attempted -> still poisoned
+  const nonRequired = gradeRun(claims([['objections', 'blocked_injection']]));
+  assert.equal(nonRequired.band, 'PARTIAL_CLAIMS_DROPPED');
+});
+
+test('G-26c a required section emptied entirely by blocking never reads SHIPPED (F-1b)', () => {
+  // next_steps survives with a verified claim, but summary (required) had one claim
+  // and it was blocked — the run must not launder that as SHIPPED.
+  const g = gradeRun(claims([
+    ['summary', 'blocked_injection'], ['next_steps', 'verified'], ['objections', 'verified'],
+  ]));
+  assert.ok(g.stats.attempted >= 1);
+  assert.equal(g.band, 'PARTIAL_CLAIMS_DROPPED', 'summary emptied by blocking must downgrade');
+
+  // but a blocked claim alongside a SURVIVING corroborated claim in the same required
+  // section still ships — the section was not emptied.
+  const survives = gradeRun(claims([
+    ['summary', 'verified'], ['summary', 'blocked_injection'], ['next_steps', 'verified'],
+  ]));
+  assert.equal(survives.band, 'SHIPPED');
 });
 
 test('G-27 required sections are configurable', () => {
@@ -386,4 +414,170 @@ test('G-41 the gate runs against a transcript built from a real API fixture', ()
   assert.equal(e.utterance_id, 1);
   // and the digit rendering from result.text still does not match
   assert.equal(anchor('your competitor quoted as almost 40 less last week', 1, t).match_type, 'none');
+});
+
+// ── F-2: stage-2 punctuation strip (L7 over spec-core condensation) ────────────
+
+test('F2-01 a verbatim quote with a trailing period verifies (normalized)', () => {
+  const e = anchor('my main concern is pricing.', 2, T);
+  assert.equal(e.match_type, 'normalized');
+  assert.equal(e.utterance_id, 2);
+  assert.equal(T.utterances[2].text.slice(e.char_start, e.char_end), 'my main concern is pricing');
+});
+
+test('F2-02 a verbatim quote with a trailing comma verifies (normalized)', () => {
+  const e = anchor('my main concern is pricing,', 2, T);
+  assert.equal(e.match_type, 'normalized');
+  assert.equal(e.utterance_id, 2);
+});
+
+test('F2-03 a model-added mid-sentence comma still verifies (normalized)', () => {
+  const e = anchor('honestly, my main concern is pricing', 2, T);
+  assert.equal(e.match_type, 'normalized');
+  assert.equal(e.utterance_id, 2);
+  assert.equal(T.utterances[2].text.slice(e.char_start, e.char_end), 'honestly my main concern is pricing');
+});
+
+test('F2-04 stage 1 stays strict: no punctuation stripping there', () => {
+  // the exact stage never sees the stripped form — a period is not in the raw line
+  const ids = anchor('my main concern is pricing.', 2, T);
+  assert.notEqual(ids.match_type, 'exact');
+});
+
+test('F2-05 no number fabrication: "4.0" never collapses into "40" (decimal punctuation kept)', () => {
+  // u8 renders "40 seats"; a "4.0 seats" quote must NOT be manufactured into a hit at
+  // the punctuation-stripped stage — the decimal separator is preserved, so it misses
+  const e = anchor('the final number is 4.0 seats', 8, T);
+  assert.equal(e.match_type, 'none');
+  // and the honest "40 seats" quote still verifies (stripping only recovers real marks)
+  assert.equal(anchor('the final number is 40 seats', 8, T).match_type, 'normalized');
+});
+
+// ── F-3: floor before any stage — a lone character never anchors exact ─────────
+
+test('F3-01 a 1-char quote never verifies as exact (floor applies at stage 1)', () => {
+  const e = anchor('i', 0, T);
+  assert.equal(e.match_type, 'none');
+  assert.equal(e.reason, 'quote_too_short_for_rescue');
+});
+
+test('F3-02 a whole short utterance ("sure") still anchors exact — the floor spares it', () => {
+  const e = anchor('sure', 1, T);
+  assert.equal(e.match_type, 'exact');
+  assert.equal(e.utterance_id, 1);
+});
+
+// ── F-8: exact_pm1 crossing a speaker turn ─────────────────────────────────────
+
+test('F8-01 a ±1 hit on the other speaker records a correction and demotes', () => {
+  const claim = {
+    id: 'sm1', extractor: 'next_steps', text: 'Rep will walk through total cost.',
+    stance: { polarity: 'positive', modality: 'commitment', attribution: 'first_party', certainty: 'high' },
+    evidence: [{ utterance_id: 2, quote: 'let me show you the total cost picture' }],
+  };
+  const c = gate(claim);
+  assert.equal(c.status, 'verified');
+  assert.equal(c.evidence[0].match_type, 'exact_pm1');
+  assert.equal(c.evidence[0].utterance_id, 3, 'the quote really lives one line down, on the rep');
+  assert.equal(c.evidence[0].claimed_utterance_id, 2, 'the cited (prospect) line is recorded as corrected');
+  assert.ok(c.context_flags.some((f) => f.flag === 'speaker_mismatch'));
+  assert.notEqual(c.interpretation_confidence, 'high');
+});
+
+test('F8-02 a same-speaker ±1 hit is inside tolerance: no correction, no flag', () => {
+  // u1 and u2 are both the prospect, so this pm1 does not cross a speaker
+  const e = anchor('my main concern is pricing', 1, T);
+  assert.equal(e.match_type, 'exact_pm1');
+  assert.equal(e.claimed_utterance_id, undefined);
+});
+
+// ── F-7: cross-utterance negation (borrowed lead) ─────────────────────────────
+
+const CROSS = {
+  utterances: [
+    { id: 0, text: 'we will never lower our list price', role: 'prospect', role_confidence: 0.9 },
+    { id: 1, text: 'interested in the premium tier for our whole team', role: 'prospect', role_confidence: 0.9 },
+  ],
+  canonical_text: 'we will never lower our list price\ninterested in the premium tier for our whole team',
+};
+
+test('F7-01 a negation at the END of the previous turn is caught for a quote at the START of the next', () => {
+  const claim = {
+    id: 'x1', extractor: 'summary', text: 'The buyer is interested in the premium tier.',
+    stance: { polarity: 'positive', modality: 'commitment', attribution: 'first_party', certainty: 'high' },
+    evidence: [{ utterance_id: 1, quote: 'interested in the premium tier for our whole team' }],
+  };
+  const c = gate(claim, CROSS);
+  assert.equal(c.status, 'verified', 'the line is real — never blocked');
+  const f = c.context_flags.find((x) => x.flag === 'negation_polarity_mismatch');
+  assert.ok(f, 'the cross-turn negation must be seen');
+  assert.equal(f.where, 'preceding');
+  assert.notEqual(c.interpretation_confidence, 'high');
+});
+
+test('F7-02 control: with no negation in the previous turn, the same quote is clean', () => {
+  const clean = {
+    utterances: [
+      { id: 0, text: 'we are happy to lower our list price', role: 'prospect', role_confidence: 0.9 },
+      { id: 1, text: 'interested in the premium tier for our whole team', role: 'prospect', role_confidence: 0.9 },
+    ],
+    canonical_text: 'we are happy to lower our list price\ninterested in the premium tier for our whole team',
+  };
+  const claim = {
+    id: 'x2', extractor: 'summary', text: 'The buyer is interested in the premium tier.',
+    stance: { polarity: 'positive', modality: 'commitment', attribution: 'first_party', certainty: 'high' },
+    evidence: [{ utterance_id: 1, quote: 'interested in the premium tier for our whole team' }],
+  };
+  const c = gate(claim, clean);
+  assert.deepEqual(c.context_flags, []);
+  assert.equal(c.interpretation_confidence, 'high');
+});
+
+// ── F-14: named regressions for two prior builder-fixed bugs ───────────────────
+
+const NUMBERS = {
+  utterances: [{ id: 0, text: 'our numbers moved forty last week', role: 'rep', role_confidence: 0.9 }],
+  canonical_text: 'our numbers moved forty last week',
+};
+
+test('F14-01 "last week" is a date, not the unit of the number beside it (forty stays unanchored)', () => {
+  const claim = {
+    id: 'lw1', extractor: 'objections', text: 'Their numbers moved forty.',
+    stance: { polarity: 'positive', modality: 'commitment', attribution: 'third_party', certainty: 'high' },
+    quantities: [{ surface: 'forty', unit: 'percent', unit_source: 'inferred', approximate: true }],
+    evidence: [{ utterance_id: 0, quote: 'our numbers moved forty last week' }],
+  };
+  const c = gate(claim, NUMBERS);
+  assert.ok(c.context_flags.some((x) => x.flag === 'number_without_unit_anchor'),
+    '"week" must not be mistaken for the unit of "forty"');
+
+  // contrast: a real unit right beside the number DOES anchor it
+  const withUnit = {
+    utterances: [{ id: 0, text: 'we landed forty seats last week', role: 'rep', role_confidence: 0.9 }],
+    canonical_text: 'we landed forty seats last week',
+  };
+  const claim2 = {
+    id: 'lw2', extractor: 'summary', text: 'They landed forty seats.',
+    stance: { polarity: 'positive', modality: 'commitment', attribution: 'first_party', certainty: 'high' },
+    quantities: [{ surface: 'forty', unit: 'seats', unit_source: 'explicit', approximate: false }],
+    evidence: [{ utterance_id: 0, quote: 'we landed forty seats last week' }],
+  };
+  assert.ok(!gate(claim2, withUnit).context_flags.some((x) => x.flag === 'number_without_unit_anchor'),
+    '"seats" beside "forty" is a real unit anchor');
+});
+
+test('F14-02 "half" and "quarter" are units on a sales call, never counted as numbers', () => {
+  const t = {
+    utterances: [{ id: 0, text: 'we will cut the list price by half next quarter', role: 'rep', role_confidence: 0.9 }],
+    canonical_text: 'we will cut the list price by half next quarter',
+  };
+  const claim = {
+    id: 'hq1', extractor: 'summary', text: 'The rep will cut the price by half next quarter.',
+    stance: { polarity: 'positive', modality: 'commitment', attribution: 'first_party', certainty: 'high' },
+    evidence: [{ utterance_id: 0, quote: 'we will cut the list price by half next quarter' }],
+  };
+  const c = gate(claim, t);
+  assert.equal(c.status, 'verified');
+  assert.ok(!c.context_flags.some((x) => x.flag === 'number_without_unit_anchor'),
+    'neither "half" nor "quarter" is a number, so there is no unanchored number to flag');
 });
