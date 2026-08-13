@@ -1,0 +1,21 @@
+{
+  "call": 2,
+  "title": "Demo — routing, AMD, compliant texting",
+  "planted": ["interest: AMD", "interest: SMS follow-ups", "rep commitment: SOC2 + TCPA one-pager by friday", "prospect commitment: call-volume report", "objection: onboarding downtime", "hypothetical trap: sixth location"],
+  "lines": [
+    { "speaker": "rep", "text": "Rahul, thanks for the thirty minutes. Straight into it — this is the after-hours flow. Call comes in at seven, no answer at the desk, watch what happens." },
+    { "speaker": "prospect", "text": "Okay, so it routed to the on-call line and then texted the patient a booking link. That's the part we lose today. That's genuinely useful." },
+    { "speaker": "rep", "text": "And here's answering machine detection on the outbound side. When your recall campaign hits a voicemail, the system knows it's a machine and drops the right message instead of burning staff time." },
+    { "speaker": "prospect", "text": "Wait, so the detection part means my front desk isn't sitting there listening to beeps all afternoon? Because recall days are half wasted on that." },
+    { "speaker": "rep", "text": "Exactly that. And the texting flow you asked about — every message goes out with consent tracking attached, so the compliance question stops being your problem." },
+    { "speaker": "prospect", "text": "That texting piece with the consent baked in, that I like. My office manager will like it more." },
+    { "speaker": "rep", "text": "Two things from my side then. I'll send you our SOC2 report and a TCPA one-pager for your office manager, both by Friday." },
+    { "speaker": "prospect", "text": "Good, send both. In exchange I'll pull our call-volume report from RingHawk so you can size this properly. I can get that to you early next week." },
+    { "speaker": "rep", "text": "Deal. What worries you about actually moving?" },
+    { "speaker": "prospect", "text": "Downtime. We cannot be down during patient hours, at all. If switching means two dead days of phones, the deal is off before it starts." },
+    { "speaker": "rep", "text": "Cutover happens on a weekend, numbers port in the background, and the old system stays live until the new one answers. Nobody's phones go dark on a Tuesday." },
+    { "speaker": "prospect", "text": "Alright. And hypothetically, if we ever opened a sixth location next year, adding it is what, a form? Not a project?" },
+    { "speaker": "rep", "text": "A form. Same day. But let's get five working first." },
+    { "speaker": "prospect", "text": "Fine. Send me the two documents, I'll send the report, and then let's talk numbers." }
+  ]
+}

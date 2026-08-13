@@ -1,0 +1,18 @@
+{
+  "call": 4,
+  "title": "Commitment check — the ledger beat",
+  "planted": ["commitment kept: SOC2 sent", "commitment DROPPED: TCPA one-pager never sent (promised call 2)", "prospect commitment kept: volume report", "pilot proposed: two locations", "new pain: front-desk churn"],
+  "lines": [
+    { "speaker": "rep", "text": "Rahul, quick check-in before we talk pilot. You got the SOC2 report?" },
+    { "speaker": "prospect", "text": "Got the SOC2, yes, forwarded it to our IT guy already. But Maya, you promised my office manager a TCPA one-pager by Friday and it never showed up. She asked me twice." },
+    { "speaker": "rep", "text": "You're right, that one's on me. It goes out today, and I'll send it directly to her so it doesn't route through you." },
+    { "speaker": "prospect", "text": "Please. Because the texting piece is her favorite part of this whole thing and right now she's the one selling it internally, not me." },
+    { "speaker": "rep", "text": "Noted, today. And thank you for the volume report — that's what let us shape the pilot. Here's the idea: two locations, your busiest and your smallest, running live before you commit the other three." },
+    { "speaker": "prospect", "text": "Two locations I can defend to Dr. Mehta without a fight. Which two is my call though." },
+    { "speaker": "rep", "text": "Completely your call. What's changed on your side since we talked?" },
+    { "speaker": "prospect", "text": "Front desk turnover, again. Lost two receptionists this month. Every new hire has to learn RingHawk's fifteen screens, and honestly training time is becoming its own cost." },
+    { "speaker": "rep", "text": "For what it's worth, new staff get one screen with us. Ring, answer, text. The pilot will show that faster than I can say it." },
+    { "speaker": "prospect", "text": "Good. So — TCPA paper today, pilot proposal on paper this week, and the sharper number you owe me from last time comes with it." },
+    { "speaker": "rep", "text": "All three. You'll have the proposal and the number together." }
+  ]
+}

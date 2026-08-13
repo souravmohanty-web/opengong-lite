@@ -1,0 +1,24 @@
+{
+  "call": 1,
+  "title": "Discovery — Brightsmile x CallForge",
+  "planted": ["pain: after-hours bookings lost", "pain: dropped calls", "competitor: ringhawk active_user", "negation trap: budget", "coreference trap: renewal too expensive"],
+  "lines": [
+    { "speaker": "rep", "text": "Hey Rahul, Maya from CallForge. Thanks for making time between patients. I know front desk mornings are chaos." },
+    { "speaker": "prospect", "text": "No problem. Honestly I've been meaning to look at this for a while, so your timing is decent." },
+    { "speaker": "rep", "text": "Tell me what's happening today. You're running five locations on RingHawk, right?" },
+    { "speaker": "prospect", "text": "Yeah, all five are on RingHawk and have been for about three years. And look, the system works until it doesn't. Calls drop mid transfer between locations at least a few times a day now." },
+    { "speaker": "rep", "text": "Where does that hurt most?" },
+    { "speaker": "prospect", "text": "After hours is the real bleed. Anything after six just rings out and goes to a voicemail nobody checks until morning. We lose maybe ten bookings a week that way. A cleaning patient calls at seven, nobody answers, they book with whoever picks up the phone." },
+    { "speaker": "rep", "text": "That's real money at five locations. What have you tried?" },
+    { "speaker": "prospect", "text": "We asked RingHawk for after-hours routing last year. The support tickets go nowhere. You wait four days and get a reply asking you to restart the router. I'm done filing them." },
+    { "speaker": "rep", "text": "Understood. Can I ask about budget, just so I don't waste your time later?" },
+    { "speaker": "prospect", "text": "We do not have a budget problem, honestly. It's a trust problem. I got burned once switching software and I'm not doing that dance again without proof it works." },
+    { "speaker": "rep", "text": "Fair. What does your RingHawk renewal look like?" },
+    { "speaker": "prospect", "text": "It's coming up and honestly it's just too expensive for what we're getting. They bumped the price again this year and the service got worse." },
+    { "speaker": "rep", "text": "Okay. One more thing — compliance. You're texting patients?" },
+    { "speaker": "prospect", "text": "We want to. My office manager keeps asking about text reminders, but I keep hearing letters like TCPA and I don't want to be the test case. So today we just don't text at all." },
+    { "speaker": "rep", "text": "That's exactly the kind of thing our compliance tooling handles. Here's what I'd suggest — a proper demo, thirty minutes, I'll show you the after-hours routing and the compliant texting flow live." },
+    { "speaker": "prospect", "text": "Alright. Do it Thursday, before the lunch rush. And keep it practical, I don't need a slideshow." },
+    { "speaker": "rep", "text": "Thursday it is. I'll bring the routing demo and the texting flow, no slides." }
+  ]
+}

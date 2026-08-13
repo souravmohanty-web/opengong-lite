@@ -1,0 +1,17 @@
+{
+  "call": 5,
+  "title": "Close — pilot agreed, verbal commit",
+  "planted": ["outcome: verbal commit", "pilot: two locations ninety days", "price: twenty six per seat", "next step: signature early next week", "cutover: weekend", "interest: call recordings for training"],
+  "lines": [
+    { "speaker": "rep", "text": "So — proposal's in front of you. Two locations, ninety day pilot, and we landed at twenty six per seat with the recall tooling included." },
+    { "speaker": "prospect", "text": "Twenty six I can sell. Dr. Mehta looked at it last night and his only question was whether we're locked in if the pilot goes badly." },
+    { "speaker": "rep", "text": "You're not. If the pilot fails your numbers, you walk at ninety days and your lines port right back. That's in section four." },
+    { "speaker": "prospect", "text": "That clause is what got him to yes, honestly. Okay. The two pilot sites are the downtown location and the Elm Street one." },
+    { "speaker": "rep", "text": "Busiest and smallest — smart. Cutover happens on a weekend like we said. Your phones never go dark on a patient day." },
+    { "speaker": "prospect", "text": "One more thing I noticed in the proposal. The call recordings — can we use those for training the new front desk hires? Because that alone might fix my churn problem." },
+    { "speaker": "rep", "text": "Yes, and I'll set up the training library view for your office manager as part of onboarding. No extra line item." },
+    { "speaker": "prospect", "text": "Then we're done negotiating. Send the agreement over, I'll have Dr. Mehta sign early next week, and let's aim the cutover for the weekend after." },
+    { "speaker": "rep", "text": "Agreement goes out this afternoon. Rahul — genuinely looking forward to this one." },
+    { "speaker": "prospect", "text": "Get my after-hours patients booking again and I'll be your reference customer. Talk next week." }
+  ]
+}

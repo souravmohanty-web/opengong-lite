@@ -36,9 +36,16 @@ state **current truth only**.
 
 > **SLICE 2 FUNCTIONALLY COMPLETE (~23:45 Aug 13).** 7 extractor families (6 LLM + 1
 > deterministic tracker) + gate + runner + email choke + viewer + server + tier-1 export,
-> all audited. Both code lanes quiet at the Slice-3 content boundary — unlocks are
-> Sourav's: key rescope (gates 3-voice probe + ALL TTS content) · D4 Anthropic key · D3
-> real recording.
+> all audited. Remaining unlocks: `voice:synthesize` scope (gates 3-voice probe + TTS
+> audio) · D4 Anthropic key · D3 real recording.
+
+## Slice 3 — content (opened per Sourav's "do whatever is best", ~00:15 Aug 14)
+
+| Task | Owner | Status |
+|---|---|---|
+| DEAL-STATE.md + 6 call scripts (5 arc + 1 messy/injection), 1:1 per D2, planted elements manifest | **projects-2f (drafting agent)** | **in-progress** — DRAFTS for human content-owner review; keyless work |
+| Stereo TTS generation from scripts | blocked: `voice:synthesize` scope | queued (projects-2f offered) |
+| Golden-call hand-labeling (2 calls) | Sourav + drafting agent | blocked: scripts + Sourav time |
 
 ## Build slices — roadmap
 

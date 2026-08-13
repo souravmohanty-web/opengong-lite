@@ -20,7 +20,11 @@
     "dialer",
     "answering machine detection",
     "integration",
-    "competitor"
+    "competitor",
+    "ringhawk",
+    "soc2",
+    "tcpa",
+    "pilot"
   ],
   "output_schema": { "type": "object", "additionalProperties": false, "required": [], "properties": {} }
 }

@@ -1,0 +1,19 @@
+{
+  "call": 3,
+  "title": "Pricing — quote, counter, discount ask",
+  "planted": ["quote: twenty eight per seat", "competitor_price: ringhawk twenty two", "discount_request: fifteen percent", "timing: renewal end of november", "authority: dr. mehta signs", "reported-speech trap: porting takes months"],
+  "lines": [
+    { "speaker": "rep", "text": "Got your call-volume report, thanks. Based on that, here's where we land — twenty eight per seat per month, all five locations, routing, texting and the recall tooling included." },
+    { "speaker": "prospect", "text": "Twenty eight. Okay. So here's my problem. RingHawk came back the moment they smelled a switch and offered twenty two to renew." },
+    { "speaker": "rep", "text": "They discounted after three years of ignored tickets. What does that tell you about the next three years?" },
+    { "speaker": "prospect", "text": "I know, I know. But I answer to Dr. Mehta on this, and he signs the checks. He's going to see a six dollar gap per seat and ask me why." },
+    { "speaker": "rep", "text": "Then let's give you the answer. Ten bookings a week recovered after hours pays that gap at one location, let alone five." },
+    { "speaker": "prospect", "text": "That math works on me. It might not work on him. Can you do fifteen percent? That gets me close enough that the conversation is about service, not price." },
+    { "speaker": "rep", "text": "Fifteen across the board I can't do. What I can do is sharpen it if we commit to a pilot structure — let me come back to you on exact numbers." },
+    { "speaker": "prospect", "text": "Okay. Timing matters here. The RingHawk renewal is end of November, and if I'm switching I need to know before they auto-renew me." },
+    { "speaker": "rep", "text": "Understood, that's our clock then. Anything else standing between you and a yes?" },
+    { "speaker": "prospect", "text": "One thing that spooked me. The old vendor told us back in the day that porting numbers takes months. If that's true it blows up your weekend cutover story." },
+    { "speaker": "rep", "text": "It's not true, and I'll prove it rather than argue it. The port request paperwork goes in on day one and I'll show you real timelines from practices your size." },
+    { "speaker": "prospect", "text": "Do that. Bring me a sharper number and the porting proof, and then I take it to Dr. Mehta." }
+  ]
+}
