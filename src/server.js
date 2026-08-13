@@ -57,4 +57,7 @@ const server = createServer((req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`viewer: http://${HOST}:${PORT}/  (bundle: ${bundlePath})`);
+  // The demo path is fully cached (L17): committed bundle + committed audio,
+  // zero network, zero keys. Live processing is the encore, never the main act.
+  console.log('demo mode: no keys needed, works offline');
 });

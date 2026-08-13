@@ -1,0 +1,129 @@
+{
+  "mode": "diarized",
+  "speakers": 2,
+  "audio_seconds": 60,
+  "utterances": [
+    {
+      "id": 0,
+      "start": 0,
+      "end": 5,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "hi rahul thanks for taking the time today i wanted to walk you through how our dialer handles compliance"
+    },
+    {
+      "id": 1,
+      "start": 5,
+      "end": 10,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "sure"
+    },
+    {
+      "id": 2,
+      "start": 10,
+      "end": 15,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "honestly my main concern is pricing your competitor quoted us almost forty less last week"
+    },
+    {
+      "id": 3,
+      "start": 15,
+      "end": 20,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "that is fair let me show you the total cost picture including the answering machine detection you would not pay extra for"
+    },
+    {
+      "id": 4,
+      "start": 20,
+      "end": 25,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we are not going to move forward with the pilot until legal signs off on the data processing agreement"
+    },
+    {
+      "id": 5,
+      "start": 25,
+      "end": 30,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "let me repeat that so it is on the record"
+    },
+    {
+      "id": 6,
+      "start": 30,
+      "end": 35,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we are not going to move forward with the pilot until legal signs off on the data processing agreement"
+    },
+    {
+      "id": 7,
+      "start": 35,
+      "end": 40,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we’ll need the soc 2 report — the security team won’t sign without it"
+    },
+    {
+      "id": 8,
+      "start": 40,
+      "end": 45,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "so the ﬁnal number is ４０ seats on the annual plan"
+    },
+    {
+      "id": 9,
+      "start": 45,
+      "end": 50,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.6,
+      "text": "the security review usually takes about three weeks from the kickoff meeting"
+    },
+    {
+      "id": 10,
+      "start": 50,
+      "end": 55,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "i will send over the security questionnaire and the mutual nda tomorrow morning"
+    },
+    {
+      "id": 11,
+      "start": 55,
+      "end": 60,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we are never going to be interested in the annual plan at this price"
+    }
+  ],
+  "canonical_text": "hi rahul thanks for taking the time today i wanted to walk you through how our dialer handles compliance\nsure\nhonestly my main concern is pricing your competitor quoted us almost forty less last week\nthat is fair let me show you the total cost picture including the answering machine detection you would not pay extra for\nwe are not going to move forward with the pilot until legal signs off on the data processing agreement\nlet me repeat that so it is on the record\nwe are not going to move forward with the pilot until legal signs off on the data processing agreement\nwe’ll need the soc 2 report — the security team won’t sign without it\nso the ﬁnal number is ４０ seats on the annual plan\nthe security review usually takes about three weeks from the kickoff meeting\ni will send over the security questionnaire and the mutual nda tomorrow morning\nwe are never going to be interested in the annual plan at this price",
+  "transcript_hash": "sha256:8cf0d6bfc73aee40bf2d9e040f365267ec380f062d6a50e60514a8c2b331ded7"
+}

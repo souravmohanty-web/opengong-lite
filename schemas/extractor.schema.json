@@ -1,0 +1,32 @@
+{
+  "$id": "opengong://extractor",
+  "$comment": "Meta-schema for extractor.json files (L12). Extractors declare a role, never a model — capabilities.json maps role -> model with typed fallbacks. registry.js reads `required` and `properties` from this file as the single source of truth for its hand-written validator, so this file and the validator can never drift apart. A top-level \"model\" key is explicitly forbidden by registry.js (not by omission alone) so the error message can cite L12 directly.",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "title",
+    "description",
+    "enabled",
+    "role",
+    "scope",
+    "prompt",
+    "evidence_required",
+    "output_schema"
+  ],
+  "properties": {
+    "name": { "type": "string", "$comment": "must equal the filename without .json" },
+    "version": { "type": "string" },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "enabled": { "type": "boolean" },
+    "role": { "type": "string", "$comment": "key into capabilities.json roles (e.g. \"extraction\") — never a model id" },
+    "scope": { "type": "string", "$comment": "e.g. \"call\" (single-call) vs a future cross-call scope" },
+    "prompt": { "type": "string" },
+    "evidence_required": { "type": "boolean" },
+    "output_schema": { "type": "object", "$comment": "portability subset only: Anthropic ∩ OpenAI structured-output schema; see registry.js lintPortability" },
+    "applies_to": { "type": "array", "items": { "type": "string" } },
+    "required_section": { "type": "boolean" },
+    "crm_map": { "type": "object" }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$id": "opengong://claim-context",
+  "$comment": "Claim schema additions from team/plans/contextual-analysis.md (interpretation gate, not yet wired into any Slice-1 extractor's output_schema — built now so extractors can $ref it once the interpretation gate lands). additionalProperties:false + all-properties-required on every object per the registry portability lint; no allOf/not/if/minLength/maxLength/minimum/maximum/multipleOf; no recursion.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stance", "entity_refs", "quantities", "requires_context", "supporting_evidence"],
+  "properties": {
+    "stance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["polarity", "modality", "attribution", "attributed_to", "certainty"],
+      "properties": {
+        "polarity": { "type": "string", "enum": ["positive", "negative", "neutral", "unclear"] },
+        "modality": { "type": "string", "enum": ["commitment", "possibility", "hypothetical", "unclear"] },
+        "attribution": { "type": "string", "enum": ["first_party", "third_party", "unclear"] },
+        "attributed_to": { "type": ["string", "null"], "$comment": "who is speaking, when attribution is third_party (e.g. \"the vendor\"); null otherwise" },
+        "certainty": { "type": "string", "enum": ["high", "medium", "low", "unclear"] }
+      }
+    },
+    "entity_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["term", "type", "registry_id", "confidence"],
+        "properties": {
+          "term": { "type": "string", "$comment": "surface form as spoken" },
+          "type": { "type": "string" },
+          "registry_id": { "type": ["string", "null"], "$comment": "id into registry/entities.json, or null if unresolved" },
+          "confidence": { "type": "string", "enum": ["high", "medium", "low"] }
+        }
+      }
+    },
+    "quantities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["surface", "unit", "unit_source", "approximate"],
+        "properties": {
+          "surface": { "type": "string", "$comment": "as spoken, never normalized (\"forty\" stays \"forty\")" },
+          "unit": { "type": ["string", "null"] },
+          "unit_source": { "type": "string", "enum": ["explicit", "inferred", "unknown"] },
+          "approximate": { "type": "boolean" }
+        }
+      }
+    },
+    "requires_context": { "type": "boolean" },
+    "supporting_evidence": {
+      "type": "array",
+      "items": { "$ref": "opengong://evidence" }
+    }
+  }
+}

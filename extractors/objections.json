@@ -1,0 +1,38 @@
+{
+  "name": "objections",
+  "version": "1.0.0",
+  "title": "Objections",
+  "description": "Every objection the buyer raises, categorized and quoted in the buyer's own words.",
+  "enabled": true,
+  "role": "extraction",
+  "scope": "call",
+  "evidence_required": true,
+  "applies_to": ["discovery", "demo", "negotiation", "renewal"],
+  "prompt": "List every objection the buyer raises, one entry per distinct concern.\n\nFor each objection:\n- category: the single closest fit from price, timing, authority, competitor, fit, trust.\n- evidence: cite the utterance(s) where the buyer raises it, before you write \"text\".\n- text: copy the buyer's exact words character-for-character wherever the transcript gives a direct quote for the concern — do not convert number words to digits or digits to number words, do not paraphrase into corporate register, do not soften the objection.\n\nOnly extract objections that are actually in the transcript. An empty list is a valid, correct result when the buyer raised none.",
+  "output_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["objections"],
+    "properties": {
+      "objections": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence", "category", "text"],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": { "$ref": "opengong://evidence" }
+            },
+            "category": {
+              "type": "string",
+              "enum": ["price", "timing", "authority", "competitor", "fit", "trust"]
+            },
+            "text": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
