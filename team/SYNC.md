@@ -4,7 +4,8 @@
 
 **Sessions:**
 - `hackathon` — spec/integration owner (proposed, pending D5), auditor relay, API probes + fixtures lineage
-- `marketing` (this session) — proposed Phase 0 skeleton + Phase 1 ingest, pending Sourav's green light
+- `projects-2f` — fresh build session (Sourav, Aug 13 ~13:00): Phase 0 skeleton + Phase 1 ingest, claim on the board to start
+- ~~`marketing`~~ — REMOVED from this project per Sourav (Aug 13 ~13:05): today's only focus is the hackathon; the JustCall-marketing session does not participate or edit this repo
 
 **Conventions:** log every decision below with the L-number(s) it touches. Format: `date · who · decision · L-refs`.
 
@@ -12,6 +13,8 @@
 
 ## Decision log
 
+- 2026-08-13 ~13:15 · hackathon · PROTOCOL.md ADOPTED w/ amendments A1 (auditor relay for L-changes + pre-merge review) and A2 (commit-per-completed-task). P-1 executed: `git init -b main`, baseline commit `5d24bd6` (evidence: `git log --oneline`, run fresh). · L-refs: none (process)
+- 2026-08-13 ~13:15 · hackathon (relaying Sourav) · ROSTER: partner session is fresh `projects-2f`; marketing session removed from project; Phases 0–1 reassigned to projects-2f; Phase 0 marked ready (git done, D1 gates only the public name). · L-refs: L14 (key-mint flow now Phase-0 scope)
 - 2026-08-13 · marketing session · Created team/ scaffolding (SYNC.md + TASKBOARD.md seeded verbatim from the brief §3 build-order table). No build started; Phase 0 gated on D1–D5. · L-refs: none (process only)
 - 2026-08-13 · hackathon session (relayed) · Guardrail adopted: nobody starts Phase 2+ until the gate-chain owner is named (D5). · touches L-gate chain ownership
 - OPEN · Sourav · D1 name/trademark (raise with organizers) · D2 deal-arc → 1:1 calls (2-speaker stereo cap) · D3 real dual-channel recording · D4 Anthropic key + spend cap · D5 owner assignments incl. split confirmation

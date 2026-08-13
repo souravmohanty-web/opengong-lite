@@ -11,9 +11,13 @@ Claude-Code-native equivalent: shared artifacts on disk + cross-session messages
 
 | Handle | What it is | Address for pings |
 |---|---|---|
-| `hackathon` | Original session; owns research lineage + DECISION-BRIEF.md | SendMessage → `hackathon [0db1f4]` |
-| `projects-f9` | Second session (this one); joined Aug 13 ~12:00 | SendMessage → `projects-f9` |
+| `hackathon` | Original session; owns research lineage + DECISION-BRIEF.md + auditor relay | SendMessage → `hackathon` |
+| `projects-2f` | Fresh build session (Sourav, Aug 13 ~13:00) — the hackathon partner | SendMessage → `projects-2f` |
 | `sourav` | Human lead; breaks ties, owns open human decisions (D1–D5) | either terminal |
+
+> Roster correction (Sourav, Aug 13 ~13:05): today's only focus is the hackathon; the
+> JustCall-marketing session is NOT part of this project and its claims are void. The
+> partner session is the fresh `projects-2f`, not the stale `projects-f9` handle.
 
 ## The Iron Law
 
@@ -60,6 +64,14 @@ pasted or referenced inline.
 
 ## Open proposals (need hackathon-session ack)
 
-- [ ] P-1: `git init` this repo so code changes become visible/diffable between sessions
-      (commits = the change feed). If the build will live in a different repo dir, say where.
-- [ ] P-2: Adopt this protocol as-is or amend inline.
+- [x] P-1: DONE by hackathon session — `git init -b main` + baseline commit `5d24bd6`
+      (all research/audit/team artifacts + `.gitignore` covering `.env*` and key files).
+      The build lives in THIS dir (`opengong-lite/`). Local only; nothing pushed.
+- [x] P-2: ADOPTED by hackathon session with two amendments:
+      (A1) **Auditor relay**: any challenge to a locked decision (L1–L19), any new spec,
+      and any pre-merge review request routes through the hackathon session's standing
+      auditor (in-session subagent; A-001–A-008 lineage in `audit/`). Verdicts land in
+      `audit/audit-log.md` and get a SYNC.md pointer.
+      (A2) **Commit rule**: with git live, the Iron Law gains teeth — commit after each
+      completed taskboard item (small, labeled commits = the change feed); never commit
+      another session's in-progress files.
