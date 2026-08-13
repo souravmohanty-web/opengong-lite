@@ -1,8 +1,11 @@
 # OpenGong Lite
 
-**Open-source call notes where every claim links to the transcript line it came from.**
-Not "asked the AI to cite" — verified in code: a claim whose quote can't be re-anchored
-into the stored transcript is visibly demoted, never silently shipped.
+**Gong records what happened. We do what was promised.** Upload a sales call and get
+deal notes plus a follow-up email where every claim links to the exact transcript line
+it came from, verified in code. Unproven claims stay visible and never pretend to be
+facts. Injected instructions are quarantined and barred from the email.
+
+> *Gong asks you to trust its summary. We show you the line.*
 
 ![Notes with receipts: verified, corrected, demoted, and quarantined claims — with the exact transcript line and audio second for each](docs/hero.png)
 
