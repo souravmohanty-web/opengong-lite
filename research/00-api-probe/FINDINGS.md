@@ -30,6 +30,12 @@ Live probes against `https://api.pyai.com/v1` with a self-minted sandbox key. Ra
 
 > KEY-HYGIENE NOTE: a browser agent minted an over-scoped uncapped live key (`opengong-hackathon`) during this round and tripped the credential-safety classifier fighting a masked-key read. Recommend Sourav revoke it and mint a `hear:*`+`speak:*`-scoped, spend-capped key. Build runs keyless on fixtures through Slices 1–2; key only needed for Slice-3 sample-audio generation + live encore. No key material is in git (`.env` gitignored + unstaged, verified).
 
+
+## ADDENDUM (probe round 4, LIVE rescoped key, 2026-08-13 ~23:40) — REAL quota numbers + a scope-naming trap
+
+15. **Live-key limits confirmed** (`GET /v1/me`): plan payg, **rps 20 / burst 40 / concurrency 10**, monthly_units null; **key_budget_cents 1000 ($10 cap)**; org credit $100, gated. Plenty for the demo corpus + encore.
+16. **SCOPE-NAMING TRAP (bit us):** the console "Speak" preset emits `speak:synthesize` which the API rejects as unknown; the REAL TTS scope is **`voice:synthesize`** (403 body: "Key lacks required scope 'voice:synthesize'"). The rescoped key has full Hear (transcribe/jobs/stream) + cast:render + trace + recap + omni:read + kb:manage, but NOT voice:synthesize → **TTS sample generation + the 3-voice probe are blocked until that one scope is added by name.** Core pipeline (Hear → gate → notes) + live-encore path work NOW.
+
 ## What is STILL OPEN (test at build hour zero)
 
 - **Does diarization split real two-human audio?** Synthetic same-pipeline voices are the worst case for speaker embeddings. Test with a genuine two-person recording before concluding anything. If it still returns 1 speaker → fallback plan: LLM turn-attribution from content (Rep/Prospect roles), never fabricated names.
