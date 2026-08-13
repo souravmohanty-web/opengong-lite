@@ -18,14 +18,16 @@ email. The badge at the top says "67% verified" because honesty is the product.*
 
 ```bash
 git clone <repo-url> && cd opengong-lite
-npm start      # mints its own free PyAI sandbox key, verifies the pipeline
-npm run demo   # opens the receipts viewer on a bundled call — works offline
-npm test       # 238 tests, all offline
+npm start      # opens the product on a bundled call. No install step, no key.
+npm run demo   # same, viewer only
+npm test       # 380+ tests, all offline
 ```
 
-Upload your own call: `node src/ingest.js your-call.wav` (dual-channel/stereo recordings —
-the standard telephony export format — get exact per-speaker labels; mono works with
-inferred roles, honestly labeled as inferred).
+A free PyAI sandbox key self-mints the first time you actually transcribe something —
+never at boot. Upload your own call: `node src/ingest.js your-call.wav`
+(dual-channel/stereo recordings, the standard telephony export format, get exact
+per-speaker labels; mono comes back as one unlabeled speaker stream today — speaker
+role inference is on the roadmap, not in the product).
 
 ## Why receipts
 
@@ -46,8 +48,9 @@ Every other row is verified against the named project's source code — receipts
 ## What it does
 
 Audio in → PyAI batch transcription (channel-based diarization) → canonical transcript →
-seven extractor families (summary, next steps, objections, pain, pricing, competitors,
-plus a zero-LLM keyword tracker) → **the receipts gate** → notes where clicking any claim
+eleven extractor families (summary, next steps, objections, pain, pricing, competitors,
+buying stage, stakeholders, risk flags, coaching, plus a zero-LLM keyword tracker) →
+**the receipts gate** → notes where clicking any claim
 highlights its exact line and plays that second of audio → self-contained HTML share file
 → follow-up email drafted **only from verified claims** (a draft citing anything
 unverified is rejected whole — that's the injection choke point).

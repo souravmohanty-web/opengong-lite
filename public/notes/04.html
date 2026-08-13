@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commitment check · call notes</title>
+<style>
+:root{
+  --paper:#f6f7f9; --surface:#ffffff; --ink:#14171c; --ink-soft:#565d68;
+  --ink-faint:#868d98; --line:#e3e6ea; --line-soft:#eceef1;
+  --accent:#2947d8; --accent-soft:#e7ebfc; --accent-ink:#1c34ad;
+  --backed:#0f7a52; --held:#b26a00; --held-bg:#fbf3e3; --held-line:#eccf9c;
+  --blocked:#c0362c; --mark:#fff2ab; --mark-ink:#3a2f00;
+  --shadow:0 1px 2px rgba(20,23,28,.05),0 6px 20px rgba(20,23,28,.05);
+  color-scheme:light;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1115; --surface:#181b21; --ink:#e7e9ee; --ink-soft:#a2a9b4;
+    --ink-faint:#727a86; --line:#282d35; --line-soft:#20242b;
+    --accent:#7f94ff; --accent-soft:#1c2440; --accent-ink:#aab6ff;
+    --backed:#39b483; --held:#e0a24a; --held-bg:#241d10; --held-line:#4a3c1e;
+    --blocked:#ff7a6e; --mark:#5a4a00; --mark-ink:#ffe9a3;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1115; --surface:#181b21; --ink:#e7e9ee; --ink-soft:#a2a9b4;
+  --ink-faint:#727a86; --line:#282d35; --line-soft:#20242b;
+  --accent:#7f94ff; --accent-soft:#1c2440; --accent-ink:#aab6ff;
+  --backed:#39b483; --held:#e0a24a; --held-bg:#241d10; --held-line:#4a3c1e;
+  --blocked:#ff7a6e; --mark:#5a4a00; --mark-ink:#ffe9a3;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--mark);color:var(--mark-ink)}
+.mono,.rc-line,.held-quote span,.chip-receipt .rc-line{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+/* deal rail */
+.deal-rail{
+  position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:18px;
+  padding:11px 22px; background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(8px); border-bottom:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.deal-name{font-size:13px;font-weight:600;letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.deal-name:hover{color:var(--accent-ink)}
+.deal-name::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.arc{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.step{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink-faint);font-size:12.5px;padding:5px 4px;border-radius:8px}
+.step .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5}
+.step:hover{color:var(--ink)}
+.step.is-current{color:var(--accent-ink);font-weight:600}
+.step.is-current .dot{background:var(--accent);opacity:1;box-shadow:0 0 0 3px var(--accent-soft)}
+.arc-sep{width:16px;height:1px;background:var(--line);margin:0 2px}
+
+/* header */
+.wrap{max-width:720px;margin:0 auto;padding:38px 22px 88px}
+.call-head{margin-bottom:26px}
+.eyebrow{margin:0 0 12px;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.call-head h1{margin:0;font-size:30px;line-height:1.15;letter-spacing:-.02em;font-weight:680;text-wrap:balance}
+.sub{margin:10px 0 0;color:var(--ink-soft);font-size:14.5px}
+.tagline{margin:16px 0 0;font-size:16.5px;line-height:1.4;font-weight:600;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.tagline::before{content:"";display:block;width:34px;height:3px;border-radius:2px;background:var(--accent);margin-bottom:12px}
+.magic{margin:16px 0 0;font-size:15px;color:var(--ink);padding:12px 15px;background:var(--accent-soft);border-radius:11px;line-height:1.5}
+.tally{margin:14px 0 0;font-size:13px;color:var(--ink-soft)}
+.tally strong{color:var(--held);font-weight:650}
+
+/* context chips */
+.context{display:flex;flex-direction:column;gap:12px;margin:0 0 30px;padding:16px 0 4px;border-top:1px solid var(--line-soft)}
+.chip-grp{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.chip-label{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;min-width:96px}
+.chip{position:relative;font-size:12.5px;color:var(--ink-soft);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:5px 12px;cursor:pointer;transition:border-color .15s,color .15s}
+.chip.chip--flat{cursor:default}
+.chip[role="button"]:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-expanded="true"]{border-color:var(--accent);color:var(--ink)}
+.chip-receipt{display:none}
+.chip[aria-expanded="true"] .chip-receipt{display:block;margin-top:10px}
+
+/* notes */
+.notes{display:flex;flex-direction:column;gap:30px}
+.grp{display:flex;flex-direction:column;gap:12px}
+.grp-label{margin:0;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+.cards{display:flex;flex-direction:column;gap:10px}
+.card{
+  position:relative; background:var(--surface); border:1px solid var(--line);
+  border-radius:13px; padding:15px 17px; box-shadow:var(--shadow);
+  transition:border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.card[role="button"]{cursor:pointer}
+.card[role="button"]:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.card[role="button"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card[aria-expanded="true"]{border-color:var(--accent)}
+.card--flat{cursor:default}
+.note{margin:0;font-size:15.5px;line-height:1.5;color:var(--ink)}
+.cue{
+  display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:12px;
+  color:var(--ink-faint);font-weight:550;letter-spacing:.005em;
+}
+.cue::before{content:"";width:13px;height:13px;border:1.5px solid currentColor;border-radius:4px;opacity:.6;
+  background:linear-gradient(currentColor,currentColor) center/7px 1.5px no-repeat,
+             linear-gradient(currentColor,currentColor) center/1.5px 7px no-repeat}
+.card[role="button"]:hover .cue{color:var(--accent)}
+.card[aria-expanded="true"] .cue{color:var(--accent)}
+.card[aria-expanded="true"] .cue::before{transform:rotate(45deg);background:linear-gradient(currentColor,currentColor) center/7px 1.5px no-repeat}
+.card--hint .cue{color:var(--accent);font-weight:600}
+.card--hint .cue::after{content:"";position:absolute}
+
+/* receipts (the reveal) */
+.receipts{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .26s ease,opacity .2s ease;overflow:hidden}
+.card[aria-expanded="true"] .receipts{grid-template-rows:1fr;opacity:1;margin-top:13px}
+.receipts>*{min-height:0}
+.receipt{border-top:1px dashed var(--line);padding-top:12px;margin-top:2px}
+.receipt+.receipt{margin-top:10px}
+.rc-meta{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}
+.play{
+  display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:12px;font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid transparent;border-radius:7px;padding:3px 9px 3px 8px;cursor:pointer;
+}
+.play:hover{border-color:var(--accent)}
+.play:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.play .tri{width:0;height:0;border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent currentColor}
+.play.is-playing .tri{border-width:0;width:8px;height:8px;background:currentColor}
+.rc-spk{font-size:11.5px;color:var(--ink-faint);text-transform:capitalize}
+.rc-tag{font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--held);background:var(--held-bg);border-radius:5px;padding:2px 6px;font-weight:650}
+.rc-line{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink-soft)}
+.rc-line mark{background:var(--mark);color:var(--mark-ink);padding:1px 3px;border-radius:3px;font-weight:600}
+
+/* held back (the gate beat) */
+.held{margin-top:6px;padding:18px 18px 8px;background:var(--held-bg);border:1px solid var(--held-line);border-radius:14px}
+.held--blocked{--held-bg:color-mix(in srgb,var(--blocked) 8%,var(--surface));--held-line:color-mix(in srgb,var(--blocked) 35%,var(--line));--held:var(--blocked)}
+.held-label{display:flex;align-items:center;gap:9px;margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--held);font-weight:700}
+.held-mark{width:15px;height:15px;border-radius:50%;border:2px solid var(--held);position:relative}
+.held-mark::after{content:"";position:absolute;left:5.5px;top:2.5px;width:2px;height:6px;background:var(--held)}
+.held--blocked .held-mark::after{left:2.5px;top:6px;width:8px;height:2px}
+.held-sub{margin:9px 0 15px;font-size:13px;color:var(--ink-soft);line-height:1.5}
+.held-card{background:var(--surface);border:1px solid var(--held-line);border-radius:11px;padding:13px 15px;margin-bottom:10px}
+.held-note{margin:0;font-size:15px;color:var(--ink-soft)}
+.held-reason{margin:8px 0 0;font-size:13px;color:var(--held);font-weight:600}
+.held-quote{margin:9px 0 0;font-size:12.5px;color:var(--ink-faint)}
+.held-quote span{color:var(--ink-soft);background:color-mix(in srgb,var(--held) 10%,transparent);padding:2px 6px;border-radius:4px}
+
+/* follow-up email (the end of the chain) */
+.email{margin-top:6px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.email-head{display:flex;align-items:center;justify-content:space-between;padding:15px 18px 0}
+.email-label{display:flex;align-items:center;gap:9px;margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+.email-mark{width:15px;height:11px;border:1.5px solid var(--accent);border-radius:2px;position:relative}
+.email-mark::after{content:"";position:absolute;left:-1.5px;top:-1.5px;width:15px;height:11px;background:linear-gradient(135deg,transparent 45%,var(--accent) 45%,var(--accent) 55%,transparent 55%)}
+.email-draft{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:5px;padding:2px 7px;font-weight:650}
+.email-trust{margin:10px 18px 0;font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+.email-body{margin:14px;padding:15px 16px;border:1px solid var(--line-soft);border-radius:10px;background:var(--paper)}
+.email-subject{margin:0 0 12px;font-size:14px;color:var(--ink);font-weight:600}
+.email-subject span{display:inline-block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-right:9px}
+.email-intro{margin:0 0 10px;font-size:14px;color:var(--ink)}
+.email-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.email-list li{position:relative;padding-left:24px;font-size:14px;line-height:1.5;color:var(--ink)}
+.em-cite{position:absolute;left:0;top:5px;width:15px;height:15px;border-radius:50%;background:color-mix(in srgb,var(--backed) 16%,transparent)}
+.em-cite::after{content:"";position:absolute;left:5px;top:3px;width:3px;height:7px;border:solid var(--backed);border-width:0 2px 2px 0;transform:rotate(42deg)}
+.email-outro{margin:12px 0 0;font-size:12.5px;color:var(--ink-faint)}
+
+.no-audio{margin:26px 0 0;font-size:12.5px;color:var(--ink-faint);text-align:center}
+
+@media (max-width:560px){
+  .wrap{padding:26px 16px 70px}
+  .call-head h1{font-size:25px}
+  .chip-label{min-width:auto;width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<nav class="deal-rail" aria-label="Deal calls">
+    <a class="deal-name" href="index.html">Brightsmile Dental Group</a>
+    <div class="arc"><a class="step" href="01.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Discovery</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="02.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Demo</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="03.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Pricing</span></a><span class="arc-sep" aria-hidden="true"></span><span class="step is-current" aria-current="step"><span class="dot" aria-hidden="true"></span><span class="lbl">Commitment check</span></span><span class="arc-sep" aria-hidden="true"></span><a class="step" href="05.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Close</span></a></div>
+  </nav>
+<main class="wrap">
+  <header class="call-head">
+    <p class="eyebrow">OpenGong · call notes with receipts</p>
+    <h1>Commitment check: the ledger moment</h1>
+    <p class="sub">Brightsmile Dental Group. Call 4 of 5.</p>
+    <p class="tagline">Gong records what happened. We do what was promised.</p>
+    <p class="magic">Every note links back to the moment it came from. Click any card to see the exact line and play it.</p>
+    <p class="tally">All 21 notes trace to the call.</p>
+  </header>
+  
+    <div class="context" aria-label="Call context">
+      
+        <div class="chip-grp">
+          <span class="chip-label">Buying stage</span>
+          <span class="chip" role="button" tabindex="0" aria-expanded="false">Buying stage: negotiation<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="36.08" aria-label="Play from 0:36"><span class="tri" aria-hidden="true"></span>0:36</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line"><mark>two locations i can defend to doctor meta without a fight</mark> which too is my call though</p>
+  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Urgency: medium<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">good so tcpa paper today <mark>palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
+  </div></span></span>
+        </div>
+        <div class="chip-grp">
+          <span class="chip-label">Flags</span>
+          <span class="chip" role="button" tabindex="0" aria-expanded="false">Buyer posture: mixed<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="3.2800000000000002" aria-label="Play from 0:03"><span class="tri" aria-hidden="true"></span>0:03</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and <mark>it never showed up she asked me twice</mark></p>
+  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Transcript quality: some_gaps<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="44.08" aria-label="Play from 0:44"><span class="tri" aria-hidden="true"></span>0:44</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line"><mark>contest tenab again lost two receptions this month</mark> every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost</p>
+  </div></span></span>
+        </div>
+        <div class="chip-grp">
+          <span class="chip-label">Also mentioned</span>
+          <span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">speaker_1</span></div>
+    <p class="rc-line"><mark>for a whole quick check in before we talk pilot you got the soc report</mark></p>
+  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">TCPA came up.<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="3.2800000000000002" aria-label="Play from 0:03"><span class="tri" aria-hidden="true"></span>0:03</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line"><mark>got the soctu yes forwarded it to our it guy already but maya you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice</mark></p>
+  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="26.32" aria-label="Play from 0:26"><span class="tri" aria-hidden="true"></span>0:26</button><span class="rc-spk">speaker_1</span></div>
+    <p class="rc-line"><mark>noted today and thank you for the volume report that&#39;s what let us ship the pilot here&#39;s the idea two locations your busiest and your smallest running live before you commit the other three</mark></p>
+  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="52.160000000000004" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">speaker_1</span></div>
+    <p class="rc-line"><mark>for what it&#39;s worth new stuff get one screen with ring and subtext the pilot will show that faster than i can say it</mark></p>
+  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">TCPA came up.<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line"><mark>good so tcpa paper today palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
+  </div></span></span>
+        </div>
+    </div>
+  <div class="notes">
+    
+    <section class="grp">
+      <h2 class="grp-label">Summary</h2>
+      <div class="cards">
+        <article class="card card--hint" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.</p>
+    <span class="cue">Click to see the line it came from</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="14" aria-label="Play from 0:14"><span class="tri" aria-hidden="true"></span>0:14</button><span class="rc-spk">speaker_1</span></div>
+    <p class="rc-line"><mark>you&#39;re right that one&#39;s on me it goes out today</mark> and i&#39;ll send it directly to her so it doesn&#39;t root through you</p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Front-desk churn: lost two receptionists this month; RingHawk&#39;s fifteen screens make training a cost.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="44.08" aria-label="Play from 0:44"><span class="tri" aria-hidden="true"></span>0:44</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">contest tenab again <mark>lost two receptions this month every new hire has to lend ringhawks fifteen screens</mark> and honestly training time is becoming its own cost</p>
+  </div></div>
+  </article>
+      </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Pain</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Front-desk churn is now a cost center: every new hire must learn RingHawk&#39;s fifteen screens, so training time is its own cost.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="44.08" aria-label="Play from 0:44"><span class="tri" aria-hidden="true"></span>0:44</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">contest tenab again lost two receptions this month <mark>every new hire has to lend ringhawks fifteen screens and honestly training time is becoming its own cost</mark></p>
+  </div></div>
+  </article>
+      </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Objections</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="3.2800000000000002" aria-label="Play from 0:03"><span class="tri" aria-hidden="true"></span>0:03</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">got the soctu yes forwarded it to our it guy already but maya <mark>you promised my office manager a tcpa one pager by friday and it never showed up she asked me twice</mark></p>
+  </div></div>
+  </article>
+      </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Competition</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">RingHawk&#39;s fifteen-screen UI (spoken &#39;ringhawks&#39;) is now a training burden as front-desk staff churn.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="44.08" aria-label="Play from 0:44"><span class="tri" aria-hidden="true"></span>0:44</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">contest tenab again lost two receptions this month <mark>every new hire has to lend ringhawks fifteen screens</mark> and honestly training time is becoming its own cost</p>
+  </div></div>
+  </article>
+      </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Pricing</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Buyer is still owed the sharper number from the pricing call; it will land with the proposal.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">good so tcpa paper today palate proposal on paper this week and <mark>the sharper number you owe me from last time comes with it</mark></p>
+  </div></div>
+  </article>
+      </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Stakeholders</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Office manager has become the internal champion, selling the deal internally; referenced, not on the call.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="20" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">please because the texting piece is her favorite part of this whole thing and right now <mark>she&#39;s the one selling it internally not me</mark></p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Dr Mehta remains the economic buyer Rahul must satisfy; referenced, not on the call.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="36.08" aria-label="Play from 0:36"><span class="tri" aria-hidden="true"></span>0:36</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">two locations <mark>i can defend to doctor meta without a fight</mark> which too is my call though</p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Threading: single_threaded</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="20" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">please because the texting piece is her favorite part of this whole thing and right now <mark>she&#39;s the one selling it internally not me</mark></p>
+  </div></div>
+  </article>
+      </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Next steps</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to send the overdue TCPA one-pager today, directly to the office manager.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="14" aria-label="Play from 0:14"><span class="tri" aria-hidden="true"></span>0:14</button><span class="rc-spk">speaker_1</span></div>
+    <p class="rc-line">you&#39;re right that one&#39;s on me <mark>it goes out today and i&#39;ll send it directly to her so it doesn&#39;t root through you</mark></p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">good so tcpa paper today <mark>palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.</p>
+    <span class="cue">See the line</span>
+    <div class="receipts"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">speaker_2</span></div>
+    <p class="rc-line">good so tcpa paper today <mark>palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
+  </div></div>
+  </article>
+      </div>
+    </section>
+    
+    
+    
+    <section class="email">
+      <div class="email-head">
+        <h2 class="email-label"><span class="email-mark" aria-hidden="true"></span>Follow-up email</h2>
+        <span class="email-draft">draft</span>
+      </div>
+      <p class="email-trust">This is the follow-up that does what we promised. Every line is cited to the call, and nothing un-verified can reach it.</p>
+      <div class="email-body">
+        <p class="email-subject"><span>Subject</span>Follow-up: the commitment check call</p>
+        <p class="email-intro">Recapping what we covered and what happens next:</p>
+        <ul class="email-list">
+          <li><span class="em-cite" aria-hidden="true"></span>SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.</li><li><span class="em-cite" aria-hidden="true"></span>Front-desk churn: lost two receptionists this month; RingHawk&#39;s fifteen screens make training a cost.</li><li><span class="em-cite" aria-hidden="true"></span>Front-desk churn is now a cost center: every new hire must learn RingHawk&#39;s fifteen screens, so training time is its own cost.</li><li><span class="em-cite" aria-hidden="true"></span>Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer is still owed the sharper number from the pricing call; it will land with the proposal.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to send the overdue TCPA one-pager today, directly to the office manager.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.</li><li><span class="em-cite" aria-hidden="true"></span>Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.</li>
+        </ul>
+        <p class="email-outro">Each point above links to its exact line in the call.</p>
+      </div>
+    </section>
+  </div>
+  
+  <p class="no-audio">Transcribed by pyai-hear (real API run). Extraction for these sample notes was authored offline and gate-verified, not a live LLM run.</p>
+</main>
+<audio id="call-audio" preload="none" src="/audio/04.m4a"></audio>
+<script>
+(function(){
+  var audio = document.getElementById('call-audio');
+  var current = null;
+
+  function toggle(el){
+    var open = el.getAttribute('aria-expanded') === 'true';
+    el.setAttribute('aria-expanded', open ? 'false' : 'true');
+  }
+  document.querySelectorAll('.card[role="button"], .chip[role="button"]').forEach(function(el){
+    el.addEventListener('click', function(e){
+      if (e.target.closest('.play')) return;
+      toggle(el);
+    });
+    el.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(el); }
+    });
+  });
+
+  var plays = Array.prototype.slice.call(document.querySelectorAll('.play'));
+  function disablePlay(){
+    plays.forEach(function(b){ b.style.display='none'; });
+  }
+  if (!audio){ disablePlay(); }
+  else {
+    audio.addEventListener('error', disablePlay, { once:true });
+    audio.addEventListener('pause', function(){ if (current){ current.classList.remove('is-playing'); current=null; } });
+    audio.addEventListener('ended', function(){ if (current){ current.classList.remove('is-playing'); current=null; } });
+    plays.forEach(function(b){
+      b.addEventListener('click', function(e){
+        e.stopPropagation();
+        var t = parseFloat(b.getAttribute('data-t'));
+        if (current && current !== b){ current.classList.remove('is-playing'); }
+        try {
+          if (isFinite(t)) audio.currentTime = t;
+          var p = audio.play();
+          if (p && p.catch) p.catch(function(){ b.classList.remove('is-playing'); });
+          b.classList.add('is-playing'); current = b;
+        } catch(err){ /* audio not ready: the highlighted line is already visible */ }
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
