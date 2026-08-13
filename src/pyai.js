@@ -17,8 +17,25 @@ async function problemFrom(res) {
   return { status: res.status, ...body };
 }
 
+const FETCH_TIMEOUT_MS = 30_000;
+
+// 429s are ambiguous: a short Retry-After is transient throttling; absent or
+// long means the sandbox daily cap — retrying that would spin until midnight.
+export function classify429(retryAfter) {
+  const seconds = Number(retryAfter);
+  if (!Number.isFinite(seconds) || seconds <= 0 || seconds > 60) {
+    return { action: 'daily_cap' };
+  }
+  return { action: 'retry', waitMs: seconds * 1000 + Math.floor(Math.random() * 250) };
+}
+
+function withTimeout(signal) {
+  const timeout = AbortSignal.timeout(FETCH_TIMEOUT_MS);
+  return signal ? AbortSignal.any([signal, timeout]) : timeout;
+}
+
 export async function mintSandboxKey() {
-  const res = await fetch(`${BASE}/sandbox/keys`, { method: 'POST' });
+  const res = await fetch(`${BASE}/sandbox/keys`, { method: 'POST', signal: withTimeout() });
   if (!res.ok) {
     throw new PyAiError('PYAI_MINT_FAILED', `key mint failed (${res.status})`, await problemFrom(res));
   }
@@ -39,19 +56,24 @@ export async function ensureKey() {
 
 // Authed fetch. On 401 with a pyai_test_* key, re-mint once and retry (L14):
 // sandbox keys expire ~7 days and week-2 cloners must not get a dead key.
-export async function pyaiFetch(path, options = {}, { remint = true } = {}) {
+export async function pyaiFetch(path, options = {}, { remint = true, retries429 = 2 } = {}) {
   const { key } = await ensureKey();
   const headers = { ...options.headers, Authorization: `Bearer ${key}` };
-  const res = await fetch(`${BASE}${path}`, { ...options, headers });
+  const res = await fetch(`${BASE}${path}`, { ...options, headers, signal: withTimeout(options.signal) });
 
   if (res.status === 401 && remint && isSandboxKey(key) && !process.env.PYAI_API_KEY) {
     await mintSandboxKey();
-    return pyaiFetch(path, options, { remint: false });
+    return pyaiFetch(path, options, { remint: false, retries429 });
   }
   if (res.status === 401) {
     throw new PyAiError('PYAI_AUTH_FAILED', 'PyAI key rejected (set PYAI_API_KEY or delete sandbox.pyai_key to re-mint)', await problemFrom(res));
   }
   if (res.status === 429) {
+    const verdict = classify429(res.headers.get('retry-after'));
+    if (verdict.action === 'retry' && retries429 > 0) {
+      await new Promise((r) => setTimeout(r, verdict.waitMs));
+      return pyaiFetch(path, options, { remint, retries429: retries429 - 1 });
+    }
     throw new PyAiError('PYAI_DAILY_CAP', 'PyAI sandbox daily cap reached — resets daily; cached fixtures still work offline', await problemFrom(res));
   }
   if (!res.ok) {

@@ -26,24 +26,39 @@ export function buildTranscript(result) {
 }
 
 // Stereo happy path: API segments are speaker-labeled (channel-based
-// diarization) — they ARE the utterance boundaries.
+// diarization) and provide the boundaries — but a segment is not automatically
+// an utterance: a long monologue segment still splits at the word cap (A-007),
+// and segments can arrive out of time order, so the final list is time-sorted
+// with ids reassigned.
 function diarizedUtterances(result) {
   const words = result.words ?? [];
-  return (result.segments ?? []).map((seg, i) => {
+  const utterances = [];
+  for (const seg of result.segments ?? []) {
     const segWords = words.filter((w) =>
       (w.speaker ?? null) === (seg.speaker ?? null)
       && w.start >= seg.start && w.end <= seg.end);
-    return {
-      id: i,
-      start: seg.start,
-      end: seg.end,
+    const base = {
       speaker: seg.speaker ?? null,
       channel: seg.channel ?? null,
       role: null,             // Rep/Prospect inference is the extraction phase's job
       role_confidence: null,
-      text: segWords.length ? joinWords(segWords) : seg.text,
     };
-  });
+    if (!segWords.length) {
+      utterances.push({ ...base, start: seg.start, end: seg.end, text: seg.text });
+      continue;
+    }
+    for (let i = 0; i < segWords.length; i += MAX_UTT_WORDS) {
+      const chunk = segWords.slice(i, i + MAX_UTT_WORDS);
+      utterances.push({
+        ...base,
+        start: chunk[0].start,
+        end: chunk[chunk.length - 1].end,
+        text: joinWords(chunk),
+      });
+    }
+  }
+  utterances.sort((a, b) => a.start - b.start);
+  return utterances.map((u, i) => ({ id: i, ...u }));
 }
 
 // Mono degraded path (L3): the API returns one coarse segment, so we build our

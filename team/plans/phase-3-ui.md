@@ -1,6 +1,9 @@
 # Phase 3 blueprint — Notes UI + receipts interaction
 
-**Status: PLANNING ARTIFACT (build freeze in effect). Author: projects-2f.**
+**Status: RECONCILED against `technical-spec-core.md` (which binds where they conflict)
+and split across build slices: the minimal one-interaction viewer + server SHIPPED in
+Slice 1 (`src/viewer.js`, `src/viewer.html`, `src/server.js`, tests green); the full
+state machine, exports, and share tiers below are the Slice 2–3 design. Author: projects-2f.**
 Grounded in: brief §3 Phase 3, L4/L6/L7 (evidence), L10 (bundle), L11 (share tiers),
 L17 (cached demo), L19 (escaping); research/02 §§3.2, 5.4, 5.7 (measured numbers cited).
 Exit test (brief): **the "oh damn" interaction works** — click a claim, watch the exact
@@ -55,6 +58,7 @@ State machine (one active claim max; states as `data-state` attrs, CSS does the 
 | `uncorroborated` | click a demoted claim | NO transcript jump (there is nothing to jump to). Card is visually demoted (grey, dashed border) with "no verified line in transcript" label. Never hidden (L7: demote, don't drop). |
 | `playing` | click any `[mm:ss]` timestamp (app mode) | Audio seeks to `t_start`, plays; reverse link: timeupdate highlights the currently-spoken segment. Share modes: timestamp is inert text — no dead controls rendered. |
 | `line-inspect` | click a transcript segment | Reverse lookup: which claims cite this segment; their cards pulse. Cheap (evidence already indexed by segment in view-model) and it demos "receipts go both ways". |
+| `blocked` | claim with `status: blocked_injection` | Quarantine strip: red border, claim text struck through, the offending line rendered escaped. NEVER in the notes body or email (view-model throws if a notes block cites it). Evaluated before uncorroborated — the planted line IS in the transcript; that's the point of the second screen. |
 
 Seek granularity: `segment.t_start` (02 §3.2: words excluded from bundles by default —
 7.7× payload inflation; word-exact seek is an app-mode nicety only if `words[]` present).
@@ -135,13 +139,22 @@ Cut order if squeezed: tier-2 → reverse-highlight → md writer. Never cut: es
 > tier-1 static-HTML export is the designated Phase-3 de-risk if the full UI looks
 > shaky by Friday noon. Cut order above already respects this.
 
-## 7. Open questions (for auditor / Sourav before Phase 3 starts)
+## 7. Open questions — ALL RESOLVED by `technical-spec-core.md` rulings (Aug 13)
 
-- Q1: Does app mode get a real HTTP server in Phase 3, or does the CLI write the tier-1
-  file and open it (`file://`) with audio path relative? (Blueprint works either way;
-  server adds ~0.5h not in the table.)
-- Q2: Uncorroborated-bucket coverage thresholds (SHIPPED vs PARTIAL banner in the footer)
-  — the standing auditor's orphan finding; Phase 3 renders whatever Phase 2 stamps.
-- Q3: Demo beat wiring (L17): should the injection-neutralized claim get a dedicated
-  visual state (e.g., red "blocked" badge) beyond the uncorroborated style? Recommend yes,
-  ~15 min, huge stage value.
+- Q1 **RESOLVED**: app mode = tiny local server (`src/server.js`, 127.0.0.1:4317, zero
+  deps, Range/206 for audio). Built in Slice 1. The file-open path survives only as the
+  tier-1 export.
+- Q2 **RESOLVED**: coverage bands computed in gate.js; the UI renders
+  `notes.coverage.band` verbatim and never recomputes (enforced by test).
+- Q3 **RESOLVED — yes**: `blocked_injection` is a first-class 4th claim status with its
+  own quarantine visual state (see the state table above). Built in Slice 1.
+
+## 8. Post-reconciliation notes
+
+- Claim shapes are `technical-spec-core.md` §2's: `claim.status` 4-state,
+  `evidence.match_type` 5-state.
+- `representation.md` governs summary anatomy for Slice 2+ rendering: 5 sections
+  (Outcome / Next steps / Key takeaways / Pain points / Interests), 300–500-word cap,
+  conditional sections omitted never "N/A" — this sets §3's markdown/HTML section order.
+- Audio in the viewer is WAV/CBR with `preload="auto"` (F-34: the money moment must not
+  seek to the wrong second).

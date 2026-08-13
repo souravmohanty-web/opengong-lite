@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenGong Lite — notes with receipts</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, sans-serif; color: #1a1a1a; background: #fafafa; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 20px; border-bottom: 1px solid #ddd; background: #fff; }
+  h1 { font-size: 18px; margin: 0; }
+  .band { font-size: 13px; color: #555; background: #f0f0f0; padding: 2px 10px; border-radius: 10px; }
+  main { display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: calc(100vh - 110px); }
+  #notes, #transcript { overflow-y: auto; padding: 16px 20px; }
+  #transcript { border-left: 1px solid #ddd; background: #fff; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #777; margin: 18px 0 6px; }
+  .claim { border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; margin: 8px 0; cursor: pointer; background: #fff; }
+  .claim p { margin: 4px 0 0; }
+  .claim.active { border-color: #2563eb; box-shadow: 0 0 0 2px #2563eb33; }
+  .claim.uncorroborated { background: #f5f5f5; color: #777; border-style: dashed; cursor: default; }
+  .claim.blocked_injection { border-color: #dc2626; background: #fef2f2; cursor: default; }
+  .claim.blocked_injection .offending { font-size: 12px; color: #991b1b; margin-top: 6px; }
+  .badge { font-size: 11px; font-weight: 600; }
+  .verified .badge, .segment_corrected .badge { color: #15803d; }
+  .uncorroborated .badge { color: #92400e; }
+  .blocked_injection .badge { color: #dc2626; }
+  .utt { padding: 6px 8px; border-radius: 6px; margin: 2px 0; }
+  .utt.active { background: #eff6ff; outline: 1px solid #bfdbfe; }
+  .ts { color: #999; font-size: 12px; margin-right: 6px; }
+  .spk { font-weight: 600; margin-right: 4px; }
+  mark { background: #fde047; padding: 0 2px; border-radius: 2px; }
+  footer { padding: 8px 20px; border-top: 1px solid #ddd; background: #fff; }
+  audio { width: 100%; }
+</style>
+</head>
+<body>
+  <div id="app">loading…</div>
+  <footer><audio controls preload="auto" src="/audio.wav"></audio></footer>
+  <script type="module" src="/viewer.js"></script>
+</body>
+</html>

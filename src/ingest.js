@@ -38,7 +38,17 @@ export async function submitJob({ filePath, audioUrl }) {
   return res.json(); // { job_id, status: 'queued' }
 }
 
-export async function pollJob(jobId, { intervalMs = 2000, timeoutMs = 5 * 60 * 1000 } = {}) {
+// Timeout scales with how much audio the job has to chew through; the byte
+// estimate deliberately errs long (longer timeout is the safe direction).
+export function estimateAudioSeconds(bytes) {
+  return Math.ceil(bytes / 16_000);
+}
+
+export function pollTimeoutMs(estimatedAudioSeconds = 0) {
+  return 120_000 + estimatedAudioSeconds * 2000;
+}
+
+export async function pollJob(jobId, { intervalMs = 2000, timeoutMs = pollTimeoutMs() } = {}) {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     const res = await pyaiFetch(`/transcription/jobs/${jobId}`);
@@ -53,8 +63,13 @@ export async function pollJob(jobId, { intervalMs = 2000, timeoutMs = 5 * 60 * 1
 }
 
 export async function ingest(source) {
+  let estimatedSeconds = 0;
+  if (source.filePath) {
+    const { size } = await stat(source.filePath);
+    estimatedSeconds = estimateAudioSeconds(size);
+  }
   const { job_id } = await submitJob(source);
-  const job = await pollJob(job_id);
+  const job = await pollJob(job_id, { timeoutMs: pollTimeoutMs(estimatedSeconds) });
   return { job_id, transcript: buildTranscript(job.result) };
 }
 

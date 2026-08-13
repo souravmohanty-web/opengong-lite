@@ -24,8 +24,8 @@ state **current truth only**.
 |---|---|---|
 | Gate/extraction stack: gate.js, injection.js, registry, prompt, llm, extract, run records | hackathon (builder subagents) | in-progress |
 | Hour-zero probes (long-audio, dual-mono, numerals, 3-voice) | hackathon | in-progress |
-| 4 defect fixes in kept code: stereo max-utterance split + time-sort (transcript.js), AbortSignals + scaled poll timeout (pyai.js), 429 Retry-After discrimination | **projects-2f** | **in-progress** (claimed ~17:30) |
-| Minimal S1 viewer + local server (127.0.0.1:4317, Range/206): ONE click-claim→highlight→audio interaction, 4-state claim.status rendering | **projects-2f** | **in-progress** (claimed ~17:30) |
+| 4 defect fixes in kept code: stereo max-utterance split + time-sort (transcript.js), AbortSignals + scaled poll timeout (pyai.js), 429 Retry-After discrimination | **projects-2f** | **done** — test-first, 4 new tests in test/defects.test.js, `npm test` 22/22 |
+| Minimal S1 viewer + local server (127.0.0.1:4317, Range/206): ONE click-claim→highlight→audio interaction, 4-state claim.status rendering | **projects-2f** | **done** — src/{viewer.js,viewer.html,server.js} + fixture bundle; 7 viewer tests (escaping first) 22/22; live server verified: `/` 200, `/bundle.json` 200, Range → `206 bytes 100-199/677600`; planted fake quote renders demoted, blocked_injection quarantined |
 
 ## Build slices — roadmap
 
