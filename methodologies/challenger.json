@@ -1,0 +1,82 @@
+{
+  "id": "challenger",
+  "name": "Challenger Sale",
+  "origin": "Matthew Dixon & Brent Adamson (CEB research, 2011); Challenger, Inc.",
+  "summary": "Teach, Tailor, Take Control: lead with a commercial insight that reframes the buyer's problem, tailor it to the stakeholder, and keep constructive tension — especially around money and next steps. Includes the 6-step commercial-teaching arc (Warmer, Reframe, Rational Drowning, Emotional Impact, A New Way, Your Solution) as a fourth scoreable trait for presentation calls.",
+  "motion": "Insight-led enterprise/mid-market selling against status-quo buyers; reframe and presentation calls.",
+  "traits": [
+    {
+      "id": "teach",
+      "name": "Teach for differentiation",
+      "weight": 5,
+      "definition": "Delivering a genuine insight the buyer didn't know about their own business — one that reframes the problem and leads to your unique differentiation, not generic thought leadership.",
+      "classifying_questions": [
+        "Did the rep deliver a genuine insight the buyer didn't already know about their own business or market?",
+        "Did the insight reframe how the buyer sees a problem or opportunity?",
+        "Did the teaching lead naturally to the rep's unique differentiation rather than generic thought leadership?"
+      ],
+      "met_signals": ["'we've noticed teams like yours actually lose money on X' framing", "buyer reacts with surprise or reflection ('huh, we hadn't thought of it that way')"],
+      "miss_signals": ["insight is a rebranded feature pitch", "generic industry stats with no reframe"],
+      "coaching": {
+        "why_it_matters": "Buyers reward reps who teach them something about their own business — it's the top-ranked rep behavior in the original CEB research.",
+        "next_move": "Build one data-backed insight about this prospect's segment that only your vantage point reveals, and open with it.",
+        "example_line": "Across the teams we work with, the surprising cost isn't missed calls — it's the 40% of follow-ups that never happen. Can I show you what that looks like in your numbers?"
+      }
+    },
+    {
+      "id": "tailor",
+      "name": "Tailor for resonance",
+      "weight": 3,
+      "definition": "Adapting the message to this stakeholder's role, KPIs, industry, and personal value drivers — and re-adapting when new context emerges mid-call.",
+      "classifying_questions": [
+        "Did the rep adapt the message to this stakeholder's role, KPIs, and industry context?",
+        "Did they reference the buyer's specific value drivers rather than a generic pitch?",
+        "Did they adjust when new stakeholder context emerged mid-call?"
+      ],
+      "met_signals": ["message framed in the listener's metric (ops hours for ops, pipeline for VP sales)", "mid-call pivot when a new stakeholder joined"],
+      "miss_signals": ["same pitch regardless of who's in the room", "value framed in the rep's vocabulary, not the buyer's"],
+      "coaching": {
+        "why_it_matters": "The same insight lands or dies based on whose KPI it's framed in — resonance is the price of the reframe being heard.",
+        "next_move": "Before the next call, write one sentence per attendee: their KPI, and your message restated in it.",
+        "example_line": "For you specifically, this shows up as forecast accuracy — let me put it in those terms."
+      }
+    },
+    {
+      "id": "take_control",
+      "name": "Take control",
+      "weight": 4,
+      "definition": "Comfort with constructive tension: discussing money directly, pushing back on buyer assumptions, resisting discount pressure, and driving concrete next steps instead of vague follow-ups.",
+      "classifying_questions": [
+        "Did the rep discuss money and pricing directly, without flinching?",
+        "Did they push back constructively on buyer assumptions or process — maintaining tension without aggression?",
+        "Did they drive concrete, dated next steps rather than accepting vague follow-ups?",
+        "Did they hold the line on discount pressure?"
+      ],
+      "met_signals": ["pricing addressed head-on", "rep respectfully challenges 'we always do an RFP'", "call ends with a dated commitment"],
+      "miss_signals": ["'send us your best price' pacified with a discount", "call ends with 'circle back next month'"],
+      "coaching": {
+        "why_it_matters": "Challengers win by holding tension where average reps release it — every released tension costs margin or momentum.",
+        "next_move": "Pick the one buyer assumption you disagreed with silently on this call, and challenge it openly on the next.",
+        "example_line": "I'll push back on that: running this as a three-month RFP is exactly how the problem survives another two quarters. Can I suggest a faster path?"
+      }
+    },
+    {
+      "id": "teaching_choreography",
+      "name": "Commercial teaching arc",
+      "weight": 2,
+      "definition": "For presentation-style calls: the 6-step arc — Warmer, Reframe, Rational Drowning, Emotional Impact, A New Way, Your Solution — with the solution arriving LAST.",
+      "classifying_questions": [
+        "Did the call follow reframe-before-solution — the product appearing only after the problem was rebuilt?",
+        "Was there rational drowning (data making the status quo untenable) and emotional impact (a story making it felt)?",
+        "Mark not_applicable for pure discovery calls with no presentation segment."
+      ],
+      "met_signals": ["solution introduced in the last third", "a customer story that makes the cost of inaction visceral"],
+      "miss_signals": ["deck opens with the product", "no emotional beat anywhere in the narrative"],
+      "coaching": {
+        "why_it_matters": "The order is the method: a solution shown before the reframe is just another demo to compare on price.",
+        "next_move": "Restructure the deck so the product doesn't appear until the buyer has felt the cost of their current path.",
+        "example_line": "Before I show you anything of ours, let me show you what the current path costs teams like yours."
+      }
+    }
+  ]
+}

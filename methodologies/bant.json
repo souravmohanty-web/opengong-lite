@@ -1,0 +1,81 @@
+{
+  "id": "bant",
+  "name": "BANT",
+  "origin": "IBM, 1950s-60s internal qualification guide.",
+  "summary": "Fast qualification: Budget, Authority, Need, Timing. Best for high-velocity SDR/first-call qualification; too shallow for enterprise deal inspection on its own.",
+  "motion": "Transactional / SMB, high-velocity inbound, SDR first calls.",
+  "traits": [
+    {
+      "id": "budget",
+      "name": "Budget",
+      "weight": 3,
+      "definition": "Whether funds exist or can be allocated for this problem, and how they get approved.",
+      "classifying_questions": [
+        "Did the rep ask whether funds exist or can be allocated for this problem?",
+        "Did they test the budget range against the likely price?",
+        "Did they learn how budget is approved and by whom?"
+      ],
+      "met_signals": ["a range or approval path is stated", "prospect confirms this is funded or fundable"],
+      "miss_signals": ["price never approached", "rep assumes budget from company size"],
+      "coaching": {
+        "why_it_matters": "A qualified need without money is a nice conversation, not a pipeline entry.",
+        "next_move": "Test a realistic range early and ask how spends of that size get approved.",
+        "example_line": "Solutions like this typically land between X and Y — is that a range you could get approved if the fit is right?"
+      }
+    },
+    {
+      "id": "authority",
+      "name": "Authority",
+      "weight": 3,
+      "definition": "Whether the contact can make or heavily influence the decision, and who else must sign off.",
+      "classifying_questions": [
+        "Did the rep establish whether the contact can make or heavily influence the decision?",
+        "Did they identify who else must sign off?",
+        "If the decision-maker wasn't on the call, was a path to them secured?"
+      ],
+      "met_signals": ["decision role clarified", "next step includes the decision-maker"],
+      "miss_signals": ["seniority assumed from title", "'I'll share it with the team' accepted flat"],
+      "coaching": {
+        "why_it_matters": "Selling hard to someone who can't buy is the most expensive way to practice your pitch.",
+        "next_move": "Ask how the decision was made last time they bought something similar, and get the decision-maker into the next step.",
+        "example_line": "Besides you, who would need to be comfortable with this before it could go ahead?"
+      }
+    },
+    {
+      "id": "need",
+      "name": "Need",
+      "weight": 4,
+      "definition": "A genuine business need the product addresses, ranked for severity, in the buyer's own words.",
+      "classifying_questions": [
+        "Did the rep confirm a genuine business need the product addresses?",
+        "Did they rank the need's severity or priority against everything else on the buyer's plate?",
+        "Did the buyer articulate the need in their own words?"
+      ],
+      "met_signals": ["prospect describes the problem unprompted", "priority relative to other initiatives established"],
+      "miss_signals": ["need inferred solely from the demo request", "rep lists problems the prospect merely agrees to"],
+      "coaching": {
+        "why_it_matters": "Without an admitted, prioritized need the deal evaporates at the first budget review.",
+        "next_move": "Have the prospect rank this problem against their other priorities before proposing next steps.",
+        "example_line": "Of everything on your plate this quarter, where does fixing this actually rank?"
+      }
+    },
+    {
+      "id": "timing",
+      "name": "Timing",
+      "weight": 3,
+      "definition": "When the buyer intends to decide or implement, anchored to a driving event.",
+      "classifying_questions": [
+        "Did the rep establish when the buyer intends to decide or implement?",
+        "Is there a driving event behind the date (contract expiry, launch, headcount change)?",
+        "Did they test what happens if the date slips?"
+      ],
+      "met_signals": ["a date tied to a real event", "consequence of slipping acknowledged"],
+      "miss_signals": ["'sometime next quarter' accepted", "rep-imposed urgency with no buyer event"],
+      "coaching": {
+        "why_it_matters": "Deals without a real deadline drift forever; a buyer event is the only deadline that survives contact with reality.",
+        "next_move": "Find the event behind the timeline — and if there isn't one, requalify how real this is.",
+        "example_line": "What happens on your side if this isn't live by that date?"
+      }
+    }
+  ]
+}

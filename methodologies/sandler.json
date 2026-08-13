@@ -1,0 +1,135 @@
+{
+  "id": "sandler",
+  "name": "Sandler Selling System",
+  "origin": "David Sandler, 1967; Sandler (formerly Sandler Training). The 'Sandler Submarine'.",
+  "summary": "Seven submarine compartments in order: Bonding & Rapport, Up-Front Contracts, Pain, Budget, Decision, Fulfillment, Post-Sell. Equal-footing, low-pressure selling: qualify hard (Pain -> Budget -> Decision) before ever presenting, and inoculate against remorse after the close.",
+  "motion": "Mid-market consultative and full-cycle sellers; strong qualification discipline.",
+  "traits": [
+    {
+      "id": "bonding_rapport",
+      "name": "Bonding & Rapport",
+      "weight": 2,
+      "definition": "An equal-footing, low-pressure tone where the buyer speaks freely — no eager-seller behavior.",
+      "classifying_questions": [
+        "Did the rep establish an equal-footing, low-pressure tone (no eager-seller behavior)?",
+        "Did they match the buyer's communication style?",
+        "Was psychological safety evident — the buyer speaking freely, including about negatives?"
+      ],
+      "met_signals": ["buyer volunteers problems unprompted", "rep comfortable with silence and 'no'"],
+      "miss_signals": ["rep over-talks or over-agrees", "buyer gives guarded one-line answers throughout"],
+      "coaching": {
+        "why_it_matters": "Sandler selling runs on the buyer telling you the truth; truth requires a peer dynamic, not a vendor dynamic.",
+        "next_move": "Open the next call with a nurturing, no-pressure frame and one honest disqualifier to signal you're not desperate.",
+        "example_line": "It may turn out we're not a fit — I'd rather we find that out together in the next twenty minutes than after a long demo."
+      }
+    },
+    {
+      "id": "upfront_contract",
+      "name": "Up-Front Contracts",
+      "weight": 4,
+      "definition": "An explicit agreement at the start: purpose, time, both agendas, and the possible outcomes — including that 'no' is acceptable. Mini-contracts before transitions (demo, pricing).",
+      "classifying_questions": [
+        "Did the rep set an explicit agenda with time, purpose, and agreed possible outcomes at the start?",
+        "Did both sides agree on what happens at the end of the call — including that 'no' is an acceptable outcome?",
+        "Were mini-contracts set before transitions (e.g., before demoing or discussing pricing)?"
+      ],
+      "met_signals": ["'by the end of this call we'll decide X or Y' stated and agreed", "transition asks before the demo"],
+      "miss_signals": ["call drifts with no agreed outcome", "ends with 'I'll send some info over'"],
+      "coaching": {
+        "why_it_matters": "Without a contract for the call, you get the mutual mystification Sandler warned about — polite endings and ghosted follow-ups.",
+        "next_move": "Script a 30-second up-front contract and deliver it before anything else on the next call.",
+        "example_line": "We've got 30 minutes. I'd like to ask about the dialer problems, you'll have questions for me, and at the end let's agree either on a next step or that it's not a fit — fair?"
+      }
+    },
+    {
+      "id": "pain",
+      "name": "Pain (Pain Funnel)",
+      "weight": 5,
+      "definition": "Running the pain funnel — surface -> example -> impact -> personal cost — until the BUYER concludes the pain matters, quantified in money, time, or emotion.",
+      "classifying_questions": [
+        "Did the rep run a pain funnel — surface statement, concrete example, business impact, personal cost?",
+        "Did they quantify the pain in money, time, or emotion?",
+        "Did the buyer, not the rep, conclude that the pain matters?"
+      ],
+      "met_signals": ["'can you give me an example... what has that cost you... how do you feel about that?' progression", "buyer says some version of 'we have to fix this'"],
+      "miss_signals": ["first pain statement taken at face value", "rep supplies the impact narrative themselves"],
+      "coaching": {
+        "why_it_matters": "People buy emotionally and justify intellectually — the funnel walks the buyer from a fact to a feeling they will pay to change.",
+        "next_move": "Take this call's strongest surface pain and go two levels deeper next time: a concrete example, then what it costs them personally.",
+        "example_line": "Can you give me a specific example of the last time that happened — and what did that end up costing you?"
+      }
+    },
+    {
+      "id": "budget",
+      "name": "Budget",
+      "weight": 3,
+      "definition": "Openly discussing whether the buyer is willing and able to invest money, time, and resources — BEFORE presenting.",
+      "classifying_questions": [
+        "Did the rep openly discuss whether the buyer is willing and able to invest (money, time, resources)?",
+        "Was budget surfaced before any presenting or pricing reveal?",
+        "Did they test comfort with the likely price range?"
+      ],
+      "met_signals": ["money discussed without flinching", "a range floated and reacted to"],
+      "miss_signals": ["price avoided until the proposal", "rep hopes the demo will justify the number later"],
+      "coaching": {
+        "why_it_matters": "Presenting before budget is qualified is free consulting; Sandler qualifies the wallet before the show.",
+        "next_move": "Introduce a money bracket in the qualification phase of the next call, matter-of-factly.",
+        "example_line": "Teams your size typically invest between X and Y with us — is that in the universe of what you'd spend to fix this?"
+      }
+    },
+    {
+      "id": "decision",
+      "name": "Decision",
+      "weight": 3,
+      "definition": "Mapping the who, how, when, and why of the decision — process, parties, and timeline agreed.",
+      "classifying_questions": [
+        "Did the rep map who, how, and when the decision gets made?",
+        "Were all parties involved in the decision uncovered?",
+        "Did they get agreement on what the decision timeline looks like?"
+      ],
+      "met_signals": ["decision steps and people named", "timeline agreed with the buyer"],
+      "miss_signals": ["'send a proposal and we'll see' accepted", "unknown approvers at closing time"],
+      "coaching": {
+        "why_it_matters": "A deal you can't map is a deal you can't forecast — surprises in the decision process are always bad ones.",
+        "next_move": "Before fulfillment, walk the buyer through 'what happens between yes and signed?' and write the steps down together.",
+        "example_line": "Suppose you love what you see — walk me through what happens next on your side, step by step."
+      }
+    },
+    {
+      "id": "fulfillment",
+      "name": "Fulfillment",
+      "weight": 2,
+      "definition": "Presenting ONLY against the pains qualified earlier — no feature dumping — and asking for a decision at the close, not a 'think it over'.",
+      "classifying_questions": [
+        "Did the presentation address only the pains uncovered earlier (no feature dumping)?",
+        "Did the rep confirm the solution closes each qualified pain?",
+        "Did they seek a decision at the close of fulfillment rather than accepting 'think it over'?"
+      ],
+      "met_signals": ["demo mapped pain-by-pain", "'does that solve the problem you described?' checks"],
+      "miss_signals": ["full product tour regardless of pains", "call ends on 'we'll think about it' unchallenged"],
+      "coaching": {
+        "why_it_matters": "Every feature beyond the qualified pains adds risk and price objections without adding desire.",
+        "next_move": "Structure the next demo as a checklist of their three pains; ask for a thumbs-up-or-down after each.",
+        "example_line": "You said missed follow-ups were the killer — here's exactly and only how that goes away. Does this close it?"
+      }
+    },
+    {
+      "id": "post_sell",
+      "name": "Post-Sell",
+      "weight": 2,
+      "definition": "Inoculating against buyer's remorse and competitor pull-back after the yes; locking next steps and onboarding.",
+      "classifying_questions": [
+        "Did the rep inoculate against remorse ('is there anything that could reverse this decision?')?",
+        "Did they proactively surface competitor pull-back or internal second-guessing?",
+        "Did they lock concrete next steps or onboarding before ending?"
+      ],
+      "met_signals": ["'what could derail this between now and signature?' asked", "onboarding step scheduled on the call"],
+      "miss_signals": ["celebration then silence", "no rehearsal of the internal pushback the champion will face"],
+      "coaching": {
+        "why_it_matters": "Deals unravel in the 48 hours after yes, when the incumbent calls back and finance asks 'why now?' — inoculate before you hang up.",
+        "next_move": "After the next verbal yes, ask what could reverse it and rehearse the buyer's answer to their toughest internal skeptic.",
+        "example_line": "Before we book onboarding — is there anyone or anything that could unwind this decision next week? Let's handle it now."
+      }
+    }
+  ]
+}

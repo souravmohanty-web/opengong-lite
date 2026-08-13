@@ -1,0 +1,80 @@
+{
+  "id": "value-selling",
+  "name": "ValueSelling Framework",
+  "origin": "ValueSelling Associates (originated at Wang Labs; long led by Julie Thomas). Canonical artifacts: Qualified Prospect Formula and Value Prompter.",
+  "summary": "Qualified Prospect = VisionMatch(Differentiated) x Value x Power x Plan — multiplicative: any element at zero means unqualified. Anchor to a C-level business issue, build a differentiated vision the buyer confirms, a time-bound measurable business case, access to power, and a mutual plan.",
+  "motion": "Enterprise / considered B2B; strong forecast-inspection rubric.",
+  "traits": [
+    {
+      "id": "vision_match",
+      "name": "Business Issue & VisionMatch (Differentiated)",
+      "weight": 4,
+      "definition": "Anchoring to a C-level business issue (not just a departmental problem), with the buyer confirming your solution vision addresses it — differentiated from alternatives.",
+      "classifying_questions": [
+        "Did the rep anchor to a C-level business issue rather than only a departmental problem?",
+        "Did the buyer confirm the solution vision addresses it?",
+        "Did the rep differentiate that vision from the alternatives?"
+      ],
+      "met_signals": ["problem tied to an executive-level issue", "buyer confirms the vision fits"],
+      "miss_signals": ["conversation stays departmental", "vision generic across vendors"],
+      "coaching": {
+        "why_it_matters": "In the multiplicative formula, no confirmed differentiated vision means the whole product is zero — everything else can't compensate.",
+        "next_move": "Connect the departmental pain upward to the business issue an executive owns, and get the buyer to confirm the linkage.",
+        "example_line": "The manual CRM work is the symptom — the business issue is forecast reliability. Is that how your CFO would frame it?"
+      }
+    },
+    {
+      "id": "value",
+      "name": "Value",
+      "weight": 4,
+      "definition": "A time-bound, measurable business case the buyer agrees justifies the investment — organizational and personal.",
+      "classifying_questions": [
+        "Did the rep build a measurable, time-bound business case?",
+        "Did the buyer agree the value justifies the cost?",
+        "Was value personal as well as organizational?"
+      ],
+      "met_signals": ["value with numbers and a timeframe", "buyer agreement captured"],
+      "miss_signals": ["value discussed without numbers or dates", "personal win never explored"],
+      "coaching": {
+        "why_it_matters": "Value at zero zeroes the deal — and undated value is unprovable value.",
+        "next_move": "Add a timeframe to every value claim and confirm both the number and the date with the buyer.",
+        "example_line": "So that's roughly $200K recovered within two quarters of go-live — do you buy that math?"
+      }
+    },
+    {
+      "id": "power",
+      "name": "Power",
+      "weight": 4,
+      "definition": "The person who can approve and fund the decision identified, with gained or planned access — testing whether your contact can get you there.",
+      "classifying_questions": [
+        "Did the rep identify the person with power to approve or fund the decision?",
+        "Did they gain or plan access to that person?",
+        "Did they test whether the contact can get them there?"
+      ],
+      "met_signals": ["power person named", "access step agreed or influence honestly tested"],
+      "miss_signals": ["power assumed", "contact's influence never probed"],
+      "coaching": {
+        "why_it_matters": "Deals without access to power are forecast risks, not commitments — power at zero zeroes the formula.",
+        "next_move": "Ask your contact directly whether they can get you to the funder, and propose the specific meeting.",
+        "example_line": "Who ultimately funds this — and can the three of us get thirty minutes together before the proposal?"
+      }
+    },
+    {
+      "id": "plan",
+      "name": "Plan",
+      "weight": 3,
+      "definition": "A mutual plan covering issue, solution, value, buying steps, and value realization — with dates, and the buyer committed to it.",
+      "classifying_questions": [
+        "Did the rep propose a mutual plan with steps, dates, and value-realization milestones?",
+        "Did the buyer commit to the plan?"
+      ],
+      "met_signals": ["plan proposed or referenced with dates", "buyer agrees to own steps"],
+      "miss_signals": ["next steps vague or one-sided", "no milestone past the signature"],
+      "coaching": {
+        "why_it_matters": "The plan converts intent into forecastable steps — and extending it past signature into value realization is what protects the renewal.",
+        "next_move": "Draft the mutual plan through value realization (not just signature) and ask the buyer to edit it.",
+        "example_line": "Here's a plan from today to your first measurable result in Q2 — mark up anything that's wrong and let's run it together."
+      }
+    }
+  ]
+}

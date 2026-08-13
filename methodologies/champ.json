@@ -1,0 +1,77 @@
+{
+  "id": "champ",
+  "name": "CHAMP",
+  "origin": "Zorian Rotenberg (InsightSquared, ~2014) — a buyer-centric reordering of BANT.",
+  "summary": "Challenges, Authority, Money, Prioritization: lead with the buyer's challenges before any budget or authority talk, then map decision-makers, funding, and where this ranks among the buyer's initiatives.",
+  "motion": "SMB / mid-market, high-velocity inbound; a buyer-friendly BANT replacement.",
+  "traits": [
+    {
+      "id": "challenges",
+      "name": "Challenges",
+      "weight": 5,
+      "definition": "The buyer's pain points, led with — before budget or authority — and ranked by the buyer.",
+      "classifying_questions": [
+        "Did the rep lead with the buyer's pain points before any budget or authority talk?",
+        "Did the buyer confirm which challenge matters most?"
+      ],
+      "met_signals": ["call opens on the buyer's problems", "top challenge named by the buyer"],
+      "miss_signals": ["qualification checklist run before any pain discussion"],
+      "coaching": {
+        "why_it_matters": "CHAMP exists because buyers hang up on budget interrogations — challenges first is what earns the rest of the acronym.",
+        "next_move": "Restructure the opener around their problems; hold money questions until a challenge is confirmed.",
+        "example_line": "Before anything about us — what's the problem that made you take this call?"
+      }
+    },
+    {
+      "id": "authority",
+      "name": "Authority",
+      "weight": 3,
+      "definition": "Decision-makers and influencers mapped, with a planned route to the decision-maker.",
+      "classifying_questions": [
+        "Did the rep map decision-makers and influencers?",
+        "Did they plan a route to the decision-maker?"
+      ],
+      "met_signals": ["buying roles identified", "a concrete step toward the decision-maker"],
+      "miss_signals": ["authority assumed from the contact's title"],
+      "coaching": {
+        "why_it_matters": "Influencers inform, decision-makers decide — you need a mapped route to the latter.",
+        "next_move": "Ask who else touches this decision and propose a step that includes them.",
+        "example_line": "Who besides you gets a vote here, and what would they want to see?"
+      }
+    },
+    {
+      "id": "money",
+      "name": "Money",
+      "weight": 3,
+      "definition": "Budget or resources allocated (or allocatable) to the challenge — explored AFTER establishing it — testing willingness to fund vs mere interest.",
+      "classifying_questions": [
+        "Did the rep explore budget or resources for the challenge after establishing it?",
+        "Did they test willingness to fund versus mere interest?"
+      ],
+      "met_signals": ["funding path discussed in the context of the confirmed challenge"],
+      "miss_signals": ["budget question fired before any pain", "interest mistaken for intent"],
+      "coaching": {
+        "why_it_matters": "Interest is free; funding is a decision. Testing the difference early saves quarters.",
+        "next_move": "Once the challenge is confirmed, ask what solving it would be worth funding.",
+        "example_line": "If this is as costly as it sounds, is it something you'd fund this quarter, or is it a next-year problem?"
+      }
+    },
+    {
+      "id": "prioritization",
+      "name": "Prioritization",
+      "weight": 4,
+      "definition": "Where solving this ranks among the buyer's initiatives, and why it must be solved now.",
+      "classifying_questions": [
+        "Did the rep establish where solving this ranks among the buyer's initiatives?",
+        "Is there a reason it must be solved now?"
+      ],
+      "met_signals": ["explicit ranking against other initiatives", "a now-reason articulated"],
+      "miss_signals": ["priority never tested", "deal advanced on politeness"],
+      "coaching": {
+        "why_it_matters": "Deals lose to other priorities more often than to competitors — rank tells you which pipeline this really is.",
+        "next_move": "Ask the ranking question directly and believe the answer.",
+        "example_line": "Honestly — of your top five initiatives this quarter, is this one of them?"
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "$comment": "Admin-level setting: which methodology pack scores calls. Set via `npm run coach -- set <pack-id>` or edit here. Files starting with _ are not packs. custom_packs_dir holds admin-compiled packs from free text.",
+  "methodology": "meddic",
+  "custom_packs_dir": "methodologies-custom"
+}

@@ -1,0 +1,77 @@
+{
+  "id": "neat",
+  "name": "N.E.A.T. Selling",
+  "origin": "Richard Harris, The Harris Consulting Group (with Sales Hacker). Trademarked N.E.A.T. Selling.",
+  "summary": "A buyer-centric modernization of BANT: core Need (beneath the surface request), Economic impact (replaces Budget), Access to Authority (replaces Authority), and a Timeline anchored to a compelling event.",
+  "motion": "SaaS / mid-market qualification; SDR-to-AE handoffs.",
+  "traits": [
+    {
+      "id": "need",
+      "name": "Need (core, not surface)",
+      "weight": 4,
+      "definition": "The deeper business need beneath the stated want — must-solve, not nice-to-have.",
+      "classifying_questions": [
+        "Did the rep dig beneath the stated want to the underlying business need?",
+        "Did they distinguish nice-to-have from must-solve?"
+      ],
+      "met_signals": ["'what's driving that request?' asked", "core need articulated by the buyer"],
+      "miss_signals": ["surface request taken as the need", "no severity test"],
+      "coaching": {
+        "why_it_matters": "Surface wants get quotes; core needs get purchase orders.",
+        "next_move": "Ask what's behind the stated request until you reach the business problem it serves.",
+        "example_line": "You asked about call recording — what's happening on the team that made that a priority now?"
+      }
+    },
+    {
+      "id": "economic_impact",
+      "name": "Economic Impact",
+      "weight": 4,
+      "definition": "What the problem costs today and what solving it is worth — confirmed by the buyer, not just 'we have budget'.",
+      "classifying_questions": [
+        "Did the rep quantify what the problem costs today and what solving it is worth?",
+        "Did the buyer confirm the economic math rather than just asserting budget exists?"
+      ],
+      "met_signals": ["cost-of-problem and value-of-solution both discussed", "buyer validates the math"],
+      "miss_signals": ["only 'do you have budget?' asked", "impact never monetized"],
+      "coaching": {
+        "why_it_matters": "Budget is a snapshot; economic impact is the argument that creates or expands budget.",
+        "next_move": "Build the cost-of-problem number with the buyer before discussing price.",
+        "example_line": "Before we talk price — what is this problem costing you per month right now, roughly?"
+      }
+    },
+    {
+      "id": "access_to_authority",
+      "name": "Access to Authority",
+      "weight": 4,
+      "definition": "Identifying the actual authority and securing a path to them — meeting, intro, or champion-carried message — with an honest test of the contact's influence.",
+      "classifying_questions": [
+        "Did the rep identify the actual authority and secure a path to them?",
+        "Did they test the contact's influence honestly rather than assuming it?"
+      ],
+      "met_signals": ["a concrete access step agreed", "influence tested ('have you gotten something like this approved before?')"],
+      "miss_signals": ["authority assumed from title", "no access ask at all"],
+      "coaching": {
+        "why_it_matters": "You rarely get the authority on the call — what you can always get is ACCESS, or the truth that there is none.",
+        "next_move": "Ask your contact how they'd carry this to the decision-maker, and offer to equip or join them.",
+        "example_line": "When you bring this to your CRO, what will they push back on — and would it help if we handled that part together?"
+      }
+    },
+    {
+      "id": "timeline",
+      "name": "Timeline (compelling event)",
+      "weight": 3,
+      "definition": "Timing anchored to a compelling event with consequences — not an arbitrary date — and tested for slippage.",
+      "classifying_questions": [
+        "Did the rep anchor timing to a compelling event with consequences, not an arbitrary date?",
+        "Did they test what happens if the date slips?"
+      ],
+      "met_signals": ["event named with a consequence", "slippage cost discussed"],
+      "miss_signals": ["'Q3 probably' accepted", "urgency invented by the rep"],
+      "coaching": {
+        "why_it_matters": "A timeline without a compelling event is a wish with a date on it.",
+        "next_move": "Find the event on the buyer's calendar that makes the date real; if none exists, requalify.",
+        "example_line": "What breaks on your side if this isn't done by then?"
+      }
+    }
+  ]
+}

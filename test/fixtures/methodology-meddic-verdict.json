@@ -1,0 +1,61 @@
+{
+  "call_type": "discovery",
+  "overall_note": "Strong discovery: pain and metrics quantified by the buyer, the economic buyer named along with her approval rule, and criteria surfaced. The decision process was never mapped, and the champion is promising but untested beyond a Thursday conversation.",
+  "traits": [
+    {
+      "id": "metrics",
+      "verdict": "met",
+      "confidence": 0.9,
+      "evidence": [
+        { "quote": "We think each booked patient is worth about 300 dollars", "segment": 2 },
+        { "quote": "Last month we missed 214 calls across three clinics.", "segment": 1 }
+      ],
+      "gap": ""
+    },
+    {
+      "id": "economic_buyer",
+      "verdict": "met",
+      "confidence": 0.85,
+      "evidence": [
+        { "quote": "Dr. Rao, our owner.", "segment": 5 },
+        { "quote": "She approves anything with a payback under six months.", "segment": 7 }
+      ],
+      "gap": ""
+    },
+    {
+      "id": "decision_criteria",
+      "verdict": "met",
+      "confidence": 0.8,
+      "evidence": [
+        { "quote": "It has to work with our Dentrix system, and the front desk has to actually use it.", "segment": 9 }
+      ],
+      "gap": ""
+    },
+    {
+      "id": "decision_process",
+      "verdict": "missed",
+      "confidence": 0.75,
+      "evidence": [],
+      "gap": "The approval rule is known (sub-six-month payback) but no path was mapped from next week's demo to a decision — no steps, no timeline, no date with Dr. Rao."
+    },
+    {
+      "id": "identify_pain",
+      "verdict": "met",
+      "confidence": 0.95,
+      "evidence": [
+        { "quote": "our front desk misses too many calls", "segment": 1 }
+      ],
+      "gap": ""
+    },
+    {
+      "id": "champion",
+      "verdict": "partial",
+      "confidence": 0.5,
+      "evidence": [
+        { "quote": "If the math is right I'll put it in front of her on Thursday.", "segment": 11 },
+        { "quote": "I will fight for this internally no matter what", "segment": 11 }
+      ],
+      "gap": "Maya is willing and now has a payback one-pager to carry, but her influence with Dr. Rao was never tested — willingness was offered, not probed."
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "id": "meddpicc",
+  "name": "MEDDPICC",
+  "origin": "Extension of MEDDIC popularized by Force Management-adjacent practitioners; adds Paper process and Competition.",
+  "summary": "MEDDIC plus two traits that kill late-stage deals: the Paper process (legal, security, procurement) and Competition (who else is in the deal, including 'do nothing'). Use over MEDDIC when contracts and rival vendors routinely decide outcomes.",
+  "motion": "Enterprise sales with formal procurement and competitive bake-offs.",
+  "traits": [
+    {
+      "id": "metrics",
+      "name": "Metrics",
+      "weight": 4,
+      "definition": "Quantified business impact confirmed by the buyer.",
+      "classifying_questions": [
+        "Did the rep get the prospect to quantify the problem or the value of solving it?",
+        "Are the numbers the prospect's own rather than the rep's assertions?"
+      ],
+      "met_signals": ["prospect states or confirms a number"],
+      "miss_signals": ["value only in adjectives"],
+      "coaching": {
+        "why_it_matters": "Metrics are the ammunition your champion uses with finance.",
+        "next_move": "Quantify the top pain from this call with the prospect and confirm it back.",
+        "example_line": "Roughly what is that costing you per month today?"
+      }
+    },
+    {
+      "id": "economic_buyer",
+      "name": "Economic Buyer",
+      "weight": 4,
+      "definition": "The person with final budget authority and veto power, and your path to them.",
+      "classifying_questions": [
+        "Did the rep identify who signs and owns the budget?",
+        "Was a step toward the economic buyer agreed?"
+      ],
+      "met_signals": ["named budget owner", "agreed path to meet them"],
+      "miss_signals": ["'leadership will decide' left unexplored"],
+      "coaching": {
+        "why_it_matters": "Late-stage stalls are usually an unmet economic buyer.",
+        "next_move": "Ask who signs and propose a specific joint step with them.",
+        "example_line": "Whose budget funds this, and what would they need to see to approve it?"
+      }
+    },
+    {
+      "id": "decision_criteria",
+      "name": "Decision Criteria",
+      "weight": 3,
+      "definition": "The yardsticks vendors are compared on — and your influence over them.",
+      "classifying_questions": [
+        "Did the rep surface what the evaluation will be judged on?",
+        "Did the rep try to shape a criterion in their favor?"
+      ],
+      "met_signals": ["criteria list stated", "rep plants a differentiator as a criterion"],
+      "miss_signals": ["demo with no known yardstick"],
+      "coaching": {
+        "why_it_matters": "Unshaped criteria default to the incumbent's or loudest competitor's strengths.",
+        "next_move": "Get the evaluation list and add one criterion you win outright.",
+        "example_line": "What are the three things that will actually decide this comparison?"
+      }
+    },
+    {
+      "id": "decision_process",
+      "name": "Decision Process",
+      "weight": 3,
+      "definition": "Steps, approvers, and timeline from 'yes' to signature.",
+      "classifying_questions": [
+        "Did the rep map stages, approvers, and a target date?",
+        "Is there a mutual plan anchored to a buyer-side event?"
+      ],
+      "met_signals": ["reverse timeline agreed"],
+      "miss_signals": ["no timeline anchor"],
+      "coaching": {
+        "why_it_matters": "Every unmapped step is a slipped quarter.",
+        "next_move": "Build a reverse timeline from the buyer's target date with owners per step.",
+        "example_line": "Can we walk backwards from your go-live date and list every step and owner?"
+      }
+    },
+    {
+      "id": "paper_process",
+      "name": "Paper Process",
+      "weight": 3,
+      "definition": "The contractual path: legal review, security review, procurement, vendor onboarding — who runs it and how long it takes.",
+      "classifying_questions": [
+        "Did the rep ask what happens after a verbal yes — legal, security, procurement steps?",
+        "Are typical durations or known bottlenecks for those steps surfaced?",
+        "Did the rep offer to start a long-lead item early (security questionnaire, MSA redlines)?"
+      ],
+      "met_signals": ["procurement/legal steps named with rough durations", "security review started in parallel"],
+      "miss_signals": ["'then we sign' with no paper path", "surprise procurement portal at closing time"],
+      "coaching": {
+        "why_it_matters": "Deals die in paperwork after every human has said yes — the paper process is where forecast slips are born.",
+        "next_move": "Ask your contact to walk you through the last purchase like this one, step by step; start the longest-lead item now.",
+        "example_line": "Last time you bought software like this, how long did security and legal take — and can we start that questionnaire this week?"
+      }
+    },
+    {
+      "id": "implicate_pain",
+      "name": "Implicate the Pain",
+      "weight": 5,
+      "definition": "Beyond identifying a pain: deepening it until the buyer owns its severity — root cause, downstream consequences, cost of inaction (identify -> indicate -> implicate, per Andy Whyte's MEDDICC canon).",
+      "classifying_questions": [
+        "Beyond naming a pain, did the rep deepen it — root cause, downstream consequences, cost of inaction?",
+        "Did the buyer's language shift to owning the pain ('we can't keep doing this')?",
+        "Did the rep connect the pain to the buyer personally or departmentally, not just corporately?"
+      ],
+      "met_signals": ["buyer escalates the pain in their own words", "cost of doing nothing made explicit"],
+      "miss_signals": ["pain named once and immediately pitched at", "severity asserted by the rep, never confirmed"],
+      "coaching": {
+        "why_it_matters": "An identified pain gets a meeting; an implicated pain gets a budget. Everything else hangs off a pain the buyer owns.",
+        "next_move": "Take the strongest pain from this call one level deeper: root cause, who else it hurts, and what it costs to leave alone.",
+        "example_line": "If nothing changes for two more quarters, what does that do to the renewal numbers — and who's answering for that?"
+      }
+    },
+    {
+      "id": "champion",
+      "name": "Champion",
+      "weight": 4,
+      "definition": "A tested internal advocate with power and personal stake.",
+      "classifying_questions": [
+        "Is someone on the buyer side actively selling this internally?",
+        "Did the rep test their influence and equip them with materials?"
+      ],
+      "met_signals": ["contact arranges internal meetings", "rep supplies a business-case asset"],
+      "miss_signals": ["friendly contact assumed to be a champion"],
+      "coaching": {
+        "why_it_matters": "A tested champion is your proxy in every meeting you are not in.",
+        "next_move": "Hand your champion a one-pager with their metrics and watch whether they socialize it.",
+        "example_line": "Would you walk your VP through this one-pager before our next call?"
+      }
+    },
+    {
+      "id": "competition",
+      "name": "Competition",
+      "weight": 3,
+      "definition": "Who else is being evaluated — vendors, internal builds, and the status quo — and your positioning against each.",
+      "classifying_questions": [
+        "Did the rep ask who else is being looked at (including doing nothing or building in-house)?",
+        "Were the competitor's perceived strengths acknowledged and countered with a trap or differentiator?",
+        "Did the rep learn where the buyer leans and why?"
+      ],
+      "met_signals": ["competitors named", "rep sets a trap question aimed at a rival's weakness"],
+      "miss_signals": ["rep never asks who else is in the deal", "badmouthing a competitor without positioning"],
+      "coaching": {
+        "why_it_matters": "You are always competing with someone — a rival, an internal build, or inertia. Unknown competition writes the criteria without you.",
+        "next_move": "Ask directly who else is in the evaluation and what they like about them; position against that, not against a generic rival.",
+        "example_line": "Who else are you looking at — and what's the strongest thing you've seen from them so far?"
+      }
+    }
+  ]
+}
