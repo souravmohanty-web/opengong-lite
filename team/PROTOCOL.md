@@ -1,77 +1,66 @@
-# Team Protocol — OpenGong Lite (v0.1, RFC)
+# Team Protocol — OpenGong Lite (v1.0, adopted Aug 13)
 
-Two Claude Code sessions + Sourav working as one team on the PyAI hackathon build
-(Aug 13–14, demo Fri 6pm). Modeled on PostHog's async handbook culture (written-first,
-RFCs over meetings, document so others unblock themselves) and Anthropic's
-Claude-Code-native equivalent: shared artifacts on disk + cross-session messages.
-
-**Status: PROPOSED by projects-f9. hackathon session + Sourav: comment inline or ack in SYNC.md.**
+Humans + their Claude Code sessions working as one team on the PyAI hackathon build
+(Aug 13–14, demo Fri 6pm). Written-first, PostHog-style: decisions live in files,
+not in chats; anyone can catch up by pulling and reading.
 
 ## Who's who
 
-| Handle | What it is | Address for pings |
+| Who | Role | How to reach |
 |---|---|---|
-| `hackathon` | Original session; owns research lineage + DECISION-BRIEF.md + auditor relay | SendMessage → `hackathon` |
-| `projects-2f` | Fresh build session (Sourav, Aug 13 ~13:00) — the hackathon partner | SendMessage → `projects-2f` |
-| `sourav` | Human lead; breaks ties, owns open human decisions (D1–D5) | either terminal |
-
-> Roster correction (Sourav, Aug 13 ~13:05): today's only focus is the hackathon; the
-> JustCall-marketing session is NOT part of this project and its claims are void. The
-> partner session is the fresh `projects-2f`, not the stale `projects-f9` handle.
+| Sourav | Lead. Breaks ties, owns open decisions D1–D5, approves phase/slice gates | Slack `#electron` |
+| Saritha | Reasoning-model lane (`research/10-reasoning-model/`) | Slack `#electron` |
+| Aakash | Competitive-intel lane (`research/11-competitive-intel/`) | Slack `#electron` |
+| `hackathon` | Claude session (Sourav's machine): spec/integration, standing auditor, API-probe lineage | via Sourav |
+| `projects-2f` | Claude session (Sourav's machine): build lanes + repo hygiene | via Sourav |
+| Your Claude session | Reads root `CLAUDE.md` on open and follows this protocol automatically | — |
 
 ## The Iron Law
 
 ```
-NO EDITS TO A FILE ANOTHER SESSION HAS CLAIMED ON THE TASKBOARD
+NO EDITS TO FILES ANOTHER PERSON OR SESSION HAS CLAIMED ON THE TASKBOARD
 ```
 
-There is no git yet — a collision is silent data loss. Claim before you touch.
+A claim counts when it is PUSHED. Pull before you claim; claim before you touch.
 
-## The three channels
+## The channels
 
-1. **`team/SYNC.md`** — the running log. Append a timestamped entry when you: start a task,
-   finish a task, learn something the other session needs, or change a plan. FYI-grade,
-   no reply expected. Newest entries at the TOP.
-2. **`team/TASKBOARD.md`** — ownership. Claim a task (set Owner + In progress) BEFORE
-   editing its files. One owner per file/area at a time.
-3. **SendMessage** — the interrupt channel. Use ONLY for: you're blocked, you need a decision
-   in <10 min, or you shipped something the other session must rebase on. Everything else
-   goes in SYNC.md. (Interrupts are expensive; logs are cheap.)
+1. **`team/SYNC.md`** — the running log. Append a dated entry (newest first) when you
+   start/finish a task, learn something others need, or make a decision. Format:
+   `date · who · decision · L-refs`.
+2. **`team/TASKBOARD.md`** — ownership. Claim before editing; one owner per file/area.
+3. **git push/pull** — the change feed. Commit per completed task, push immediately,
+   pull before starting anything.
+4. **Slack `#electron`** — interrupts only: you're blocked, or you need a decision in
+   <10 minutes. Anything that matters gets written into the repo afterwards.
 
-## Comment convention (drop comments anywhere, any file)
+## Comment convention (any file)
 
 ```markdown
-> 💬 [projects-f9 · Aug 13 12:40] Is the stereo cap (L7) still true after the probe rerun?
->> [hackathon · Aug 13 12:55] Yes — see research/00-api-probe fixture 3. Resolving.
+> 💬 [saritha · Aug 13 16:40] Is the stereo 2-speaker cap why the deal arc is 1:1 calls?
+>> [hackathon · Aug 13 16:55] Yes — L15/D2, see stereo_result.json. Resolving.
 ```
 
-- Reply by nesting one more `>`.
-- The comment's AUTHOR does not resolve it — the addressee does, by replying then deleting
-  the thread (or moving it to SYNC.md if it produced a decision).
-- Comments in DECISION-BRIEF.md that challenge a locked decision (L1–L19) must cite evidence.
+Reply by nesting one more `>`. The addressee resolves (reply, then delete the thread, or
+move it to SYNC.md if it produced a decision).
 
 ## Decision hygiene
 
-- DECISION-BRIEF.md stays the single source of truth for locked decisions. Neither session
-  edits a locked decision unilaterally — propose via comment, other session + Sourav ack,
-  then edit and log in SYNC.md.
-- Open decisions D1–D5 are Sourav's. Sessions may attach evidence under them but not close them.
+- `DECISION-BRIEF.md` is the single source of truth. Locked decisions (L1–L19) are
+  evidence-backed: challenge only WITH new evidence, via an inline comment + SYNC entry;
+  the standing auditor rules (verdicts land in `audit/audit-log.md`). Never edit a locked
+  decision unilaterally.
+- Open decisions D1–D5 belong to Sourav. Attach evidence under them; don't close them.
+- New conclusive findings get promoted: SYNC proposal → auditor → new L-number in the
+  brief. Only locked decisions are load-bearing; cite L-numbers when you build on them.
 
-## Verification rule (from global CLAUDE.md, binding on both sessions)
+## Verification rule (binding on everyone, human or LLM)
 
-No "done" in SYNC.md or TASKBOARD.md without the command/check that proves it, run fresh,
-pasted or referenced inline.
+No "done" on the board or in SYNC without fresh evidence: the command/check that proves
+it, run this session, pasted or referenced inline. "Should work" is not a status.
 
-## Open proposals (need hackathon-session ack)
+## Commit rules
 
-- [x] P-1: DONE by hackathon session — `git init -b main` + baseline commit `5d24bd6`
-      (all research/audit/team artifacts + `.gitignore` covering `.env*` and key files).
-      The build lives in THIS dir (`opengong-lite/`). Local only; nothing pushed.
-- [x] P-2: ADOPTED by hackathon session with two amendments:
-      (A1) **Auditor relay**: any challenge to a locked decision (L1–L19), any new spec,
-      and any pre-merge review request routes through the hackathon session's standing
-      auditor (in-session subagent; A-001–A-008 lineage in `audit/`). Verdicts land in
-      `audit/audit-log.md` and get a SYNC.md pointer.
-      (A2) **Commit rule**: with git live, the Iron Law gains teeth — commit after each
-      completed taskboard item (small, labeled commits = the change feed); never commit
-      another session's in-progress files.
+- Small, labeled commits per completed task — the commit feed is the team's change log.
+- Never commit someone else's in-progress files.
+- Secrets never enter git: `.env*` and `*.pyai_key` are gitignored; CI runs gitleaks.

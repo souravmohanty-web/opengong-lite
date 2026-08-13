@@ -1,5 +1,10 @@
 # TASKBOARD — seeded from DECISION-BRIEF.md §3 (the build order IS the task taxonomy)
 
+> ⚠️ **BUILD FREEZE (Aug 13): do NOT start code work from these rows.** Sourav requires
+> master-plan approval first, and the phase rows below are being restructured into
+> vertical slices. Research lanes (R-10, R-11, open lanes) are EXEMPT and active.
+> Check `team/SYNC.md` top entries for the current gate.
+
 Status values: `blocked` / `ready` / `claimed:<session>` / `in-progress:<session>` / `done (exit test passed)`
 
 | Phase | Hours | Deliverable | Exit test | Status | Owner |

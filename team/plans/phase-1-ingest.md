@@ -1,8 +1,9 @@
 # Phase 1 (Ingest) — review brief for Sourav
 
-**Status: built pre-freeze, exit test passed, UNCOMMITTED.** This doc is the plan-mode
-artifact for approval: approve → one commit lands it; reject → `git clean` removes it
-(nothing else touches these files).
+**Status: built pre-freeze, exit test passed, UNCOMMITTED.** The four files below exist
+only in the working tree on Sourav's machine — **cloners will not see them in the repo**
+until approved. This doc is the plan-mode artifact for that approval: approve → one
+commit lands them; reject → `git clean` removes them (nothing else touches these files).
 
 ## What was built (all in working tree, uncommitted)
 
