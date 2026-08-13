@@ -8,7 +8,7 @@ Last updated: 2026-08-13 late night. Demo: **Friday 6pm** (whole company judging
 OpenGong Lite — open-source call notes where every claim links to the exact transcript line (receipts). Hackathon flagship (Week-1 public launch if it wins). Fictional demo deal: **Brightsmile Dental (buyer) × CallForge (vendor), competitor RingHawk.**
 
 ## Current state
-- **Scorecard: 41/100** (0 reds), `npm run scorecard`. Loop depth 15/15 (the moat). Gate B (honesty) GREEN. Gate C RED (needs labels.json). Gate A pending (rehearsal). The remaining ~59 is human-gated (labels + rehearsal) + a batch of buildable fixtures in flight.
+- **Scorecard: 54/100** (0 reds), `npm run scorecard`. Loop depth 15/15. Craft 7/10. API gravity 10/20. Demo 7/25 (pending rehearsal). Product pull raw 19 but CAPPED at 15/30 by Gate C (needs labels.json — uncaps to 19+ and unlocks pp-2.6 precision when labels land). Gate B GREEN, Gate A pending (rehearsal). Remaining is human-gated: labels (~+8-10) + rehearsal (~+13). Trajectory: labels+rehearsal → ~75+.
 - **Demo runs on REAL content:** 5 gate-verified bundles (samples/bundles/01–05), 98.1% verified, the planted fake claim demoted (call-03), segment_corrected (call-05), cross-call RingHawk + dropped-TCPA ledger. `samples/audio/*.m4a` (WAVs gitignored).
 
 ## DONE + committed (durable)
