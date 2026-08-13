@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "opengong://evidence",
+  "title": "Evidence citation",
+  "description": "ROOT = one evidence item exactly as the extraction model must return it (L6): a verbatim quote plus the utterance it came from. Never offsets, and never a segment-only citation. This root is what extractors $ref as opengong://evidence, so it stays a closed, fully-required object inside the Anthropic-OpenAI schema subset. What the gate hands BACK (match types, corrections, rejections, context flags, coverage bands) is defined in $defs below and is written by code only — no model ever emits it, so it is deliberately kept out of the prompted schema.",
+  "type": "object",
+  "properties": {
+    "utterance_id": { "type": "integer", "description": "id of the utterance the quote is taken from" },
+    "quote": { "type": "string", "description": "verbatim span of canonical_text, character for character: no digit/number-word conversion, no repunctuation, no paraphrase" }
+  },
+  "required": ["utterance_id", "quote"],
+  "additionalProperties": false,
+  "$defs": {
+    "citation_with_affixes": {
+      "type": "object",
+      "description": "The gate also accepts optional prefix/suffix on a citation, used ONLY to break a whole-transcript rescue tie. Not part of the prompted schema.",
+      "properties": {
+        "utterance_id": { "type": "integer" },
+        "quote": { "type": "string" },
+        "prefix": { "type": "string", "description": "text immediately before the quote" },
+        "suffix": { "type": "string", "description": "text immediately after the quote" }
+      },
+      "required": ["utterance_id", "quote"]
+    },
+    "anchored_evidence": {
+      "type": "object",
+      "description": "A citation that survived the anchor ladder.",
+      "properties": {
+        "utterance_id": { "type": "integer", "minimum": 0, "description": "where the quote actually is" },
+        "claimed_utterance_id": {
+          "type": ["integer", "null"],
+          "description": "present only on segment_corrected: where the model said it was"
+        },
+        "quote": { "type": "string" },
+        "match_type": { "enum": ["exact", "exact_pm1", "normalized", "segment_corrected"] },
+        "t_start": { "type": ["number", "null"] },
+        "t_end": { "type": ["number", "null"] },
+        "char_start": { "type": "integer", "minimum": 0, "description": "offset into the RAW utterance text" },
+        "char_end": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["utterance_id", "quote", "match_type", "t_start", "t_end", "char_start", "char_end"],
+      "additionalProperties": false
+    },
+    "rejected_evidence": {
+      "type": "object",
+      "description": "A citation that failed. Rejected receipts are shown, never silently dropped.",
+      "properties": {
+        "utterance_id": { "type": ["integer", "null"] },
+        "quote": { "type": "string" },
+        "match_type": { "const": "none" },
+        "reason": {
+          "enum": [
+            "not_found_in_transcript",
+            "quote_too_short_for_rescue",
+            "ambiguous_rescue_tie",
+            "empty_quote"
+          ],
+          "description": "closed vocabulary; ambiguous_rescue_tie means the gate refused to guess"
+        }
+      },
+      "required": ["utterance_id", "quote", "match_type", "reason"],
+      "additionalProperties": false
+    },
+    "context_flag": {
+      "type": "object",
+      "description": "Deterministic disagreement between a cue in the evidence window and the stance the model declared. Never blocks; only demotes interpretation_confidence.",
+      "properties": {
+        "flag": {
+          "enum": [
+            "negation_polarity_mismatch",
+            "double_negation",
+            "hypothetical_modality_mismatch",
+            "reported_speech_attribution_mismatch",
+            "hedge_certainty_mismatch",
+            "number_without_unit_anchor",
+            "requires_context_missing_support",
+            "supporting_evidence_unanchored",
+            "low_role_confidence"
+          ]
+        },
+        "where": { "enum": ["in_quote", "preceding", null] },
+        "cue": { "type": ["string", "null"] },
+        "utterance_id": { "type": ["integer", "null"] }
+      },
+      "required": ["flag", "where", "cue", "utterance_id"],
+      "additionalProperties": false
+    },
+    "gated_claim": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "extractor": { "type": "string" },
+        "section": { "type": "string" },
+        "text": { "type": "string" },
+        "status": {
+          "enum": ["blocked_injection", "verified", "segment_corrected", "uncorroborated"],
+          "description": "blocked_injection is evaluated FIRST and never folds into uncorroborated: the planted line is in the transcript and anchors cleanly, which is exactly why a second screen exists"
+        },
+        "blocked_reasons": {
+          "type": "array",
+          "description": "present only on blocked_injection",
+          "items": { "enum": ["cites_tainted_utterance", "smuggled_link", "imperative_smuggling"] }
+        },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/anchored_evidence" } },
+        "rejected_evidence": { "type": "array", "items": { "$ref": "#/$defs/rejected_evidence" } },
+        "supporting_evidence": { "type": "array", "items": { "$ref": "#/$defs/anchored_evidence" } },
+        "rejected_supporting_evidence": { "type": "array", "items": { "$ref": "#/$defs/rejected_evidence" } },
+        "requires_context": { "type": "boolean" },
+        "context_flags": { "type": "array", "items": { "$ref": "#/$defs/context_flag" } },
+        "interpretation_confidence": {
+          "enum": ["high", "medium", "low", null],
+          "description": "derived in code, never model-supplied; null when nothing anchored"
+        }
+      },
+      "required": [
+        "status", "evidence", "rejected_evidence", "supporting_evidence",
+        "rejected_supporting_evidence", "requires_context", "context_flags",
+        "interpretation_confidence"
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "description": "Computed once by gradeRun; the UI renders the band and never recomputes it.",
+      "properties": {
+        "band": {
+          "enum": [
+            "GATE_BLOCKED_UNPROVEN_CLAIMS",
+            "PARTIAL_EXTRACTORS_FAILED",
+            "PARTIAL_LOW_COVERAGE",
+            "PARTIAL_CLAIMS_DROPPED",
+            "SHIPPED_WITH_CORRECTIONS",
+            "SHIPPED"
+          ]
+        },
+        "ratio": { "type": "number", "minimum": 0, "maximum": 1, "description": "corroborated / attempted; 1 when attempted is 0" },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "total": { "type": "integer" },
+            "attempted": { "type": "integer", "description": "excludes blocked_injection" },
+            "verified": { "type": "integer" },
+            "segment_corrected": { "type": "integer" },
+            "uncorroborated": { "type": "integer" },
+            "blocked_injection": { "type": "integer" },
+            "corroborated": { "type": "integer", "description": "verified + segment_corrected" }
+          },
+          "required": ["total", "attempted", "verified", "segment_corrected", "uncorroborated", "blocked_injection", "corroborated"]
+        },
+        "required_sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "section": { "type": "string" },
+              "attempted": { "type": "integer" },
+              "corroborated": { "type": "integer" }
+            },
+            "required": ["section", "attempted", "corroborated"]
+          }
+        },
+        "extractor_failures": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["band", "ratio", "stats", "required_sections", "extractor_failures"]
+    },
+    "gate_output": {
+      "type": "object",
+      "description": "What src/gate.js produces for a whole run.",
+      "properties": {
+        "claims": { "type": "array", "items": { "$ref": "#/$defs/gated_claim" } },
+        "coverage": { "$ref": "#/$defs/coverage" }
+      },
+      "required": ["claims", "coverage"]
+    }
+  }
+}

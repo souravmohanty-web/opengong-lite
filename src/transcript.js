@@ -30,12 +30,17 @@ export function buildTranscript(result) {
 // an utterance: a long monologue segment still splits at the word cap (A-007),
 // and segments can arrive out of time order, so the final list is time-sorted
 // with ids reassigned.
+function sameSpeaker(a, b) {
+  if (a == null || b == null) return a == null && b == null;
+  return String(a).toLowerCase() === String(b).toLowerCase();
+}
+
 function diarizedUtterances(result) {
   const words = result.words ?? [];
   const utterances = [];
   for (const seg of result.segments ?? []) {
     const segWords = words.filter((w) =>
-      (w.speaker ?? null) === (seg.speaker ?? null)
+      sameSpeaker(w.speaker ?? null, seg.speaker ?? null)
       && w.start >= seg.start && w.end <= seg.end);
     const base = {
       speaker: seg.speaker ?? null,
@@ -43,17 +48,34 @@ function diarizedUtterances(result) {
       role: null,             // Rep/Prospect inference is the extraction phase's job
       role_confidence: null,
     };
-    if (!segWords.length) {
+    if (segWords.length) {
+      for (let i = 0; i < segWords.length; i += MAX_UTT_WORDS) {
+        const chunk = segWords.slice(i, i + MAX_UTT_WORDS);
+        utterances.push({
+          ...base,
+          start: chunk[0].start,
+          end: chunk[chunk.length - 1].end,
+          text: joinWords(chunk),
+        });
+      }
+      continue;
+    }
+    // No matchable words[] (absent, or labels the filter can't reconcile): the
+    // cap still holds — split the segment TEXT and interpolate times linearly,
+    // else a 600-word monologue sails through as one utterance (audit #6).
+    const textWords = seg.text.split(' ');
+    if (textWords.length <= MAX_UTT_WORDS) {
       utterances.push({ ...base, start: seg.start, end: seg.end, text: seg.text });
       continue;
     }
-    for (let i = 0; i < segWords.length; i += MAX_UTT_WORDS) {
-      const chunk = segWords.slice(i, i + MAX_UTT_WORDS);
+    const perWord = (seg.end - seg.start) / textWords.length;
+    for (let i = 0; i < textWords.length; i += MAX_UTT_WORDS) {
+      const chunk = textWords.slice(i, i + MAX_UTT_WORDS);
       utterances.push({
         ...base,
-        start: chunk[0].start,
-        end: chunk[chunk.length - 1].end,
-        text: joinWords(chunk),
+        start: seg.start + i * perWord,
+        end: seg.start + Math.min(i + MAX_UTT_WORDS, textWords.length) * perWord,
+        text: chunk.join(' '),
       });
     }
   }

@@ -1,7 +1,7 @@
 {
   "mode": "diarized",
   "speakers": 2,
-  "audio_seconds": 60,
+  "audio_seconds": 75,
   "utterances": [
     {
       "id": 0,
@@ -100,7 +100,7 @@
       "speaker": "speaker_1",
       "channel": 0,
       "role": "rep",
-      "role_confidence": 0.6,
+      "role_confidence": 0.9,
       "text": "the security review usually takes about three weeks from the kickoff meeting"
     },
     {
@@ -122,8 +122,38 @@
       "role": "prospect",
       "role_confidence": 0.9,
       "text": "we are never going to be interested in the annual plan at this price"
+    },
+    {
+      "id": 12,
+      "start": 60,
+      "end": 65,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "if we bought the enterprise tier next quarter would you throw in the onboarding"
+    },
+    {
+      "id": 13,
+      "start": 65,
+      "end": 70,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "our old vendor said the dialer was unreliable during peak hours"
+    },
+    {
+      "id": 14,
+      "start": 70,
+      "end": 75,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.6,
+      "text": "i will get the pricing approval from my manager today"
     }
   ],
-  "canonical_text": "hi rahul thanks for taking the time today i wanted to walk you through how our dialer handles compliance\nsure\nhonestly my main concern is pricing your competitor quoted us almost forty less last week\nthat is fair let me show you the total cost picture including the answering machine detection you would not pay extra for\nwe are not going to move forward with the pilot until legal signs off on the data processing agreement\nlet me repeat that so it is on the record\nwe are not going to move forward with the pilot until legal signs off on the data processing agreement\nwe’ll need the soc 2 report — the security team won’t sign without it\nso the ﬁnal number is ４０ seats on the annual plan\nthe security review usually takes about three weeks from the kickoff meeting\ni will send over the security questionnaire and the mutual nda tomorrow morning\nwe are never going to be interested in the annual plan at this price",
-  "transcript_hash": "sha256:8cf0d6bfc73aee40bf2d9e040f365267ec380f062d6a50e60514a8c2b331ded7"
+  "canonical_text": "hi rahul thanks for taking the time today i wanted to walk you through how our dialer handles compliance\nsure\nhonestly my main concern is pricing your competitor quoted us almost forty less last week\nthat is fair let me show you the total cost picture including the answering machine detection you would not pay extra for\nwe are not going to move forward with the pilot until legal signs off on the data processing agreement\nlet me repeat that so it is on the record\nwe are not going to move forward with the pilot until legal signs off on the data processing agreement\nwe’ll need the soc 2 report — the security team won’t sign without it\nso the ﬁnal number is ４０ seats on the annual plan\nthe security review usually takes about three weeks from the kickoff meeting\ni will send over the security questionnaire and the mutual nda tomorrow morning\nwe are never going to be interested in the annual plan at this price\nif we bought the enterprise tier next quarter would you throw in the onboarding\nour old vendor said the dialer was unreliable during peak hours\ni will get the pricing approval from my manager today",
+  "transcript_hash": "sha256:68d412c273079a1fe46ee5e1211f284889f078862359170c1fe6798a51340394"
 }

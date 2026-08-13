@@ -14,10 +14,28 @@ export function formatTime(seconds) {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
+// Closed enums (technical-spec-core §2). Anything outside them fails CLOSED at
+// the boundary — a typo'd status must never render a claim into the main list.
+const CLAIM_STATUSES = new Set(['verified', 'segment_corrected', 'uncorroborated', 'blocked_injection']);
+
 export function buildViewModel(bundle) {
+  const uttById = new Map();
+  for (const u of bundle.transcript.utterances) {
+    if (!Number.isInteger(u.id)) {
+      throw new Error(`utterance id must be an integer, got: ${JSON.stringify(u.id)}`);
+    }
+    uttById.set(u.id, u);
+  }
+
   const claims = bundle.claims.map((claim) => {
+    if (!CLAIM_STATUSES.has(claim.status)) {
+      throw new Error(`unknown claim.status ${JSON.stringify(claim.status)} — closed enum, failing closed`);
+    }
     const primary = claim.evidence?.[0] ?? null;
     const anchored = claim.status === 'verified' || claim.status === 'segment_corrected';
+    if (anchored && primary && !uttById.has(primary.utterance_id)) {
+      throw new Error(`claim ${claim.id} cites utterance ${primary.utterance_id} which is not in the bundle — exports must be self-contained`);
+    }
     return {
       id: claim.id,
       extractor: claim.extractor,
@@ -48,6 +66,7 @@ export function buildViewModel(bundle) {
     title: bundle.call?.title ?? bundle.call?.id ?? 'call',
     coverage: bundle.notes.coverage,          // rendered verbatim, never recomputed
     utterances: bundle.transcript.utterances,
+    uttById,                                  // id-keyed — array order is NOT id order
     claims,
     quarantine: claims.filter((c) => c.status === 'blocked_injection'),
     sections: bundle.notes.sections,
@@ -90,7 +109,7 @@ export function render(vm, root, audio) {
       </section>
       <section id="transcript">
         ${vm.utterances.map((u) => `
-          <div class="utt" data-utt="${u.id}">
+          <div class="utt" data-utt="${escapeHtml(u.id)}">
             <span class="ts">[${formatTime(u.start)}]</span>
             ${u.speaker ? `<span class="spk">${escapeHtml(u.speaker)}:</span>` : ''}
             <span class="txt">${escapeHtml(u.text)}</span>
@@ -105,11 +124,12 @@ export function render(vm, root, audio) {
       root.querySelectorAll('.claim.active').forEach((n) => n.classList.remove('active'));
       el.classList.add('active');
       if (!claim?.anchor) return;                     // demoted claims have nothing to prove
-      const utt = root.querySelector(`.utt[data-utt="${claim.anchor.utterance_id}"]`);
-      if (!utt) return;
+      const source = vm.uttById.get(claim.anchor.utterance_id);  // id-keyed, survives reordering
+      const utt = root.querySelector(`.utt[data-utt="${Number(claim.anchor.utterance_id)}"]`);
+      if (!utt || !source) return;
       utt.classList.add('active');
       const txt = utt.querySelector('.txt');
-      const raw = vm.utterances[claim.anchor.utterance_id].text;
+      const raw = source.text;
       const idx = raw.indexOf(claim.anchor.quote);
       if (idx >= 0) {
         txt.innerHTML = `${escapeHtml(raw.slice(0, idx))}<mark>${escapeHtml(claim.anchor.quote)}</mark>${escapeHtml(raw.slice(idx + claim.anchor.quote.length))}`;

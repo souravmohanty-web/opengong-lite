@@ -1,0 +1,195 @@
+[
+  {
+    "id": "a1",
+    "extractor": "next_steps",
+    "text": "The buyer committed to signing the MSA before the end of the quarter.",
+    "stance": { "polarity": "affirmative", "modality": "committed", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [
+      { "utterance_id": 3, "quote": "we are going to sign the master services agreement before the end of this quarter" }
+    ],
+    "_why": "planted quote — nowhere in the transcript, long enough for rescue to try"
+  },
+  {
+    "id": "a2",
+    "extractor": "objections",
+    "text": "A competitor quoted 40 less last week.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "third_party", "certainty": "certain" },
+    "evidence": [
+      { "utterance_id": 2, "quote": "my main concern is pricing your competitor quoted us almost 40 less last week" }
+    ],
+    "_why": "digit/number-word fold attempt: transcript says forty, model wrote 40"
+  },
+  {
+    "id": "a3",
+    "extractor": "objections",
+    "text": "Pricing is the main concern.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [
+      { "utterance_id": 2, "quote": "speaker_2: honestly my main concern is pricing your competitor quoted us almost forty less last week" }
+    ],
+    "_why": "quote carries the rendered speaker prefix that is not in canonical text"
+  },
+  {
+    "id": "a4",
+    "extractor": "summary",
+    "text": "The buyer put the pilot on hold on the record.",
+    "stance": { "polarity": "negative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [
+      { "utterance_id": 5, "quote": "on the record we are not going to move forward with the pilot until legal" }
+    ],
+    "_why": "quote spans two utterances — must never be stitched across the join"
+  },
+  {
+    "id": "a5",
+    "extractor": "summary",
+    "text": "Legal sign-off blocks the pilot.",
+    "stance": { "polarity": "negative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [
+      { "utterance_id": 0, "quote": "we are not going to move forward with the pilot until legal signs off on the data processing agreement" }
+    ],
+    "_why": "long+unique-looking quote that in fact occurs twice — rescue must refuse to guess"
+  },
+  {
+    "id": "a6",
+    "extractor": "summary",
+    "text": "Legal sign-off blocks the pilot (first statement).",
+    "stance": { "polarity": "negative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [
+      {
+        "utterance_id": 0,
+        "quote": "we are not going to move forward with the pilot until legal signs off on the data processing agreement",
+        "suffix": "let me repeat that so it is on the record"
+      }
+    ],
+    "_why": "same tie, disambiguated by a supplied suffix"
+  },
+  {
+    "id": "a7",
+    "extractor": "summary",
+    "text": "The buyer agreed.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 1, "quote": "SURE" }],
+    "_why": "below the 15-char normalized floor: casefold must NOT rescue it"
+  },
+  {
+    "id": "a8",
+    "extractor": "summary",
+    "text": "Something happened.",
+    "stance": { "polarity": "unclear", "modality": "unclear", "attribution": "unclear", "certainty": "unclear" },
+    "evidence": [{ "utterance_id": 2, "quote": "   " }],
+    "_why": "empty quote"
+  },
+  {
+    "id": "a9",
+    "extractor": "objections",
+    "text": "Price is the blocking concern.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "quantities": [{ "surface": "forty", "unit": "unknown", "unit_source": "absent", "approximate": true }],
+    "evidence": [
+      { "utterance_id": 2, "quote": "honestly my main concern is pricing" },
+      { "utterance_id": 2, "quote": "and we have no budget left this year" }
+    ],
+    "_why": "one real receipt + one hallucinated one — claim survives, bad evidence is rejected"
+  },
+  {
+    "id": "a10",
+    "extractor": "summary",
+    "text": "The buyer is interested in the annual plan at this price.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 11, "quote": "interested in the annual plan at this price" }],
+    "_why": "quote-mining: the negation sits just before the quoted span"
+  },
+  {
+    "id": "a11",
+    "extractor": "next_steps",
+    "text": "The security team will sign once the SOC 2 report is delivered.",
+    "stance": { "polarity": "affirmative", "modality": "committed", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 7, "quote": "We'll need the SOC 2 report - the security team won't sign without it" }],
+    "_why": "typographic variants + casefold (normalized hit) and a real double negation"
+  },
+  {
+    "id": "a12",
+    "extractor": "objections",
+    "text": "The competitor is forty cheaper.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "third_party", "certainty": "certain" },
+    "quantities": [{ "surface": "forty", "unit": "percent", "unit_source": "inferred", "approximate": true }],
+    "evidence": [{ "utterance_id": 2, "quote": "quoted us almost forty less last week" }],
+    "_why": "number with no unit anywhere in the line, but the model declared a unit"
+  },
+  {
+    "id": "a13",
+    "extractor": "summary",
+    "text": "The buyer agreed to the compliance walkthrough.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 1, "quote": "sure" }],
+    "_why": "bare acknowledgement with no antecedent supplied"
+  },
+  {
+    "id": "a14",
+    "extractor": "summary",
+    "text": "The buyer agreed to the compliance walkthrough.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 1, "quote": "sure" }],
+    "supporting_evidence": [{ "utterance_id": 0, "quote": "walk you through how our dialer handles compliance" }],
+    "_why": "same bare acknowledgement, antecedent supplied and anchorable"
+  },
+  {
+    "id": "a15",
+    "extractor": "summary",
+    "text": "The buyer agreed to a fifty percent discount.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 1, "quote": "sure" }],
+    "supporting_evidence": [{ "utterance_id": 0, "quote": "we can do fifty percent off the annual plan" }],
+    "_why": "antecedent is itself invented — supporting evidence goes through the same gate"
+  },
+  {
+    "id": "a16",
+    "extractor": "next_steps",
+    "text": "The buyer is buying the enterprise tier next quarter.",
+    "stance": { "polarity": "affirmative", "modality": "committed", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 12, "quote": "if we bought the enterprise tier next quarter" }],
+    "_why": "hypothetical read as a commitment"
+  },
+  {
+    "id": "a17",
+    "extractor": "objections",
+    "text": "The buyer says our dialer is unreliable during peak hours.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 13, "quote": "the dialer was unreliable during peak hours" }],
+    "_why": "reported speech about a different vendor, attributed to the speaker"
+  },
+  {
+    "id": "a18",
+    "extractor": "next_steps",
+    "text": "The security review takes three weeks.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 9, "quote": "the security review usually takes about three weeks" }],
+    "_why": "hedged line reported as certain"
+  },
+  {
+    "id": "a19",
+    "extractor": "next_steps",
+    "text": "The rep will get pricing approval from their manager today.",
+    "stance": { "polarity": "affirmative", "modality": "committed", "attribution": "first_party", "certainty": "certain" },
+    "evidence": [{ "utterance_id": 14, "quote": "i will get the pricing approval from my manager today" }],
+    "_why": "clean line, but the utterance role is low-confidence (0.6)"
+  },
+  {
+    "id": "a20",
+    "extractor": "summary",
+    "text": "The final number is 40 seats on the annual plan.",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "first_party", "certainty": "certain" },
+    "quantities": [{ "surface": "40", "unit": "seats", "unit_source": "explicit", "approximate": false }],
+    "evidence": [{ "utterance_id": 8, "quote": "the final number is 40 seats" }],
+    "_why": "NFKC width folding is legal (４０ -> 40); number-word folding is not"
+  },
+  {
+    "id": "a21",
+    "extractor": "objections",
+    "text": "The competitor quoted almost forty less (unit not stated on the call).",
+    "stance": { "polarity": "affirmative", "modality": "actual", "attribution": "third_party", "certainty": "certain" },
+    "quantities": [{ "surface": "forty", "unit": "unknown", "unit_source": "absent", "approximate": true }],
+    "evidence": [{ "utterance_id": 2, "quote": "quoted us almost forty less last week" }],
+    "_why": "same bare number as a12, but the model admitted unit=unknown — agreement, no flag"
+  }
+]
