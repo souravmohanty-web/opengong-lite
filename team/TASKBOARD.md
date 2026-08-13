@@ -4,10 +4,11 @@ Rules: pull first · claim before you touch (a claim counts when PUSHED) · one 
 area · `done` requires fresh evidence. History lives in `team/SYNC.md`, not here — rows
 state **current truth only**.
 
-> **Gate status (Aug 13 evening): product-code build is GATED.** Two things open it:
-> the lane-10 model bake-off result, and Sourav's explicit go. Research lanes and planning
-> docs are active. When the gate opens, work runs as the vertical slices below
-> (`team/plans/master-plan.md` governs; `team/plans/build-orchestration.md` = who does what).
+> **Gate status: BUILD GATE OPEN (Sourav "go", ~17:20 Aug 13 — SYNC e8928df). Slice 1 in
+> flight.** `team/plans/master-plan.md` governs scope; `team/plans/build-orchestration.md`
+> governs how (builders deliver evidence, auditor breaks it, orchestrator merges).
+> Bake-off does not block: extraction defaults to claude-sonnet-5; Saritha's result is a
+> one-line config change later (L12).
 
 ## Done — foundation (evidence in SYNC)
 
@@ -17,7 +18,16 @@ state **current truth only**.
 | Ingest → canonical transcript (L1–L4): stereo + mono utterance layer, golden tests | `npm test` 11/11 fresh Aug 13 evening; live e2e on call.wav; **approved by Sourav ~15:05 ("keep as-is, no audit")**, committed `36e8ce2` | projects-2f |
 | Research 00–05 + audit lineage + master plan + operative design docs | see `team/plans/INDEX.md` | hackathon |
 
-## Build slices — GATED, unclaimed until the gate opens
+## Slice 1 — ACTIVE claims
+
+| Task | Owner | Status |
+|---|---|---|
+| Gate/extraction stack: gate.js, injection.js, registry, prompt, llm, extract, run records | hackathon (builder subagents) | in-progress |
+| Hour-zero probes (long-audio, dual-mono, numerals, 3-voice) | hackathon | in-progress |
+| 4 defect fixes in kept code: stereo max-utterance split + time-sort (transcript.js), AbortSignals + scaled poll timeout (pyai.js), 429 Retry-After discrimination | **projects-2f** | **in-progress** (claimed ~17:30) |
+| Minimal S1 viewer + local server (127.0.0.1:4317, Range/206): ONE click-claim→highlight→audio interaction, 4-state claim.status rendering | **projects-2f** | **in-progress** (claimed ~17:30) |
+
+## Build slices — roadmap
 
 | Slice | Scope (master-plan §build-start) | Est | Exit gate |
 |---|---|---|---|
