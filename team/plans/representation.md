@@ -19,7 +19,7 @@ Default = the 5 sections hands-on reviewers actually see in the market leader: *
 
 ## Verified competitive facts (usable)
 - Sybill has **NO claim-level citation anywhere** (checked product pages, FAQ, changelog, independent reviews).
-- Their users report **"20 action items when only 4–5 existed"** — structurally impossible here: no citation → no task. This is the killer comparison.
+- CORRECTED 2026-08-14 (research/13-sybill-deep/01): the "20 action items when only 4-5 existed" quote could NOT be verified against any source and must not be used on stage. The VERIFIED analog (independent hands-on tester): Sybill fabricated a complete contact profile for an invented prospect. Same failure class (confident fabrication absent real data) — structurally impossible here: no citation, no claim. Use the verified line only.
 - Their core Magic Summary template is **locked** ("no provision to modify") — ours is plugin files.
 - Their latency: 5–30 min. Our local cited summary in <60s is a legitimate flex.
 - Their video/body-language analysis carries EU AI Act emotion-recognition exposure — our audio-only scope is a compliance feature; say so.
