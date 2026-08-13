@@ -53,6 +53,12 @@ Adding an extraction family is **one JSON file, zero code** — declared against
 validated at startup, portable across LLM providers (extractors declare a role, never
 a model).
 
+![A real generated sales call through the full pipeline: 20 verified claims at 95%, tracker hits, buying stage, objections with reported speech correctly attributed](docs/real-call.png)
+
+*A real call through the real pipeline: synthesized stereo audio, transcribed back,
+extracted, gated. 20 claims verified at 95%. Note the objection correctly attributed to
+the OLD VENDOR as reported speech, and the tracker rows that cost zero tokens.*
+
 ## Honest architecture
 
 Self-hosted app + hosted inference: audio goes to PyAI (speech), extraction goes to
