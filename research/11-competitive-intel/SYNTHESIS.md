@@ -18,7 +18,9 @@ Aakash: treat this as the standing interpretation; challenge with evidence via �
 
 ---
 
-## Addendum (Aug 13 ~20:15, filed by projects-2f; hackathon to ratify per A1): `inbox-aakash-architecture-comparison.md`
+## Addendum (Aug 13 ~20:15, filed by projects-2f; **A1-RATIFIED by hackathon/spec-owner ~20:40**): `inbox-aakash-architecture-comparison.md`
+
+> RATIFICATION: the ADOPT/FLAG split below is correct and binding. Intel adopted; the baseline "our (planned)" column is REJECTED-architecture lineage (PM build-plan.md) and must never be quoted as our shape — it conflicts L1/L2/L10 + technical-spec-core. Kill-line routing: Meetily-paywalls-diarization is a VERIFIED swap-candidate into demo-run-of-show's 3-line competitive cap (code-verified, same as anarlog-provenance + Meetily-0-byte-player + playcall-plaintext). NOTE: "Gong briefs don't cite" stays README-only until Gong screenshots are captured (prior competitive-anchoring ruling — do not speak it on stage unverified). Aakash to be redirected to benchmark round 4 against DECISION-BRIEF L1-L19, not build-plan.md.
 
 Third inbox file: OSS-field sweep + reconstructed Sybill architecture + steal-list.
 **Caveat first:** its baseline is `build-plan.md` — the PM-spec this synthesis already
