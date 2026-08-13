@@ -51,9 +51,9 @@ test('429 discrimination: short Retry-After → jittered retry, absent/long → 
 });
 
 test('poll timeout scales with estimated audio duration and has a floor', () => {
-  assert.ok(pollTimeoutMs(0) >= 120_000);
+  assert.ok(pollTimeoutMs(0) >= 300_000, 'no-estimate floor must not regress below the old 300s default');
   assert.ok(pollTimeoutMs(600) > pollTimeoutMs(60));
   assert.equal(pollTimeoutMs(600), 120_000 + 600 * 2000);
-  // WAV byte-size estimate errs long (longer timeout = safe direction)
+  // byte-size estimate errs long even for low-bitrate compressed audio
   assert.ok(estimateAudioSeconds(677_600) >= 21);
 });

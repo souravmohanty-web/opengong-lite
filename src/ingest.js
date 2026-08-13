@@ -28,24 +28,37 @@ export async function submitJob({ filePath, audioUrl }) {
   }
   const form = new FormData();
   form.set('model', 'pyai-hear');
+  let timeoutMs;
   if (filePath) {
-    const { name } = await validateUpload(filePath);
+    const { name, size } = await validateUpload(filePath);
     form.set('file', await openAsBlob(filePath), name);
+    timeoutMs = uploadTimeoutMs(size);
   } else {
     form.set('audio_url', audioUrl);
+    timeoutMs = uploadTimeoutMs(0);
   }
-  const res = await pyaiFetch('/transcription/jobs', { method: 'POST', body: form });
+  const res = await pyaiFetch('/transcription/jobs', { method: 'POST', body: form, timeoutMs });
   return res.json(); // { job_id, status: 'queued' }
 }
 
 // Timeout scales with how much audio the job has to chew through; the byte
-// estimate deliberately errs long (longer timeout is the safe direction).
+// estimate deliberately errs long (longer timeout is the safe direction), so
+// the divisor assumes low-bitrate compressed audio (~32kbps — audit: /16000
+// still erred SHORT ×0.19–0.25 on mp3/opus).
 export function estimateAudioSeconds(bytes) {
-  return Math.ceil(bytes / 16_000);
+  return Math.ceil(bytes / 4_000);
 }
 
+// Floor of 300s — with no estimate (audio_url path) anything lower is a
+// regression vs the original default (audit #4).
 export function pollTimeoutMs(estimatedAudioSeconds = 0) {
-  return 120_000 + estimatedAudioSeconds * 2000;
+  return Math.max(300_000, 120_000 + estimatedAudioSeconds * 2000);
+}
+
+// Upload budget scales with payload: ~10s/MB on top of a 60s base, so a big
+// WAV on stage wifi doesn't die to a flat 30s timeout (audit #9).
+export function uploadTimeoutMs(bytes = 0) {
+  return 60_000 + Math.ceil(bytes / 100_000) * 1000;
 }
 
 export async function pollJob(jobId, { intervalMs = 2000, timeoutMs = pollTimeoutMs() } = {}) {

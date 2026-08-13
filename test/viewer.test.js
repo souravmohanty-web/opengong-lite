@@ -26,8 +26,38 @@ test('verified claim resolves to a playable anchor with quote offsets', () => {
   assert.equal(c1.status, 'verified');
   assert.equal(c1.anchor.utterance_id, 0);
   assert.ok(c1.anchor.t_start > 0);
-  const utt = vm.utterances[c1.anchor.utterance_id];
+  const utt = vm.uttById.get(c1.anchor.utterance_id);
   assert.ok(utt.text.includes(c1.anchor.quote), 'quote must be locatable in the cited utterance');
+});
+
+test('audit#7: anchors are id-keyed — reordered bundles still resolve', () => {
+  const b = bundle();
+  b.transcript.utterances.reverse();          // array index no longer equals id
+  const vm = buildViewModel(b);
+  const c1 = vm.claims.find((c) => c.id === 'c1');
+  const utt = vm.uttById.get(c1.anchor.utterance_id);
+  assert.equal(utt.id, 0);
+  assert.ok(utt.text.includes(c1.anchor.quote));
+});
+
+test('audit#7: a claim citing an utterance missing from the bundle fails at load, not first click', () => {
+  const b = bundle();
+  b.claims[0].evidence[0].utterance_id = 99;
+  assert.throws(() => buildViewModel(b), /self-contained/);
+});
+
+test('audit#3: hostile utterance id is rejected at the boundary', () => {
+  const b = bundle();
+  b.transcript.utterances[0].id = '0"><img src=x onerror=alert(1)>';
+  assert.throws(() => buildViewModel(b), /integer/);
+});
+
+test('audit#5: status variance fails CLOSED — unknown status throws', () => {
+  for (const bad of ['Blocked_Injection', 'blocked_injection ', 'VERIFIED', 'shipped']) {
+    const b = bundle();
+    b.claims[3].status = bad;
+    assert.throws(() => buildViewModel(b), /closed enum/, `status ${JSON.stringify(bad)} must not render`);
+  }
 });
 
 test('uncorroborated claim is demoted: no anchor, nothing to play', () => {
