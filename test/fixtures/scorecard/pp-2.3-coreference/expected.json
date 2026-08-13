@@ -1,0 +1,51 @@
+[
+  {
+    "id": "coref-1",
+    "pronoun": "it",
+    "referent": "the annual plan",
+    "establishing_utterance_id": 0,
+    "should_resolve": true
+  },
+  {
+    "id": "coref-2",
+    "pronoun": "that",
+    "referent": "the SOC 2 requirement",
+    "establishing_utterance_id": 2,
+    "should_resolve": true
+  },
+  {
+    "id": "coref-3",
+    "pronoun": "they",
+    "referent": "RingCentral",
+    "establishing_utterance_id": 4,
+    "should_resolve": true
+  },
+  {
+    "id": "coref-4",
+    "pronoun": "it",
+    "referent": null,
+    "establishing_utterance_id": null,
+    "should_resolve": false,
+    "expect_flags": [
+      "requires_context_missing_support"
+    ]
+  },
+  {
+    "id": "coref-5",
+    "pronoun": "this",
+    "referent": null,
+    "establishing_utterance_id": null,
+    "should_resolve": false,
+    "expect_flags": [
+      "supporting_evidence_unanchored",
+      "requires_context_missing_support"
+    ]
+  },
+  {
+    "id": "coref-6",
+    "pronoun": "them",
+    "referent": "legal team",
+    "establishing_utterance_id": 8,
+    "should_resolve": true
+  }
+]

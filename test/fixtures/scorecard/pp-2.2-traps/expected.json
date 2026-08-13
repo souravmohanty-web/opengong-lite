@@ -1,0 +1,47 @@
+[
+  {
+    "id": "trap-neg-1",
+    "kind": "negation",
+    "expected_flag": "negation_polarity_mismatch"
+  },
+  {
+    "id": "trap-neg-2",
+    "kind": "negation",
+    "expected_flag": "negation_polarity_mismatch"
+  },
+  {
+    "id": "trap-neg-3",
+    "kind": "negation",
+    "expected_flag": "negation_polarity_mismatch"
+  },
+  {
+    "id": "trap-hyp-1",
+    "kind": "hypothetical",
+    "expected_flag": "hypothetical_modality_mismatch"
+  },
+  {
+    "id": "trap-hyp-2",
+    "kind": "hypothetical",
+    "expected_flag": "hypothetical_modality_mismatch"
+  },
+  {
+    "id": "trap-hyp-3",
+    "kind": "hypothetical",
+    "expected_flag": "hypothetical_modality_mismatch"
+  },
+  {
+    "id": "trap-rep-1",
+    "kind": "reported",
+    "expected_flag": "reported_speech_attribution_mismatch"
+  },
+  {
+    "id": "trap-rep-2",
+    "kind": "reported",
+    "expected_flag": "reported_speech_attribution_mismatch"
+  },
+  {
+    "id": "trap-rep-3",
+    "kind": "reported",
+    "expected_flag": "reported_speech_attribution_mismatch"
+  }
+]

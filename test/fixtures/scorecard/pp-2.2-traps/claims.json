@@ -1,0 +1,173 @@
+[
+  {
+    "id": "trap-neg-1",
+    "extractor": "pain",
+    "section": "pain",
+    "text": "The buyer says they have budget issues this quarter.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 1,
+        "quote": "we do not have any budget issues on our end this quarter"
+      }
+    ]
+  },
+  {
+    "id": "trap-neg-2",
+    "extractor": "risk_flags",
+    "section": "risk_flags",
+    "text": "The buyer plans to switch away from their current vendor.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 2,
+        "quote": "there is no plan to switch away from our current vendor right now"
+      }
+    ]
+  },
+  {
+    "id": "trap-neg-3",
+    "extractor": "risk_flags",
+    "section": "risk_flags",
+    "text": "The buyer complained about call quality on this platform.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 3,
+        "quote": "i have never once complained about call quality on this platform"
+      }
+    ]
+  },
+  {
+    "id": "trap-hyp-1",
+    "extractor": "next_steps",
+    "section": "next_steps",
+    "text": "The buyer is buying the enterprise plan next year.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 5,
+        "quote": "if we ended up buying the enterprise plan next year would you throw in onboarding"
+      }
+    ]
+  },
+  {
+    "id": "trap-hyp-2",
+    "extractor": "buying_stage",
+    "section": "buying_stage",
+    "text": "The buyer's compliance team approved this deal.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 6,
+        "quote": "suppose our compliance team approved this we would still need finance sign off"
+      }
+    ]
+  },
+  {
+    "id": "trap-hyp-3",
+    "extractor": "pricing",
+    "section": "pricing",
+    "text": "The buyer needs double the seats.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "imagine we had three more reps on the floor we might need double the seats"
+      }
+    ]
+  },
+  {
+    "id": "trap-rep-1",
+    "extractor": "objections",
+    "section": "objections",
+    "text": "This dialer drops calls during peak hours.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 9,
+        "quote": "our old vendor told us their dialer drops calls during peak hours"
+      }
+    ]
+  },
+  {
+    "id": "trap-rep-2",
+    "extractor": "next_steps",
+    "section": "next_steps",
+    "text": "The buyer wants a demo before they sign anything.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 10,
+        "quote": "my manager mentioned she wants a demo before we sign anything"
+      }
+    ]
+  },
+  {
+    "id": "trap-rep-3",
+    "extractor": "summary",
+    "section": "summary",
+    "text": "The contract renews in March.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 11,
+        "quote": "according to our it lead the current contract renews in march"
+      }
+    ]
+  }
+]

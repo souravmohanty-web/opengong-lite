@@ -1,0 +1,22 @@
+{
+  "mono": {
+    "transcript": "transcript.mono.json",
+    "claims": "claims.mono.json",
+    "expect_status": "verified",
+    "expect_flag": "low_role_confidence",
+    "expect_interpretation_confidence": "medium",
+    "note": "a low role_confidence utterance (LLM-inferred role on a mono call) must demote, never ship as silently high-confidence"
+  },
+  "noisy": {
+    "transcript": "transcript.noisy.json",
+    "claims": "claims.noisy.json",
+    "expect_band": "PARTIAL_LOW_COVERAGE",
+    "expect_ratio_below": 0.5,
+    "note": "a noisy/choppy call must show its degraded coverage band out loud, never silently ship as SHIPPED"
+  },
+  "non_english": {
+    "problem_fixture": "non-english-error.json",
+    "expect_error_name": "PYAI_REQUEST_FAILED",
+    "note": "a non-English (or otherwise rejected) call must surface a clear, named, distinguishable refusal — never a silent crash or garbage transcript"
+  }
+}

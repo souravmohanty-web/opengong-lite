@@ -38,8 +38,8 @@
       "weight": 4,
       "target": "12 planted ambiguous terms (SCORECARD 2.1) typed correctly or confidence:low; any confident-wrong = red",
       "band_thresholds": { "green": "all 12 resolve or demote correctly", "red": "any confident-wrong label" },
-      "method": "needs a seeded ambiguity fixture + expected-label file — not yet built",
-      "grader": "pending-samples",
+      "method": "test/fixtures/scorecard/pp-2.1-ambiguity/{transcript,claims,expected}.json + test/scorecard-2.1-ambiguity.test.js — node --test that file; green iff the suite passes and all 12 SC-2.1 cases run",
+      "grader": "auto",
       "gate": null
     },
     {
@@ -48,8 +48,8 @@
       "weight": 4,
       "target": "9 negation/hypothetical/reported-speech trap lines (SCORECARD 2.2) yield 0 asserted claims",
       "band_thresholds": { "green": "0/9 traps produce a wrong assertion", "red": "any trap line asserted as fact" },
-      "method": "gate.test.js already covers single-fixture cases (G-29..G-33, F7-01/02); the full 9-line planted trap set is not assembled as one scored fixture yet",
-      "grader": "pending-samples",
+      "method": "test/fixtures/scorecard/pp-2.2-traps/{transcript,claims,expected}.json + test/scorecard-2.2-traps.test.js — the full 3+3+3 planted trap set assembled as one scored fixture, graded via the real interpretation gate (src/gate.js contextCheck); green iff the suite passes and all 9 SC-2.2 cases run",
+      "grader": "auto",
       "gate": null
     },
     {
@@ -58,8 +58,8 @@
       "weight": 3,
       "target": "6 coreference cases (SCORECARD 2.3) resolve to a named referent + establishing line, else demoted",
       "band_thresholds": { "green": "6/6 resolve or demote correctly", "red": "any unresolved pronoun shipped as a named claim" },
-      "method": "needs a pronoun-heavy fixture with expected referents — not yet built",
-      "grader": "pending-samples",
+      "method": "test/fixtures/scorecard/pp-2.3-coreference/{transcript,claims,expected}.json + test/scorecard-2.3-coreference.test.js — green iff the suite passes and all 6 SC-2.3 cases run",
+      "grader": "auto",
       "gate": null
     },
     {
@@ -78,8 +78,8 @@
       "weight": 3,
       "target": "quiet call → ≥3 coverage records, 0 fake claims (SCORECARD 2.5)",
       "band_thresholds": { "green": ">=3 coverage records, 0 fabricated claims", "red": "any fabricated claim on a quiet call" },
-      "method": "needs a quiet-call fixture run through the pipeline — not yet built",
-      "grader": "pending-samples",
+      "method": "test/fixtures/scorecard/pp-2.5-absence/{transcript,claims,extraction,expected}.json + test/scorecard-2.5-absence.test.js — quiet-call fixture yields 7 coverage records (buying_stage x3, risk_flags x3, stakeholders.threading) validated against the real extractor schemas, 0 fabricated claims",
+      "grader": "auto",
       "gate": null
     },
     {
@@ -98,8 +98,8 @@
       "weight": 3,
       "target": "mono/noisy/non-English each labeled inferred / warned / refused (SCORECARD 2.7)",
       "band_thresholds": { "green": "one fixture per degraded mode, correctly labeled", "red": "silent garbage on any degraded mode" },
-      "method": "needs one fixture per degraded mode scored against expected labels — not yet built",
-      "grader": "pending-samples",
+      "method": "test/fixtures/scorecard/pp-2.7-degradation/** + test/scorecard-2.7-degradation.test.js — one fixture per degraded mode (mono role_confidence, noisy coverage band, non-English named refusal) scored against src/gate.js + src/pyai.js",
+      "grader": "auto",
       "gate": null
     },
     {

@@ -9,7 +9,8 @@
   "evidence_required": false,
   "applies_to": ["all"],
   "crm_map": {
-    "hubspot": { "property": "ai_tracker_hits" }
+    "hubspot": { "property": "ai_tracker_hits" },
+    "justcall": { "field": "call_info.notes" }
   },
   "prompt": "Deterministic keyword tracker — no LLM prompt is used; keywords are scanned in code against the canonical transcript.",
   "keywords": [

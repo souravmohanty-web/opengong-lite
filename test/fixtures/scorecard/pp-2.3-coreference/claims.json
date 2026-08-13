@@ -1,0 +1,147 @@
+[
+  {
+    "id": "coref-1",
+    "extractor": "objections",
+    "section": "objections",
+    "text": "The buyer thinks the annual plan is too expensive.",
+    "stance": {
+      "polarity": "negative",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 1,
+        "quote": "it is too expensive for us right now"
+      }
+    ],
+    "supporting_evidence": [
+      {
+        "utterance_id": 0,
+        "quote": "that is how the annual plan is priced out for your team"
+      }
+    ]
+  },
+  {
+    "id": "coref-2",
+    "extractor": "objections",
+    "section": "objections",
+    "text": "The buyer says the SOC 2 requirement will block the deal.",
+    "stance": {
+      "polarity": "negative",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 3,
+        "quote": "that is going to be a blocker for us"
+      }
+    ],
+    "supporting_evidence": [
+      {
+        "utterance_id": 2,
+        "quote": "here is the soc 2 requirement our security team asked about"
+      }
+    ]
+  },
+  {
+    "id": "coref-3",
+    "extractor": "competitors",
+    "section": "competitors",
+    "text": "The buyer says RingCentral quoted them a lower price for the same seat count.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "commitment",
+      "attribution": "third_party",
+      "attributed_to": "RingCentral",
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 5,
+        "quote": "they quoted us way less honestly"
+      }
+    ],
+    "supporting_evidence": [
+      {
+        "utterance_id": 4,
+        "quote": "ringcentral quoted us way less for the same seat count"
+      }
+    ]
+  },
+  {
+    "id": "coref-4",
+    "extractor": "pain",
+    "section": "pain",
+    "text": "The buyer says something does not work for their team \u2014 which product or feature this refers to is not named on the call.",
+    "stance": {
+      "polarity": "negative",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "low"
+    },
+    "evidence": [
+      {
+        "utterance_id": 6,
+        "quote": "it just does not work for our team"
+      }
+    ],
+    "supporting_evidence": []
+  },
+  {
+    "id": "coref-5",
+    "extractor": "pain",
+    "section": "pain",
+    "text": "The buyer says this will not fly with their ops lead \u2014 the cited antecedent does not actually establish what \"this\" is.",
+    "stance": {
+      "polarity": "negative",
+      "modality": "commitment",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "low"
+    },
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "this is not going to fly with our ops lead"
+      }
+    ],
+    "supporting_evidence": [
+      {
+        "utterance_id": 0,
+        "quote": "the buyer already signed the enterprise contract last week"
+      }
+    ]
+  },
+  {
+    "id": "coref-6",
+    "extractor": "stakeholders",
+    "section": "stakeholders",
+    "text": "The buyer will need to get their legal team on a call too.",
+    "stance": {
+      "polarity": "neutral",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "evidence": [
+      {
+        "utterance_id": 9,
+        "quote": "we would need to get them on a call too"
+      }
+    ],
+    "supporting_evidence": [
+      {
+        "utterance_id": 8,
+        "quote": "our legal team can review the msa language whenever you are ready"
+      }
+    ]
+  }
+]

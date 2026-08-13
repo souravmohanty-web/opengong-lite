@@ -1,0 +1,89 @@
+{
+  "mode": "diarized",
+  "speakers": 2,
+  "audio_seconds": 40,
+  "utterances": [
+    {
+      "id": 0,
+      "start": 0,
+      "end": 5,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "hi thanks for hopping on i just want to walk through how the dialer works today"
+    },
+    {
+      "id": 1,
+      "start": 5,
+      "end": 10,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "sure sounds good"
+    },
+    {
+      "id": 2,
+      "start": 10,
+      "end": 15,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "so this is the dashboard where your calls and texts show up in one place"
+    },
+    {
+      "id": 3,
+      "start": 15,
+      "end": 20,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "ok that makes sense"
+    },
+    {
+      "id": 4,
+      "start": 20,
+      "end": 25,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "that is really the whole walkthrough, any questions on how it works day to day"
+    },
+    {
+      "id": 5,
+      "start": 25,
+      "end": 30,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "nope i think that covers it for now"
+    },
+    {
+      "id": 6,
+      "start": 30,
+      "end": 35,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "great thanks for your time today"
+    },
+    {
+      "id": 7,
+      "start": 35,
+      "end": 40,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "thanks bye"
+    }
+  ],
+  "canonical_text": "hi thanks for hopping on i just want to walk through how the dialer works today\nsure sounds good\nso this is the dashboard where your calls and texts show up in one place\nok that makes sense\nthat is really the whole walkthrough, any questions on how it works day to day\nnope i think that covers it for now\ngreat thanks for your time today\nthanks bye",
+  "transcript_hash": "sha256:8b06670645b63723551620eaf6deea28ae1286b8e3e7cf4ebc576b2bc3b708dd"
+}

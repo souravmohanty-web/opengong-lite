@@ -18,6 +18,22 @@
 const SECTION_TITLES = { objections: 'Objections', summary: 'Summary', next_steps: 'Next steps' };
 const CORROBORATED = new Set(['verified', 'segment_corrected']);
 
+// call.source (Sourav's CRM-plumbing recommendation): every bundle carries the
+// full set of CRM source-identity slots, even on today's upload/URL ingest
+// path where none of them are known. This makes "the schema carries CRM
+// source IDs, populated when you connect a CRM" a literally true statement
+// about the shape shipped today, not a roadmap promise — a future CRM adapter
+// fills these in (buildBundle's `source` param), it never adds new keys.
+const EMPTY_SOURCE = {
+  system: null,
+  external_call_id: null,
+  external_contact_id: null,
+  external_account_id: null,
+  external_deal_id: null,
+  occurred_at: null,
+  direction: null,
+};
+
 function displayEvidence(claim, transcript) {
   if (claim.evidence?.length) return claim.evidence;
   if (!claim.rejected_evidence?.length) return [];
@@ -52,12 +68,14 @@ function buildSections(claims) {
 // -> "opengong.bundle.v1". `claims` are already-gated (src/gate.js output);
 // `coverage` is already-graded (gate.gradeRun output) — this module composes,
 // it never re-derives either.
-export function buildBundle({ transcript, claims, coverage, callId = 'call', title, audio = null, provenance = null }) {
+export function buildBundle({
+  transcript, claims, coverage, callId = 'call', title, audio = null, provenance = null, source = null,
+}) {
   const viewerClaims = claims.map((c) => ({ ...c, evidence: displayEvidence(c, transcript) }));
 
   return {
     format: 'opengong.bundle.v1',
-    call: { id: callId, title: title ?? callId },
+    call: { id: callId, title: title ?? callId, source: { ...EMPTY_SOURCE, ...(source ?? {}) } },
     audio,
     transcript: {
       mode: transcript.mode,

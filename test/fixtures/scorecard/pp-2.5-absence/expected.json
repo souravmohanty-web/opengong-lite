@@ -1,0 +1,15 @@
+{
+  "min_coverage_records": 3,
+  "coverage_record_paths": [
+    ["buying_stage", "stage"], ["buying_stage", "urgency"], ["buying_stage", "trigger_event"],
+    ["risk_flags", "buyer_posture"], ["risk_flags", "transcript_quality"], ["risk_flags", "anomaly"],
+    ["stakeholders", "threading"]
+  ],
+  "empty_list_extractors": [
+    { "extractor": "next_steps", "field": "next_steps" },
+    { "extractor": "pricing", "field": "pricing_mentions" },
+    { "extractor": "stakeholders", "field": "stakeholders" }
+  ],
+  "required_claim_ids": ["quiet-summary-1"],
+  "expected_run_band": "SHIPPED"
+}

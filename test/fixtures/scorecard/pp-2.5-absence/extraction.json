@@ -1,0 +1,18 @@
+{
+  "next_steps": { "next_steps": [] },
+  "pricing": { "pricing_mentions": [] },
+  "buying_stage": {
+    "stage": { "value": "unclear", "basis": "absent", "evidence": [] },
+    "urgency": { "value": "none", "basis": "absent", "evidence": [] },
+    "trigger_event": { "value": "none", "basis": "absent", "evidence": [] }
+  },
+  "risk_flags": {
+    "buyer_posture": { "value": "open", "basis": "inferred", "evidence": [] },
+    "transcript_quality": { "value": "clean", "basis": "inferred", "evidence": [] },
+    "anomaly": { "value": "none", "basis": "absent", "evidence": [] }
+  },
+  "stakeholders": {
+    "stakeholders": [],
+    "threading": { "value": "single_threaded", "basis": "inferred", "evidence": [] }
+  }
+}

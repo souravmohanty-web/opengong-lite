@@ -1,0 +1,94 @@
+[
+  {
+    "id": "amb-ring-1",
+    "category": "entity",
+    "term": "ring",
+    "resolved": true,
+    "expected_type": "common_word",
+    "expected_registry_id": null
+  },
+  {
+    "id": "amb-ring-2",
+    "category": "entity",
+    "term": "ring",
+    "resolved": true,
+    "expected_type": "competitor",
+    "expected_registry_id": "ring"
+  },
+  {
+    "id": "amb-ring-3",
+    "category": "entity",
+    "term": "ring",
+    "resolved": true,
+    "expected_type": "competitor",
+    "expected_registry_id": "ring"
+  },
+  {
+    "id": "amb-ring-4",
+    "category": "entity",
+    "term": "ring",
+    "resolved": false,
+    "expected_type": "unclear",
+    "expected_registry_id": null
+  },
+  {
+    "id": "amb-lp-1",
+    "category": "entity",
+    "term": "local presence",
+    "resolved": true,
+    "expected_type": "feature",
+    "expected_registry_id": "local_presence"
+  },
+  {
+    "id": "amb-lp-2",
+    "category": "entity",
+    "term": "local presence",
+    "resolved": true,
+    "expected_type": "feature",
+    "expected_registry_id": "local_presence"
+  },
+  {
+    "id": "amb-lp-3",
+    "category": "entity",
+    "term": "local presence",
+    "resolved": true,
+    "expected_type": "generic_phrase",
+    "expected_registry_id": null
+  },
+  {
+    "id": "amb-lp-4",
+    "category": "entity",
+    "term": "local presence",
+    "resolved": false,
+    "expected_type": "unclear",
+    "expected_registry_id": null
+  },
+  {
+    "id": "amb-forty-1",
+    "category": "number",
+    "term": "forty",
+    "resolved": true,
+    "expected_unit": "usd"
+  },
+  {
+    "id": "amb-forty-2",
+    "category": "number",
+    "term": "forty",
+    "resolved": true,
+    "expected_unit": "seats"
+  },
+  {
+    "id": "amb-forty-3",
+    "category": "number",
+    "term": "forty",
+    "resolved": true,
+    "expected_unit": "percent"
+  },
+  {
+    "id": "amb-forty-4",
+    "category": "number",
+    "term": "forty",
+    "resolved": false,
+    "expected_unit": "unknown"
+  }
+]

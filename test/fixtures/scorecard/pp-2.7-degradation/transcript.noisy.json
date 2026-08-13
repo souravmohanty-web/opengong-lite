@@ -1,0 +1,59 @@
+{
+  "mode": "diarized",
+  "speakers": 2,
+  "audio_seconds": 25,
+  "utterances": [
+    {
+      "id": 0,
+      "start": 0,
+      "end": 5,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "hi thanks for hopping on today i want to walk you through the dialer and go over pricing"
+    },
+    {
+      "id": 1,
+      "start": 5,
+      "end": 10,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "yeah go ahead sorry the line is pretty choppy on my end"
+    },
+    {
+      "id": 2,
+      "start": 10,
+      "end": 15,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "mm something something the budget mm cut out there"
+    },
+    {
+      "id": 3,
+      "start": 15,
+      "end": 20,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "sorry you cut out for a second can you say that again"
+    },
+    {
+      "id": 4,
+      "start": 20,
+      "end": 25,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "mm yeah mm the connection mm keeps dropping mm"
+    }
+  ],
+  "canonical_text": "hi thanks for hopping on today i want to walk you through the dialer and go over pricing\nyeah go ahead sorry the line is pretty choppy on my end\nmm something something the budget mm cut out there\nsorry you cut out for a second can you say that again\nmm yeah mm the connection mm keeps dropping mm",
+  "transcript_hash": "sha256:ecd6465222ac33e865221255795df2d57d33cd92a6a702aad4ae99d6f5f0f2ab"
+}

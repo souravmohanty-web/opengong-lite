@@ -356,6 +356,75 @@ CHECKS['ag-4.4-cost-stamped'] = () => {
   return ok(green ? 'green' : 'red', `${stamped}/${total} entries stamped across ${records.length} run record(s)`, green ? 'runs/*/run.json' : gaps.slice(0, 5).join('; '));
 };
 
+// -- Product pull: contextual/interpretation guard fixtures ---------------
+// Each of these five wires a scored fixture set under test/fixtures/scorecard/
+// to its dedicated test file, via the same tap()-and-inspect pattern the
+// loop_depth checks above use. Green requires BOTH the suite to pass AND the
+// expected number of per-case tests to have actually run (a suite that
+// silently lost cases to a typo/skip must not read green).
+function countMatching(tapResult, re) {
+  return tapResult.tests.filter((t) => re.test(t.name)).length;
+}
+
+CHECKS['pp-2.1-ambiguity-traps'] = () => {
+  const t = tap('test/scorecard-2.1-ambiguity.test.js');
+  if (t.spawnError) return pending(`could not run test/scorecard-2.1-ambiguity.test.js: ${t.spawnError}`);
+  const cases = countMatching(t, /^SC-2\.1 amb-/);
+  const suiteGreen = t.fail === 0 && t.total > 0;
+  if (suiteGreen && cases === 12) {
+    return ok('green', `${t.pass}/${t.total} pass, 12/12 planted ambiguous terms resolve or demote correctly`, 'test/scorecard-2.1-ambiguity.test.js');
+  }
+  const failing = t.tests.filter((x) => !x.ok).map((x) => x.name).slice(0, 5);
+  return ok('red', `${t.pass}/${t.total} pass, ${cases}/12 ambiguity cases ran`, failing.join('; ') || 'fixture did not run all 12 cases');
+};
+
+CHECKS['pp-2.2-negation-hypothetical-reported'] = () => {
+  const t = tap('test/scorecard-2.2-traps.test.js');
+  if (t.spawnError) return pending(`could not run test/scorecard-2.2-traps.test.js: ${t.spawnError}`);
+  const cases = countMatching(t, /^SC-2\.2 trap-/);
+  const suiteGreen = t.fail === 0 && t.total > 0;
+  if (suiteGreen && cases === 9) {
+    return ok('green', `${t.pass}/${t.total} pass, 9/9 negation/hypothetical/reported traps yield 0 asserted claims`, 'test/scorecard-2.2-traps.test.js');
+  }
+  const failing = t.tests.filter((x) => !x.ok).map((x) => x.name).slice(0, 5);
+  return ok('red', `${t.pass}/${t.total} pass, ${cases}/9 trap cases ran`, failing.join('; ') || 'fixture did not run all 9 cases');
+};
+
+CHECKS['pp-2.3-coreference'] = () => {
+  const t = tap('test/scorecard-2.3-coreference.test.js');
+  if (t.spawnError) return pending(`could not run test/scorecard-2.3-coreference.test.js: ${t.spawnError}`);
+  const cases = countMatching(t, /^SC-2\.3 coref-/);
+  const suiteGreen = t.fail === 0 && t.total > 0;
+  if (suiteGreen && cases === 6) {
+    return ok('green', `${t.pass}/${t.total} pass, 6/6 coreference cases resolve or demote correctly`, 'test/scorecard-2.3-coreference.test.js');
+  }
+  const failing = t.tests.filter((x) => !x.ok).map((x) => x.name).slice(0, 5);
+  return ok('red', `${t.pass}/${t.total} pass, ${cases}/6 coreference cases ran`, failing.join('; ') || 'fixture did not run all 6 cases');
+};
+
+CHECKS['pp-2.5-absence-honesty'] = () => {
+  const t = tap('test/scorecard-2.5-absence.test.js');
+  if (t.spawnError) return pending(`could not run test/scorecard-2.5-absence.test.js: ${t.spawnError}`);
+  const suiteGreen = t.fail === 0 && t.total === 5;
+  if (suiteGreen) {
+    return ok('green', `${t.pass}/${t.total} pass — quiet call yields >=3 coverage records, 0 fabricated claims`, 'test/scorecard-2.5-absence.test.js');
+  }
+  const failing = t.tests.filter((x) => !x.ok).map((x) => x.name).slice(0, 5);
+  return ok('red', `${t.pass}/${t.total} pass`, failing.join('; ') || `expected 5 tests, found ${t.total}`);
+};
+
+CHECKS['pp-2.7-degradation-ladder'] = () => {
+  const t = tap('test/scorecard-2.7-degradation.test.js');
+  if (t.spawnError) return pending(`could not run test/scorecard-2.7-degradation.test.js: ${t.spawnError}`);
+  const ids = ['SC-2.7-mono', 'SC-2.7-noisy', 'SC-2.7-non-english'];
+  const found = ids.map((id) => ({ id, test: findTest(t, id) }));
+  const missing = found.filter((f) => !f.test);
+  if (missing.length) return pending(`not found in test/scorecard-2.7-degradation.test.js: ${missing.map((m) => m.id).join(', ')}`);
+  const allGreen = found.every((f) => f.test.ok);
+  const status = found.map((f) => `${f.id}=${f.test.ok ? 'ok' : 'FAIL'}`).join(' ');
+  return ok(allGreen ? 'green' : 'red', status, 'test/scorecard-2.7-degradation.test.js (mono / noisy / non-English)');
+};
+
 // -- Demo magnetism -----------------------------------------------------
 CHECKS['dm-3.2-refusal-states-in-bundle'] = () => {
   const p = 'test/fixtures/bundle.slice1.json';

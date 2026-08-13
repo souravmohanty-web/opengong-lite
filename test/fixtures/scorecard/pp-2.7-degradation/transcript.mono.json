@@ -1,0 +1,29 @@
+{
+  "mode": "mono",
+  "speakers": 1,
+  "audio_seconds": 10,
+  "utterances": [
+    {
+      "id": 0,
+      "start": 0,
+      "end": 5,
+      "speaker": null,
+      "channel": null,
+      "role": null,
+      "role_confidence": null,
+      "text": "hi thanks for hopping on today i want to walk you through the dialer and go over pricing"
+    },
+    {
+      "id": 1,
+      "start": 5,
+      "end": 10,
+      "speaker": null,
+      "channel": null,
+      "role": "rep",
+      "role_confidence": 0.65,
+      "text": "i will get the pricing approval from my manager today"
+    }
+  ],
+  "canonical_text": "hi thanks for hopping on today i want to walk you through the dialer and go over pricing\ni will get the pricing approval from my manager today",
+  "transcript_hash": "sha256:679459061a4267bcdd96154d912883d73350a2678cb06b387cf0ffd057aecb79"
+}

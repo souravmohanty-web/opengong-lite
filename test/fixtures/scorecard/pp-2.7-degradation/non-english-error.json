@@ -1,0 +1,6 @@
+{
+  "status": 400,
+  "title": "unsupported_language",
+  "detail": "transcription is English-only today; detected language: hi",
+  "request_id": "req_scorecard_fixture_nonen_1"
+}

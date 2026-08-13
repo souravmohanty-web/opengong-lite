@@ -1,0 +1,139 @@
+{
+  "mode": "diarized",
+  "speakers": 2,
+  "audio_seconds": 65,
+  "utterances": [
+    {
+      "id": 0,
+      "start": 0,
+      "end": 5,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "hi thanks for hopping on today i want to walk you through the dialer and go over pricing"
+    },
+    {
+      "id": 1,
+      "start": 5,
+      "end": 10,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "sounds good we already get a ring on every call from our current setup so that part is not new to us"
+    },
+    {
+      "id": 2,
+      "start": 10,
+      "end": 15,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we actually trialed ring for two months before this call"
+    },
+    {
+      "id": 3,
+      "start": 15,
+      "end": 20,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "ring quoted us a lower rate but their support was slower to respond"
+    },
+    {
+      "id": 4,
+      "start": 20,
+      "end": 25,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "ring came up in our vendor review last quarter too though i do not remember which way that went"
+    },
+    {
+      "id": 5,
+      "start": 25,
+      "end": 30,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "local presence is one of our most requested features it shows a local area code so prospects actually pick up"
+    },
+    {
+      "id": 6,
+      "start": 30,
+      "end": 35,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "local presence definitely matters for our outbound team given how many area codes we call into"
+    },
+    {
+      "id": 7,
+      "start": 35,
+      "end": 40,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we do not have much of a local presence in the midwest so most of our reps work remote"
+    },
+    {
+      "id": 8,
+      "start": 40,
+      "end": 45,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "local presence came up with the last account we onboarded i would have to check my notes on the specifics"
+    },
+    {
+      "id": 9,
+      "start": 45,
+      "end": 50,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "the annual plan comes out to forty a seat which is more than we budgeted for"
+    },
+    {
+      "id": 10,
+      "start": 50,
+      "end": 55,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "we can fit forty seats on the team plan before you would need to upgrade tiers"
+    },
+    {
+      "id": 11,
+      "start": 55,
+      "end": 60,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "our current vendor gave us a forty percent discount for signing a two year term"
+    },
+    {
+      "id": 12,
+      "start": 60,
+      "end": 65,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "forty came up again near the end of the call but i honestly could not tell you what it was about anymore"
+    }
+  ],
+  "canonical_text": "hi thanks for hopping on today i want to walk you through the dialer and go over pricing\nsounds good we already get a ring on every call from our current setup so that part is not new to us\nwe actually trialed ring for two months before this call\nring quoted us a lower rate but their support was slower to respond\nring came up in our vendor review last quarter too though i do not remember which way that went\nlocal presence is one of our most requested features it shows a local area code so prospects actually pick up\nlocal presence definitely matters for our outbound team given how many area codes we call into\nwe do not have much of a local presence in the midwest so most of our reps work remote\nlocal presence came up with the last account we onboarded i would have to check my notes on the specifics\nthe annual plan comes out to forty a seat which is more than we budgeted for\nwe can fit forty seats on the team plan before you would need to upgrade tiers\nour current vendor gave us a forty percent discount for signing a two year term\nforty came up again near the end of the call but i honestly could not tell you what it was about anymore",
+  "transcript_hash": "sha256:421d572f91ac7fa4d38ae5fbdcb923d638b3ede338470cfdf475e2573fd98326"
+}

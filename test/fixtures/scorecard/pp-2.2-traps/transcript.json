@@ -1,0 +1,129 @@
+{
+  "mode": "diarized",
+  "speakers": 2,
+  "audio_seconds": 60,
+  "utterances": [
+    {
+      "id": 0,
+      "start": 0,
+      "end": 5,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "before we get into pricing tell me a bit about how the current setup is working"
+    },
+    {
+      "id": 1,
+      "start": 5,
+      "end": 10,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we do not have any budget issues on our end this quarter"
+    },
+    {
+      "id": 2,
+      "start": 10,
+      "end": 15,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "there is no plan to switch away from our current vendor right now"
+    },
+    {
+      "id": 3,
+      "start": 15,
+      "end": 20,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "i have never once complained about call quality on this platform"
+    },
+    {
+      "id": 4,
+      "start": 20,
+      "end": 25,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "good to know, what would make the enterprise tier worth it for you next year"
+    },
+    {
+      "id": 5,
+      "start": 25,
+      "end": 30,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "if we ended up buying the enterprise plan next year would you throw in onboarding"
+    },
+    {
+      "id": 6,
+      "start": 30,
+      "end": 35,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "suppose our compliance team approved this we would still need finance sign off"
+    },
+    {
+      "id": 7,
+      "start": 35,
+      "end": 40,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "imagine we had three more reps on the floor we might need double the seats"
+    },
+    {
+      "id": 8,
+      "start": 40,
+      "end": 45,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "has anyone raised concerns about reliability with the team"
+    },
+    {
+      "id": 9,
+      "start": 45,
+      "end": 50,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "our old vendor told us their dialer drops calls during peak hours"
+    },
+    {
+      "id": 10,
+      "start": 50,
+      "end": 55,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "my manager mentioned she wants a demo before we sign anything"
+    },
+    {
+      "id": 11,
+      "start": 55,
+      "end": 60,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "according to our it lead the current contract renews in march"
+    }
+  ],
+  "canonical_text": "before we get into pricing tell me a bit about how the current setup is working\nwe do not have any budget issues on our end this quarter\nthere is no plan to switch away from our current vendor right now\ni have never once complained about call quality on this platform\ngood to know, what would make the enterprise tier worth it for you next year\nif we ended up buying the enterprise plan next year would you throw in onboarding\nsuppose our compliance team approved this we would still need finance sign off\nimagine we had three more reps on the floor we might need double the seats\nhas anyone raised concerns about reliability with the team\nour old vendor told us their dialer drops calls during peak hours\nmy manager mentioned she wants a demo before we sign anything\naccording to our it lead the current contract renews in march",
+  "transcript_hash": "sha256:31511abb086371898951f1c47c6e853039da3ca1252ab70603ba43c908bbcf12"
+}

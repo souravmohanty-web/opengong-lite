@@ -1,0 +1,109 @@
+{
+  "mode": "diarized",
+  "speakers": 2,
+  "audio_seconds": 50,
+  "utterances": [
+    {
+      "id": 0,
+      "start": 0,
+      "end": 5,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "so that is how the annual plan is priced out for your team"
+    },
+    {
+      "id": 1,
+      "start": 5,
+      "end": 10,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "it is too expensive for us right now"
+    },
+    {
+      "id": 2,
+      "start": 10,
+      "end": 15,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "understood, and here is the soc 2 requirement our security team asked about"
+    },
+    {
+      "id": 3,
+      "start": 15,
+      "end": 20,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "that is going to be a blocker for us"
+    },
+    {
+      "id": 4,
+      "start": 20,
+      "end": 25,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "ringcentral quoted us way less for the same seat count"
+    },
+    {
+      "id": 5,
+      "start": 25,
+      "end": 30,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "they quoted us way less honestly"
+    },
+    {
+      "id": 6,
+      "start": 30,
+      "end": 35,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "it just does not work for our team"
+    },
+    {
+      "id": 7,
+      "start": 35,
+      "end": 40,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "this is not going to fly with our ops lead"
+    },
+    {
+      "id": 8,
+      "start": 40,
+      "end": 45,
+      "speaker": "speaker_1",
+      "channel": 0,
+      "role": "rep",
+      "role_confidence": 0.9,
+      "text": "our legal team can review the msa language whenever you are ready"
+    },
+    {
+      "id": 9,
+      "start": 45,
+      "end": 50,
+      "speaker": "speaker_2",
+      "channel": 1,
+      "role": "prospect",
+      "role_confidence": 0.9,
+      "text": "we would need to get them on a call too"
+    }
+  ],
+  "canonical_text": "so that is how the annual plan is priced out for your team\nit is too expensive for us right now\nunderstood, and here is the soc 2 requirement our security team asked about\nthat is going to be a blocker for us\nringcentral quoted us way less for the same seat count\nthey quoted us way less honestly\nit just does not work for our team\nthis is not going to fly with our ops lead\nour legal team can review the msa language whenever you are ready\nwe would need to get them on a call too",
+  "transcript_hash": "sha256:e323b9bb8624245309adf240e257b369219f6eeeda0c49607609cbd9db62c7b0"
+}

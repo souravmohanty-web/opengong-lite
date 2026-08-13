@@ -1,0 +1,12 @@
+[
+  {
+    "id": "quiet-summary-1", "extractor": "summary", "section": "summary",
+    "text": "The rep gave a short walkthrough of the calls-and-texts dashboard; the buyer had no questions, and no next steps or pricing were discussed.",
+    "stance": { "polarity": "neutral", "modality": "possibility", "attribution": "first_party", "attributed_to": null, "certainty": "high" },
+    "evidence": [
+      { "utterance_id": 0, "quote": "i just want to walk through how the dialer works today" },
+      { "utterance_id": 2, "quote": "this is the dashboard where your calls and texts show up in one place" },
+      { "utterance_id": 5, "quote": "nope i think that covers it for now" }
+    ]
+  }
+]

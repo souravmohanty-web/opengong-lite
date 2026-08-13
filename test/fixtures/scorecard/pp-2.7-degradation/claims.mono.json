@@ -1,0 +1,8 @@
+[
+  {
+    "id": "mono-1", "extractor": "next_steps", "section": "next_steps",
+    "text": "The rep will get pricing approval from their manager today.",
+    "stance": { "polarity": "positive", "modality": "commitment", "attribution": "first_party", "attributed_to": null, "certainty": "high" },
+    "evidence": [ { "utterance_id": 1, "quote": "i will get the pricing approval from my manager today" } ]
+  }
+]

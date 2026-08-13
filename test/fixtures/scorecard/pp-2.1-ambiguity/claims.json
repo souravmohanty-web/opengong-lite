@@ -1,0 +1,362 @@
+[
+  {
+    "id": "amb-ring-1",
+    "extractor": "competitors",
+    "section": "competitors",
+    "text": "A ring/notification on every call is standard on the buyer's current setup (not the competitor Ring).",
+    "stance": {
+      "polarity": "neutral",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "medium"
+    },
+    "entity_refs": [
+      {
+        "term": "ring",
+        "type": "common_word",
+        "registry_id": null,
+        "confidence": "high"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 1,
+        "quote": "we already get a ring on every call from our current setup"
+      }
+    ]
+  },
+  {
+    "id": "amb-ring-2",
+    "extractor": "competitors",
+    "section": "competitors",
+    "text": "The buyer trialed the competitor Ring for two months before this call.",
+    "stance": {
+      "polarity": "neutral",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "entity_refs": [
+      {
+        "term": "ring",
+        "type": "competitor",
+        "registry_id": "ring",
+        "confidence": "high"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 2,
+        "quote": "we actually trialed ring for two months before this call"
+      }
+    ]
+  },
+  {
+    "id": "amb-ring-3",
+    "extractor": "competitors",
+    "section": "competitors",
+    "text": "The competitor Ring quoted the buyer a lower rate but with slower support.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "possibility",
+      "attribution": "third_party",
+      "attributed_to": "Ring",
+      "certainty": "high"
+    },
+    "entity_refs": [
+      {
+        "term": "ring",
+        "type": "competitor",
+        "registry_id": "ring",
+        "confidence": "high"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 3,
+        "quote": "ring quoted us a lower rate but their support was slower to respond"
+      }
+    ]
+  },
+  {
+    "id": "amb-ring-4",
+    "extractor": "competitors",
+    "section": "competitors",
+    "text": "\"Ring\" came up in the buyer's vendor review; whether this is the competitor or the common word cannot be told from the line alone.",
+    "stance": {
+      "polarity": "neutral",
+      "modality": "unclear",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "low"
+    },
+    "entity_refs": [
+      {
+        "term": "ring",
+        "type": "unclear",
+        "registry_id": null,
+        "confidence": "low"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 4,
+        "quote": "ring came up in our vendor review last quarter too though i do not remember which way that went"
+      }
+    ]
+  },
+  {
+    "id": "amb-lp-1",
+    "extractor": "pain",
+    "section": "pain",
+    "text": "Local Presence (the caller-ID feature) is one of the rep's most-requested features.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "entity_refs": [
+      {
+        "term": "local presence",
+        "type": "feature",
+        "registry_id": "local_presence",
+        "confidence": "high"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 5,
+        "quote": "local presence is one of our most requested features it shows a local area code so prospects actually pick up"
+      }
+    ]
+  },
+  {
+    "id": "amb-lp-2",
+    "extractor": "pain",
+    "section": "pain",
+    "text": "The Local Presence feature matters to the buyer's outbound team.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "entity_refs": [
+      {
+        "term": "local presence",
+        "type": "feature",
+        "registry_id": "local_presence",
+        "confidence": "high"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 6,
+        "quote": "local presence definitely matters for our outbound team given how many area codes we call into"
+      }
+    ]
+  },
+  {
+    "id": "amb-lp-3",
+    "extractor": "pain",
+    "section": "pain",
+    "text": "The buyer does not have much local presence (physical footprint) in the midwest \u2014 the generic phrase, not the feature.",
+    "stance": {
+      "polarity": "negative",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "entity_refs": [
+      {
+        "term": "local presence",
+        "type": "generic_phrase",
+        "registry_id": null,
+        "confidence": "high"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 7,
+        "quote": "we do not have much of a local presence in the midwest so most of our reps work remote"
+      }
+    ]
+  },
+  {
+    "id": "amb-lp-4",
+    "extractor": "pain",
+    "section": "pain",
+    "text": "\"Local presence\" came up with the buyer's last onboarded account; whether that meant the feature or the generic phrase cannot be told from the line alone.",
+    "stance": {
+      "polarity": "neutral",
+      "modality": "unclear",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "low"
+    },
+    "entity_refs": [
+      {
+        "term": "local presence",
+        "type": "unclear",
+        "registry_id": null,
+        "confidence": "low"
+      }
+    ],
+    "quantities": [],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 8,
+        "quote": "local presence came up with the last account we onboarded i would have to check my notes on the specifics"
+      }
+    ]
+  },
+  {
+    "id": "amb-forty-1",
+    "extractor": "pricing",
+    "section": "pricing",
+    "text": "The annual plan is forty dollars a seat, more than the buyer budgeted for.",
+    "stance": {
+      "polarity": "negative",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "entity_refs": [],
+    "quantities": [
+      {
+        "surface": "forty",
+        "unit": "usd",
+        "unit_source": "explicit",
+        "approximate": false
+      }
+    ],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 9,
+        "quote": "the annual plan comes out to forty a seat which is more than we budgeted for"
+      }
+    ]
+  },
+  {
+    "id": "amb-forty-2",
+    "extractor": "pricing",
+    "section": "pricing",
+    "text": "The team plan fits forty seats before the buyer would need to upgrade tiers.",
+    "stance": {
+      "polarity": "neutral",
+      "modality": "possibility",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "high"
+    },
+    "entity_refs": [],
+    "quantities": [
+      {
+        "surface": "forty",
+        "unit": "seats",
+        "unit_source": "explicit",
+        "approximate": false
+      }
+    ],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 10,
+        "quote": "we can fit forty seats on the team plan before you would need to upgrade tiers"
+      }
+    ]
+  },
+  {
+    "id": "amb-forty-3",
+    "extractor": "pricing",
+    "section": "pricing",
+    "text": "The buyer's current vendor gave them a forty percent discount for a two-year term.",
+    "stance": {
+      "polarity": "positive",
+      "modality": "possibility",
+      "attribution": "third_party",
+      "attributed_to": "current vendor",
+      "certainty": "high"
+    },
+    "entity_refs": [],
+    "quantities": [
+      {
+        "surface": "forty",
+        "unit": "percent",
+        "unit_source": "explicit",
+        "approximate": false
+      }
+    ],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 11,
+        "quote": "our current vendor gave us a forty percent discount for signing a two year term"
+      }
+    ]
+  },
+  {
+    "id": "amb-forty-4",
+    "extractor": "pricing",
+    "section": "pricing",
+    "text": "\"Forty\" came up again near the end of the call; the buyer could not say what it referred to, so the unit is unknown.",
+    "stance": {
+      "polarity": "neutral",
+      "modality": "unclear",
+      "attribution": "first_party",
+      "attributed_to": null,
+      "certainty": "low"
+    },
+    "entity_refs": [],
+    "quantities": [
+      {
+        "surface": "forty",
+        "unit": "unknown",
+        "unit_source": "unknown",
+        "approximate": true
+      }
+    ],
+    "requires_context": false,
+    "supporting_evidence": [],
+    "evidence": [
+      {
+        "utterance_id": 12,
+        "quote": "forty came up again near the end of the call but i honestly could not tell you what it was about anymore"
+      }
+    ]
+  }
+]

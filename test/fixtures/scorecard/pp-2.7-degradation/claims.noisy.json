@@ -1,0 +1,29 @@
+[
+  {
+    "id": "noisy-summary-1", "extractor": "summary", "section": "summary",
+    "text": "The rep opened by walking the buyer through the dialer and pricing.",
+    "stance": { "polarity": "positive", "modality": "commitment", "attribution": "first_party", "attributed_to": null, "certainty": "high" },
+    "evidence": [ { "utterance_id": 0, "quote": "hi thanks for hopping on today i want to walk you through the dialer and go over pricing" } ]
+  },
+  {
+    "id": "noisy-objections-1", "extractor": "objections", "section": "objections",
+    "text": "The buyer says the budget is going to be a problem next quarter.",
+    "stance": { "polarity": "positive", "modality": "commitment", "attribution": "first_party", "attributed_to": null, "certainty": "high" },
+    "evidence": [ { "utterance_id": 2, "quote": "the budget is going to be a real problem for us starting next quarter" } ],
+    "_why": "the choppy line only captured fragments (\"mm something something the budget mm\"); this reconstructed reading is not actually in the transcript"
+  },
+  {
+    "id": "noisy-pain-1", "extractor": "pain", "section": "pain",
+    "text": "The connection has been dropping during important calls all week.",
+    "stance": { "polarity": "negative", "modality": "commitment", "attribution": "first_party", "attributed_to": null, "certainty": "high" },
+    "evidence": [ { "utterance_id": 4, "quote": "the connection has been dropping during important calls all week" } ],
+    "_why": "the noisy line only says \"mm yeah mm the connection mm keeps dropping mm\"; this specific reading is not actually in the transcript"
+  },
+  {
+    "id": "noisy-pricing-1", "extractor": "pricing", "section": "pricing",
+    "text": "The buyer wants a lower price before renewing next quarter.",
+    "stance": { "polarity": "positive", "modality": "commitment", "attribution": "first_party", "attributed_to": null, "certainty": "high" },
+    "evidence": [ { "utterance_id": 3, "quote": "can you say that again about wanting a lower price before renewing" } ],
+    "_why": "fabricated content mapped onto a garbled turn that never said this"
+  }
+]
