@@ -10,8 +10,9 @@ git clone <repo-url> && cd opengong-lite
 # and follows the same team protocol automatically.
 ```
 
-Read: `DECISION-BRIEF.md` (the spec, 5 min) → `team/SYNC.md` top entries (current state)
-→ `team/TASKBOARD.md` (find your lane — or open a new one; see "Open lanes" there.
+Read: `START-HERE.md` (the one-pager) → `team/SYNC.md` top entries (current state) →
+`DECISION-BRIEF.md` (the spec, 5 min) → `team/plans/master-plan.md` (the roadmap) →
+`team/TASKBOARD.md` (find your lane — or open a new one; see "Open lanes" there.
 You don't need permission to start a lane, you need evidence to promote one).
 
 ## The loop — one pebble on top

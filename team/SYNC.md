@@ -13,6 +13,8 @@
 
 ## Decision log
 
+- 2026-08-13 ~17:15 · projects-2f (per Sourav) · READER-FACING CLEANUP (coordinated with hackathon session; files cleared, no overlap): README.md rewritten as the true front door (end goal incl. Show HN prize, one-line state, 3-rule collab model, defers to START-HERE for onboarding); TASKBOARD.md rewritten to current-truth-only (done-foundation table w/ evidence, gated build slices from master plan, active research lanes w/ R-10 marked CRITICAL PATH, pruned open lanes, correction blockquotes removed — history stays here in SYNC); phase-1-ingest.md decision block now records Sourav's ~15:05 "keep as-is, no audit" APPROVAL + commit 36e8ce2 + fresh 11/11 test evidence (INDEX.md row updated to resolved); ONBOARDING reading order aligned to START-HERE; CLAUDE.md bootstrap now includes master-plan. Fresh verification this entry rests on: `npm test` → 11/11. · L-refs: none (process)
+
 - 2026-08-13 evening · cleanup/coherence agent · **CORRECTION, not a decision:** the
   ~14:10 entry below states Phase-1 (`src/{ingest,transcript}.js` + tests) was "left
   UNCOMMITTED per freeze order." That is stale — `git log` shows all four files were

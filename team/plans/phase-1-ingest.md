@@ -1,9 +1,10 @@
 # Phase 1 (Ingest) — review brief for Sourav
 
-**Status: built pre-freeze, exit test passed, UNCOMMITTED.** The four files below exist
-only in the working tree on Sourav's machine — **cloners will not see them in the repo**
-until approved. This doc is the plan-mode artifact for that approval: approve → one
-commit lands them; reject → `git clean` removes them (nothing else touches these files).
+**Status: RESOLVED — APPROVED and committed.** Sourav ruled ~15:05 Aug 13 in the
+hackathon-session terminal: "keep as-is, no audit" (chosen over keep-but-audit-first and
+discard). The four files landed in commit `36e8ce2`. Fresh verification after commit:
+`npm test` → 11/11 (Aug 13 evening, projects-2f). This doc is retained as the review
+record; the code now lives in `src/` / `test/` under the build-gate rules.
 
 ## What was built (all in working tree, uncommitted)
 
@@ -30,7 +31,8 @@ commit lands them; reject → `git clean` removes them (nothing else touches the
 - Long-audio segment granularity is a known unknown (brief §5) — the utterance layer
   handles it either way, but golden fixtures only cover short files.
 
-## Decision requested
+## Decision
 
-- [ ] APPROVE → commit Phase 1 as-is, board row → done
-- [ ] REJECT/AMEND → say what changes; files stay uncommitted until then
+- [x] **APPROVED** — Sourav, ~15:05 Aug 13, via "keep as-is, no audit" ruling (hackathon
+      session); executed in commit `36e8ce2`. Board row → done.
+- [ ] ~~REJECT/AMEND~~

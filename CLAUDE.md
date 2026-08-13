@@ -8,9 +8,11 @@ Before doing ANYTHING, read in this order:
 2. `DECISION-BRIEF.md` — the spec. L1–L19 are evidence-locked decisions: build on them,
    never relitigate without new evidence. Challenges = inline 💬 comment + SYNC.md entry;
    the standing auditor (runs on Sourav's machine) rules and logs in `audit/audit-log.md`.
-3. `team/PROTOCOL.md` — working agreement. Iron Law: no edits to files another
+3. `team/plans/master-plan.md` — the roadmap (stages + build slices) and build-start
+   ruling; `team/plans/INDEX.md` maps its appendix docs.
+4. `team/PROTOCOL.md` — working agreement. Iron Law: no edits to files another
    session/person has claimed on `team/TASKBOARD.md`. Claim before you touch.
-4. Your lane's `research/*/FINDINGS.md` or the taskboard row you own.
+5. Your lane's `research/*/FINDINGS.md` or the taskboard row you own.
 
 Rules that bind every session here:
 
