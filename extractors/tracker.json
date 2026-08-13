@@ -1,0 +1,26 @@
+{
+  "name": "tracker",
+  "version": "1.0.0",
+  "title": "Keyword Tracker",
+  "description": "Deterministic keyword hits across the call — competitors, compliance, money terms. 100% receipts by construction, zero AI cost; the keyword list is the config surface (content owner edits it when the deal arc lands).",
+  "enabled": true,
+  "role": "tracker",
+  "scope": "call",
+  "evidence_required": false,
+  "applies_to": ["all"],
+  "crm_map": {
+    "hubspot": { "property": "ai_tracker_hits" }
+  },
+  "prompt": "Deterministic keyword tracker — no LLM prompt is used; keywords are scanned in code against the canonical transcript.",
+  "keywords": [
+    "compliance",
+    "pricing",
+    "discount",
+    "contract",
+    "dialer",
+    "answering machine detection",
+    "integration",
+    "competitor"
+  ],
+  "output_schema": { "type": "object", "additionalProperties": false, "required": [], "properties": {} }
+}

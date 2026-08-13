@@ -31,8 +31,14 @@ state **current truth only**.
 | Slice-2: email-from-verified-claims choke point (L8, spec-core: email role never sees transcript; uncited bullets cut; unknown claim_id rejects whole draft) | **projects-2f** | **done** — src/email.js + 6 tests: composer refuses bundle-shaped input structurally; uncorroborated/blocked can't enter or be cited (whole-draft reject); deterministic keyless baseline passes its own screen; suite 215/215 |
 | Slice-2: README limitations block (follow-ups b+d: hyphen/slash false-rejection, taint-screen best-effort, cross-utterance cue gap) | **projects-2f** | **done** — 4 limitations incl. "right quote, wrong claim" unsolved; public README inherits the section |
 | Slice-2: P1 extractor files (next_steps, pain, pricing, competitors) | **projects-2f** | **done** — 4 JSON files, zero code (the extensibility demo); all 6 families load through the frozen registry's full lint chain; suite 215/215 |
-| Slice-2: deterministic keyword tracker | **blocked → hackathon** | needs 2 extensions in gate-lane files: registry ALLOWED_KEYS + `keywords` field, and a deterministic dispatch in extract.js (no LLM). Design proposed via SendMessage; JSON file is 10 min once unblocked |
-| Slice-2: gate-schema items (a)(c) | hackathon | per hackathon's routing |
+| Slice-2: deterministic keyword tracker | **projects-2f** (enablement: hackathon aad40e3) | **done** — extractors/tracker.json (8 seed keywords, content owner edits when deal arc lands); 7 families load; suite 238/238 |
+| Slice-2: gate-schema items (a)(c) | hackathon | **done** in aad40e3 (double-mark guard, speaker_mismatch enum, tracker-first deadlock fix) |
+
+> **SLICE 2 FUNCTIONALLY COMPLETE (~23:45 Aug 13).** 7 extractor families (6 LLM + 1
+> deterministic tracker) + gate + runner + email choke + viewer + server + tier-1 export,
+> all audited. Both code lanes quiet at the Slice-3 content boundary — unlocks are
+> Sourav's: key rescope (gates 3-voice probe + ALL TTS content) · D4 Anthropic key · D3
+> real recording.
 
 ## Build slices — roadmap
 
