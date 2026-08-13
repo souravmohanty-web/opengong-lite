@@ -79,6 +79,19 @@ sandbox key self-mints for live runs.
   not independent of it.
 - **English-only transcription today** (provider constraint).
 
+## Roadmap (named, not promised)
+
+- **Connect your CRM, pick a recording** — the read side of CRM integration. Ingestion
+  today is upload + URL; every call already carries a `source` block (external
+  call/contact/deal ids) and every extractor a `crm_map` block, so listing and pulling
+  recordings from HubSpot/Salesforce/JustCall is an adapter + config, not a rebuild.
+- **CRM write-back** — the same `crm_map` plumbing in the other direction
+  (`ai_next_action` and friends), approval-gated, append-never-replace.
+- **Live capture** — the ingest input is shaped to accept a Vexa-style
+  `meeting.completed` webhook payload unchanged.
+- **Extractor sharing** — extraction families are single JSON files; a community
+  registry is the obvious next step.
+
 ## You'll hate this if…
 
 You want sentiment scores (uncitable, so we don't ship them), real-time in-call coaching
