@@ -89,11 +89,27 @@ function diarizedUtterances(result) {
 function monoUtterances(result) {
   const words = result.words ?? [];
   if (!words.length) {
-    return (result.segments ?? []).map((seg, i) => ({
-      id: i, start: seg.start, end: seg.end,
-      speaker: null, channel: null, role: null, role_confidence: null,
-      text: seg.text,
-    }));
+    // Same cap discipline as the diarized fallback (A-007 residual): a giant
+    // mono segment with no words[] still splits, with interpolated times.
+    const utterances = [];
+    for (const seg of result.segments ?? []) {
+      const base = { speaker: null, channel: null, role: null, role_confidence: null };
+      const textWords = seg.text.split(' ');
+      if (textWords.length <= MAX_UTT_WORDS) {
+        utterances.push({ ...base, start: seg.start, end: seg.end, text: seg.text });
+        continue;
+      }
+      const perWord = (seg.end - seg.start) / textWords.length;
+      for (let i = 0; i < textWords.length; i += MAX_UTT_WORDS) {
+        utterances.push({
+          ...base,
+          start: seg.start + i * perWord,
+          end: seg.start + Math.min(i + MAX_UTT_WORDS, textWords.length) * perWord,
+          text: textWords.slice(i, i + MAX_UTT_WORDS).join(' '),
+        });
+      }
+    }
+    return utterances.map((u, i) => ({ id: i, ...u }));
   }
 
   const groups = [];

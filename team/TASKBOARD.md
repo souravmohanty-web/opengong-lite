@@ -27,6 +27,7 @@ state **current truth only**.
 | 4 defect fixes in kept code: stereo max-utterance split + time-sort (transcript.js), AbortSignals + scaled poll timeout (pyai.js), 429 Retry-After discrimination | **projects-2f** | **done** — test-first, 4 new tests in test/defects.test.js, `npm test` 22/22 |
 | Minimal S1 viewer + local server (127.0.0.1:4317, Range/206): ONE click-claim→highlight→audio interaction, 4-state claim.status rendering | **projects-2f** | **done** — src/{viewer.js,viewer.html,server.js} + fixture bundle; 7 viewer tests (escaping first) 22/22; live server verified: `/` 200, `/bundle.json` 200, Range → `206 bytes 100-199/677600`; planted fake quote renders demoted, blocked_injection quarantined |
 | Cached demo path: `npm run demo` replays committed fixtures, zero keys, offline (L17) | **projects-2f** | **done** — verified: boots cold, `/` 200, 4 claims served, Range 206; no network calls in the path |
+| Slice-2: tier-1 self-contained HTML export (`node src/export.js <bundle>`) + A-007 mono residual fix | **projects-2f** | **done** — src/export.js + viewer inline-mode boot; escaped-inline-JSON breakout tested; invalid bundle fails at export time; 12KB real file generated; scoped suites 42/42 (full-suite run deferred: gate remediation mid-flight) |
 
 ## Build slices — roadmap
 

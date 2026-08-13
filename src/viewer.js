@@ -143,11 +143,23 @@ export function render(vm, root, audio) {
   });
 }
 
-// Boot only in a browser; node imports the pure helpers above.
+// Boot only in a browser; node imports the pure helpers above. Two fuel lines:
+// tier-1 export inlines the bundle as #og-data (no server, no audio — the
+// footer player is removed); app mode fetches from the local server.
 if (typeof document !== 'undefined') {
-  const audio = document.querySelector('audio');
-  fetch('/bundle.json')
-    .then((r) => r.json())
-    .then((bundle) => render(buildViewModel(bundle), document.getElementById('app'), audio))
-    .catch((err) => { document.getElementById('app').textContent = `failed to load bundle: ${err.message}`; });
+  const inline = document.getElementById('og-data');
+  if (inline) {
+    document.querySelector('footer')?.remove();
+    try {
+      render(buildViewModel(JSON.parse(inline.textContent)), document.getElementById('app'), null);
+    } catch (err) {
+      document.getElementById('app').textContent = `failed to load bundle: ${err.message}`;
+    }
+  } else {
+    const audio = document.querySelector('audio');
+    fetch('/bundle.json')
+      .then((r) => r.json())
+      .then((bundle) => render(buildViewModel(bundle), document.getElementById('app'), audio))
+      .catch((err) => { document.getElementById('app').textContent = `failed to load bundle: ${err.message}`; });
+  }
 }
