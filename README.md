@@ -9,7 +9,7 @@ AI notes for sales calls, with citations. Like Perplexity cites its sources, but
 ## How it works
 
 1. **Drop in a deal's calls.** Upload recordings or point at URLs. Stereo files get exact speaker labels, read off the channels.
-2. **Get the deal, not just the notes.** One workspace per account: the call-by-call arc, what was promised on which call, what's still owed, search across everything.
+2. **Get the whole deal.** One workspace per account: the call-by-call arc, what was promised on which call, what's still owed, search across everything.
 3. **Click any note.** The source line lights up and plays. Notes come with numbered citations, the way you'd expect from a research tool.
 4. **See the score honestly.** A note the AI couldn't back says "not found in the call" and stays visible. A line that tried to inject instructions is blocked and shown. The header reads "20 of 21 backed" because that is what the checker found.
 5. **Send the follow-up.** The email drafts only from notes that passed the check. One bad citation kills the whole draft. You hit send, it never does.
