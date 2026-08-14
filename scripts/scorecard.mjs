@@ -526,7 +526,7 @@ CHECKS['dm-3.4-cross-call-search'] = async () => {
   // The 3 planted cross-call searches, per samples/DEAL-STATE.md's answer key —
   // "soc 2" (with the space) because that is how the real synthesized audio
   // was transcribed ("SOC 2"), matching the literal quick-try query already
-  // shipped in public/deal.html. Expected callIds are call ids as they appear
+  // shipped on the deal workspace (public/index.html). Expected callIds are as they appear
   // in the bundles (e.g. "01"), matching test/deal-index.test.js exactly.
   const PLANTED = [
     { q: 'ringhawk', expect: ['01', '02', '03', '04'] },

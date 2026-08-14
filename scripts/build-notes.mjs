@@ -1,20 +1,25 @@
 #!/usr/bin/env node
-// Builds the notes-first demo pages (the primary demo surface) from the 5
-// gate-verified bundles:
-//   public/notes/NN.html  is one clean single-call notes page per call, rendered
-//                           by src/notes-view.mjs (reuses viewer.js's
-//                           buildViewModel + email.js's composeEmail, read-only)
+// Builds the demo workspace from the gate-checked bundles. One flow, one URL:
+// the deal, then a call, then a citation, then the audio.
+//
+//   public/index.html     is THE landing: the deal workspace. Where the deal
+//                           stands, what was promised on which call, one search
+//                           box across every call, and the calls in order.
+//   public/notes/NN.html  is one call: its notes, each with numbered citation
+//                           chips, rendered by src/notes-view.mjs (reuses
+//                           viewer.js's buildViewModel + email.js's
+//                           composeEmail, read-only)
 //   public/audio/NN.m4a   is the call audio, staged so the play-from-here reveal
 //                           can seek it (Range-served by src/deal-server.mjs)
 //
-// Deal nav moves across the 5 calls (Discovery -> Close). Audio is optional: if
-// a file is missing the click-to-reveal still works, the play buttons hide.
+// Audio is optional: if a file is missing the click-to-reveal still works and
+// the play buttons hide.
 //
 // Usage: node scripts/build-notes.mjs
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, existsSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { renderCallPage, renderLandingPage, landingCard, shortLabel } from '../src/notes-view.mjs';
+import { renderCallPage, renderDealWorkspace, shortLabel } from '../src/notes-view.mjs';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const BUNDLES_DIR = join(ROOT, 'samples/bundles');
@@ -24,6 +29,13 @@ const NOTES_DIR = join(PUBLIC_DIR, 'notes');
 const AUDIO_DIR = join(PUBLIC_DIR, 'audio');
 
 const DEAL_NAME = 'Brightsmile Dental Group';
+const DEAL_META = '5 locations, on RingHawk today';
+
+// Who is on these calls (samples/DEAL-STATE.md: rep on the left channel, buyer
+// on the right). Diarization gives channel labels; the names are deal facts the
+// caller owns, so the renderer never invents them.
+const SPEAKERS = { speaker_1: 'Maya', speaker_2: 'Rahul' };
+const OWNERS = { rep: 'Maya', buyer: 'Rahul', joint: 'Both', unknown: 'Unclear who' };
 
 export function loadBundles(dir = BUNDLES_DIR) {
   const files = readdirSync(dir).filter((f) => f.endsWith('.bundle.json')).sort();
@@ -75,20 +87,30 @@ export function buildNotes({ quiet = false } = {}) {
       dealName: DEAL_NAME,
       seq,
       total: calls.length,
+      speakers: SPEAKERS,
+      homeHref: '../index.html',
       audioSrc: audioPresent.get(id) ? `/audio/${id}.m4a` : null,
     });
     writeFileSync(join(NOTES_DIR, `${id}.html`), html);
   }
 
-  // Samples-first landing at public/notes/index.html (the deal-server root).
-  const cards = bundles.map((b, i) => landingCard(b, i + 1));
-  writeFileSync(join(NOTES_DIR, 'index.html'), renderLandingPage(cards, { dealName: DEAL_NAME }));
+  // The landing IS the deal workspace, at the server root (public/index.html).
+  writeFileSync(join(PUBLIC_DIR, 'index.html'), renderDealWorkspace(bundles, {
+    dealName: DEAL_NAME,
+    dealMeta: DEAL_META,
+    owners: OWNERS,
+  }));
+
+  // The old samples-first landing lived under public/notes/. One flow means one
+  // landing, so a stale copy from an earlier build never competes with it.
+  const stale = join(NOTES_DIR, 'index.html');
+  if (existsSync(stale)) rmSync(stale);
 
   if (!quiet) {
-    console.log(`landing: public/notes/index.html (${cards.length} sample calls)`);
-    console.log(`notes pages: ${calls.length} calls -> public/notes/{${calls.map((c) => c.id).join(',')}}.html`);
+    console.log(`deal workspace: public/index.html (${calls.length} calls, the landing)`);
+    console.log(`call pages: ${calls.length} calls -> public/notes/{${calls.map((c) => c.id).join(',')}}.html`);
     console.log(`audio staged: ${staged}/${calls.length} -> public/audio/`);
-    console.log(`open the demo at the deal-server root (/ -> notes/index.html)`);
+    console.log(`open the demo at the deal-server root (/ -> index.html)`);
   }
   return { calls: calls.length, staged };
 }

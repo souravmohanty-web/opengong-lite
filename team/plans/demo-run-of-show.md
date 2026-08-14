@@ -3,7 +3,7 @@
 > **This replaces the pre-content version of this file.** Every quote, timestamp, claim id,
 > and click path below is pulled live from the committed 6-call bundles
 > (`samples/bundles/01–06.bundle.json`) and the real rendered pages under `public/notes/`
-> and `public/deal.html`, re-verified (`npm test` 410 tests, 409 pass / 0 fail / 1 skip;
+> and `public/index.html`, re-verified (`npm test` 421 tests, 420 pass / 0 fail / 1 skip;
 > `node scripts/extract-offline.mjs` real totals below). Nothing here is a placeholder.
 
 ## Lead line (memorize; opens the pitch and is already the UI's own tagline)
@@ -35,20 +35,20 @@ of 118 attempted, plus 3 injection-blocked claims quarantined out of the denomin
 ```bash
 npm start        # builds the workspace if stale, then serves http://127.0.0.1:4318/
 ```
-That is the whole thing: **one command, one URL.** It lands on the samples landing page
-(`/notes/index.html`) listing all 6 calls. `npm start` never touches the network and never
+That is the whole thing: **one command, one URL.** It lands on the deal workspace
+(`/index.html`): where the deal stands, what was promised on which call, one search box
+across every call, and the 6 calls in order. A call page is one click from there. `npm start` never touches the network and never
 mints a key. A PyAI key self-mints only on the first real transcription.
 
 (The older single-call receipts viewer is still there: `npm run demo` → `http://127.0.0.1:4317/`,
 one fixture bundle. That's the tier-1 view alone, useful for a side question.)
 
 **One server, one port, one origin.** Pin these tabs before the room fills:
-- **Tab 0**: `http://127.0.0.1:4318/` (the landing, all 6 calls, where `npm start` opens)
+- **Tab 0**: `http://127.0.0.1:4318/` (the deal workspace: stage, ledger, search, the 6 calls; where `npm start` opens)
 - **Tab 1**: `http://127.0.0.1:4318/notes/01.html` (Discovery, the money moment)
 - **Tab 2**: `http://127.0.0.1:4318/notes/04.html` (Commitment check, what's owed)
 - **Tab 3**: `http://127.0.0.1:4318/notes/03.html` (Pricing, the gate catching the lie)
 - **Tab 4**: `http://127.0.0.1:4318/notes/05.html` (Close, the self-correction flourish)
-- **Tab 5**: `http://127.0.0.1:4318/deal.html` (cross-call search + commitment ledger)
 - **Tab 6**: `http://127.0.0.1:4318/notes/06.html` (Messy, the blocked injection, never-cut)
 
 Zero network calls in this whole path (`src/deal-server.mjs` is a static file server over
@@ -93,8 +93,8 @@ airplane-mode act.** It's what you run even when the wifi is perfect.
   called out: the TCPA one-pager promised by Friday never showed up, and the office
   manager asked twice."** Receipt: `0:03 · speaker_2`, *"got the soctu yes forwarded
   it to our it guy already but maya you promised my office manager a tcpa one pager by
-  friday and it never showed up she asked me twice."* Then switch to Tab 5
-  (`deal.html`), type **`tcpa`** in the search box: 3 calls light up in order.
+  friday and it never showed up she asked me twice."* Then switch to Tab 0
+  (the deal workspace), type **`tcpa`** in the search box: 3 calls light up in order.
   Raised in call 1 (fear of TCPA compliance), promised by Friday in call 2 (*"i'll send
   you our sot report and the tcpa one paper for your office manager both by friday"*),
   dropped and called out in call 4. Point at the **"What was promised"** ledger below
@@ -106,11 +106,11 @@ airplane-mode act.** It's what you run even when the wifi is perfect.
   > *(checkpoint ~2:30, you should be here)*
 
 - **2:40–3:30 The gate catching the planted lie, the trust proof for the action
-  layer:** switch to Tab 3 (`notes/03.html`, Pricing). Scroll to **Held back**:
-  *"The call did not back these, so they stay out of your notes. This is the check
-  doing its job."* Card: **"Rep agreed to match RingHawk's twenty two renewal price if
-  the buyer commits today."** Under it: **"We couldn't find this line in the call."**
-  and *"Claimed line: i can match their twenty two if you commit today."* Read it aloud,
+  layer:** switch to Tab 3 (`notes/03.html`, Pricing). Scroll to **Not found in the call**:
+  *"This note stayed out of the notes above. Shown here so you can see what was
+  dropped."* Card: **"Rep agreed to match RingHawk's twenty two renewal price if
+  the buyer commits today."** Under it: **"We couldn't find this in the call."**
+  and *"It cited this line: i can match their twenty two if you commit today."* Read it aloud,
   deadpan, then say: *"That's a plausible sales lie. Any model can write that sentence.
   It never happened. What Maya said in that segment was 'I can't. What I can do is
   sharpen it if we commit to a pilot.' The gate re-read the real segment, found no match,
@@ -142,9 +142,9 @@ airplane-mode act.** It's what you run even when the wifi is perfect.
   keyword tracker. Watch which gate caught it. The citation gate couldn't. That line
   really was said, so it anchors perfectly. `src/injection.js` is a second, independent
   screen. Different attack, different defense."*
-  Scroll to the **Follow-up email** on the same page: it reads *"3 claims stayed out"*, and
+  Scroll to the **Follow-up email** on the same page: it reads *"Only backed notes reach this draft. 3 stayed out."*, and
   the discount is nowhere in the draft. *"The email choke point never saw it."* Then flip
-  to Tab 5 (`deal.html`) and search **`forty percent discount`**. Zero hits across the
+  to Tab 0 (the deal workspace) and search **`forty percent discount`**. Zero hits across the
   whole deal. *"Quarantined means quarantined. Not in the notes, not in the email, not
   even in cross-call search."*
 
@@ -207,8 +207,8 @@ airplane-mode act.** It's what you run even when the wifi is perfect.
 lie) · the red blocked-injection block on call 6 · the follow-up email pulling from the
 same cited claims. Cut order if squeezed: the segment-corrected flourish drops first →
 the ledger/cross-call-search beat shrinks to just the `tcpa` search (skip the call-04
-card) → the injection beat shrinks to the red block + the "3 claims stayed out" email
-line (skip the `deal.html` search) → the stage-numbers beat shrinks to just the 97.7%
+card) → the injection beat shrinks to the red block + the "3 stayed out" email
+line (skip the deal-workspace search) → the stage-numbers beat shrinks to just the 97.7%
 number → harness aside drops entirely.
 
 ## 3 competitive kill-lines (evidence-pinned; verified against the named project's own
@@ -231,8 +231,8 @@ not speak it on stage unverified.
 - **Live encore failure → 20s max**, then: "that's a named exit, which honestly demos
   better than a silent hang," show the failure record if one exists, move on. Never debug
   on stage.
-- **Laptop dies:** `public/notes/*.html` and `public/deal.html` are already
-  self-contained static files (no fetch, bundle inlined). Carry the whole `public/`
+- **Laptop dies:** `public/calls/*.html` are already self-contained static files (no
+  fetch, bundle inlined); the workspace itself is the whole `public/` directory. Carry the whole `public/`
   directory on a USB stick + Slack it as a zip → backup laptop (same repo cloned,
   tabs pre-pinned) → a 90-second screen recording of the perfect run → phone, last
   resort.

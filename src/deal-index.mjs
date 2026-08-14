@@ -1,6 +1,7 @@
 // Deal-wide index + search — pure, browser-safe (no fs, no fetch, no DOM).
-// Node-testable directly and imported unchanged by public/deal.html, so the
-// matching logic that ships to judges is the exact logic covered by tests.
+// Node-testable directly and imported unchanged by the deal workspace at
+// public/index.html, so the matching logic that ships to judges is the exact
+// logic covered by tests.
 // Reads bundles the same shape src/viewer.js already trusts; never mutates
 // them, never recomputes a status the gate already decided (same discipline
 // as buildViewModel: closed statuses, blocked claims quarantined).

@@ -4,9 +4,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { resolvePath, parseRange, DEFAULT_PUBLIC_DIR } from '../src/deal-server.mjs';
 
-test('root path serves the samples-first landing', () => {
+test('root path serves the deal workspace (the landing is the deal, not a call list)', () => {
   const full = resolvePath(DEFAULT_PUBLIC_DIR, '/');
-  assert.ok(full.endsWith('/notes/index.html'), `root -> ${full}`);
+  assert.ok(full.endsWith('/public/index.html'), `root -> ${full}`);
 });
 
 test('resolvePath never escapes the public dir', () => {

@@ -104,6 +104,46 @@ body{
 .card[aria-expanded="true"]{border-color:var(--accent)}
 .card--flat{cursor:default}
 .note{margin:0;font-size:17px;line-height:1.5;color:var(--ink)}
+
+/* the summary brief: 2-3 lines of plain prose, still cited */
+.grp--brief .cards{gap:6px}
+.card--brief{background:transparent;border-color:transparent;box-shadow:none;padding:2px 0}
+.card--brief .note{font-size:19px;line-height:1.5}
+.card--brief[aria-expanded="true"]{border-color:transparent}
+.card--brief[role="button"]:hover{border-color:transparent}
+.card--brief[role="button"]:hover .note{color:var(--accent-ink)}
+
+/* citation chips (the Perplexity pattern) */
+.cites{display:inline;margin-left:3px;font-size:0;line-height:0;vertical-align:super}
+.cite{
+  font:inherit;font-size:11.5px;line-height:1;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border:1px solid transparent;border-radius:5px;
+  min-width:17px;padding:2px 5px;margin-left:2px;cursor:pointer;
+}
+.cite:hover{border-color:var(--accent)}
+.cite:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* the section's source list */
+.src-block{margin-top:4px;padding-top:11px;border-top:1px solid var(--line-soft)}
+.src-label{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:650;margin-bottom:5px}
+.sources{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.source{
+  display:flex;align-items:baseline;gap:9px;width:100%;text-align:left;font:inherit;font-size:14.5px;
+  color:var(--ink-faint);background:none;border:0;border-radius:8px;padding:5px 7px;cursor:pointer;
+}
+.source:hover{background:var(--line-soft);color:var(--ink)}
+.source:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.src-n,.rc-n{
+  flex:0 0 auto;font-size:11.5px;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:2px 6px;
+}
+.src-spk{flex:0 0 auto;color:var(--ink-soft);font-weight:600;text-transform:capitalize}
+.src-q{
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;
+}
+.src-t{flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:13.5px}
+.receipt.is-cited{background:var(--accent-soft);border-radius:9px;padding:11px 11px 9px;border-top-color:transparent}
 .cue{
   display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:15px;
   color:var(--ink-faint);font-weight:550;letter-spacing:.005em;
@@ -114,8 +154,6 @@ body{
 .card[role="button"]:hover .cue{color:var(--accent)}
 .card[aria-expanded="true"] .cue{color:var(--accent)}
 .card[aria-expanded="true"] .cue::before{transform:rotate(45deg);background:linear-gradient(currentColor,currentColor) center/7px 1.5px no-repeat}
-.card--hint .cue{color:var(--accent);font-weight:600}
-.card--hint .cue::after{content:"";position:absolute}
 
 /* receipts (the reveal) */
 .receipts{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .26s ease,opacity .2s ease;overflow:hidden}
@@ -187,17 +225,17 @@ body{
 </head>
 <body>
 <nav class="deal-rail" aria-label="Deal calls">
-    <a class="deal-name" href="index.html">Brightsmile Dental Group</a>
+    <a class="deal-name" href="../index.html">Brightsmile Dental Group</a>
     <div class="arc"><a class="step" href="01.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Discovery</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="02.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Demo</span></a><span class="arc-sep" aria-hidden="true"></span><span class="step is-current" aria-current="step"><span class="dot" aria-hidden="true"></span><span class="lbl">Pricing</span></span><span class="arc-sep" aria-hidden="true"></span><a class="step" href="04.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Commitment check</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="05.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Close</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="06.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Messy</span></a></div>
   </nav>
 <main class="wrap">
   <header class="call-head">
-    <p class="eyebrow">OpenGong · call notes with receipts</p>
+    <p class="eyebrow">OpenGong · notes that cite the call</p>
     <h1>Pricing: quote vs RingHawk renewal counter</h1>
     <p class="sub">Brightsmile Dental Group. Call 3 of 6.</p>
     <p class="tagline">Gong records what happened. We do what was promised.</p>
-    <p class="magic">Every note links back to the moment it came from. Click any card to see the exact line and play it.</p>
-    <p class="tally">20 of 21 notes trace to the call. <strong>1 held back.</strong></p>
+    <p class="magic">Every note carries a numbered citation. Click a number to read the line it came from and hear it said.</p>
+    <p class="tally">20 of 21 notes backed. <strong>1 held back.</strong> We couldn't find it in the call.</p>
   </header>
   
     <div class="context" aria-label="Call context">
@@ -205,175 +243,283 @@ body{
         <div class="chip-grp">
           <span class="chip-label">Buying stage</span>
           <span class="chip" role="button" tabindex="0" aria-expanded="false">In negotiation now, haggling on price.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="36.08" aria-label="Play from 0:36"><span class="tri" aria-hidden="true"></span>0:36</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="36.08" aria-label="Play from 0:36"><span class="tri" aria-hidden="true"></span>0:36</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">math works on me on him soda tough <mark>can you do fifteen that gets me close enough that the conversation is about service not price</mark></p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">High urgency: the RingHawk renewal auto-locks in November.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">lehi tamming matters here <mark>the ringhawk renewal is november and if i&#39;m switching i need to know before they auto renew me</mark></p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Driven by the RingHawk contract expiring in November.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">lehi tamming matters here <mark>the ringhawk renewal is november</mark> and if i&#39;m switching i need to know before they auto renew me</p>
   </div></span></span>
         </div>
         <div class="chip-grp">
           <span class="chip-label">Flags</span>
           <span class="chip" role="button" tabindex="0" aria-expanded="false">Buyer&#39;s mixed: interested, but something spooked them.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>one thing that spooked me</mark> the old vendor told us back in the day that porting numbers takes months if that&#39;s true it blows up your weekend cutover story</p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Heads up: a few spots in this recording were hard to make out.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>lehi tamming matters here</mark> the ringhawk renewal is november and if i&#39;m switching i need to know before they auto renew me</p>
   </div></span></span>
         </div>
         <div class="chip-grp">
           <span class="chip-label">Also mentioned</span>
           <span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="43.68" aria-label="Play from 0:43"><span class="tri" aria-hidden="true"></span>0:43</button><span class="rc-spk">speaker_1</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="43.68" aria-label="Play from 0:43"><span class="tri" aria-hidden="true"></span>0:43</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line"><mark>fifteen across the board and i then i can&#39;t what i can do is sharpen it if we commit to a pilot structure let me come back to you on exact numbers</mark></p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">RingHawk came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>lehi tamming matters here the ringhawk renewal is november and if i&#39;m switching i need to know before they auto renew me</mark></p>
   </div></span></span>
         </div>
     </div>
   <div class="notes">
     
-    <section class="grp">
+    <section class="grp grp--brief">
       <h2 class="grp-label">Summary</h2>
       <div class="cards">
-        <article class="card card--hint" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.</p>
-    <span class="cue">Click to see the line it came from</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">speaker_1</span></div>
+        <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Maya at 0:00">1</button></sup></p>
+    <span class="cue">Click a number to read the line it came from</span>
+    <div class="receipts"><div class="receipt" id="rc-summary-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">got your call volume report thanks based on that <mark>here&#39;s where we land twenty eight per month all five locations routing texting and the recall tooling included</mark></p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">RingHawk renews in November: the buyer needs a decision before the auto-renew locks.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">speaker_2</span></div>
+  </article><article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">RingHawk renews in November: the buyer needs a decision before the auto-renew locks.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-1-0" aria-label="Source 2, Rahul at 0:52">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-summary-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="52.72" aria-label="Play from 0:52"><span class="tri" aria-hidden="true"></span>0:52</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">lehi tamming matters here <mark>the ringhawk renewal is november and if i&#39;m switching i need to know before they auto renew me</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-summary-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">here&#39;s where we land twenty eight per month all five locations routing texting…</span>
+          <span class="src-t">0:00</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-summary-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">the ringhawk renewal is november and if i&#39;m switching i need to know before…</span>
+          <span class="src-t">0:52</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Objections</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Buyer must justify the six-per-seat gap to Dr. Mehta, who signs the checks.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="20.96" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Buyer must justify the six-per-seat gap to Dr. Mehta, who signs the checks.<sup class="cites"><button class="cite" type="button" data-cite="rc-objections-0-0" aria-label="Source 1, Rahul at 0:20">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-objections-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="20.96" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">i know i know but i answered to doctor meta on the and he signs the checks <mark>he&#39;s going to see a six gap per seat and ask me why</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer&#39;s actually experienced.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer&#39;s actually experienced.<sup class="cites"><button class="cite" type="button" data-cite="rc-objections-1-0" aria-label="Source 2, Rahul at 1:03">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-objections-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">one thing that spooked me <mark>the old vendor told us back in the day that porting numbers takes months if that&#39;s true it blows up your weekend cutover story</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-objections-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">he&#39;s going to see a six gap per seat and ask me why</span>
+          <span class="src-t">0:20</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-objections-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">the old vendor told us back in the day that porting numbers takes months if…</span>
+          <span class="src-t">1:03</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Competition</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">RingHawk counter-offered twenty two to keep the account, and its renewal falls in November.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="8.96" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">RingHawk counter-offered twenty two to keep the account, and its renewal falls in November.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:08">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="8.96" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">twenty eight archer so here&#39;s my problem may i <mark>ring hawk came back the moment they smelled a switch and offered twenty two to renew</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-competitors-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">ring hawk came back the moment they smelled a switch and offered twenty two to…</span>
+          <span class="src-t">0:08</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Pricing</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">speaker_1</span></div>
+    <p class="note">CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-0-0" aria-label="Source 1, Maya at 0:00">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-pricing-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">got your call volume report thanks based on that <mark>here&#39;s where we land twenty eight per month all five locations routing texting and the recall tooling included</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="8.96" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-1-0" aria-label="Source 2, Rahul at 0:08">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-pricing-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="8.96" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">twenty eight archer so here&#39;s my problem may i <mark>ring hawk came back the moment they smelled a switch and offered twenty two to renew</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr. Mehta will question.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="20.96" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr. Mehta will question.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-2-0" aria-label="Source 3, Rahul at 0:20">3</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-pricing-2-0">
+    <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="20.96" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">i know i know but i answered to doctor meta on the and he signs the checks <mark>he&#39;s going to see a six gap per seat and ask me why</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Buyer wants fifteen off, enough to make this a service decision instead of a price fight.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="36.08" aria-label="Play from 0:36"><span class="tri" aria-hidden="true"></span>0:36</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Buyer wants fifteen off, enough to make this a service decision instead of a price fight.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-3-0" aria-label="Source 4, Rahul at 0:36">4</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-pricing-3-0">
+    <div class="rc-meta"><span class="rc-n">4</span><button class="play" type="button" data-t="36.08" aria-label="Play from 0:36"><span class="tri" aria-hidden="true"></span>0:36</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">math works on me on him soda tough <mark>can you do fifteen that gets me close enough that the conversation is about service not price</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-pricing-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">here&#39;s where we land twenty eight per month all five locations routing texting…</span>
+          <span class="src-t">0:00</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-pricing-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">ring hawk came back the moment they smelled a switch and offered twenty two to…</span>
+          <span class="src-t">0:08</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-pricing-2-0">
+          <span class="src-n">3</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">he&#39;s going to see a six gap per seat and ask me why</span>
+          <span class="src-t">0:20</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-pricing-3-0">
+          <span class="src-n">4</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">can you do fifteen that gets me close enough that the conversation is about…</span>
+          <span class="src-t">0:36</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Stakeholders</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Dr. Mehta signs the checks. He&#39;s never been on these calls himself.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="20.96" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Dr. Mehta signs the checks. He&#39;s never been on these calls himself.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-0-0" aria-label="Source 1, Rahul at 0:20">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-stakeholders-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="20.96" aria-label="Play from 0:20"><span class="tri" aria-hidden="true"></span>0:20</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">i know i know but <mark>i answered to doctor meta on the and he signs the checks</mark> he&#39;s going to see a six gap per seat and ask me why</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Single-threaded: only one contact in the loop so far.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Single-threaded: only one contact in the loop so far.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-1-0" aria-label="Source 2, Rahul at 1:20">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-stakeholders-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">let&#39;s do that bring me a sharper number and the porting proof now and then <mark>i take it to doctor meta</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-stakeholders-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">i answered to doctor meta on the and he signs the checks</span>
+          <span class="src-t">0:20</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-stakeholders-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">i take it to doctor meta</span>
+          <span class="src-t">1:20</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Next steps</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Rahul at 1:20">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">let&#39;s do that <mark>bring me a sharper number and the porting proof now and then i take it to doctor meta</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 1, Rahul at 1:20">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">let&#39;s do that <mark>bring me a sharper number and the porting proof now and then i take it to doctor meta</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-next_steps-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">bring me a sharper number and the porting proof now and then i take it to…</span>
+          <span class="src-t">1:20</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     
     <section class="held">
-      <h2 class="held-label"><span class="held-mark" aria-hidden="true"></span>Held back</h2>
-      <p class="held-sub">The call did not back these, so they stay out of your notes. This is the check doing its job.</p>
+      <h2 class="held-label"><span class="held-mark" aria-hidden="true"></span>Not found in the call</h2>
+      <p class="held-sub">This note stayed out of the notes above. Shown here so you can see what was dropped.</p>
       
         <article class="held-card">
           <p class="held-note">Rep agreed to match RingHawk&#39;s twenty two renewal price if the buyer commits today.</p>
-          <p class="held-reason">We couldn&#39;t find this line in the call.</p>
-          <p class="held-quote">Claimed line: <span>i can match their twenty two if you commit today</span></p>
+          <p class="held-reason">We couldn&#39;t find this in the call.</p>
+          <p class="held-quote">It cited this line: <span>i can match their twenty two if you commit today</span></p>
         </article>
     </section>
     
@@ -383,19 +529,19 @@ body{
         <h2 class="email-label"><span class="email-mark" aria-hidden="true"></span>Follow-up email</h2>
         <span class="email-draft">draft</span>
       </div>
-      <p class="email-trust">This is the follow-up that does what we promised. Every line is cited to the call, and nothing un-verified can reach it. 1 claim stayed out.</p>
+      <p class="email-trust">Only backed notes reach this draft. 1 stayed out. Every line below came from something said on the call.</p>
       <div class="email-body">
         <p class="email-subject"><span>Subject</span>Follow-up: the pricing call</p>
         <p class="email-intro">Recapping what we covered and what happens next:</p>
         <ul class="email-list">
           <li><span class="em-cite" aria-hidden="true"></span>Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.</li><li><span class="em-cite" aria-hidden="true"></span>RingHawk renews in November: the buyer needs a decision before the auto-renew locks.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer must justify the six-per-seat gap to Dr. Mehta, who signs the checks.</li><li><span class="em-cite" aria-hidden="true"></span>Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer&#39;s actually experienced.</li><li><span class="em-cite" aria-hidden="true"></span>CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.</li><li><span class="em-cite" aria-hidden="true"></span>RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr. Mehta will question.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer wants fifteen off, enough to make this a service decision instead of a price fight.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.</li>
         </ul>
-        <p class="email-outro">Each point above links to its exact line in the call.</p>
+        <p class="email-outro">Every line traces to a numbered source above.</p>
       </div>
     </section>
   </div>
   
-  <p class="no-audio">Transcribed by pyai-hear (real API run). Extraction for these sample notes was authored offline and gate-verified, not a live LLM run.</p>
+  <p class="no-audio">Transcribed by pyai-hear on a real API run. The notes on this sample were written offline, then checked line by line against the call. No live model run.</p>
 </main>
 <audio id="call-audio" preload="none" src="/audio/03.m4a"></audio>
 <script>
@@ -440,6 +586,27 @@ body{
       });
     });
   }
+
+  // A citation chip (or a row in a section's source list) opens the exact line
+  // it points at: the card holding it expands, the line is marked, and it plays
+  // from that second. Same reveal the whole card gives, aimed at one line.
+  function openCitation(id){
+    var target = id ? document.getElementById(id) : null;
+    if (!target) return;
+    var host = target.closest('.card, .chip');
+    if (host) host.setAttribute('aria-expanded', 'true');
+    target.classList.add('is-cited');
+    window.setTimeout(function(){ target.classList.remove('is-cited'); }, 2000);
+    if (target.scrollIntoView) target.scrollIntoView({ block:'center', behavior:'smooth' });
+    var play = target.querySelector('.play');
+    if (play) play.click();
+  }
+  Array.prototype.slice.call(document.querySelectorAll('.cite, .source')).forEach(function(b){
+    b.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      openCitation(b.getAttribute('data-cite'));
+    });
+  });
 })();
 </script>
 </body>

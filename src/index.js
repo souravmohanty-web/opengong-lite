@@ -1,6 +1,7 @@
-// `npm start` opens THE DEMO: the Brightsmile notes workspace, on one port,
-// at one URL. It refreshes the built pages when they are stale, then serves
-// public/ over 127.0.0.1:4318 — root lands on the samples landing page.
+// `npm start` opens THE DEMO: the Brightsmile deal workspace, on one port, at
+// one URL. It refreshes the built pages when they are stale, then serves
+// public/ over 127.0.0.1:4318 — root lands on the deal, and a call is one
+// click from there.
 //
 // Zero keys, zero network at boot. A PyAI sandbox key self-mints lazily on the
 // first real transcription (pyaiFetch handles it); nothing is minted or spent
@@ -33,7 +34,7 @@ const SOURCES = [
   r('scripts/build-deal-index.mjs'),
 ];
 const OUTPUTS = [
-  r('public/notes/index.html'),
+  r('public/index.html'),
   r('public/deal-index.json'),
   r('public/deal-index.mjs'),
   r('public/calls'),
@@ -87,7 +88,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   startServer(DEFAULT_PUBLIC_DIR).on('listening', function onListening() {
     const { port } = this.address();
     console.log(`\nOpenGong Lite → http://127.0.0.1:${port}/`);
-    console.log('Brightsmile Dental, 6 calls. Click any claim to see the line it came from.');
+    console.log('Brightsmile Dental: the deal, then a call, then the line it came from.');
     console.log('Single-call receipts viewer (older, one fixture): npm run demo → http://127.0.0.1:4317/\n');
     const key = loadKey();
     console.log(key

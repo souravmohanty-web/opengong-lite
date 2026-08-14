@@ -6,14 +6,23 @@
 // in the notes body, evidence quotes rendered verbatim.
 //
 // The experience: one call's notes as clean human cards, grouped by section.
-// Click a card and the exact transcript line it came from slides in, the
-// matched quote highlighted, with a play button for that audio moment. A claim
-// the gate could not find in the call renders in its own demoted "Held back"
-// block with the reason. Audio is a bonus layer: the click-to-reveal works with
-// or without it.
+// Each note ends in numbered citation chips, the pattern every reader already
+// knows from Perplexity. Click a chip (or anywhere on the card) and the exact
+// transcript line slides in with the matched quote highlighted, and it plays
+// from that second. Every section closes with a compact source list: number,
+// speaker, the quote, the timestamp. A note the call could not back renders in
+// its own demoted block with the reason. Audio is a bonus layer: the
+// click-to-reveal works with or without it.
+//
+// Display vocabulary is a render-time map and nothing more. The gate's enum
+// names (verified, segment_corrected, uncorroborated, blocked_injection) stay
+// exactly as they are in the bundles, the JSON, and the tests. Only the words
+// on screen change: backed / backed, citation corrected / not found in the
+// call / blocked.
 
 import { buildViewModel, escapeHtml, formatTime } from './viewer.js';
 import { composeEmail } from './email.js';
+import { buildCommitmentLedger } from './deal-index.mjs';
 
 // Notes body (human prose, each claim a card), in reading order.
 const PRIMARY = [
@@ -40,9 +49,34 @@ const EMAIL_SECTIONS = new Set(['summary', 'pain', 'objections', 'pricing', 'nex
 
 const normKey = (title) => String(title ?? '').trim().toLowerCase().replace(/\s+/g, '_');
 
+// The words a reader sees. One place, so a sweep is one file.
+const NOT_FOUND = "We couldn't find this in the call.";
+const BLOCKED_NOTE = 'Blocked. This line tried to give instructions to the AI. It never enters notes or email.';
+const CORRECTED_TAG = 'citation corrected';
+
 function humanReason(reason) {
-  if (reason === 'not_found_in_transcript') return "We couldn't find this line in the call.";
-  return 'The call did not back this up.';
+  if (reason === 'not_found_in_transcript') return NOT_FOUND;
+  return 'The call does not back this up.';
+}
+
+// Source-list quotes are trimmed for width, never edited. The full quote still
+// renders verbatim in the receipt the citation opens.
+export function truncateQuote(quote, max = 80) {
+  const q = String(quote ?? '').trim();
+  if (q.length <= max) return q;
+  const cut = q.slice(0, max);
+  const atWord = cut.replace(/\s+\S*$/, '');
+  return `${(atWord.length > max * 0.6 ? atWord : cut).trimEnd()}…`;
+}
+
+// Diarization labels are machine output (speaker_1). A caller who knows who was
+// on the call can pass real names; otherwise we at least say "Speaker 1".
+export function speakerName(raw, names = {}) {
+  const key = String(raw ?? '').trim();
+  if (!key) return '';
+  if (names[key]) return names[key];
+  const m = /^speaker[_\s-]?(\d+)$/i.exec(key);
+  return m ? `Speaker ${m[1]}` : key;
 }
 
 // Short arc label for the deal nav: the part before the first separator
@@ -111,6 +145,40 @@ export function buildNotesModel(bundle, opts = {}) {
     return { text: block.text, receipts, corrected, claimIds };
   }
 
+  // Citations, Perplexity-style: every receipt in a section gets a number, the
+  // numbering restarts per section, and the same transcript line cited twice
+  // keeps one number. `domId` is per receipt (each card renders its own copy of
+  // the line, so element ids have to stay unique); `target` is the copy the
+  // section's source list opens.
+  function numberSources(section) {
+    const byLine = new Map();
+    const sources = [];
+    section.cards.forEach((card, ci) => {
+      card.receipts.forEach((r, ri) => {
+        const lineKey = `${r.utteranceId}|${r.quote}`;
+        let src = byLine.get(lineKey);
+        r.domId = `rc-${section.key}-${ci}-${ri}`;
+        if (!src) {
+          src = {
+            n: sources.length + 1,
+            target: r.domId,
+            speaker: r.speaker,
+            quote: r.quote,
+            quoteShort: truncateQuote(r.quote),
+            tStart: r.tStart,
+            tLabel: r.tLabel,
+            corrected: r.corrected,
+          };
+          byLine.set(lineKey, src);
+          sources.push(src);
+        }
+        r.n = src.n;
+      });
+    });
+    section.sources = sources;
+    return section;
+  }
+
   const primary = [];
   const emailClaimIds = [];
   for (const [key, label] of PRIMARY) {
@@ -120,7 +188,7 @@ export function buildNotesModel(bundle, opts = {}) {
     if (EMAIL_SECTIONS.has(key)) {
       for (const card of cards) for (const id of card.claimIds) emailClaimIds.push(id);
     }
-    primary.push({ key, label, cards });
+    primary.push(numberSources({ key, label, cards }));
   }
 
   // Follow-up email, composed through the choke point (src/email.js, read-only):
@@ -181,32 +249,65 @@ export function buildNotesModel(bundle, opts = {}) {
 // of a play button — a dead button that silently does nothing on a projector
 // is worse than no button. The receipt itself (line + highlight) is unchanged:
 // click-to-reveal never depended on audio.
-function receiptRowHtml(r, hasAudio = true) {
-  const spk = r.speaker ? `<span class="rc-spk">${escapeHtml(r.speaker)}</span>` : '';
-  const corrected = r.corrected ? `<span class="rc-tag">segment corrected</span>` : '';
+function receiptRowHtml(r, hasAudio = true, names = {}) {
+  const spk = r.speaker ? `<span class="rc-spk">${escapeHtml(speakerName(r.speaker, names))}</span>` : '';
+  const corrected = r.corrected ? `<span class="rc-tag">${CORRECTED_TAG}</span>` : '';
+  const num = r.n ? `<span class="rc-n">${escapeHtml(r.n)}</span>` : '';
+  const id = r.domId ? ` id="${escapeHtml(r.domId)}"` : '';
   const stamp = hasAudio
     ? `<button class="play" type="button" data-t="${escapeHtml(r.tStart)}" aria-label="Play from ${escapeHtml(r.tLabel)}"><span class="tri" aria-hidden="true"></span>${escapeHtml(r.tLabel)}</button>`
     : `<span class="rc-time">${escapeHtml(r.tLabel)}</span>`;
-  return `<div class="receipt">
-    <div class="rc-meta">${stamp}${spk}${corrected}</div>
+  return `<div class="receipt"${id}>
+    <div class="rc-meta">${num}${stamp}${spk}${corrected}</div>
     <p class="rc-line">${r.lineHtml}</p>
   </div>`;
 }
 
-function cardHtml(card, { hint = false, hasAudio = true } = {}) {
+// The citation chips themselves: one small superscript number per line the note
+// stands on, at the end of the note text, exactly where a reader expects them.
+function citesHtml(card, names = {}) {
+  if (!card.receipts.length) return '';
+  const chips = card.receipts.map((r) => {
+    const who = speakerName(r.speaker, names);
+    const label = `Source ${r.n}${who ? `, ${who}` : ''} at ${r.tLabel}`;
+    return `<button class="cite" type="button" data-cite="${escapeHtml(r.domId)}" aria-label="${escapeHtml(label)}">${escapeHtml(r.n)}</button>`;
+  }).join('');
+  return `<sup class="cites">${chips}</sup>`;
+}
+
+function cardHtml(card, { hint = false, hasAudio = true, brief = false, names = {} } = {}) {
   const hasReceipt = card.receipts.length > 0;
-  const receipts = card.receipts.map((r) => receiptRowHtml(r, hasAudio)).join('');
-  const affordance = hasReceipt
-    ? `<span class="cue">${hint ? 'Click to see the line it came from' : 'See the line'}</span>`
+  const receipts = card.receipts.map((r) => receiptRowHtml(r, hasAudio, names)).join('');
+  const affordance = hint && hasReceipt
+    ? `<span class="cue">Click a number to read the line it came from</span>`
     : '';
   const attrs = hasReceipt
     ? ` role="button" tabindex="0" aria-expanded="false"`
     : '';
-  return `<article class="card${hasReceipt ? '' : ' card--flat'}${hint ? ' card--hint' : ''}"${attrs}>
-    <p class="note">${escapeHtml(card.text)}</p>
+  return `<article class="card${hasReceipt ? '' : ' card--flat'}${brief ? ' card--brief' : ''}"${attrs}>
+    <p class="note">${escapeHtml(card.text)}${citesHtml(card, names)}</p>
     ${affordance}
     ${hasReceipt ? `<div class="receipts">${receipts}</div>` : ''}
   </article>`;
+}
+
+// The section's source list: the numbered lines the notes above stand on.
+// Speaker, the quote, the timestamp. Click a row and it opens the same line the
+// chip opens.
+function sourceListHtml(section, names = {}) {
+  if (!section.sources?.length) return '';
+  const rows = section.sources.map((s) => `<li>
+        <button class="source" type="button" data-cite="${escapeHtml(s.target)}">
+          <span class="src-n">${escapeHtml(s.n)}</span>
+          <span class="src-spk">${escapeHtml(speakerName(s.speaker, names))}</span>
+          <span class="src-q">${escapeHtml(s.quoteShort)}</span>
+          <span class="src-t">${escapeHtml(s.tLabel)}</span>
+        </button>
+      </li>`).join('');
+  return `<div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources">${rows}</ol>
+    </div>`;
 }
 
 function navHtml(ctx) {
@@ -230,40 +331,51 @@ function provenanceFootHtml(m) {
   const p = m.provenance;
   if (!p) return '';
   const parts = [];
-  if (p.transcription_model) parts.push(`Transcribed by ${p.transcription_model} (real API run).`);
+  if (p.transcription_model) parts.push(`Transcribed by ${p.transcription_model} on a real API run.`);
   if (p.extraction_model === 'offline-author') {
-    parts.push('Extraction for these sample notes was authored offline and gate-verified, not a live LLM run.');
+    parts.push('The notes on this sample were written offline, then checked line by line against the call. No live model run.');
   } else if (p.extraction_model) {
-    parts.push(`Extraction: ${p.extraction_model}.`);
+    parts.push(`Notes written by ${p.extraction_model}.`);
   }
   if (!parts.length) return '';
   return `<p class="no-audio">${escapeHtml(parts.join(' '))}</p>`;
 }
 
-function summaryChip(m) {
-  const { backed, attempted, notFound } = m.tallies;
+// The tally, always as a fraction. "held back" stays as the short form because
+// the sentence right after it says what it means.
+export function tallyLine(m) {
+  const { backed, attempted, notFound, blocked } = m.tallies;
+  const parts = [`${backed} of ${attempted} notes backed.`];
   if (notFound > 0) {
-    return `${backed} of ${attempted} notes trace to the call. <strong>${notFound} held back.</strong>`;
+    parts.push(`<strong>${notFound} held back.</strong> We couldn't find ${notFound === 1 ? 'it' : 'them'} in the call.`);
   }
-  return `All ${backed} notes trace to the call.`;
+  if (blocked > 0) {
+    parts.push(`<strong>${blocked} blocked.</strong> ${blocked === 1 ? 'A line' : 'Lines'} in the audio tried to give the AI instructions.`);
+  }
+  return parts.join(' ');
 }
 
 export function renderNotesPage(model, ctx = {}) {
   const m = model;
   const hasAudio = Boolean(ctx.audioSrc);
+  const names = ctx.speakers ?? {};
   let firstHintUsed = false;
   const useHint = (has) => {
     if (has && !firstHintUsed) { firstHintUsed = true; return true; }
     return false;
   };
 
-  const primaryHtml = m.primary.map((sec) => `
-    <section class="grp">
+  const primaryHtml = m.primary.map((sec) => {
+    const brief = sec.key === 'summary';
+    return `
+    <section class="grp${brief ? ' grp--brief' : ''}">
       <h2 class="grp-label">${escapeHtml(sec.label)}</h2>
       <div class="cards">
-        ${sec.cards.map((card) => cardHtml(card, { hint: useHint(card.receipts.length > 0), hasAudio })).join('')}
+        ${sec.cards.map((card) => cardHtml(card, { hint: useHint(card.receipts.length > 0), hasAudio, brief, names })).join('')}
       </div>
-    </section>`).join('');
+      ${sourceListHtml(sec, names)}
+    </section>`;
+  }).join('');
 
   const chipsHtml = m.secondary.length ? `
     <div class="context" aria-label="Call context">
@@ -273,31 +385,32 @@ export function renderNotesPage(model, ctx = {}) {
           ${sec.chips.map((c) => {
             const r = c.receipts[0] ?? null;
             const data = r ? ` role="button" tabindex="0" aria-expanded="false"` : '';
-            return `<span class="chip${r ? '' : ' chip--flat'}"${data}>${escapeHtml(c.text)}${r ? `<span class="chip-receipt">${receiptRowHtml(r, hasAudio)}</span>` : ''}</span>`;
+            return `<span class="chip${r ? '' : ' chip--flat'}"${data}>${escapeHtml(c.text)}${r ? `<span class="chip-receipt">${receiptRowHtml(r, hasAudio, names)}</span>` : ''}</span>`;
           }).join('')}
         </div>`).join('')}
     </div>` : '';
 
   const heldBackHtml = m.heldBack.length ? `
     <section class="held">
-      <h2 class="held-label"><span class="held-mark" aria-hidden="true"></span>Held back</h2>
-      <p class="held-sub">The call did not back these, so they stay out of your notes. This is the check doing its job.</p>
+      <h2 class="held-label"><span class="held-mark" aria-hidden="true"></span>Not found in the call</h2>
+      <p class="held-sub">${m.heldBack.length === 1 ? 'This note' : 'These notes'} stayed out of the notes above. Shown here so you can see what was dropped.</p>
       ${m.heldBack.map((h) => `
         <article class="held-card">
           <p class="held-note">${escapeHtml(h.text)}</p>
           <p class="held-reason">${escapeHtml(h.reason)}</p>
-          ${h.claimedQuote ? `<p class="held-quote">Claimed line: <span>${escapeHtml(h.claimedQuote)}</span></p>` : ''}
+          ${h.claimedQuote ? `<p class="held-quote">It cited this line: <span>${escapeHtml(h.claimedQuote)}</span></p>` : ''}
         </article>`).join('')}
     </section>` : '';
 
   const quarantineHtml = m.quarantine.length ? `
     <section class="held held--blocked">
       <h2 class="held-label"><span class="held-mark" aria-hidden="true"></span>Blocked</h2>
-      <p class="held-sub">A planted instruction was caught in the audio and kept out of the notes and any email.</p>
+      <p class="held-sub">Someone read an instruction out loud on this call. Here is what it said, and where it stopped.</p>
       ${m.quarantine.map((q) => `
         <article class="held-card">
           <p class="held-note"><s>${escapeHtml(q.text)}</s></p>
-          ${q.offending ? `<p class="held-quote">Planted line: <span>${escapeHtml(q.offending)}</span></p>` : ''}
+          <p class="held-reason">${escapeHtml(BLOCKED_NOTE)}</p>
+          ${q.offending ? `<p class="held-quote">The line: <span>${escapeHtml(q.offending)}</span></p>` : ''}
         </article>`).join('')}
     </section>` : '';
 
@@ -308,14 +421,14 @@ export function renderNotesPage(model, ctx = {}) {
         <h2 class="email-label"><span class="email-mark" aria-hidden="true"></span>Follow-up email</h2>
         <span class="email-draft">draft</span>
       </div>
-      <p class="email-trust">This is the follow-up that does what we promised. Every line is cited to the call, and nothing un-verified can reach it.${keptOut > 0 ? ` ${keptOut} claim${keptOut === 1 ? '' : 's'} stayed out.` : ''}</p>
+      <p class="email-trust">Only backed notes reach this draft.${keptOut > 0 ? ` ${keptOut} stayed out.` : ''} Every line below came from something said on the call.</p>
       <div class="email-body">
         <p class="email-subject"><span>Subject</span>${escapeHtml(m.email.subject)}</p>
         <p class="email-intro">Recapping what we covered and what happens next:</p>
         <ul class="email-list">
           ${m.email.bullets.map((b) => `<li><span class="em-cite" aria-hidden="true"></span>${escapeHtml(b.text)}</li>`).join('')}
         </ul>
-        <p class="email-outro">Each point above links to its exact line in the call.</p>
+        <p class="email-outro">Every line traces to a numbered source above.</p>
       </div>
     </section>` : '';
 
@@ -340,12 +453,12 @@ export function renderNotesPage(model, ctx = {}) {
 ${navHtml(ctx)}
 <main class="wrap">
   <header class="call-head">
-    <p class="eyebrow">OpenGong · call notes with receipts</p>
+    <p class="eyebrow">OpenGong · notes that cite the call</p>
     <h1>${escapeHtml(m.title)}</h1>
     <p class="sub">${seqLine}</p>
     <p class="tagline">Gong records what happened. We do what was promised.</p>
-    <p class="magic">Every note links back to the moment it came from. Click any card to see the exact line and play it.</p>
-    <p class="tally">${summaryChip(m)}</p>
+    <p class="magic">Every note carries a numbered citation. Click a number to read the line it came from and hear it said.</p>
+    <p class="tally">${tallyLine(m)}</p>
   </header>
   ${chipsHtml}
   <div class="notes">
@@ -354,7 +467,7 @@ ${navHtml(ctx)}
     ${quarantineHtml}
     ${emailHtml}
   </div>
-  ${audioSrc ? '' : '<p class="no-audio">Audio is not loaded here. The transcript line still shows on click.</p>'}
+  ${audioSrc ? '' : '<p class="no-audio">No audio is staged for this call. The transcript line still opens on click.</p>'}
   ${provenanceFootHtml(m)}
 </main>
 ${audioHtml}
@@ -371,70 +484,199 @@ export function renderCallPage(bundle, ctx = {}) {
   return renderNotesPage(model, ctx);
 }
 
-// One landing-card record from a bundle: the short label, the human title, a
-// one-line summary, and the backed / held-back tally. Pure, node-testable.
+// One call record for the deal view: the short label, the human title, a
+// one-line summary, where the deal stood, and the backed tally as a fraction.
+// Pure, node-testable.
 export function landingCard(bundle, seq) {
   const m = buildNotesModel(bundle, { seq });
   const summarySec = m.primary.find((s) => s.key === 'summary');
   const summary = summarySec?.cards?.[0]?.text ?? '';
+  const stageChip = m.secondary.find((s) => s.key === 'buying_stage');
   return {
     id: bundle.call?.id ?? String(seq),
     seq,
     label: shortLabel(bundle.call?.title ?? ''),
     title: m.title,
     summary,
+    stage: stageChip?.chips?.[0]?.text ?? null,
     backed: m.tallies.backed,
+    attempted: m.tallies.attempted,
     notFound: m.tallies.notFound,
+    blocked: m.tallies.blocked,
     href: `${bundle.call?.id ?? seq}.html`,
   };
 }
 
-// Samples-first landing: a stranger lands, sees the 5 real calls, clicks one,
-// and reads its cited notes in seconds. No upload, no key, no config.
-export function renderLandingPage(cards, ctx = {}) {
-  const dealName = ctx.dealName ?? 'the deal';
-  const searchHref = ctx.searchHref ?? '../deal.html';
-  const cardsHtml = cards.map((c) => {
+// ── the deal workspace (the landing) ─────────────────────────────────────────
+// The account view a rep opens on Monday: where the deal stands, the calls in
+// order, what was promised on each, and one search box across all of them.
+// A call is a chapter; you click into it for the receipts.
+
+const OWNER_LABEL = { rep: 'Rep', buyer: 'Buyer', joint: 'Both', unknown: 'Unclear who' };
+// A call-out reads as a slipped promise when the claim itself says so.
+const SLIP_CUE = /dropped commitment|never showed up|overdue|asked twice|still waiting/i;
+// A due date the claim could not pin down adds nothing to a ledger row.
+const VAGUE_DUE = /^(none|unclear|unknown|)$/i;
+
+export function buildDealModel(bundles, opts = {}) {
+  const calls = bundles.map((b, i) => {
+    const c = landingCard(b, i + 1);
+    return { ...c, notesHref: `notes/${c.id}.html` };
+  });
+
+  const totals = calls.reduce((a, c) => ({
+    backed: a.backed + c.backed,
+    attempted: a.attempted + c.attempted,
+    notFound: a.notFound + c.notFound,
+    blocked: a.blocked + c.blocked,
+  }), { backed: 0, attempted: 0, notFound: 0, blocked: 0 });
+
+  const last = calls[calls.length - 1] ?? null;
+  // The verbal commit: the first call where the buying-stage claim says the
+  // deal is committed. Read off the gate's own claim, never inferred.
+  const committed = calls.find((c) => /^committed/i.test(String(c.stage ?? '').trim())) ?? null;
+
+  // Ledger rows carry no verdict of our own. A promise is what a next_steps
+  // claim says; a call-out is what a trust objection says. The only judgement
+  // here is which call-outs read as a promise that slipped, and that is taken
+  // from the claim's own words, never from comparing calls ourselves.
+  const ledger = buildCommitmentLedger(bundles).map((e) => ({
+    callSeq: e.callSeq,
+    callLabel: shortLabel(e.callTitle),
+    notesHref: `notes/${e.callId}.html`,
+    kind: e.kind,
+    slipped: e.kind === 'called_out' && SLIP_CUE.test(e.text ?? ''),
+    owner: e.owner,
+    ownerLabel: OWNER_LABEL[e.owner] ?? (e.owner ? String(e.owner) : ''),
+    due: VAGUE_DUE.test(String(e.due ?? '').trim()) ? '' : (e.due ?? ''),
+    text: e.text,
+  }));
+
+  return {
+    dealName: opts.dealName ?? 'the deal',
+    dealMeta: opts.dealMeta ?? null,
+    calls,
+    totals,
+    stage: last?.stage ?? null,
+    stageSeq: last?.seq ?? null,
+    commit: committed
+      ? { text: committed.summary, seq: committed.seq, label: committed.label, notesHref: committed.notesHref }
+      : null,
+    ledger,
+  };
+}
+
+function dealTallyLine(t) {
+  const parts = [`${t.backed} of ${t.attempted} notes backed.`];
+  if (t.notFound > 0) parts.push(`${t.notFound} held back: we couldn't find ${t.notFound === 1 ? 'it' : 'them'} in a call.`);
+  if (t.blocked > 0) parts.push(`${t.blocked} blocked.`);
+  return parts.join(' ');
+}
+
+function callRowsHtml(calls, owners = {}) {
+  return calls.map((c) => {
     const tally = c.notFound > 0
-      ? `${c.backed} notes backed. <strong>${c.notFound} held back.</strong>`
-      : `${c.backed} notes, all backed`;
-    return `<a class="sample" href="${escapeHtml(c.href)}">
-      <span class="sample-seq">${escapeHtml(String(c.seq).padStart(2, '0'))}</span>
-      <span class="sample-body">
-        <span class="sample-label">${escapeHtml(c.label)}</span>
-        <span class="sample-summary">${escapeHtml(c.summary)}</span>
-        <span class="sample-tally">${tally}</span>
+      ? `${c.backed} of ${c.attempted} backed. <strong>${c.notFound} held back.</strong>`
+      : `${c.backed} of ${c.attempted} backed.`;
+    const blocked = c.blocked > 0 ? ` <strong>${c.blocked} blocked.</strong>` : '';
+    return `<a class="call-row" href="${escapeHtml(c.notesHref)}">
+      <span class="call-seq">${escapeHtml(String(c.seq).padStart(2, '0'))}</span>
+      <span class="call-body">
+        <span class="call-label">${escapeHtml(c.label)}</span>
+        <span class="call-summary">${escapeHtml(c.summary)}</span>
+        <span class="call-tally">${tally}${blocked}</span>
       </span>
-      <span class="sample-go" aria-hidden="true">See the notes</span>
+      <span class="call-go" aria-hidden="true">Open the notes</span>
     </a>`;
   }).join('');
+}
+
+function ledgerHtml(entries, owners = {}) {
+  if (!entries.length) return '<p class="empty">Nothing was promised on these calls yet.</p>';
+  const rows = entries.map((e) => {
+    const callOut = e.kind === 'called_out';
+    const who = callOut ? (e.slipped ? 'Called out' : 'Raised') : (owners[e.owner] ?? e.ownerLabel);
+    const cls = e.slipped ? ' led-row--flag' : (callOut ? ' led-row--raised' : '');
+    return `<li class="led-row${cls}">
+      <a class="led-call" href="${escapeHtml(e.notesHref)}">Call ${escapeHtml(e.callSeq)}</a>
+      <span class="led-who">${escapeHtml(who)}</span>
+      <span class="led-what">${escapeHtml(e.text)}</span>
+      <span class="led-due">${escapeHtml(e.due)}</span>
+    </li>`;
+  }).join('');
+  return `<ol class="ledger">${rows}</ol>`;
+}
+
+export function renderDealPage(model, ctx = {}) {
+  const m = model;
+  const owners = ctx.owners ?? {};
+  const meta = [m.dealMeta, `${m.calls.length} calls so far`].filter(Boolean).join(' · ');
+
+  const stageHtml = m.stage
+    ? `<p class="deal-stage"><span class="deal-stage-k">Where it stands</span>${escapeHtml(m.stage)}</p>`
+    : '';
+  const commitHtml = m.commit
+    ? `<p class="deal-commit"><span class="deal-commit-k">The commit</span>${escapeHtml(m.commit.text)} <a class="deal-commit-link" href="${escapeHtml(m.commit.notesHref)}">Call ${escapeHtml(m.commit.seq)}, ${escapeHtml(m.commit.label)}</a></p>`
+    : '';
 
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OpenGong · call notes with receipts</title>
-<style>${STYLES}${LANDING_STYLES}</style>
+<title>${escapeHtml(m.dealName)} · the deal</title>
+<style>${STYLES}${DEAL_STYLES}</style>
 </head>
 <body>
-<main class="wrap wrap--landing">
-  <header class="landing-head">
-    <p class="eyebrow">OpenGong</p>
-    <h1 class="landing-h1">Gong records what happened.<br>We do what was promised.</h1>
-    <p class="landing-lede">Call notes where every line links back to the moment it came from. Pick a call below and see it work. No upload, no key, no setup.</p>
-    <p class="landing-deal">${escapeHtml(dealName)}. ${cards.length} calls, Discovery to Close.</p>
+<main class="wrap wrap--deal">
+  <header class="deal-head">
+    <p class="eyebrow">OpenGong · notes that cite the call</p>
+    <h1 class="deal-h1">${escapeHtml(m.dealName)}</h1>
+    <p class="deal-meta">${escapeHtml(meta)}</p>
+    ${stageHtml}
+    ${commitHtml}
+    <p class="deal-tally">${escapeHtml(dealTallyLine(m.totals))}</p>
   </header>
-  <section class="samples" aria-label="Sample calls">
-    ${cardsHtml}
+
+  <section class="deal-sec" aria-label="The calls">
+    <h2 class="deal-h2">The calls</h2>
+    <p class="deal-sub">Open a call and click a citation number. You get the line it came from, and you can play it.</p>
+    <div class="calls">
+      ${callRowsHtml(m.calls, owners)}
+    </div>
   </section>
-  <footer class="landing-foot">
-    <p>Open any call, then click a note to see the exact transcript line and play it. A claim the call cannot back is held back on the page. The follow-up email only carries lines the call proved.</p>
-    <p><a class="foot-link" href="${escapeHtml(searchHref)}">Search across all ${cards.length} calls</a></p>
+
+  <section class="deal-sec" aria-label="Promises made on these calls">
+    <h2 class="deal-h2">What was promised</h2>
+    <p class="deal-sub">Every promise made out loud, in call order. Nothing here is a guess: if a later call says a promise slipped, that line shows in red.</p>
+    ${ledgerHtml(m.ledger, owners)}
+  </section>
+
+  <section class="deal-sec" aria-label="Search across the deal">
+    <h2 class="deal-h2">Search the whole deal</h2>
+    <p class="deal-sub">One box across every call, the notes and the raw transcript both.</p>
+    <input id="search-input" class="deal-search" type="text" placeholder="Try tcpa, ringhawk, or soc 2" autocomplete="off" aria-label="Search all calls">
+    <div class="try-row">Quick tries:
+      <button type="button" data-q="tcpa">tcpa</button>
+      <button type="button" data-q="ringhawk">ringhawk</button>
+      <button type="button" data-q="soc 2">soc 2</button>
+    </div>
+    <div id="results" class="results"></div>
+  </section>
+
+  <footer class="deal-foot">
+    <p>Gong records what happened. We do what was promised.</p>
+    <p>Anything we couldn't find in a call is shown held back on that call's page. The follow-up email only carries backed notes.</p>
   </footer>
 </main>
+<script type="module">${DEAL_SCRIPT}</script>
 </body>
 </html>`;
+}
+
+// Convenience: bundles → the deal workspace page.
+export function renderDealWorkspace(bundles, ctx = {}) {
+  return renderDealPage(buildDealModel(bundles, ctx), ctx);
 }
 
 // ── styles ───────────────────────────────────────────────────────────────────
@@ -538,6 +780,46 @@ body{
 .card[aria-expanded="true"]{border-color:var(--accent)}
 .card--flat{cursor:default}
 .note{margin:0;font-size:17px;line-height:1.5;color:var(--ink)}
+
+/* the summary brief: 2-3 lines of plain prose, still cited */
+.grp--brief .cards{gap:6px}
+.card--brief{background:transparent;border-color:transparent;box-shadow:none;padding:2px 0}
+.card--brief .note{font-size:19px;line-height:1.5}
+.card--brief[aria-expanded="true"]{border-color:transparent}
+.card--brief[role="button"]:hover{border-color:transparent}
+.card--brief[role="button"]:hover .note{color:var(--accent-ink)}
+
+/* citation chips (the Perplexity pattern) */
+.cites{display:inline;margin-left:3px;font-size:0;line-height:0;vertical-align:super}
+.cite{
+  font:inherit;font-size:11.5px;line-height:1;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border:1px solid transparent;border-radius:5px;
+  min-width:17px;padding:2px 5px;margin-left:2px;cursor:pointer;
+}
+.cite:hover{border-color:var(--accent)}
+.cite:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* the section's source list */
+.src-block{margin-top:4px;padding-top:11px;border-top:1px solid var(--line-soft)}
+.src-label{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:650;margin-bottom:5px}
+.sources{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.source{
+  display:flex;align-items:baseline;gap:9px;width:100%;text-align:left;font:inherit;font-size:14.5px;
+  color:var(--ink-faint);background:none;border:0;border-radius:8px;padding:5px 7px;cursor:pointer;
+}
+.source:hover{background:var(--line-soft);color:var(--ink)}
+.source:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.src-n,.rc-n{
+  flex:0 0 auto;font-size:11.5px;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:2px 6px;
+}
+.src-spk{flex:0 0 auto;color:var(--ink-soft);font-weight:600;text-transform:capitalize}
+.src-q{
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;
+}
+.src-t{flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:13.5px}
+.receipt.is-cited{background:var(--accent-soft);border-radius:9px;padding:11px 11px 9px;border-top-color:transparent}
 .cue{
   display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:15px;
   color:var(--ink-faint);font-weight:550;letter-spacing:.005em;
@@ -548,8 +830,6 @@ body{
 .card[role="button"]:hover .cue{color:var(--accent)}
 .card[aria-expanded="true"] .cue{color:var(--accent)}
 .card[aria-expanded="true"] .cue::before{transform:rotate(45deg);background:linear-gradient(currentColor,currentColor) center/7px 1.5px no-repeat}
-.card--hint .cue{color:var(--accent);font-weight:600}
-.card--hint .cue::after{content:"";position:absolute}
 
 /* receipts (the reveal) */
 .receipts{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .26s ease,opacity .2s ease;overflow:hidden}
@@ -619,46 +899,107 @@ body{
 }
 `;
 
-// ── landing styles (samples-first first impression) ──────────────────────────
-const LANDING_STYLES = `
-.wrap--landing{max-width:760px;padding-top:56px}
-.landing-head{margin-bottom:34px}
-.landing-h1{margin:12px 0 0;font-size:38px;line-height:1.1;letter-spacing:-.025em;font-weight:700;text-wrap:balance}
-.landing-h1 br{display:none}
-@media (min-width:520px){.landing-h1 br{display:inline}}
-.landing-lede{margin:18px 0 0;font-size:18px;line-height:1.5;color:var(--ink-soft);max-width:56ch}
-.landing-deal{margin:16px 0 0;font-size:15px;letter-spacing:.02em;color:var(--ink-faint)}
-.landing-deal::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
-.samples{display:flex;flex-direction:column;gap:11px}
-.sample{
+// ── deal-workspace styles (the account view a rep opens first) ───────────────
+const DEAL_STYLES = `
+.wrap--deal{max-width:860px;padding-top:52px}
+.deal-head{margin-bottom:38px}
+.deal-h1{margin:10px 0 0;font-size:38px;line-height:1.1;letter-spacing:-.025em;font-weight:700;text-wrap:balance}
+.deal-meta{margin:10px 0 0;font-size:15.5px;letter-spacing:.01em;color:var(--ink-faint)}
+.deal-meta::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.deal-stage,.deal-commit{
+  margin:14px 0 0;font-size:17.5px;line-height:1.5;color:var(--ink);
+  padding:12px 15px;background:var(--accent-soft);border-radius:11px;
+}
+.deal-commit{background:color-mix(in srgb,var(--backed) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--backed) 28%,var(--line))}
+.deal-stage-k,.deal-commit-k{
+  display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:650;
+  color:var(--ink-faint);margin-bottom:4px;
+}
+.deal-commit-link{color:var(--accent-ink);font-weight:600;text-decoration:none;white-space:nowrap}
+.deal-commit-link:hover{text-decoration:underline}
+.deal-tally{margin:14px 0 0;font-size:16px;color:var(--ink-soft)}
+
+.deal-sec{margin-bottom:40px}
+.deal-h2{margin:0;font-size:24px;letter-spacing:-.01em;font-weight:680;color:var(--ink)}
+.deal-sub{margin:7px 0 15px;font-size:16px;line-height:1.5;color:var(--ink-soft);max-width:66ch}
+
+/* commitment ledger */
+.ledger{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.led-row{
+  display:grid;grid-template-columns:74px 96px 1fr 132px;gap:12px;align-items:baseline;
+  background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 14px;font-size:15.5px;
+}
+.led-row--flag{border-color:color-mix(in srgb,var(--blocked) 45%,var(--line));background:color-mix(in srgb,var(--blocked) 7%,var(--surface))}
+.led-row--raised{background:var(--paper)}
+.led-row--raised .led-who{color:var(--held)}
+.led-call{color:var(--ink-faint);font-size:14px;text-decoration:none;font-variant-numeric:tabular-nums}
+.led-call:hover{color:var(--accent-ink);text-decoration:underline}
+.led-who{font-weight:650;color:var(--ink-soft)}
+.led-row--flag .led-who{color:var(--blocked)}
+.led-what{color:var(--ink);line-height:1.45}
+.led-due{color:var(--ink-faint);font-size:14px;text-align:right}
+.empty{color:var(--ink-faint);font-size:16px}
+
+/* search */
+.deal-search{
+  width:100%;font:inherit;font-size:17px;padding:12px 14px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:11px;
+}
+.deal-search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.try-row{margin-top:9px;font-size:14.5px;color:var(--ink-faint)}
+.try-row button{
+  font:inherit;font-size:14.5px;color:var(--ink-soft);background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:3px 11px;margin-left:7px;cursor:pointer;
+}
+.try-row button:hover{border-color:var(--accent);color:var(--accent-ink)}
+.results{margin-top:16px}
+.results-summary{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.hit-call{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 14px;margin-bottom:8px}
+.hit-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.hit-head a{font-weight:650;color:var(--ink);text-decoration:none}
+.hit-head a:hover{color:var(--accent-ink);text-decoration:underline}
+.hit-count{font-size:13.5px;color:var(--ink-faint)}
+.hit-list{margin:7px 0 0;padding:0 0 0 17px;color:var(--ink-soft)}
+.hit-list li{margin:3px 0;font-size:14.5px;line-height:1.5}
+.hit-list mark{background:var(--mark);color:var(--mark-ink);padding:1px 3px;border-radius:3px}
+
+/* the calls, in order */
+.calls{display:flex;flex-direction:column;gap:10px}
+.call-row{
   display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;
   background:var(--surface);border:1px solid var(--line);border-radius:14px;
-  padding:16px 18px;box-shadow:var(--shadow);
-  transition:border-color .16s ease, transform .16s ease, box-shadow .16s ease;
+  padding:15px 17px;box-shadow:var(--shadow);
+  transition:border-color .16s ease, transform .16s ease;
 }
-.sample:hover{border-color:var(--accent);transform:translateY(-1px)}
-.sample:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.sample-seq{
+.call-row:hover{border-color:var(--accent);transform:translateY(-1px)}
+.call-row:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.call-seq{
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   font-size:15px;font-weight:600;color:var(--accent-ink);background:var(--accent-soft);
   width:34px;height:34px;flex:0 0 34px;display:flex;align-items:center;justify-content:center;border-radius:9px;
 }
-.sample-body{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
-.sample-label{font-size:24px;font-weight:660;letter-spacing:-.015em;color:var(--ink)}
-.sample-summary{font-size:16px;line-height:1.45;color:var(--ink-soft);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.sample-tally{font-size:14px;color:var(--ink-faint);margin-top:2px}
-.sample-tally strong{color:var(--held);font-weight:650}
-.sample-go{
+.call-body{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.call-label{font-size:22px;font-weight:660;letter-spacing:-.015em;color:var(--ink)}
+.call-summary{font-size:16px;line-height:1.45;color:var(--ink-soft)}
+.call-tally{font-size:14px;color:var(--ink-faint);margin-top:2px}
+.call-tally strong{color:var(--held);font-weight:650}
+.call-go{
   flex:0 0 auto;font-size:15px;font-weight:600;color:var(--accent-ink);
   display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
 }
-.sample-go::after{content:"";width:0;height:0;border-style:solid;border-width:4px 0 4px 6px;border-color:transparent transparent transparent currentColor}
-.sample:hover .sample-go{gap:9px}
-@media (max-width:520px){.sample-go{display:none}.landing-h1{font-size:30px}}
-.landing-foot{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-soft);color:var(--ink-soft);font-size:15px;line-height:1.6}
-.landing-foot p{margin:0 0 10px}
-.foot-link{color:var(--accent-ink);font-weight:600;text-decoration:none}
-.foot-link:hover{text-decoration:underline}
+.call-go::after{content:"";width:0;height:0;border-style:solid;border-width:4px 0 4px 6px;border-color:transparent transparent transparent currentColor}
+.call-row:hover .call-go{gap:9px}
+
+.deal-foot{margin-top:6px;padding-top:20px;border-top:1px solid var(--line-soft);color:var(--ink-soft);font-size:15px;line-height:1.6}
+.deal-foot p{margin:0 0 8px}
+.deal-foot p:first-child{color:var(--ink);font-weight:600}
+@media (max-width:620px){
+  .deal-h1{font-size:30px}
+  .call-go{display:none}
+  .led-row{grid-template-columns:66px 1fr;row-gap:4px}
+  .led-what{grid-column:1 / -1}
+  .led-due{text-align:left;grid-column:1 / -1}
+}
 `;
 
 // ── client script (vanilla, zero deps) ──────────────────────────────────────
@@ -704,5 +1045,109 @@ const SCRIPT = `
       });
     });
   }
+
+  // A citation chip (or a row in a section's source list) opens the exact line
+  // it points at: the card holding it expands, the line is marked, and it plays
+  // from that second. Same reveal the whole card gives, aimed at one line.
+  function openCitation(id){
+    var target = id ? document.getElementById(id) : null;
+    if (!target) return;
+    var host = target.closest('.card, .chip');
+    if (host) host.setAttribute('aria-expanded', 'true');
+    target.classList.add('is-cited');
+    window.setTimeout(function(){ target.classList.remove('is-cited'); }, 2000);
+    if (target.scrollIntoView) target.scrollIntoView({ block:'center', behavior:'smooth' });
+    var play = target.querySelector('.play');
+    if (play) play.click();
+  }
+  Array.prototype.slice.call(document.querySelectorAll('.cite, .source')).forEach(function(b){
+    b.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      openCitation(b.getAttribute('data-cite'));
+    });
+  });
 })();
+`;
+
+// ── deal-workspace client script (module: search reuses deal-index.mjs) ──────
+// The search box runs the SAME searchDeal() the tests cover, imported from the
+// copy build-deal-index.mjs syncs into public/. Nothing about matching is
+// reimplemented here.
+const DEAL_SCRIPT = `
+import { searchDeal } from './deal-index.mjs';
+
+const input = document.getElementById('search-input');
+const results = document.getElementById('results');
+let index = null;
+
+function escapeHtml(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(ch){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch];
+  });
+}
+function markQuery(text, q){
+  const i = text.toLowerCase().indexOf(q);
+  if (i < 0) return escapeHtml(text);
+  return escapeHtml(text.slice(0, i)) + '<mark>' + escapeHtml(text.slice(i, i + q.length)) + '</mark>' + escapeHtml(text.slice(i + q.length));
+}
+function joinHuman(items){
+  if (items.length === 1) return String(items[0]);
+  if (items.length === 2) return items[0] + ' and ' + items[1];
+  return items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
+}
+// Notes first, keyword-tracker matches next, raw transcript lines last.
+function bestSnippets(records, q, limit){
+  const rank = (r) => (r.source === 'claim' && r.extractor !== 'tracker') ? 0 : (r.source === 'claim' ? 1 : 2);
+  const sorted = records.slice().sort((a, b) => rank(a) - rank(b));
+  const seen = new Set();
+  const out = [];
+  for (const r of sorted){
+    if (seen.has(r.text)) continue;
+    seen.add(r.text);
+    out.push(r);
+    if (out.length >= (limit || 3)) break;
+  }
+  return out;
+}
+
+function run(q){
+  if (!index){
+    results.innerHTML = '<p class="empty">Search is still loading.</p>';
+    return;
+  }
+  if (!q.trim()){ results.innerHTML = ''; return; }
+  const found = searchDeal(index, q);
+  if (!found.callIds.length){
+    results.innerHTML = '<p class="empty">Nothing for "' + escapeHtml(q) + '" in these calls. Try tcpa or ringhawk.</p>';
+    return;
+  }
+  const nums = found.callIds.map((id) => index.calls.find((c) => c.id === id).seq);
+  const head = 'Said on call' + (nums.length > 1 ? 's ' : ' ') + joinHuman(nums) + '.';
+  const cards = found.callIds.map((id) => {
+    const call = index.calls.find((c) => c.id === id);
+    const hits = found.hitsByCall[id];
+    const snips = bestSnippets(hits, found.query, 3);
+    return '<div class="hit-call">'
+      + '<div class="hit-head"><a href="notes/' + escapeHtml(call.id) + '.html">Call ' + call.seq + ': ' + escapeHtml(String(call.title).split(/[:]/)[0].trim()) + '</a>'
+      + '<span class="hit-count">' + hits.length + (hits.length > 1 ? ' mentions' : ' mention') + '</span></div>'
+      + '<ul class="hit-list">' + snips.map((s) => '<li>' + markQuery(s.text, found.query) + '</li>').join('') + '</ul>'
+      + '</div>';
+  }).join('');
+  results.innerHTML = '<p class="results-summary">' + escapeHtml(head) + '</p>' + cards;
+}
+
+document.querySelectorAll('.try-row button').forEach(function(b){
+  b.addEventListener('click', function(){ input.value = b.dataset.q; run(b.dataset.q); });
+});
+input.addEventListener('input', function(){ run(input.value); });
+
+fetch('deal-index.json')
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    index = { calls: data.calls, records: data.records };
+    if (input.value) run(input.value);
+  })
+  .catch(function(){
+    results.innerHTML = '<p class="empty">Search needs the deal index. Run npm start to build it.</p>';
+  });
 `;

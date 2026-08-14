@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brightsmile Dental Group · the deal</title>
+<style>
+:root{
+  --paper:#f6f7f9; --surface:#ffffff; --ink:#14171c; --ink-soft:#565d68;
+  --ink-faint:#5f6672; --line:#e3e6ea; --line-soft:#eceef1;
+  --accent:#2947d8; --accent-soft:#e7ebfc; --accent-ink:#1c34ad;
+  --backed:#0f7a52; --held:#b26a00; --held-bg:#fbf3e3; --held-line:#eccf9c;
+  --blocked:#c0362c; --mark:#fff2ab; --mark-ink:#3a2f00;
+  --shadow:0 1px 2px rgba(20,23,28,.05),0 6px 20px rgba(20,23,28,.05);
+  color-scheme:light;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1115; --surface:#181b21; --ink:#e7e9ee; --ink-soft:#a2a9b4;
+    --ink-faint:#98a0ac; --line:#282d35; --line-soft:#20242b;
+    --accent:#7f94ff; --accent-soft:#1c2440; --accent-ink:#aab6ff;
+    --backed:#39b483; --held:#e0a24a; --held-bg:#241d10; --held-line:#4a3c1e;
+    --blocked:#ff7a6e; --mark:#5a4a00; --mark-ink:#ffe9a3;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1115; --surface:#181b21; --ink:#e7e9ee; --ink-soft:#a2a9b4;
+  --ink-faint:#98a0ac; --line:#282d35; --line-soft:#20242b;
+  --accent:#7f94ff; --accent-soft:#1c2440; --accent-ink:#aab6ff;
+  --backed:#39b483; --held:#e0a24a; --held-bg:#241d10; --held-line:#4a3c1e;
+  --blocked:#ff7a6e; --mark:#5a4a00; --mark-ink:#ffe9a3;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--mark);color:var(--mark-ink)}
+.mono,.rc-line,.held-quote span,.chip-receipt .rc-line{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+/* deal rail */
+.deal-rail{
+  position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:18px;
+  padding:11px 22px; background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(8px); border-bottom:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.deal-name{font-size:16px;font-weight:600;letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.deal-name:hover{color:var(--accent-ink)}
+.deal-name::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.arc{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.step{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink-faint);font-size:15px;padding:5px 4px;border-radius:8px}
+.step .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5}
+.step:hover{color:var(--ink)}
+.step.is-current{color:var(--accent-ink);font-weight:600}
+.step.is-current .dot{background:var(--accent);opacity:1;box-shadow:0 0 0 3px var(--accent-soft)}
+.arc-sep{width:16px;height:1px;background:var(--line);margin:0 2px}
+
+/* header */
+.wrap{max-width:720px;margin:0 auto;padding:38px 22px 88px}
+.call-head{margin-bottom:26px}
+.eyebrow{margin:0 0 12px;font-size:14px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.call-head h1{margin:0;font-size:30px;line-height:1.15;letter-spacing:-.02em;font-weight:680;text-wrap:balance}
+.sub{margin:10px 0 0;color:var(--ink-soft);font-size:16.5px}
+.tagline{margin:16px 0 0;font-size:19px;line-height:1.4;font-weight:600;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.tagline::before{content:"";display:block;width:34px;height:3px;border-radius:2px;background:var(--accent);margin-bottom:12px}
+.magic{margin:16px 0 0;font-size:17px;color:var(--ink);padding:12px 15px;background:var(--accent-soft);border-radius:11px;line-height:1.5}
+.tally{margin:14px 0 0;font-size:16px;color:var(--ink-soft)}
+.tally strong{color:var(--held);font-weight:650}
+
+/* context chips */
+.context{display:flex;flex-direction:column;gap:12px;margin:0 0 30px;padding:16px 0 4px;border-top:1px solid var(--line-soft)}
+.chip-grp{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.chip-label{font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;min-width:96px}
+.chip{position:relative;font-size:16px;color:var(--ink-soft);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:5px 12px;cursor:pointer;transition:border-color .15s,color .15s}
+.chip.chip--flat{cursor:default}
+.chip[role="button"]:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-expanded="true"]{border-color:var(--accent);color:var(--ink)}
+.chip-receipt{display:none}
+.chip[aria-expanded="true"] .chip-receipt{display:block;margin-top:10px}
+
+/* notes */
+.notes{display:flex;flex-direction:column;gap:30px}
+.grp{display:flex;flex-direction:column;gap:12px}
+.grp-label{margin:0;font-size:24px;letter-spacing:-.01em;color:var(--ink);font-weight:680}
+.cards{display:flex;flex-direction:column;gap:10px}
+.card{
+  position:relative; background:var(--surface); border:1px solid var(--line);
+  border-radius:13px; padding:15px 17px; box-shadow:var(--shadow);
+  transition:border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.card[role="button"]{cursor:pointer}
+.card[role="button"]:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.card[role="button"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card[aria-expanded="true"]{border-color:var(--accent)}
+.card--flat{cursor:default}
+.note{margin:0;font-size:17px;line-height:1.5;color:var(--ink)}
+
+/* the summary brief: 2-3 lines of plain prose, still cited */
+.grp--brief .cards{gap:6px}
+.card--brief{background:transparent;border-color:transparent;box-shadow:none;padding:2px 0}
+.card--brief .note{font-size:19px;line-height:1.5}
+.card--brief[aria-expanded="true"]{border-color:transparent}
+.card--brief[role="button"]:hover{border-color:transparent}
+.card--brief[role="button"]:hover .note{color:var(--accent-ink)}
+
+/* citation chips (the Perplexity pattern) */
+.cites{display:inline;margin-left:3px;font-size:0;line-height:0;vertical-align:super}
+.cite{
+  font:inherit;font-size:11.5px;line-height:1;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border:1px solid transparent;border-radius:5px;
+  min-width:17px;padding:2px 5px;margin-left:2px;cursor:pointer;
+}
+.cite:hover{border-color:var(--accent)}
+.cite:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* the section's source list */
+.src-block{margin-top:4px;padding-top:11px;border-top:1px solid var(--line-soft)}
+.src-label{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:650;margin-bottom:5px}
+.sources{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.source{
+  display:flex;align-items:baseline;gap:9px;width:100%;text-align:left;font:inherit;font-size:14.5px;
+  color:var(--ink-faint);background:none;border:0;border-radius:8px;padding:5px 7px;cursor:pointer;
+}
+.source:hover{background:var(--line-soft);color:var(--ink)}
+.source:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.src-n,.rc-n{
+  flex:0 0 auto;font-size:11.5px;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:2px 6px;
+}
+.src-spk{flex:0 0 auto;color:var(--ink-soft);font-weight:600;text-transform:capitalize}
+.src-q{
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;
+}
+.src-t{flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:13.5px}
+.receipt.is-cited{background:var(--accent-soft);border-radius:9px;padding:11px 11px 9px;border-top-color:transparent}
+.cue{
+  display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:15px;
+  color:var(--ink-faint);font-weight:550;letter-spacing:.005em;
+}
+.cue::before{content:"";width:13px;height:13px;border:1.5px solid currentColor;border-radius:4px;opacity:.6;
+  background:linear-gradient(currentColor,currentColor) center/7px 1.5px no-repeat,
+             linear-gradient(currentColor,currentColor) center/1.5px 7px no-repeat}
+.card[role="button"]:hover .cue{color:var(--accent)}
+.card[aria-expanded="true"] .cue{color:var(--accent)}
+.card[aria-expanded="true"] .cue::before{transform:rotate(45deg);background:linear-gradient(currentColor,currentColor) center/7px 1.5px no-repeat}
+
+/* receipts (the reveal) */
+.receipts{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .26s ease,opacity .2s ease;overflow:hidden}
+.card[aria-expanded="true"] .receipts{grid-template-rows:1fr;opacity:1;margin-top:13px}
+.receipts>*{min-height:0}
+.receipt{border-top:1px dashed var(--line);padding-top:12px;margin-top:2px}
+.receipt+.receipt{margin-top:10px}
+.rc-meta{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap}
+.play{
+  display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:15px;font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid transparent;border-radius:7px;padding:3px 9px 3px 8px;cursor:pointer;
+}
+.play:hover{border-color:var(--accent)}
+.play:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.play .tri{width:0;height:0;border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent currentColor}
+.play.is-playing .tri{border-width:0;width:8px;height:8px;background:currentColor}
+.rc-time{display:inline-flex;align-items:center;font:inherit;font-size:15px;font-weight:600;
+  font-variant-numeric:tabular-nums;color:var(--ink-soft);background:var(--line-soft);
+  border-radius:7px;padding:3px 9px}
+.rc-spk{font-size:14px;color:var(--ink-faint);text-transform:capitalize}
+.rc-tag{font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:var(--held);background:var(--held-bg);border-radius:5px;padding:2px 6px;font-weight:650}
+.rc-line{margin:0;font-size:16px;line-height:1.6;color:var(--ink-soft)}
+.rc-line mark{background:var(--mark);color:var(--mark-ink);padding:1px 3px;border-radius:3px;font-weight:600}
+
+/* held back (the gate beat) */
+.held{margin-top:6px;padding:18px 18px 8px;background:var(--held-bg);border:1px solid var(--held-line);border-radius:14px}
+.held--blocked{--held-bg:color-mix(in srgb,var(--blocked) 8%,var(--surface));--held-line:color-mix(in srgb,var(--blocked) 35%,var(--line));--held:var(--blocked)}
+.held-label{display:flex;align-items:center;gap:10px;margin:0;font-size:24px;letter-spacing:-.01em;color:var(--held);font-weight:680}
+.held-mark{width:15px;height:15px;border-radius:50%;border:2px solid var(--held);position:relative}
+.held-mark::after{content:"";position:absolute;left:5.5px;top:2.5px;width:2px;height:6px;background:var(--held)}
+.held--blocked .held-mark::after{left:2.5px;top:6px;width:8px;height:2px}
+.held-sub{margin:9px 0 15px;font-size:16px;color:var(--ink-soft);line-height:1.5}
+.held-card{background:var(--surface);border:1px solid var(--held-line);border-radius:11px;padding:13px 15px;margin-bottom:10px}
+.held-note{margin:0;font-size:17px;color:var(--ink-soft)}
+.held-reason{margin:8px 0 0;font-size:16px;color:var(--held);font-weight:600}
+.held-quote{margin:9px 0 0;font-size:16px;color:var(--ink-faint)}
+.held-quote span{color:var(--ink-soft);background:color-mix(in srgb,var(--held) 10%,transparent);padding:2px 6px;border-radius:4px}
+
+/* follow-up email (the end of the chain) */
+.email{margin-top:6px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.email-head{display:flex;align-items:center;justify-content:space-between;padding:15px 18px 0}
+.email-label{display:flex;align-items:center;gap:10px;margin:0;font-size:24px;letter-spacing:-.01em;color:var(--accent-ink);font-weight:680}
+.email-mark{width:15px;height:11px;border:1.5px solid var(--accent);border-radius:2px;position:relative}
+.email-mark::after{content:"";position:absolute;left:-1.5px;top:-1.5px;width:15px;height:11px;background:linear-gradient(135deg,transparent 45%,var(--accent) 45%,var(--accent) 55%,transparent 55%)}
+.email-draft{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:5px;padding:2px 7px;font-weight:650}
+.email-trust{margin:10px 18px 0;font-size:16px;color:var(--ink-soft);line-height:1.5}
+.email-body{margin:14px;padding:15px 16px;border:1px solid var(--line-soft);border-radius:10px;background:var(--paper)}
+.email-subject{margin:0 0 12px;font-size:16px;color:var(--ink);font-weight:600}
+.email-subject span{display:inline-block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-right:9px}
+.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.email-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.email-list li{position:relative;padding-left:24px;font-size:16px;line-height:1.5;color:var(--ink)}
+.em-cite{position:absolute;left:0;top:5px;width:15px;height:15px;border-radius:50%;background:color-mix(in srgb,var(--backed) 16%,transparent)}
+.em-cite::after{content:"";position:absolute;left:5px;top:3px;width:3px;height:7px;border:solid var(--backed);border-width:0 2px 2px 0;transform:rotate(42deg)}
+.email-outro{margin:12px 0 0;font-size:16px;color:var(--ink-faint)}
+
+.no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
+
+@media (max-width:560px){
+  .wrap{padding:26px 16px 70px}
+  .call-head h1{font-size:25px}
+  .chip-label{min-width:auto;width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}
+
+.wrap--deal{max-width:860px;padding-top:52px}
+.deal-head{margin-bottom:38px}
+.deal-h1{margin:10px 0 0;font-size:38px;line-height:1.1;letter-spacing:-.025em;font-weight:700;text-wrap:balance}
+.deal-meta{margin:10px 0 0;font-size:15.5px;letter-spacing:.01em;color:var(--ink-faint)}
+.deal-meta::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.deal-stage,.deal-commit{
+  margin:14px 0 0;font-size:17.5px;line-height:1.5;color:var(--ink);
+  padding:12px 15px;background:var(--accent-soft);border-radius:11px;
+}
+.deal-commit{background:color-mix(in srgb,var(--backed) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--backed) 28%,var(--line))}
+.deal-stage-k,.deal-commit-k{
+  display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:650;
+  color:var(--ink-faint);margin-bottom:4px;
+}
+.deal-commit-link{color:var(--accent-ink);font-weight:600;text-decoration:none;white-space:nowrap}
+.deal-commit-link:hover{text-decoration:underline}
+.deal-tally{margin:14px 0 0;font-size:16px;color:var(--ink-soft)}
+
+.deal-sec{margin-bottom:40px}
+.deal-h2{margin:0;font-size:24px;letter-spacing:-.01em;font-weight:680;color:var(--ink)}
+.deal-sub{margin:7px 0 15px;font-size:16px;line-height:1.5;color:var(--ink-soft);max-width:66ch}
+
+/* commitment ledger */
+.ledger{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.led-row{
+  display:grid;grid-template-columns:74px 96px 1fr 132px;gap:12px;align-items:baseline;
+  background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 14px;font-size:15.5px;
+}
+.led-row--flag{border-color:color-mix(in srgb,var(--blocked) 45%,var(--line));background:color-mix(in srgb,var(--blocked) 7%,var(--surface))}
+.led-row--raised{background:var(--paper)}
+.led-row--raised .led-who{color:var(--held)}
+.led-call{color:var(--ink-faint);font-size:14px;text-decoration:none;font-variant-numeric:tabular-nums}
+.led-call:hover{color:var(--accent-ink);text-decoration:underline}
+.led-who{font-weight:650;color:var(--ink-soft)}
+.led-row--flag .led-who{color:var(--blocked)}
+.led-what{color:var(--ink);line-height:1.45}
+.led-due{color:var(--ink-faint);font-size:14px;text-align:right}
+.empty{color:var(--ink-faint);font-size:16px}
+
+/* search */
+.deal-search{
+  width:100%;font:inherit;font-size:17px;padding:12px 14px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:11px;
+}
+.deal-search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.try-row{margin-top:9px;font-size:14.5px;color:var(--ink-faint)}
+.try-row button{
+  font:inherit;font-size:14.5px;color:var(--ink-soft);background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:3px 11px;margin-left:7px;cursor:pointer;
+}
+.try-row button:hover{border-color:var(--accent);color:var(--accent-ink)}
+.results{margin-top:16px}
+.results-summary{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.hit-call{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 14px;margin-bottom:8px}
+.hit-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.hit-head a{font-weight:650;color:var(--ink);text-decoration:none}
+.hit-head a:hover{color:var(--accent-ink);text-decoration:underline}
+.hit-count{font-size:13.5px;color:var(--ink-faint)}
+.hit-list{margin:7px 0 0;padding:0 0 0 17px;color:var(--ink-soft)}
+.hit-list li{margin:3px 0;font-size:14.5px;line-height:1.5}
+.hit-list mark{background:var(--mark);color:var(--mark-ink);padding:1px 3px;border-radius:3px}
+
+/* the calls, in order */
+.calls{display:flex;flex-direction:column;gap:10px}
+.call-row{
+  display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:15px 17px;box-shadow:var(--shadow);
+  transition:border-color .16s ease, transform .16s ease;
+}
+.call-row:hover{border-color:var(--accent);transform:translateY(-1px)}
+.call-row:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.call-seq{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:15px;font-weight:600;color:var(--accent-ink);background:var(--accent-soft);
+  width:34px;height:34px;flex:0 0 34px;display:flex;align-items:center;justify-content:center;border-radius:9px;
+}
+.call-body{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.call-label{font-size:22px;font-weight:660;letter-spacing:-.015em;color:var(--ink)}
+.call-summary{font-size:16px;line-height:1.45;color:var(--ink-soft)}
+.call-tally{font-size:14px;color:var(--ink-faint);margin-top:2px}
+.call-tally strong{color:var(--held);font-weight:650}
+.call-go{
+  flex:0 0 auto;font-size:15px;font-weight:600;color:var(--accent-ink);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.call-go::after{content:"";width:0;height:0;border-style:solid;border-width:4px 0 4px 6px;border-color:transparent transparent transparent currentColor}
+.call-row:hover .call-go{gap:9px}
+
+.deal-foot{margin-top:6px;padding-top:20px;border-top:1px solid var(--line-soft);color:var(--ink-soft);font-size:15px;line-height:1.6}
+.deal-foot p{margin:0 0 8px}
+.deal-foot p:first-child{color:var(--ink);font-weight:600}
+@media (max-width:620px){
+  .deal-h1{font-size:30px}
+  .call-go{display:none}
+  .led-row{grid-template-columns:66px 1fr;row-gap:4px}
+  .led-what{grid-column:1 / -1}
+  .led-due{text-align:left;grid-column:1 / -1}
+}
+</style>
+</head>
+<body>
+<main class="wrap wrap--deal">
+  <header class="deal-head">
+    <p class="eyebrow">OpenGong · notes that cite the call</p>
+    <h1 class="deal-h1">Brightsmile Dental Group</h1>
+    <p class="deal-meta">5 locations, on RingHawk today · 6 calls so far</p>
+    <p class="deal-stage"><span class="deal-stage-k">Where it stands</span>Committed: the agreement is sitting with Dr. Mehta and nothing changed on this call.</p>
+    <p class="deal-commit"><span class="deal-commit-k">The commit</span>Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included. <a class="deal-commit-link" href="notes/05.html">Call 5, Close</a></p>
+    <p class="deal-tally">117 of 118 notes backed. 1 held back: we couldn&#39;t find it in a call. 3 blocked.</p>
+  </header>
+
+  <section class="deal-sec" aria-label="The calls">
+    <h2 class="deal-h2">The calls</h2>
+    <p class="deal-sub">Open a call and click a citation number. You get the line it came from, and you can play it.</p>
+    <div class="calls">
+      <a class="call-row" href="notes/01.html">
+      <span class="call-seq">01</span>
+      <span class="call-body">
+        <span class="call-label">Discovery</span>
+        <span class="call-summary">Discovery landed a 30-minute demo of after-hours routing and compliant texting.</span>
+        <span class="call-tally">24 of 24 backed.</span>
+      </span>
+      <span class="call-go" aria-hidden="true">Open the notes</span>
+    </a><a class="call-row" href="notes/02.html">
+      <span class="call-seq">02</span>
+      <span class="call-body">
+        <span class="call-label">Demo</span>
+        <span class="call-summary">Demo landed: after-hours routing, AMD, and consent-tracked texting all resonated with the buyer.</span>
+        <span class="call-tally">19 of 19 backed.</span>
+      </span>
+      <span class="call-go" aria-hidden="true">Open the notes</span>
+    </a><a class="call-row" href="notes/03.html">
+      <span class="call-seq">03</span>
+      <span class="call-body">
+        <span class="call-label">Pricing</span>
+        <span class="call-summary">Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.</span>
+        <span class="call-tally">20 of 21 backed. <strong>1 held back.</strong></span>
+      </span>
+      <span class="call-go" aria-hidden="true">Open the notes</span>
+    </a><a class="call-row" href="notes/04.html">
+      <span class="call-seq">04</span>
+      <span class="call-body">
+        <span class="call-label">Commitment check</span>
+        <span class="call-summary">SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.</span>
+        <span class="call-tally">21 of 21 backed.</span>
+      </span>
+      <span class="call-go" aria-hidden="true">Open the notes</span>
+    </a><a class="call-row" href="notes/05.html">
+      <span class="call-seq">05</span>
+      <span class="call-body">
+        <span class="call-label">Close</span>
+        <span class="call-summary">Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.</span>
+        <span class="call-tally">23 of 23 backed.</span>
+      </span>
+      <span class="call-go" aria-hidden="true">Open the notes</span>
+    </a><a class="call-row" href="notes/06.html">
+      <span class="call-seq">06</span>
+      <span class="call-body">
+        <span class="call-label">Messy</span>
+        <span class="call-summary">Rahul called in to read out a suspicious email about CallForge. The rep identified it as a phishing template using the CallForge name and told him not to click the link.</span>
+        <span class="call-tally">10 of 10 backed. <strong>3 blocked.</strong></span>
+      </span>
+      <span class="call-go" aria-hidden="true">Open the notes</span>
+    </a>
+    </div>
+  </section>
+
+  <section class="deal-sec" aria-label="Promises made on these calls">
+    <h2 class="deal-h2">What was promised</h2>
+    <p class="deal-sub">Every promise made out loud, in call order. Nothing here is a guess: if a later call says a promise slipped, that line shows in red.</p>
+    <ol class="ledger"><li class="led-row">
+      <a class="led-call" href="notes/01.html">Call 1</a>
+      <span class="led-who">Maya</span>
+      <span class="led-what">Rep to run a 30-minute demo Thursday covering after-hours routing and the compliant texting flow, no slides.</span>
+      <span class="led-due">Thursday</span>
+    </li><li class="led-row led-row--raised">
+      <a class="led-call" href="notes/01.html">Call 1</a>
+      <span class="led-who">Raised</span>
+      <span class="led-what">Trust is the blocker. They got burned switching software once and won&#39;t repeat that without proof it works.</span>
+      <span class="led-due"></span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/02.html">Call 2</a>
+      <span class="led-who">Maya</span>
+      <span class="led-what">Rep committed to send the SOC 2 report and the TCPA one-pager to the office manager, both by Friday.</span>
+      <span class="led-due">Friday</span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/02.html">Call 2</a>
+      <span class="led-who">Rahul</span>
+      <span class="led-what">Buyer to pull the RingHawk call-volume report and send it so the rep can size the deal, early next week.</span>
+      <span class="led-due">early next week</span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/02.html">Call 2</a>
+      <span class="led-who">Both</span>
+      <span class="led-what">Once the documents are exchanged, both sides move to pricing.</span>
+      <span class="led-due">after documents exchanged</span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/03.html">Call 3</a>
+      <span class="led-who">Maya</span>
+      <span class="led-what">Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.</span>
+      <span class="led-due">before the November renewal</span>
+    </li><li class="led-row led-row--raised">
+      <a class="led-call" href="notes/03.html">Call 3</a>
+      <span class="led-who">Raised</span>
+      <span class="led-what">Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer&#39;s actually experienced.</span>
+      <span class="led-due"></span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/04.html">Call 4</a>
+      <span class="led-who">Maya</span>
+      <span class="led-what">Rep to send the overdue TCPA one-pager today, directly to the office manager.</span>
+      <span class="led-due">today</span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/04.html">Call 4</a>
+      <span class="led-who">Maya</span>
+      <span class="led-what">Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.</span>
+      <span class="led-due">this week</span>
+    </li><li class="led-row led-row--flag">
+      <a class="led-call" href="notes/04.html">Call 4</a>
+      <span class="led-who">Called out</span>
+      <span class="led-what">Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.</span>
+      <span class="led-due"></span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/05.html">Call 5</a>
+      <span class="led-who">Maya</span>
+      <span class="led-what">Rep to send the agreement this afternoon.</span>
+      <span class="led-due">this afternoon</span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/05.html">Call 5</a>
+      <span class="led-who">Rahul</span>
+      <span class="led-what">Buyer to have Dr. Mehta sign the agreement early next week.</span>
+      <span class="led-due">early next week</span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/05.html">Call 5</a>
+      <span class="led-who">Both</span>
+      <span class="led-what">Both sides to aim the cutover for the weekend after signing.</span>
+      <span class="led-due">weekend after signing</span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/05.html">Call 5</a>
+      <span class="led-who">Maya</span>
+      <span class="led-what">Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.</span>
+      <span class="led-due">during onboarding</span>
+    </li><li class="led-row led-row--raised">
+      <a class="led-call" href="notes/05.html">Call 5</a>
+      <span class="led-who">Raised</span>
+      <span class="led-what">Dr. Mehta&#39;s only remaining question: are we locked in if the pilot goes badly?</span>
+      <span class="led-due"></span>
+    </li><li class="led-row">
+      <a class="led-call" href="notes/06.html">Call 6</a>
+      <span class="led-who">Both</span>
+      <span class="led-what">No next step was agreed on this call: the rep confirmed nothing is outstanding on his side.</span>
+      <span class="led-due"></span>
+    </li></ol>
+  </section>
+
+  <section class="deal-sec" aria-label="Search across the deal">
+    <h2 class="deal-h2">Search the whole deal</h2>
+    <p class="deal-sub">One box across every call, the notes and the raw transcript both.</p>
+    <input id="search-input" class="deal-search" type="text" placeholder="Try tcpa, ringhawk, or soc 2" autocomplete="off" aria-label="Search all calls">
+    <div class="try-row">Quick tries:
+      <button type="button" data-q="tcpa">tcpa</button>
+      <button type="button" data-q="ringhawk">ringhawk</button>
+      <button type="button" data-q="soc 2">soc 2</button>
+    </div>
+    <div id="results" class="results"></div>
+  </section>
+
+  <footer class="deal-foot">
+    <p>Gong records what happened. We do what was promised.</p>
+    <p>Anything we couldn't find in a call is shown held back on that call's page. The follow-up email only carries backed notes.</p>
+  </footer>
+</main>
+<script type="module">
+import { searchDeal } from './deal-index.mjs';
+
+const input = document.getElementById('search-input');
+const results = document.getElementById('results');
+let index = null;
+
+function escapeHtml(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(ch){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch];
+  });
+}
+function markQuery(text, q){
+  const i = text.toLowerCase().indexOf(q);
+  if (i < 0) return escapeHtml(text);
+  return escapeHtml(text.slice(0, i)) + '<mark>' + escapeHtml(text.slice(i, i + q.length)) + '</mark>' + escapeHtml(text.slice(i + q.length));
+}
+function joinHuman(items){
+  if (items.length === 1) return String(items[0]);
+  if (items.length === 2) return items[0] + ' and ' + items[1];
+  return items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
+}
+// Notes first, keyword-tracker matches next, raw transcript lines last.
+function bestSnippets(records, q, limit){
+  const rank = (r) => (r.source === 'claim' && r.extractor !== 'tracker') ? 0 : (r.source === 'claim' ? 1 : 2);
+  const sorted = records.slice().sort((a, b) => rank(a) - rank(b));
+  const seen = new Set();
+  const out = [];
+  for (const r of sorted){
+    if (seen.has(r.text)) continue;
+    seen.add(r.text);
+    out.push(r);
+    if (out.length >= (limit || 3)) break;
+  }
+  return out;
+}
+
+function run(q){
+  if (!index){
+    results.innerHTML = '<p class="empty">Search is still loading.</p>';
+    return;
+  }
+  if (!q.trim()){ results.innerHTML = ''; return; }
+  const found = searchDeal(index, q);
+  if (!found.callIds.length){
+    results.innerHTML = '<p class="empty">Nothing for "' + escapeHtml(q) + '" in these calls. Try tcpa or ringhawk.</p>';
+    return;
+  }
+  const nums = found.callIds.map((id) => index.calls.find((c) => c.id === id).seq);
+  const head = 'Said on call' + (nums.length > 1 ? 's ' : ' ') + joinHuman(nums) + '.';
+  const cards = found.callIds.map((id) => {
+    const call = index.calls.find((c) => c.id === id);
+    const hits = found.hitsByCall[id];
+    const snips = bestSnippets(hits, found.query, 3);
+    return '<div class="hit-call">'
+      + '<div class="hit-head"><a href="notes/' + escapeHtml(call.id) + '.html">Call ' + call.seq + ': ' + escapeHtml(String(call.title).split(/[:]/)[0].trim()) + '</a>'
+      + '<span class="hit-count">' + hits.length + (hits.length > 1 ? ' mentions' : ' mention') + '</span></div>'
+      + '<ul class="hit-list">' + snips.map((s) => '<li>' + markQuery(s.text, found.query) + '</li>').join('') + '</ul>'
+      + '</div>';
+  }).join('');
+  results.innerHTML = '<p class="results-summary">' + escapeHtml(head) + '</p>' + cards;
+}
+
+document.querySelectorAll('.try-row button').forEach(function(b){
+  b.addEventListener('click', function(){ input.value = b.dataset.q; run(b.dataset.q); });
+});
+input.addEventListener('input', function(){ run(input.value); });
+
+fetch('deal-index.json')
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    index = { calls: data.calls, records: data.records };
+    if (input.value) run(input.value);
+  })
+  .catch(function(){
+    results.innerHTML = '<p class="empty">Search needs the deal index. Run npm start to build it.</p>';
+  });
+</script>
+</body>
+</html>

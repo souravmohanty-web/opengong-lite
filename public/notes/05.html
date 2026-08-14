@@ -104,6 +104,46 @@ body{
 .card[aria-expanded="true"]{border-color:var(--accent)}
 .card--flat{cursor:default}
 .note{margin:0;font-size:17px;line-height:1.5;color:var(--ink)}
+
+/* the summary brief: 2-3 lines of plain prose, still cited */
+.grp--brief .cards{gap:6px}
+.card--brief{background:transparent;border-color:transparent;box-shadow:none;padding:2px 0}
+.card--brief .note{font-size:19px;line-height:1.5}
+.card--brief[aria-expanded="true"]{border-color:transparent}
+.card--brief[role="button"]:hover{border-color:transparent}
+.card--brief[role="button"]:hover .note{color:var(--accent-ink)}
+
+/* citation chips (the Perplexity pattern) */
+.cites{display:inline;margin-left:3px;font-size:0;line-height:0;vertical-align:super}
+.cite{
+  font:inherit;font-size:11.5px;line-height:1;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border:1px solid transparent;border-radius:5px;
+  min-width:17px;padding:2px 5px;margin-left:2px;cursor:pointer;
+}
+.cite:hover{border-color:var(--accent)}
+.cite:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* the section's source list */
+.src-block{margin-top:4px;padding-top:11px;border-top:1px solid var(--line-soft)}
+.src-label{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:650;margin-bottom:5px}
+.sources{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.source{
+  display:flex;align-items:baseline;gap:9px;width:100%;text-align:left;font:inherit;font-size:14.5px;
+  color:var(--ink-faint);background:none;border:0;border-radius:8px;padding:5px 7px;cursor:pointer;
+}
+.source:hover{background:var(--line-soft);color:var(--ink)}
+.source:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.src-n,.rc-n{
+  flex:0 0 auto;font-size:11.5px;font-weight:650;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:2px 6px;
+}
+.src-spk{flex:0 0 auto;color:var(--ink-soft);font-weight:600;text-transform:capitalize}
+.src-q{
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;
+}
+.src-t{flex:0 0 auto;font-variant-numeric:tabular-nums;font-size:13.5px}
+.receipt.is-cited{background:var(--accent-soft);border-radius:9px;padding:11px 11px 9px;border-top-color:transparent}
 .cue{
   display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-size:15px;
   color:var(--ink-faint);font-weight:550;letter-spacing:.005em;
@@ -114,8 +154,6 @@ body{
 .card[role="button"]:hover .cue{color:var(--accent)}
 .card[aria-expanded="true"] .cue{color:var(--accent)}
 .card[aria-expanded="true"] .cue::before{transform:rotate(45deg);background:linear-gradient(currentColor,currentColor) center/7px 1.5px no-repeat}
-.card--hint .cue{color:var(--accent);font-weight:600}
-.card--hint .cue::after{content:"";position:absolute}
 
 /* receipts (the reveal) */
 .receipts{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .26s ease,opacity .2s ease;overflow:hidden}
@@ -187,17 +225,17 @@ body{
 </head>
 <body>
 <nav class="deal-rail" aria-label="Deal calls">
-    <a class="deal-name" href="index.html">Brightsmile Dental Group</a>
+    <a class="deal-name" href="../index.html">Brightsmile Dental Group</a>
     <div class="arc"><a class="step" href="01.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Discovery</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="02.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Demo</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="03.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Pricing</span></a><span class="arc-sep" aria-hidden="true"></span><a class="step" href="04.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Commitment check</span></a><span class="arc-sep" aria-hidden="true"></span><span class="step is-current" aria-current="step"><span class="dot" aria-hidden="true"></span><span class="lbl">Close</span></span><span class="arc-sep" aria-hidden="true"></span><a class="step" href="06.html"><span class="dot" aria-hidden="true"></span><span class="lbl">Messy</span></a></div>
   </nav>
 <main class="wrap">
   <header class="call-head">
-    <p class="eyebrow">OpenGong · call notes with receipts</p>
+    <p class="eyebrow">OpenGong · notes that cite the call</p>
     <h1>Close: verbal commit on the pilot</h1>
     <p class="sub">Brightsmile Dental Group. Call 5 of 6.</p>
     <p class="tagline">Gong records what happened. We do what was promised.</p>
-    <p class="magic">Every note links back to the moment it came from. Click any card to see the exact line and play it.</p>
-    <p class="tally">All 23 notes trace to the call.</p>
+    <p class="magic">Every note carries a numbered citation. Click a number to read the line it came from and hear it said.</p>
+    <p class="tally">23 of 23 notes backed.</p>
   </header>
   
     <div class="context" aria-label="Call context">
@@ -205,182 +243,311 @@ body{
         <div class="chip-grp">
           <span class="chip-label">Buying stage</span>
           <span class="chip" role="button" tabindex="0" aria-expanded="false">Committed. Ready to sign.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>then we&#39;re done negotiating send the agreement over</mark> i&#39;ll have doctor meta sign early next week and let&#39;s aim the cutover for the weekend after</p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">High urgency: Dr. Mehta signs early next week.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">then we&#39;re done negotiating send the agreement over <mark>i&#39;ll have doctor meta sign early next week</mark> and let&#39;s aim the cutover for the weekend after</p>
   </div></span></span>
         </div>
         <div class="chip-grp">
           <span class="chip-label">Flags</span>
           <span class="chip" role="button" tabindex="0" aria-expanded="false">Buyer&#39;s open, ready to be a reference customer.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">get my after ask patients booking again and <mark>i&#39;ll be your reference customer</mark> talk next week</p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Heads up: a few spots in this recording were hard to make out.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="63.84" aria-label="Play from 1:03"><span class="tri" aria-hidden="true"></span>1:03</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>get my after ask patients booking again</mark> and i&#39;ll be your reference customer talk next week</p>
   </div></span></span>
         </div>
         <div class="chip-grp">
           <span class="chip-label">Also mentioned</span>
           <span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">speaker_1</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line"><mark>so proposals in front of you two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included</mark></p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>twenty six i can sell doctor meta looked at it last night and his only question was whether we&#39;re locked in if the pilot goes badly</mark></p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="15.200000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">speaker_1</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="15.200000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line"><mark>you&#39;re not if the pilot fills your numbers you walk at ninety days and your lines port right back that&#39;s in section four</mark></p>
   </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="22.080000000000002" aria-label="Play from 0:22"><span class="tri" aria-hidden="true"></span>0:22</button><span class="rc-spk">speaker_2</span></div>
+    <div class="rc-meta"><button class="play" type="button" data-t="22.080000000000002" aria-label="Play from 0:22"><span class="tri" aria-hidden="true"></span>0:22</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>that clause is what got him to yes honestly okay the two pilot sites are the downtown location and the elm street one</mark></p>
   </div></span></span>
         </div>
     </div>
   <div class="notes">
     
-    <section class="grp">
+    <section class="grp grp--brief">
       <h2 class="grp-label">Summary</h2>
       <div class="cards">
-        <article class="card card--hint" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.</p>
-    <span class="cue">Click to see the line it came from</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">speaker_1</span></div>
+        <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Maya at 0:00">1</button></sup></p>
+    <span class="cue">Click a number to read the line it came from</span>
+    <div class="receipts"><div class="receipt" id="rc-summary-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">so proposals in front of you <mark>two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included</mark></p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Cutover happens on a weekend so phones never go dark on a patient day.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="29.44" aria-label="Play from 0:29"><span class="tri" aria-hidden="true"></span>0:29</button><span class="rc-spk">speaker_1</span><span class="rc-tag">segment corrected</span></div>
+  </article><article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Cutover happens on a weekend so phones never go dark on a patient day.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-1-0" aria-label="Source 2, Maya at 0:29">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-summary-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="29.44" aria-label="Play from 0:29"><span class="tri" aria-hidden="true"></span>0:29</button><span class="rc-spk">Maya</span><span class="rc-tag">citation corrected</span></div>
     <p class="rc-line">busiest and smallest <mark>smart cutover happens on a weekend like we your phones never go dark on a patient day</mark></p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Buyer wants to use call recordings to train new front-desk hires and sees it fixing churn.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="35.76" aria-label="Play from 0:35"><span class="tri" aria-hidden="true"></span>0:35</button><span class="rc-spk">speaker_2</span></div>
+  </article><article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Buyer wants to use call recordings to train new front-desk hires and sees it fixing churn.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-2-0" aria-label="Source 3, Rahul at 0:35">3</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-summary-2-0">
+    <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="35.76" aria-label="Play from 0:35"><span class="tri" aria-hidden="true"></span>0:35</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">more thing i noticed in the proposal <mark>the core recording can we use those for training the new front desk hires</mark> because that alone might fix my churn problem</p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-summary-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">two locations ninety day pilot and we landed at twenty six per seat with the…</span>
+          <span class="src-t">0:00</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-summary-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">smart cutover happens on a weekend like we your phones never go dark on a…</span>
+          <span class="src-t">0:29</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-summary-2-0">
+          <span class="src-n">3</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">the core recording can we use those for training the new front desk hires</span>
+          <span class="src-t">0:35</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Pain</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Front-desk churn is Rahul&#39;s own problem; he sees call recordings for training as the thing that might fix it.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="35.76" aria-label="Play from 0:35"><span class="tri" aria-hidden="true"></span>0:35</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Front-desk churn is Rahul&#39;s own problem; he sees call recordings for training as the thing that might fix it.<sup class="cites"><button class="cite" type="button" data-cite="rc-pain-0-0" aria-label="Source 1, Rahul at 0:35">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-pain-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="35.76" aria-label="Play from 0:35"><span class="tri" aria-hidden="true"></span>0:35</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">more thing i noticed in the proposal <mark>the core recording can we use those for training the new front desk hires because that alone might fix my churn problem</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-pain-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">the core recording can we use those for training the new front desk hires…</span>
+          <span class="src-t">0:35</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Objections</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Dr. Mehta&#39;s only remaining question: are we locked in if the pilot goes badly?</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Dr. Mehta&#39;s only remaining question: are we locked in if the pilot goes badly?<sup class="cites"><button class="cite" type="button" data-cite="rc-objections-0-0" aria-label="Source 1, Rahul at 0:08">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-objections-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">twenty six i can sell doctor meta looked at it last night and <mark>his only question was whether we&#39;re locked in if the pilot goes badly</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-objections-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">his only question was whether we&#39;re locked in if the pilot goes badly</span>
+          <span class="src-t">0:08</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Pricing</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Final landed price: twenty six per seat, recall tooling included, on a two-location ninety-day pilot.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">speaker_1</span></div>
+    <p class="note">Final landed price: twenty six per seat, recall tooling included, on a two-location ninety-day pilot.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-0-0" aria-label="Source 1, Maya at 0:00">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-pricing-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">so proposals in front of you two locations ninety day pilot and <mark>we landed at twenty six per seat with the recall tooling included</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-1-0" aria-label="Source 2, Rahul at 0:08">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-pricing-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>twenty six i can sell doctor meta looked at it last night</mark> and his only question was whether we&#39;re locked in if the pilot goes badly</p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-pricing-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">we landed at twenty six per seat with the recall tooling included</span>
+          <span class="src-t">0:00</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-pricing-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">twenty six i can sell doctor meta looked at it last night</span>
+          <span class="src-t">0:08</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Stakeholders</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Dr. Mehta reviewed the proposal himself and is set to sign. He wasn&#39;t on this call.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Dr. Mehta reviewed the proposal himself and is set to sign. He wasn&#39;t on this call.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-0-0" aria-label="Source 1, Rahul at 0:08">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-stakeholders-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">twenty six i can sell <mark>doctor meta looked at it last night</mark> and his only question was whether we&#39;re locked in if the pilot goes badly</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Office manager gets the training live-review as part of onboarding. She wasn&#39;t on this call either.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="45.28" aria-label="Play from 0:45"><span class="tri" aria-hidden="true"></span>0:45</button><span class="rc-spk">speaker_1</span></div>
+    <p class="note">Office manager gets the training live-review as part of onboarding. She wasn&#39;t on this call either.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-1-0" aria-label="Source 2, Maya at 0:45">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-stakeholders-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="45.28" aria-label="Play from 0:45"><span class="tri" aria-hidden="true"></span>0:45</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">yes and <mark>i&#39;ll set up the training live review for your office manager</mark> as part of onboarding no extra line item</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Single-threaded: only one contact in the loop so far.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Single-threaded: only one contact in the loop so far.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-2-0" aria-label="Source 3, Rahul at 0:51">3</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-stakeholders-2-0">
+    <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">then we&#39;re done negotiating send the agreement over <mark>i&#39;ll have doctor meta sign early next week</mark> and let&#39;s aim the cutover for the weekend after</p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-stakeholders-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">doctor meta looked at it last night</span>
+          <span class="src-t">0:08</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-stakeholders-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">i&#39;ll set up the training live review for your office manager</span>
+          <span class="src-t">0:45</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-stakeholders-2-0">
+          <span class="src-n">3</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">i&#39;ll have doctor meta sign early next week</span>
+          <span class="src-t">0:51</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     <section class="grp">
       <h2 class="grp-label">Next steps</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to send the agreement this afternoon.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="59.44" aria-label="Play from 0:59"><span class="tri" aria-hidden="true"></span>0:59</button><span class="rc-spk">speaker_1</span></div>
+    <p class="note">Rep to send the agreement this afternoon.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Maya at 0:59">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="59.44" aria-label="Play from 0:59"><span class="tri" aria-hidden="true"></span>0:59</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line"><mark>agreement goes out this afternoon</mark> rahul genuinely looking forward to this one</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Buyer to have Dr. Mehta sign the agreement early next week.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Buyer to have Dr. Mehta sign the agreement early next week.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Rahul at 0:51">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">then we&#39;re done negotiating send the agreement over <mark>i&#39;ll have doctor meta sign early next week</mark> and let&#39;s aim the cutover for the weekend after</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Both sides to aim the cutover for the weekend after signing.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Both sides to aim the cutover for the weekend after signing.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-2-0" aria-label="Source 3, Rahul at 0:51">3</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-2-0">
+    <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">then we&#39;re done negotiating send the agreement over i&#39;ll have doctor meta sign early next week and <mark>let&#39;s aim the cutover for the weekend after</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="45.28" aria-label="Play from 0:45"><span class="tri" aria-hidden="true"></span>0:45</button><span class="rc-spk">speaker_1</span></div>
+    <p class="note">Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-3-0" aria-label="Source 4, Maya at 0:45">4</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-3-0">
+    <div class="rc-meta"><span class="rc-n">4</span><button class="play" type="button" data-t="45.28" aria-label="Play from 0:45"><span class="tri" aria-hidden="true"></span>0:45</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">yes and <mark>i&#39;ll set up the training live review for your office manager as part of onboarding no extra line item</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep sends the agreement this afternoon; Dr. Mehta signs early next week; cutover the weekend after.</p>
-    <span class="cue">See the line</span>
-    <div class="receipts"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">speaker_2</span></div>
+    <p class="note">Rep sends the agreement this afternoon; Dr. Mehta signs early next week; cutover the weekend after.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-4-0" aria-label="Source 5, Rahul at 0:51">5</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-4-0">
+    <div class="rc-meta"><span class="rc-n">5</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">then we&#39;re done negotiating send the agreement over <mark>i&#39;ll have doctor meta sign early next week and let&#39;s aim the cutover for the weekend after</mark></p>
   </div></div>
   </article>
       </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-next_steps-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">agreement goes out this afternoon</span>
+          <span class="src-t">0:59</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-next_steps-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">i&#39;ll have doctor meta sign early next week</span>
+          <span class="src-t">0:51</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-next_steps-2-0">
+          <span class="src-n">3</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">let&#39;s aim the cutover for the weekend after</span>
+          <span class="src-t">0:51</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-next_steps-3-0">
+          <span class="src-n">4</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">i&#39;ll set up the training live review for your office manager as part of…</span>
+          <span class="src-t">0:45</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-next_steps-4-0">
+          <span class="src-n">5</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">i&#39;ll have doctor meta sign early next week and let&#39;s aim the cutover for the…</span>
+          <span class="src-t">0:51</span>
+        </button>
+      </li></ol>
+    </div>
     </section>
     
     
@@ -390,19 +557,19 @@ body{
         <h2 class="email-label"><span class="email-mark" aria-hidden="true"></span>Follow-up email</h2>
         <span class="email-draft">draft</span>
       </div>
-      <p class="email-trust">This is the follow-up that does what we promised. Every line is cited to the call, and nothing un-verified can reach it.</p>
+      <p class="email-trust">Only backed notes reach this draft. Every line below came from something said on the call.</p>
       <div class="email-body">
         <p class="email-subject"><span>Subject</span>Follow-up: the close call</p>
         <p class="email-intro">Recapping what we covered and what happens next:</p>
         <ul class="email-list">
           <li><span class="em-cite" aria-hidden="true"></span>Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.</li><li><span class="em-cite" aria-hidden="true"></span>Cutover happens on a weekend so phones never go dark on a patient day.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer wants to use call recordings to train new front-desk hires and sees it fixing churn.</li><li><span class="em-cite" aria-hidden="true"></span>Front-desk churn is Rahul&#39;s own problem; he sees call recordings for training as the thing that might fix it.</li><li><span class="em-cite" aria-hidden="true"></span>Dr. Mehta&#39;s only remaining question: are we locked in if the pilot goes badly?</li><li><span class="em-cite" aria-hidden="true"></span>Final landed price: twenty six per seat, recall tooling included, on a two-location ninety-day pilot.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to send the agreement this afternoon.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer to have Dr. Mehta sign the agreement early next week.</li><li><span class="em-cite" aria-hidden="true"></span>Both sides to aim the cutover for the weekend after signing.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.</li><li><span class="em-cite" aria-hidden="true"></span>Rep sends the agreement this afternoon; Dr. Mehta signs early next week; cutover the weekend after.</li>
         </ul>
-        <p class="email-outro">Each point above links to its exact line in the call.</p>
+        <p class="email-outro">Every line traces to a numbered source above.</p>
       </div>
     </section>
   </div>
   
-  <p class="no-audio">Transcribed by pyai-hear (real API run). Extraction for these sample notes was authored offline and gate-verified, not a live LLM run.</p>
+  <p class="no-audio">Transcribed by pyai-hear on a real API run. The notes on this sample were written offline, then checked line by line against the call. No live model run.</p>
 </main>
 <audio id="call-audio" preload="none" src="/audio/05.m4a"></audio>
 <script>
@@ -447,6 +614,27 @@ body{
       });
     });
   }
+
+  // A citation chip (or a row in a section's source list) opens the exact line
+  // it points at: the card holding it expands, the line is marked, and it plays
+  // from that second. Same reveal the whole card gives, aimed at one line.
+  function openCitation(id){
+    var target = id ? document.getElementById(id) : null;
+    if (!target) return;
+    var host = target.closest('.card, .chip');
+    if (host) host.setAttribute('aria-expanded', 'true');
+    target.classList.add('is-cited');
+    window.setTimeout(function(){ target.classList.remove('is-cited'); }, 2000);
+    if (target.scrollIntoView) target.scrollIntoView({ block:'center', behavior:'smooth' });
+    var play = target.querySelector('.play');
+    if (play) play.click();
+  }
+  Array.prototype.slice.call(document.querySelectorAll('.cite, .source')).forEach(function(b){
+    b.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      openCitation(b.getAttribute('data-cite'));
+    });
+  });
 })();
 </script>
 </body>
