@@ -59,6 +59,27 @@ Ours: self-hosted, bulk-exportable, MIT. Nobody schedules your deals for deletio
 Use sparingly and factually; the screenshot is the receipt. Do not name the account
 in public materials.
 
+## Notifications (second screenshot, Sourav's constraints applied)
+
+Sybill ships a notification matrix: five event types crossed with three channels
+(in app, email, Slack), email defaults on, a daily-6AM digest scheduler behind it.
+
+Sourav's ruling: **in-app only, and not for everything.** No channel matrix, no
+email/Slack delivery infra, no settings page with checkboxes. One quiet in-app
+surface (a dot and a short list), and only events where the user has to ACT:
+
+1. **A commitment is due or was dropped.** The ledger already knows. "The TCPA
+   one-pager you promised on call 2 has not gone out." This one is ours alone.
+2. **A deal signal that says act today.** Saritha's signals already carry severity;
+   only the top band notifies. "Worth a move this week" stays on the page.
+3. **An approval is waiting.** When gated actions land (CRM write, email send-assist),
+   the approval queue notifies. Nothing else does.
+
+Explicitly NOT notifications: notes ready (processing is fast; the workspace shows
+it), scorecard ready, activity chatter, mentions (no comments feature), anything
+delivered on a schedule. If a notification can be ignored without cost, it should
+not exist.
+
 ## Build sequencing
 
 The dashboard IA is post-hackathon (Show HN week at earliest). Nothing here blocks
