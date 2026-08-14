@@ -109,6 +109,45 @@ payload (name, number, tool, date, or verbatim phrase); no observation without i
 consequence; generic section titles banned; if a takeaway could describe any sales
 call, it fails.
 
+## The beat-them layer (Sourav: "we'd need to be better than them")
+
+Matching Fireflies' completeness and Fathom's crispness is TABLE STAKES — that's what
+the template above buys. Better comes from six things their architecture cannot follow.
+Every one is already built; the work is making the summary SURFACE them.
+
+1. **A summary with an error model.** Fathom's "~1,500 unqualified leads/mo" takeaway
+   must be trusted; if their AI invents a number, nothing on the page knows. Our page
+   opens with its own score ("20 of 21 backed · 1 held back") and shows its misses. We
+   are the only notetaker that can be wrong OUT LOUD — and we caught our own summarizer
+   inventing "$15 per seat" on record. Line: *"Every notetaker summarizes. Ours is the
+   only one that tells you when it's wrong."*
+2. **Promises tracked ACROSS calls.** Fireflies/Fathom are per-meeting; action items die
+   at the end of each call page. The commitment ledger carries them: SOC2 promised call
+   2, delivery checked call 4, cited at both ends. Nobody else even attempts deal-level
+   promise tracking. Line: *"They record meetings. We keep score of promises."*
+3. **A follow-up email you don't have to fact-check.** Their drafts can contain anything
+   the model wrote; you proofread or you risk it. Ours structurally cannot contain an
+   unverified line (choke point, whole-draft rejection).
+4. **Absence as a finding.** "No next step was agreed on this call" is a manager's
+   highest-value alert; a tool optimizing for impressive-looking notes will never lead
+   with it. We already do.
+5. **Coaching on YOUR methodology.** Fathom ships fixed frameworks; our packs compile a
+   team's own written method into scored, evidence-cited verdicts (14 packs + compiler).
+6. **Your calls stay your files.** Both competitors hold your customer recordings in
+   their cloud. Ours: files on disk, MIT, one self-contained HTML per share.
+
+**Where they beat us today (say it plainly, fix or roadmap it):** live meeting capture
+(bots), video, ask-anything chat over the call, integration breadth, and — until the
+launch-week extractor upgrade lands — prose finesse. The order of work stands: match
+their register first (this standard), then lead with the six beats. A crisp summary
+that can prove itself beats a crisp summary, full stop.
+
+**Q&A ammunition (demo script):** "How is this different from Fireflies or Fathom?" →
+"Two ways you can check live: our summary shows you its own misses — theirs can't be
+wrong on their own page — and our workspace tracks whether the promise made on call two
+actually happened on call four. Also, it's open source and your recordings never leave
+your machine."
+
 ## Implementation routing
 
 - **Deployment (Saritha):** LLM prompt rules + render grouping. Appended to issue #14's
