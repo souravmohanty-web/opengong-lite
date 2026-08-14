@@ -40,6 +40,18 @@ On a live run, PyAI's Recap summarized our pricing call as a deal at "$15 per se
 
 Try to break it yourself: the attack suite ships in the repo. Every fabrication path we ever found is a permanent test.
 
+## Why it holds up
+
+The harness is the product. These are the choices that make it hard to fool.
+
+- **Numbers can't be laundered.** "Forty" never verifies as "40". Punctuation between digits never fuses, so a fabricated "4015" can't ride on a spoken "40.15". We learned both the hard way, in adversarial audits, and kept the attacks as tests.
+- **A citation must earn its place.** Empty quotes, one-word quotes, and best-guess matches all fail. When the same line appears twice and the citation is ambiguous, the note demotes instead of guessing.
+- **Injection defense has layers.** The transcript is fenced as data. Tainted lines are screened, any note citing one is blocked, and the email choke catches whatever slips: it accepts checked notes only, so there is no path from a hostile line to your outbox.
+- **Nothing fails silently.** Every failure has a named exit: the budget refuses before it spends, a rate cap ends the run with a reason, an unreadable file says so. Meeting bots that quietly drop your recording are how trust dies.
+- **Every run leaves a paper trail.** Append-only run records carry the model, prompt version, transcript hash, and logged cost. When a note is wrong, you can trace exactly which run wrote it and why.
+- **Degraded modes say so.** No LLM key means keyword-level notes, labeled as such. Mono audio means unlabeled speakers, stated on the page. The output never dresses up as more than it is.
+- **The core verifies offline.** The checking layer is deterministic code with zero dependencies. It runs in tests, in CI, and on stage with the wifi off.
+
 ## What you get
 
 - **Transcript** with real speaker labels on stereo audio. Labels are read, never guessed.
