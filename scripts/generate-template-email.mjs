@@ -9,19 +9,23 @@
 //
 //   node scripts/generate-template-email.mjs              # every call
 //   node scripts/generate-template-email.mjs --call 02    # one call
-//   LLM_API_KEY=... node scripts/generate-template-email.mjs   # live model
+//   LLM_API_KEY=... node scripts/generate-template-email.mjs   # a configured endpoint
 //
-// With LLM_API_KEY set, the draft comes from an OpenAI-compatible endpoint
-// (LLM_BASE_URL, default Groq; LLM_MODEL, default a free llama) at temperature 0.
-// With no key, the completion is read from samples/emails/authored/NN.draft.json:
-// a draft written offline in the shape the model must return. It still goes
-// through the SAME parser and the SAME screenDraft() choke as a live answer, and
-// it is labelled model "offline-author" in provenance. It is never labelled as a
-// model run that did not happen.
+// The tier is picked once, for the whole run, in this order:
+//   1. LLM_API_KEY set -> that OpenAI-compatible endpoint (LLM_BASE_URL, default
+//      Groq; LLM_MODEL) at temperature 0.
+//   2. No key, but Ollama is running on 127.0.0.1:11434 -> drafts locally,
+//      no key needed. Picks an installed model itself (LLM_MODEL overrides).
+//   3. Neither -> the completion is read from
+//      samples/emails/authored/NN.draft.json, a draft written offline in the
+//      shape the model must return. It still goes through the SAME parser and
+//      the SAME screenDraft() choke as a live answer, and it is labelled model
+//      "offline-author" in provenance. It is never labelled as a model run
+//      that did not happen.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { generateTemplateEmail, completeWithOpenAI, DEFAULT_MODEL } from '../src/template-email.js';
+import { generateTemplateEmail, completeWithOpenAI, resolveLLMTier } from '../src/template-email.js';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const TEMPLATES_DIR = join(ROOT, 'templates');
@@ -34,7 +38,7 @@ const AUTHORED_DIR = join(OUT_DIR, 'authored');
 const DEAL_NAME = 'Brightsmile Dental Group';
 const OWNERS = { rep: 'Maya', buyer: 'Rahul', joint: 'Both', unknown: '' };
 
-export const OFFLINE_NOTE = 'authored offline, screened by the real choke; regenerate live with LLM_API_KEY';
+export const OFFLINE_NOTE = 'authored offline, screened by the real choke; regenerate live with LLM_API_KEY, or start Ollama locally and rerun with no key';
 
 export function loadTemplates(dir = TEMPLATES_DIR) {
   return readdirSync(dir)
@@ -63,8 +67,18 @@ export function offlineAuthor(callId, dir = AUTHORED_DIR) {
   };
 }
 
-export function artifactFor(bundle, result, { live }) {
+// tier.source is one of 'configured' | 'ollama-local' | 'offline'. The offline
+// branch stamps model/base_url/note itself, same as it always has; the two
+// live branches keep whatever generateTemplateEmail already put in
+// result.provenance (it already carries the "via local Ollama" suffix and the
+// source field for the ollama-local case) and only add the run-level note.
+export function artifactFor(bundle, result, { tier }) {
   const t = result.template;
+  const note = tier.source === 'offline'
+    ? OFFLINE_NOTE
+    : tier.source === 'ollama-local'
+      ? 'live local model run, no key needed, screened by the same choke as the baseline draft'
+      : 'live model run, screened by the same choke as the baseline draft';
   return {
     call_id: bundle.call?.id ?? null,
     template: {
@@ -92,9 +106,9 @@ export function artifactFor(bundle, result, { live }) {
       bullets: result.draft.bullets.length,
       claim_ids: result.draft.bullets.map((b) => b.claim_id),
     },
-    provenance: live
-      ? { ...result.provenance, note: 'live model run, screened by the same choke as the baseline draft' }
-      : { ...result.provenance, model: 'offline-author', base_url: null, note: OFFLINE_NOTE },
+    provenance: tier.source === 'offline'
+      ? { ...result.provenance, model: 'offline-author', base_url: null, source: 'offline-author', note }
+      : { ...result.provenance, note },
     routing: { considered: result.considered },
     generated_at: new Date().toISOString(),
   };
@@ -103,8 +117,16 @@ export function artifactFor(bundle, result, { live }) {
 export async function generateAll({ only = null, outDir = OUT_DIR, quiet = false } = {}) {
   const templates = loadTemplates();
   const bundles = loadBundles();
-  const live = Boolean(process.env.LLM_API_KEY);
+  // One tier decision for the whole run: a key wins outright (Ollama is never
+  // probed), otherwise one short local probe, otherwise the offline cache.
+  const tier = await resolveLLMTier({ env: process.env });
   mkdirSync(outDir, { recursive: true });
+
+  if (!quiet) {
+    if (tier.source === 'configured') console.log(`LLM tier: configured endpoint (${tier.baseURL}, model ${tier.model})`);
+    else if (tier.source === 'ollama-local') console.log(`LLM tier: local Ollama detected, no key needed (model ${tier.model})`);
+    else console.log('LLM tier: no key, no local Ollama running. Using the offline cache.');
+  }
 
   const written = [];
   const skipped = [];
@@ -113,14 +135,20 @@ export async function generateAll({ only = null, outDir = OUT_DIR, quiet = false
     const callId = bundle.call?.id ?? String(i + 1);
     if (only && callId !== only) continue;
 
+    const complete = tier.source === 'offline'
+      ? offlineAuthor(callId)
+      : (prompt, opts) => completeWithOpenAI(prompt, {
+        ...opts, apiKey: tier.apiKey, baseURL: tier.baseURL, model: tier.model, source: tier.source,
+      });
+
     const result = await generateTemplateEmail(bundle, templates, {
       deal: { priorBundles: bundles.slice(0, i) },
       dealName: DEAL_NAME,
       recipient: OWNERS.buyer,
       sender: OWNERS.rep,
       owners: OWNERS,
-      complete: live ? completeWithOpenAI : offlineAuthor(callId),
-      model: process.env.LLM_MODEL ?? DEFAULT_MODEL,
+      complete,
+      model: tier.model,
     });
 
     if (!result.ok) {
@@ -128,7 +156,7 @@ export async function generateAll({ only = null, outDir = OUT_DIR, quiet = false
       if (!quiet) console.log(`call ${callId}: no routed email (${result.reason})`);
       continue;
     }
-    const artifact = artifactFor(bundle, result, { live });
+    const artifact = artifactFor(bundle, result, { tier });
     const path = join(outDir, `${callId}.template-email.json`);
     writeFileSync(path, `${JSON.stringify(artifact, null, 2)}\n`);
     written.push({ callId, templateId: result.template_id, cut: result.cut, path });
@@ -137,11 +165,11 @@ export async function generateAll({ only = null, outDir = OUT_DIR, quiet = false
     }
   }
   if (!quiet) {
-    console.log(live
-      ? 'source: live model. Provenance says so.'
-      : 'source: offline-author, screened by the real choke. Set LLM_API_KEY to regenerate live.');
+    console.log(tier.source === 'offline'
+      ? 'source: offline-author, screened by the real choke. Set LLM_API_KEY to regenerate live, or start Ollama locally and rerun with no key.'
+      : `source: ${tier.source === 'ollama-local' ? 'local Ollama, no key needed' : 'live model'}. Provenance says so.`);
   }
-  return { written, skipped, live };
+  return { written, skipped, live: tier.source !== 'offline', tier: tier.source };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

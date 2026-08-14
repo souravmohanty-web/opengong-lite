@@ -21,6 +21,7 @@
 // back to the deterministic baseline email. Null is a valid answer.
 
 import { screenDraft, stepMeta, EmailError } from './email.js';
+import { detectOllama } from './llm-detect.js';
 
 export const DEFAULT_BASE_URL = 'https://api.groq.com/openai/v1';
 // Free Groq llama. Override with LLM_MODEL for any other OpenAI-compatible
@@ -416,7 +417,38 @@ export async function completeWithOpenAI(prompt, opts = {}) {
   if (typeof text !== 'string' || !text.trim()) {
     throw new TemplateError('LLM_EMPTY_RESPONSE', 'the model returned no message content');
   }
-  return { text, model: json?.model ?? model, base_url: baseURL };
+  // source is a caller-supplied label ("ollama-local"), never inferred here:
+  // this function talks to any OpenAI-compatible endpoint and has no way to
+  // know which tier picked it. A plain configured call leaves it at the default.
+  return { text, model: json?.model ?? model, base_url: baseURL, source: opts.source ?? 'configured' };
+}
+
+// ── the tier ladder ──────────────────────────────────────────────────────────
+
+// Which endpoint drafts the email, decided once per run and reused across
+// every call in it (never re-probed per call, so a machine with no Ollama
+// never pays the timeout more than once): (1) a configured key always wins,
+// and Ollama is never even asked; (2) with no key, one short local probe — a
+// real answer there is used keyless; (3) with neither, the caller falls back
+// to its own cached/offline path, which lives outside this file because it
+// has no live endpoint to describe.
+export async function resolveLLMTier(opts = {}) {
+  const env = opts.env ?? (typeof process !== 'undefined' ? process.env : {}) ?? {};
+  const apiKey = opts.apiKey ?? env.LLM_API_KEY ?? null;
+  if (apiKey) {
+    return {
+      source: 'configured',
+      apiKey,
+      baseURL: String(opts.baseURL ?? env.LLM_BASE_URL ?? DEFAULT_BASE_URL).replace(/\/+$/, ''),
+      model: opts.model ?? env.LLM_MODEL ?? DEFAULT_MODEL,
+    };
+  }
+  const detect = opts.detectOllama ?? detectOllama;
+  const found = await detect({ env, fetchImpl: opts.fetchImpl, timeoutMs: opts.ollamaTimeoutMs });
+  if (found) {
+    return { source: 'ollama-local', apiKey: 'ollama', baseURL: found.baseURL, model: found.model };
+  }
+  return { source: 'offline' };
 }
 
 // ── parsing the model's answer ───────────────────────────────────────────────
@@ -551,6 +583,13 @@ export async function generateTemplateEmail(bundle, templates, opts = {}) {
   }
 
   const body = renderDraftBody(screened);
+  // The source rides along on the completion (set by resolveLLMTier's caller,
+  // or the caller's own stand-in complete()), never guessed here. Only the
+  // local-Ollama tier gets a suffix: the model name alone ("llama3.2") reads
+  // as a hosted model unless the panel says where it actually ran.
+  const rawModel = completion.model ?? opts.model ?? DEFAULT_MODEL;
+  const source = completion.source ?? 'configured';
+  const modelLabel = source === 'ollama-local' ? `${rawModel} via local Ollama` : rawModel;
   return {
     ok: true,
     template_id: template.id,
@@ -562,7 +601,8 @@ export async function generateTemplateEmail(bundle, templates, opts = {}) {
     provenance: {
       template_id: template.id,
       template_version: template.version,
-      model: completion.model ?? opts.model ?? DEFAULT_MODEL,
+      model: modelLabel,
+      source,
       base_url: completion.base_url ?? null,
       temperature: 0,
       cut: screened.cut,

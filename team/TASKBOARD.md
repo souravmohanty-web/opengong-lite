@@ -47,6 +47,7 @@ state **current truth only**.
 | Stereo TTS generation from scripts | blocked: `voice:synthesize` scope | queued (projects-2f offered) |
 | Golden-call hand-labeling (2 calls) | Sourav + drafting agent | blocked: scripts + Sourav time |
 | Output-quality match vs the documented standard: render-layer fixes to the email panel + `composeEmail` baseline shape + summary section order | **projects-2f** | **done** — `research/13-sybill-deep/04-output-standard-match.md` (26-item verdict table + before/after); greeting/outcome-lead/grouped recap/owner+due next steps/close, choke point untouched; `npm test` 437/436 pass, 1 skip. Template system + DSL remain Aakash's (issue #2), untouched |
+| Native Ollama auto-detection as a 3rd LLM tier for the template-routed email (per Sourav): configured key > local Ollama (keyless) > cached/offline, in that order | **projects-2f** | **done** — `src/llm-detect.js` (new, `detectOllama()`, native fetch, ~500ms timeout, never throws), `resolveLLMTier()` in `src/template-email.js`, `scripts/generate-template-email.mjs` rewired off the old key-boolean onto the 3-way tier; provenance carries `source` + a `"<model> via local Ollama"` label so the panel and the cache note both say where the draft actually ran; README + regenerate-hint copy updated; `npm test` 512/511 pass, 1 skip (was 491/490/1, +21 new, all offline/injected — no real Ollama needed or touched) |
 
 ## Build slices — roadmap
 

@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import {
   routeTemplate, routeWithTrace, renderContext, buildPrompt, parseDraft,
   generateTemplateEmail, validateTemplate, backedClaims, openRepPromises,
-  completeWithOpenAI, TemplateError, DEFAULT_BASE_URL, DEFAULT_MODEL,
+  completeWithOpenAI, resolveLLMTier, TemplateError, DEFAULT_BASE_URL, DEFAULT_MODEL,
 } from '../src/template-email.js';
 import { renderCallPage, buildNotesModel, normalizeRoutedEmail } from '../src/notes-view.mjs';
 
@@ -551,4 +551,89 @@ test('the model carries the routed draft only when one was passed in', () => {
   assert.equal(m.routedEmail.template.id, 'post-demo-followup');
   assert.equal(m.routedEmail.cut, 0);
   assert.ok(m.email.bullets.length > 0, 'the baseline draft is untouched by any of this');
+});
+
+// ── the tier ladder: configured key > local Ollama > offline/cached ─────────
+// All offline. Ollama detection is injected here (a fake detectOllama, or a
+// fake fetchImpl one layer down) so none of this needs Ollama installed,
+// running, or even present on the machine running the suite.
+
+test('TIER-01 a configured key wins outright, and Ollama is never even probed', async () => {
+  const explode = async () => { throw new Error('detectOllama must never be called when a key is configured'); };
+  const tier = await resolveLLMTier({ env: { LLM_API_KEY: 'k-123' }, detectOllama: explode });
+  assert.equal(tier.source, 'configured');
+  assert.equal(tier.apiKey, 'k-123');
+  assert.equal(tier.baseURL, DEFAULT_BASE_URL);
+  assert.equal(tier.model, DEFAULT_MODEL);
+});
+
+test('TIER-01b an explicit opts.apiKey wins the same way as an env key, and still skips the probe', async () => {
+  const explode = async () => { throw new Error('must not probe'); };
+  const tier = await resolveLLMTier({ env: {}, apiKey: 'k-explicit', detectOllama: explode });
+  assert.equal(tier.source, 'configured');
+});
+
+test('TIER-02 no key, Ollama detected: keyless local tier, carrying the model the probe picked', async () => {
+  const detectOllama = async (opts) => {
+    assert.deepEqual(opts.env, {}, 'the probe receives the same env the tier resolver was given');
+    return { baseURL: 'http://127.0.0.1:11434/v1', model: 'llama3.2:3b', source: 'ollama-local' };
+  };
+  const tier = await resolveLLMTier({ env: {}, detectOllama });
+  assert.equal(tier.source, 'ollama-local');
+  assert.equal(tier.apiKey, 'ollama');
+  assert.equal(tier.baseURL, 'http://127.0.0.1:11434/v1');
+  assert.equal(tier.model, 'llama3.2:3b');
+});
+
+test('TIER-03 no key, no Ollama: the offline/cached tier, exactly as today', async () => {
+  const tier = await resolveLLMTier({ env: {}, detectOllama: async () => null });
+  assert.deepEqual(tier, { source: 'offline' });
+});
+
+test('TIER-03b a probe that times out or is refused degrades the same as no key at all', async () => {
+  // Standing in for detectOllama's own internal degrade-to-null (test/llm-detect.test.js
+  // covers that layer directly): whatever reaches resolveLLMTier as null must not throw
+  // and must land on the offline tier, never wedge on a live-looking but broken tier.
+  const refused = async () => null;
+  const timedOut = async () => null;
+  for (const detectOllama of [refused, timedOut]) {
+    const tier = await resolveLLMTier({ env: {}, detectOllama });
+    assert.equal(tier.source, 'offline');
+  }
+});
+
+test('TIER-04 provenance carries the source, and only the local tier gets the "via local Ollama" suffix', async () => {
+  const configured = await generateTemplateEmail(bundle('02'), templates(), {
+    ...dealCtx('02'),
+    complete: async () => ({ text: JSON.stringify(goodPayload), model: 'llama-3.3-70b-versatile', source: 'configured' }),
+  });
+  assert.equal(configured.ok, true);
+  assert.equal(configured.provenance.source, 'configured');
+  assert.equal(configured.provenance.model, 'llama-3.3-70b-versatile');
+
+  const ollama = await generateTemplateEmail(bundle('02'), templates(), {
+    ...dealCtx('02'),
+    complete: async () => ({ text: JSON.stringify(goodPayload), model: 'llama3.2:3b', source: 'ollama-local' }),
+  });
+  assert.equal(ollama.ok, true);
+  assert.equal(ollama.provenance.source, 'ollama-local');
+  assert.equal(ollama.provenance.model, 'llama3.2:3b via local Ollama');
+});
+
+test('TIER-05 a completion with no source label defaults to configured, so pre-existing callers are unaffected', async () => {
+  const res = await generateTemplateEmail(bundle('02'), templates(), {
+    ...dealCtx('02'),
+    complete: async () => ({ text: JSON.stringify(goodPayload), model: 'llama-3.3-70b-versatile' }),
+  });
+  assert.equal(res.ok, true);
+  assert.equal(res.provenance.source, 'configured');
+  assert.equal(res.provenance.model, 'llama-3.3-70b-versatile', 'no suffix without the ollama-local source');
+});
+
+test('TIER-06 completeWithOpenAI tags its own return with whatever source it was told, defaulting to configured', async () => {
+  const fetchImpl = async () => ({ ok: true, json: async () => ({ model: 'llama3.2', choices: [{ message: { content: '{}' } }] }) });
+  const plain = await completeWithOpenAI({ messages: [] }, { apiKey: 'k', fetchImpl, env: {} });
+  assert.equal(plain.source, 'configured');
+  const local = await completeWithOpenAI({ messages: [] }, { apiKey: 'ollama', fetchImpl, env: {}, source: 'ollama-local' });
+  assert.equal(local.source, 'ollama-local');
 });

@@ -59,7 +59,7 @@ The harness is the product. These are the choices that make it hard to fool.
 - **Recap and deal notes** across eleven extractor families (pain, pricing, objections, competitors, stakeholders, next steps, more). Absence is a finding: "no next step was agreed" beats an invented one.
 - **The commitment ledger.** Call 2: rep promises a TCPA one-pager. Call 4: the buyer points out it never arrived. The ledger caught it, with both citations.
 - **Coaching scorecards** on the methodology your team already uses. Fourteen packs ship (MEDDIC, MEDDPICC, BANT, SPIN, Sandler, SPICED, more), or compile your own from a text file. Every verdict cites its evidence or says "not discussed." CLI today (`npm run coach`); viewer tab is on the way.
-- **Follow-up email** drafted from backed notes only.
+- **Follow-up email** drafted from backed notes only, keyless when a local Ollama install is running.
 
 ## Numbers
 
@@ -84,6 +84,7 @@ The harness is the product. These are the choices that make it hard to fool.
 - Methodology packs are JSON files. Your sales process stops being a vendor feature request.
 - Outputs are typed and versioned. Everything exports as Markdown and JSON. Your data leaves whenever you want.
 - The email choke point: `src/email.js` accepts claims, never transcripts. Nothing unchecked can reach outbound mail.
+- The follow-up draft comes from an OpenAI-compatible call: a free hosted model by default, or your own endpoint via `LLM_API_KEY`. With no key set, a local Ollama install on `127.0.0.1:11434` is auto-detected and used instead, still zero keys. Small local models write rougher prose and invent more than a hosted one; the same screen checks both, so an invented line from either source gets cut before it reaches your outbox.
 - `DATA-FLOW.md` lists every network call this thing makes, with file and line.
 
 ## Roadmap
