@@ -22,7 +22,6 @@ import { tier1Html } from '../src/export.js';
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const BUNDLES_DIR = join(ROOT, 'samples/bundles');
 const PUBLIC_DIR = join(ROOT, 'public');
-const CALLS_DIR = join(PUBLIC_DIR, 'calls');
 
 export function loadBundles(dir = BUNDLES_DIR) {
   const files = readdirSync(dir)
@@ -44,22 +43,23 @@ export function build(dir = BUNDLES_DIR) {
 // The whole deal-workspace build as a callable function (same reason as
 // build-notes.mjs's buildNotes): `npm start` refreshes a stale workspace
 // in-process rather than shelling out to a second node.
-export function buildDealWorkspace({ quiet = false } = {}) {
+export function buildDealWorkspace({ quiet = false, publicDir = PUBLIC_DIR } = {}) {
   const { bundles, index, commitments } = build();
+  const callsDir = join(publicDir, 'calls');
 
-  mkdirSync(CALLS_DIR, { recursive: true });
+  mkdirSync(callsDir, { recursive: true });
 
   writeFileSync(
-    join(PUBLIC_DIR, 'deal-index.json'),
+    join(publicDir, 'deal-index.json'),
     JSON.stringify({ calls: index.calls, records: index.records, commitments }, null, 2),
   );
 
-  copyFileSync(join(ROOT, 'src/deal-index.mjs'), join(PUBLIC_DIR, 'deal-index.mjs'));
+  copyFileSync(join(ROOT, 'src/deal-index.mjs'), join(publicDir, 'deal-index.mjs'));
 
   for (const bundle of bundles) {
     const id = bundle.call?.id;
     if (!id) throw new Error('bundle missing call.id — cannot name its export');
-    writeFileSync(join(CALLS_DIR, `${id}.html`), tier1Html(bundle));
+    writeFileSync(join(callsDir, `${id}.html`), tier1Html(bundle));
   }
 
   if (!quiet) {

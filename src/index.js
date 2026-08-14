@@ -21,10 +21,13 @@ const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const r = (...p) => join(ROOT, ...p);
 
 // Everything the built pages are rendered FROM. If any of it is newer than the
-// oldest built artifact, the workspace on disk is stale.
-const SOURCES = [
+// oldest built artifact, the workspace on disk is stale. workspace/ is the
+// register `npm run pipeline` writes, so a call added since the last build
+// makes the workspace stale and `npm start` rebuilds it before serving.
+export const SOURCES = [
   r('samples/bundles'),
   r('samples/audio'),
+  r('workspace'),
   r('src/notes-view.mjs'),
   r('src/viewer.js'),
   r('src/email.js'),

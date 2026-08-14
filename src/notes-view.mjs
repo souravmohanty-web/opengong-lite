@@ -23,6 +23,7 @@
 import { buildViewModel, escapeHtml, formatTime } from './viewer.js';
 import { composeEmail } from './email.js';
 import { buildCommitmentLedger } from './deal-index.mjs';
+import { EXTRACTION_MODES } from './fallback.js';
 
 // Notes body (human prose, each claim a card), in reading order. The order is
 // the one a manager scans in ten seconds and the one team/plans/representation.md
@@ -60,6 +61,17 @@ const CORRECTED_TAG = 'citation corrected';
 function humanReason(reason) {
   if (reason === 'not_found_in_transcript') return NOT_FOUND;
   return 'The call does not back this up.';
+}
+
+// A run with no LLM key gets the keyword tracker and nothing else (see
+// src/fallback.js). That run covers less of the call, so every surface it
+// reaches says so in the same words. Read off the bundle's own provenance
+// stamp, never guessed from what the claims happen to look like.
+export const TRACKER_ONLY_NOTE = 'Keyword tracker only. No AI model ran on this call, so these notes cover less of it.';
+
+export function coverageNoteFor(provenance) {
+  if (provenance?.extraction_mode === EXTRACTION_MODES.DETERMINISTIC_TRACKERS_ONLY) return TRACKER_ONLY_NOTE;
+  return null;
 }
 
 // Source-list quotes are trimmed for width, never edited. The full quote still
@@ -367,7 +379,12 @@ function provenanceFootHtml(m) {
   if (!p) return '';
   const parts = [];
   if (p.transcription_model) parts.push(`Transcribed by ${p.transcription_model} on a real API run.`);
-  if (p.extraction_model === 'offline-author') {
+  // The mode outranks the model name. A keyless run still stamps the model it
+  // would have used, and printing that name here would claim a model run that
+  // never happened. The page says what did run, up in the header.
+  if (coverageNoteFor(p)) {
+    // nothing to add: the header already carries the disclosure
+  } else if (p.extraction_model === 'offline-author') {
     parts.push('The notes on this sample were written offline, then checked line by line against the call. No live model run.');
   } else if (p.extraction_model) {
     parts.push(`Notes written by ${p.extraction_model}.`);
@@ -485,6 +502,16 @@ export function renderNotesPage(model, ctx = {}) {
     ? `${escapeHtml(m.dealName ?? '')}${m.dealName ? '. ' : ''}Call ${m.seq} of ${m.total}.`
     : escapeHtml(m.dealName ?? '');
 
+  // The promise in the header has to match the page under it. Notes carry
+  // numbered citations; a run that produced only tracker chips carries the
+  // moment each line came from, and says so instead.
+  const magicLine = m.primary.length
+    ? 'Every note carries a numbered citation. Click a number to read the line it came from and hear it said.'
+    : 'Every line below carries the moment it came from. Click one to read it and hear it said.';
+  // What the run could not cover, said once, where a reader lands.
+  const coverageNote = coverageNoteFor(m.provenance);
+  const coverageHtml = coverageNote ? `<p class="limited">${escapeHtml(coverageNote)}</p>` : '';
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -501,8 +528,8 @@ ${navHtml(ctx)}
     <h1>${escapeHtml(m.title)}</h1>
     <p class="sub">${seqLine}</p>
     <p class="tagline">Gong records what happened. We do what was promised.</p>
-    <p class="magic">Every note carries a numbered citation. Click a number to read the line it came from and hear it said.</p>
-    <p class="tally">${tallyLine(m)}</p>
+    <p class="magic">${escapeHtml(magicLine)}</p>
+    <p class="tally">${tallyLine(m)}</p>${coverageHtml}
   </header>
   ${chipsHtml}
   <div class="notes">
@@ -543,6 +570,7 @@ export function landingCard(bundle, seq) {
     title: m.title,
     summary,
     stage: stageChip?.chips?.[0]?.text ?? null,
+    note: coverageNoteFor(bundle.provenance), // null on a full run, so a card that has nothing to disclose says nothing
     backed: m.tallies.backed,
     attempted: m.tallies.attempted,
     notFound: m.tallies.notFound,
@@ -607,6 +635,33 @@ export function buildDealModel(bundles, opts = {}) {
       ? { text: committed.summary, seq: committed.seq, label: committed.label, notesHref: committed.notesHref }
       : null,
     ledger,
+    // Deals other than the one this page is headed by: your own calls, added
+    // by the pipeline. Empty by default, so a workspace with no calls of your
+    // own renders exactly the page it renders today.
+    groups: opts.groups ?? [],
+  };
+}
+
+// A second deal on the landing. Same call cards as the deal above it, its own
+// name, its own tally, its own pages. Built from bundles the same way, so a
+// call registered by the pipeline is not a different kind of thing on screen.
+export function buildCallGroup(bundles, opts = {}) {
+  const prefix = opts.hrefPrefix ?? 'notes/';
+  const calls = bundles.map((b, i) => {
+    const c = landingCard(b, i + 1);
+    return { ...c, notesHref: `${prefix}${c.id}.html` };
+  });
+  const totals = calls.reduce((a, c) => ({
+    backed: a.backed + c.backed,
+    attempted: a.attempted + c.attempted,
+    notFound: a.notFound + c.notFound,
+    blocked: a.blocked + c.blocked,
+  }), { backed: 0, attempted: 0, notFound: 0, blocked: 0 });
+  return {
+    name: opts.name ?? 'Your calls',
+    slug: opts.slug ?? 'your-calls',
+    calls,
+    totals,
   };
 }
 
@@ -623,11 +678,14 @@ function callRowsHtml(calls, owners = {}) {
       ? `${c.backed} of ${c.attempted} backed. <strong>${c.notFound} held back.</strong>`
       : `${c.backed} of ${c.attempted} backed.`;
     const blocked = c.blocked > 0 ? ` <strong>${c.blocked} blocked.</strong>` : '';
+    // The card says what the call is about, and what the run could not cover.
+    // A full run has nothing to disclose, so the line is the summary alone.
+    const summary = [c.summary, c.note].filter(Boolean).join(' ');
     return `<a class="call-row" href="${escapeHtml(c.notesHref)}">
       <span class="call-seq">${escapeHtml(String(c.seq).padStart(2, '0'))}</span>
       <span class="call-body">
         <span class="call-label">${escapeHtml(c.label)}</span>
-        <span class="call-summary">${escapeHtml(c.summary)}</span>
+        <span class="call-summary">${escapeHtml(summary)}</span>
         <span class="call-tally">${tally}${blocked}</span>
       </span>
       <span class="call-go" aria-hidden="true">Open the notes</span>
@@ -649,6 +707,23 @@ function ledgerHtml(entries, owners = {}) {
     </li>`;
   }).join('');
   return `<ol class="ledger">${rows}</ol>`;
+}
+
+// The deals below the sample one. Nothing renders when there are none, so the
+// landing byte-for-byte matches the demo it is today until you add a call.
+function groupsHtml(groups, owners = {}) {
+  return groups.map((g) => {
+    const n = g.calls.length;
+    const sub = `${n} ${n === 1 ? 'call' : 'calls'} you ran through the pipeline. ${dealTallyLine(g.totals)}`;
+    return `
+  <section class="deal-sec deal-group" data-deal="${escapeHtml(g.slug)}" aria-label="${escapeHtml(g.name)}">
+    <h2 class="deal-h2">${escapeHtml(g.name)}</h2>
+    <p class="deal-sub">${escapeHtml(sub)}</p>
+    <div class="calls">
+      ${callRowsHtml(g.calls, owners)}
+    </div>
+  </section>`;
+  }).join('');
 }
 
 export function renderDealPage(model, ctx = {}) {
@@ -707,7 +782,7 @@ export function renderDealPage(model, ctx = {}) {
     </div>
     <div id="results" class="results"></div>
   </section>
-
+${groupsHtml(m.groups ?? [], owners)}
   <footer class="deal-foot">
     <p>Gong records what happened. We do what was promised.</p>
     <p>Anything we couldn't find in a call is shown held back on that call's page. The follow-up email only carries backed notes.</p>
@@ -795,6 +870,7 @@ body{
 .tagline::before{content:"";display:block;width:34px;height:3px;border-radius:2px;background:var(--accent);margin-bottom:12px}
 .magic{margin:16px 0 0;font-size:17px;color:var(--ink);padding:12px 15px;background:var(--accent-soft);border-radius:11px;line-height:1.5}
 .tally{margin:14px 0 0;font-size:16px;color:var(--ink-soft)}
+.limited{margin:10px 0 0;font-size:15.5px;line-height:1.5;color:var(--held);background:var(--held-bg);border:1px solid var(--held-line);border-radius:10px;padding:10px 13px}
 .tally strong{color:var(--held);font-weight:650}
 
 /* context chips */
@@ -1038,6 +1114,10 @@ const DEAL_STYLES = `
 }
 .call-go::after{content:"";width:0;height:0;border-style:solid;border-width:4px 0 4px 6px;border-color:transparent transparent transparent currentColor}
 .call-row:hover .call-go{gap:9px}
+
+/* your own calls, under the sample deal */
+.deal-group{border-top:1px solid var(--line-soft);padding-top:26px}
+.deal-group .deal-h2{color:var(--ink)}
 
 .deal-foot{margin-top:6px;padding-top:20px;border-top:1px solid var(--line-soft);color:var(--ink-soft);font-size:15px;line-height:1.6}
 .deal-foot p{margin:0 0 8px}

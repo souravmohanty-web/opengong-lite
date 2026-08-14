@@ -236,7 +236,7 @@ export function formatFinalLine(record, elapsedS = '0.0') {
 // closeRun. Every path out of this function calls closeRun exactly once.
 
 export async function runPipeline({
-  transcript, extractorDefs, glossaryEntries = [], callId = 'call',
+  transcript, extractorDefs, glossaryEntries = [], callId = 'call', title = null,
   budgetUsd = 1.0, model = 'claude-sonnet-5', callLlm, concurrency = 3,
   runsRoot = DEFAULT_RUNS_ROOT, now = () => new Date(),
   // Keyless-fallback honesty seam (src/fallback.js decides the mode; this
@@ -310,7 +310,9 @@ export async function runPipeline({
 
   if (coverage.band !== 'GATE_BLOCKED_UNPROVEN_CLAIMS') {
     const bundle = buildBundle({
-      transcript, claims: gated, coverage, callId,
+      // `title` is what the caller was handed (a file name, a URL's host and
+      // path). Absent, buildBundle falls back to the call id, as before.
+      transcript, claims: gated, coverage, callId, title: title ?? undefined,
       provenance: {
         extraction_model: model,
         extraction_mode: extractionMode,

@@ -2,6 +2,7 @@
 // ONE end-to-end command: audio in, receipts bundle + follow-up email out.
 //
 //   node scripts/pipeline.mjs <audio-file-or-url> [--call-id ID] [--budget USD]
+//                             [--deal NAME] [--no-workspace]
 //   npm run pipeline -- <audio-file-or-url>
 //
 // The full chain, wired for real (this is the piece that was missing — every
@@ -23,6 +24,12 @@
 //     -> buildBundle (src/bundle.js, reused verbatim)
 //     -> composeEmail + screenDraft (src/email.js, reused verbatim) from the
 //        bundle's gated claims — never from the transcript (choke point).
+//     -> registerCall (src/calls-manifest.mjs) + a workspace rebuild, so the
+//        run ENDS somewhere a human looks: the call gets a card on the deal
+//        landing and its own notes page with citation chips. New calls land in
+//        their own deal ("Your calls" unless --deal says otherwise); the
+//        Brightsmile sample deal is read-only and registerCall refuses it.
+//        `--no-workspace` runs the chain and writes runs/<id>/ only.
 //
 // A Recap tier (the colleague build's D4 chain has ingest -> extraction ->
 // recap -> ...) is deliberately NOT implemented: this sandbox has no recap
@@ -45,6 +52,11 @@ import { callMessages, LlmError } from '../src/llm.js';
 import { runPipeline, DEFAULT_RUNS_ROOT, formatFinalLine } from '../src/run.js';
 import { composeEmail, screenDraft } from '../src/email.js';
 import { writeAtomic, readJson } from '../src/store.js';
+import {
+  registerCall, sourceTitle, DEFAULT_DEAL_NAME, DEFAULT_MANIFEST_PATH,
+} from '../src/calls-manifest.mjs';
+import { buildNotes } from './build-notes.mjs';
+import { buildDealWorkspace } from './build-deal-index.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -70,7 +82,7 @@ function defaultCallId(source) {
 // can be proven with a fixture transcript, no ingest/network involved at all
 // (test/pipeline.test.js's fallback + gate proofs use this directly).
 export async function runFromTranscript({
-  transcript, callId = 'pipeline-run', budgetUsd = 1.0, runsRoot = DEFAULT_RUNS_ROOT,
+  transcript, callId = 'pipeline-run', title = null, budgetUsd = 1.0, runsRoot = DEFAULT_RUNS_ROOT,
   env = process.env, extractorsDir = DEFAULT_EXTRACTORS_DIR, schemasDir = DEFAULT_SCHEMAS_DIR,
   callLlmOverride, extractorDefsOverride,
 } = {}) {
@@ -82,7 +94,7 @@ export async function runFromTranscript({
     ?? (plan.mode === EXTRACTION_MODES.LLM ? (req) => callMessages({ ...req, apiKey: env.ANTHROPIC_API_KEY }) : undefined);
 
   const record = await runPipeline({
-    transcript, extractorDefs: plan.extractorDefs, callId, budgetUsd, callLlm, runsRoot,
+    transcript, extractorDefs: plan.extractorDefs, callId, title, budgetUsd, callLlm, runsRoot,
     extractionMode: plan.mode, extractionNote: plan.note, extractorsSkipped: plan.extractorsSkipped,
   });
 
@@ -112,21 +124,39 @@ export async function ingestAndRun({
   const resolvedCallId = callId ?? defaultCallId(source);
   const { job_id, transcript } = await ingestFn(source);
   const result = await runFromTranscript({
-    transcript, callId: resolvedCallId, budgetUsd, runsRoot, env, extractorsDir, schemasDir,
-    callLlmOverride, extractorDefsOverride,
+    transcript, callId: resolvedCallId, title: sourceTitle(source), budgetUsd, runsRoot, env,
+    extractorsDir, schemasDir, callLlmOverride, extractorDefsOverride,
   });
   return { job_id, ...result };
 }
 
+// ── the last mile: the run lands in the workspace ───────────────────────────
+// Registration is one manifest row plus a copy of the bundle; the rebuild is
+// the same two builders `npm start` runs. Split out and injectable so the
+// tests can prove the loop against a temp workspace, never the repo's public/.
+export function publishToWorkspace({
+  bundlePath, deal = DEFAULT_DEAL_NAME, title = null, audioPath = null, runId = null, source = null,
+  manifestPath = DEFAULT_MANIFEST_PATH, publicDir, rebuild = true,
+} = {}) {
+  const { entry } = registerCall({ bundlePath, deal, title, audioPath, runId, source, manifestPath });
+  if (rebuild) {
+    buildNotes({ quiet: true, manifestPath, ...(publicDir ? { publicDir } : {}) });
+    buildDealWorkspace({ quiet: true, ...(publicDir ? { publicDir } : {}) });
+  }
+  return { entry, path: `/mine/${entry.id}.html` };
+}
+
 // ── CLI ──────────────────────────────────────────────────────────────────────
 
-function parseArgv(argv) {
-  const args = { source: null, callId: null, budget: 1.0 };
+export function parseArgv(argv) {
+  const args = { source: null, callId: null, budget: 1.0, deal: DEFAULT_DEAL_NAME, workspace: true };
   const positional = [];
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
     if (a === '--call-id') args.callId = argv[i += 1];
     else if (a === '--budget') args.budget = Number(argv[i += 1]);
+    else if (a === '--deal') args.deal = argv[i += 1];
+    else if (a === '--no-workspace') args.workspace = false;
     else positional.push(a);
   }
   args.source = positional[0];
@@ -136,7 +166,7 @@ function parseArgv(argv) {
 async function main() {
   const args = parseArgv(process.argv.slice(2));
   if (!args.source) {
-    console.error('usage: node scripts/pipeline.mjs <audio-file-or-url> [--call-id ID] [--budget USD]');
+    console.error('usage: node scripts/pipeline.mjs <audio-file-or-url> [--call-id ID] [--budget USD] [--deal NAME] [--no-workspace]');
     process.exit(2);
   }
   const source = resolveSource(args.source);
@@ -178,6 +208,32 @@ async function main() {
     if (outcome.email.cut) console.log(`(${outcome.email.cut} uncited bullet(s) cut by the choke point)`);
   } else {
     console.log('\nno bundle produced — nothing verified enough to email (see run.json exit_reason)');
+  }
+
+  // The last mile. Without this the run ends in runs/<id>/ and nobody ever
+  // sees it: the bundle goes into the register, the workspace rebuilds, and
+  // the run prints the one place to look.
+  if (outcome.bundle && args.workspace) {
+    let published;
+    try {
+      published = publishToWorkspace({
+        bundlePath: path.join(DEFAULT_RUNS_ROOT, outcome.record.run_id, 'bundle.json'),
+        deal: args.deal,
+        title: sourceTitle(source),
+        audioPath: source.filePath ?? null,
+        runId: outcome.record.run_id,
+        source: args.source,
+      });
+    } catch (err) {
+      console.error(`\n[workspace] the call ran but did not reach the workspace: ${err.message}`);
+      process.exit(outcome.record.exit_code ?? 0);
+    }
+    const url = `http://127.0.0.1:4318${published.path}`;
+    console.log(`\ndeal: ${published.entry.deal}${source.filePath ? '' : ' (no local audio, the transcript line still opens on click)'}`);
+    console.log(`npm run pipeline -- ${args.source} && npm start → your call is at ${url}`);
+    console.log(`the deal landing lists it under "${published.entry.deal}": http://127.0.0.1:4318/`);
+  } else if (outcome.bundle) {
+    console.log('\n(--no-workspace: the bundle stayed in the run directory and no page was built)');
   }
 
   process.exit(outcome.record.exit_code ?? 0);

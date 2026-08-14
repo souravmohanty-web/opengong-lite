@@ -7,3 +7,6 @@ node_modules/
 runs/
 samples/audio/*.wav
 team/score-run.json
+# your own calls: the pipeline's register + the pages it builds for them
+workspace/
+public/mine/
