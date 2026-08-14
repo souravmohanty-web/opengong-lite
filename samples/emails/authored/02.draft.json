@@ -1,0 +1,14 @@
+{
+  "subject": "Next steps after the demo",
+  "greeting": "Hi Rahul,",
+  "opener": "Thanks for the time on the demo. Here is what I took away, and what we said we would do next.",
+  "bullets": [
+    { "claim_id": "summary-0-0", "group": "outcome", "text": "The demo landed. After-hours routing, answering machine detection and consent-tracked texting all resonated with you." },
+    { "claim_id": "objections-0", "group": "recap", "text": "You said downtime is a dealbreaker, that you cannot be down during patient hours at all." },
+    { "claim_id": "next_steps-0", "group": "next_steps", "text": "I will send the SOC 2 report and the TCPA one-pager to your office manager, both by Friday." },
+    { "claim_id": "next_steps-1", "group": "next_steps", "text": "You will pull the RingHawk call-volume report and send it over, early next week, so I can size the deal." },
+    { "claim_id": "next_steps-2", "group": "next_steps", "text": "Once those documents are exchanged, we both move to pricing." }
+  ],
+  "close": "Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.",
+  "signoff": "Best,\nMaya"
+}

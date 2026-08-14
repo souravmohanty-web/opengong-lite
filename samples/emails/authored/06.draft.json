@@ -1,0 +1,11 @@
+{
+  "subject": "Thanks for the time today",
+  "greeting": "Hi Rahul,",
+  "opener": "Thanks for the time today. Here is what I took away.",
+  "bullets": [
+    { "claim_id": "summary-0-0", "group": "recap", "text": "You called to read out a suspicious email about CallForge. It is a phishing template using our name, so please do not click the link." },
+    { "claim_id": "summary-1-0", "group": "recap", "text": "Nothing moved on the deal itself. The agreement is still with Dr. Mehta." }
+  ],
+  "close": "We did not land on a specific next step. What would be useful to you right now?",
+  "signoff": "Best,\nMaya"
+}

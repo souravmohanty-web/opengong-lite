@@ -246,6 +246,12 @@ export function buildNotesModel(bundle, opts = {}) {
     bullets: draft.bullets,
   };
 
+  // The routed template draft, read from the cached artifact the caller passes
+  // in (samples/emails/NN.template-email.json). The page NEVER generates it:
+  // the demo needs no key and no network, and a missing or half-written
+  // artifact simply means no second panel, never a broken one.
+  const routedEmail = normalizeRoutedEmail(opts.routedEmail);
+
   const secondary = [];
   for (const [key, label] of SECONDARY) {
     const s = sectionByKey.get(key);
@@ -285,7 +291,49 @@ export function buildNotesModel(bundle, opts = {}) {
     heldBack,
     quarantine: vm.quarantine, // blocked_injection, shown only if present
     email,
+    routedEmail, // null unless a cached routed draft was passed in
     provenance: vm.provenance ?? null,
+  };
+}
+
+// A cached routed draft is data from disk, so it is checked before it renders.
+// Anything missing the parts that make it trustworthy (which template picked
+// it, which model wrote it, at least one line that carries a claim id) is
+// dropped whole. Half a panel is worse than none: the second panel's entire
+// claim is that the gate checked every line in it.
+export function normalizeRoutedEmail(artifact) {
+  if (!artifact || typeof artifact !== 'object') return null;
+  const { template, draft, provenance } = artifact;
+  if (!template?.id || !template?.short || !template?.explainer) return null;
+  if (!draft || !Array.isArray(draft.bullets) || draft.bullets.length === 0) return null;
+  if (!provenance?.model) return null;
+  const bullets = draft.bullets.filter((b) => b && typeof b.text === 'string' && typeof b.claim_id === 'string');
+  if (!bullets.length) return null;
+  const group = (name) => bullets.filter((b) => b.group === name);
+  const cut = Number.isFinite(provenance.cut) ? provenance.cut : 0;
+  return {
+    template: {
+      id: String(template.id),
+      title: String(template.title ?? template.id),
+      short: String(template.short),
+      explainer: String(template.explainer),
+    },
+    subject: String(draft.subject ?? ''),
+    greeting: String(draft.greeting ?? ''),
+    opener: String(draft.opener ?? ''),
+    outcome: group('outcome')[0] ?? null,
+    recap: group('recap'),
+    next_steps: group('next_steps'),
+    assurance: String(draft.assurance ?? ''),
+    signoff: String(draft.signoff ?? 'Best,'),
+    bullets,
+    cut,
+    provenanceLine: [
+      `Template ${template.id}`,
+      `model ${provenance.model}`,
+      cut === 1 ? '1 line cut' : `${cut} lines cut`,
+    ].join(' · '),
+    note: provenance.note ? String(provenance.note) : null,
   };
 }
 
@@ -493,6 +541,36 @@ export function renderNotesPage(model, ctx = {}) {
       </div>
     </section>` : '';
 
+  // The second panel: the same claims, routed to a template file and written by
+  // a model, then put through the same screen. It renders from the cached
+  // artifact only. With no artifact staged (a fresh clone, a call nobody has
+  // generated for yet) the page shows the verbatim panel above and nothing else,
+  // which is the keyless story and still the whole product.
+  const r = m.routedEmail;
+  const routedBullet = (b) => `<li data-claim="${escapeHtml(b.claim_id)}"><span class="em-cite" aria-hidden="true"></span><span class="em-text">${escapeHtml(b.text)}</span><span class="em-claim">${escapeHtml(b.claim_id)}</span></li>`;
+  const routedBlock = (label, items) => (items.length ? `
+        <p class="email-hdr">${escapeHtml(label)}</p>
+        <ul class="email-list">${items.map(routedBullet).join('')}</ul>` : '');
+  const routedHtml = r ? `
+    <section class="email email--routed">
+      <div class="email-head">
+        <h2 class="email-label"><span class="email-mark" aria-hidden="true"></span>Routed follow-up: ${escapeHtml(r.template.short)} template</h2>
+        <span class="email-draft">routed</span>
+      </div>
+      <p class="email-trust">${escapeHtml(r.template.explainer)}</p>
+      <div class="email-body">
+        <p class="email-subject"><span>Subject</span>${escapeHtml(r.subject)}</p>
+        <p class="email-greeting">${escapeHtml(r.greeting)}</p>
+        ${r.opener ? `<p class="email-intro">${escapeHtml(r.opener)}</p>` : ''}
+        ${r.outcome ? `<p class="email-lead" data-claim="${escapeHtml(r.outcome.claim_id)}">${escapeHtml(r.outcome.text)}<span class="em-claim">${escapeHtml(r.outcome.claim_id)}</span></p>` : ''}
+        ${routedBlock('What we covered', r.recap)}
+        ${routedBlock('Next steps', r.next_steps)}
+        ${r.assurance ? `<p class="email-outro">${escapeHtml(r.assurance)}</p>` : ''}
+        <p class="email-sign">${r.signoff.split('\n').map((l) => escapeHtml(l)).join('<br>')}</p>
+      </div>
+      <p class="email-prov">${escapeHtml(r.provenanceLine)}${r.note ? `. ${escapeHtml(r.note)}` : ''}</p>
+    </section>` : '';
+
   const audioSrc = ctx.audioSrc ?? null;
   const audioHtml = audioSrc
     ? `<audio id="call-audio" preload="none" src="${escapeHtml(audioSrc)}"></audio>`
@@ -537,6 +615,7 @@ ${navHtml(ctx)}
     ${heldBackHtml}
     ${quarantineHtml}
     ${emailHtml}
+    ${routedHtml}
   </div>
   ${audioSrc ? '' : '<p class="no-audio">No audio is staged for this call. The transcript line still opens on click.</p>'}
   ${provenanceFootHtml(m)}
@@ -551,6 +630,7 @@ ${audioHtml}
 export function renderCallPage(bundle, ctx = {}) {
   const model = buildNotesModel(bundle, {
     seq: ctx.seq, total: ctx.total, dealName: ctx.dealName, stage: ctx.stage, owners: ctx.owners,
+    routedEmail: ctx.routedEmail,
   });
   return renderNotesPage(model, ctx);
 }
@@ -1011,6 +1091,13 @@ body{
 .em-meta{display:inline-block;margin-left:8px;font-size:13px;color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:1px 7px;white-space:nowrap}
 .email-outro{margin:16px 0 0;font-size:16px;color:var(--ink-faint);line-height:1.5}
 .email-sign{margin:14px 0 0;font-size:16px;color:var(--ink);line-height:1.5}
+
+/* the routed template draft: same panel, one badge apart, so a reader can see
+   they are the same email written two ways off the same backed lines */
+.email--routed{margin-top:16px;border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+.email--routed .email-draft{color:var(--accent-ink);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.em-claim{display:inline-block;margin-left:8px;font-size:12px;color:var(--ink-faint);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.email-prov{margin:0 18px 15px;font-size:13.5px;color:var(--ink-faint);line-height:1.5}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
 

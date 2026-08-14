@@ -1,0 +1,113 @@
+{
+  "call_id": "06",
+  "template": {
+    "id": "no-next-step-reengagement",
+    "version": "1.0.0",
+    "title": "No next step re-engagement",
+    "short": "no next step",
+    "explainer": "No next step was agreed, so this template picked itself. A free model drafted it. The gate checked every line."
+  },
+  "draft": {
+    "subject": "Thanks for the time today",
+    "greeting": "Hi Rahul,",
+    "opener": "Thanks for the time today. Here is what I took away.",
+    "outcome": null,
+    "recap": [
+      {
+        "text": "You called to read out a suspicious email about CallForge. It is a phishing template using our name, so please do not click the link.",
+        "group": "recap",
+        "claim_id": "summary-0-0"
+      },
+      {
+        "text": "Nothing moved on the deal itself. The agreement is still with Dr. Mehta.",
+        "group": "recap",
+        "claim_id": "summary-1-0"
+      }
+    ],
+    "next_steps": [],
+    "assurance": "We did not land on a specific next step. What would be useful to you right now?",
+    "signoff": "Best,\nMaya",
+    "body": "Hi Rahul,\n\nThanks for the time today. Here is what I took away.\n\nWhat we covered:\n- You called to read out a suspicious email about CallForge. It is a phishing template using our name, so please do not click the link.\n- Nothing moved on the deal itself. The agreement is still with Dr. Mehta.\n\nWe did not land on a specific next step. What would be useful to you right now?\n\nBest,\nMaya",
+    "bullets": [
+      {
+        "text": "You called to read out a suspicious email about CallForge. It is a phishing template using our name, so please do not click the link.",
+        "group": "recap",
+        "claim_id": "summary-0-0"
+      },
+      {
+        "text": "Nothing moved on the deal itself. The agreement is still with Dr. Mehta.",
+        "group": "recap",
+        "claim_id": "summary-1-0"
+      }
+    ]
+  },
+  "screen": {
+    "cut": 0,
+    "off_template_cut": 0,
+    "bullets": 2,
+    "claim_ids": [
+      "summary-0-0",
+      "summary-1-0"
+    ]
+  },
+  "provenance": {
+    "template_id": "no-next-step-reengagement",
+    "template_version": "1.0.0",
+    "model": "offline-author",
+    "base_url": null,
+    "temperature": 0,
+    "cut": 0,
+    "off_template_cut": 0,
+    "bullets": 2,
+    "claim_ids": [
+      "summary-0-0",
+      "summary-1-0"
+    ],
+    "note": "authored offline, screened by the real choke; regenerate live with LLM_API_KEY"
+  },
+  "routing": {
+    "considered": [
+      {
+        "id": "no-next-step-reengagement",
+        "priority": 10,
+        "fired": true
+      },
+      {
+        "id": "ghosted-deal-nudge",
+        "priority": 20,
+        "fired": false
+      },
+      {
+        "id": "close-pilot-confirmation",
+        "priority": 30,
+        "fired": false
+      },
+      {
+        "id": "pricing-followup",
+        "priority": 40,
+        "fired": false
+      },
+      {
+        "id": "post-demo-followup",
+        "priority": 50,
+        "fired": false
+      },
+      {
+        "id": "commitment-fulfillment",
+        "priority": 60,
+        "fired": false
+      },
+      {
+        "id": "objection-addressed",
+        "priority": 70,
+        "fired": false
+      },
+      {
+        "id": "post-discovery-followup",
+        "priority": 80,
+        "fired": false
+      }
+    ]
+  },
+  "generated_at": "2026-08-14T04:51:36.203Z"
+}

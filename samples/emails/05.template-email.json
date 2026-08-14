@@ -1,0 +1,161 @@
+{
+  "call_id": "05",
+  "template": {
+    "id": "close-pilot-confirmation",
+    "version": "1.0.0",
+    "title": "Close and pilot confirmation",
+    "short": "close",
+    "explainer": "The commit on this call picked this template. A free model drafted it. The gate checked every line."
+  },
+  "draft": {
+    "subject": "Confirming what we agreed",
+    "greeting": "Hi Rahul,",
+    "opener": "Thanks for the time today. Here is what we agreed.",
+    "outcome": {
+      "text": "You are in: a two-location ninety-day pilot at twenty six per seat, recall tooling included.",
+      "group": "outcome",
+      "claim_id": "summary-0-0"
+    },
+    "recap": [
+      {
+        "text": "The price that landed is twenty six per seat, with recall tooling included.",
+        "group": "recap",
+        "claim_id": "pricing-0"
+      }
+    ],
+    "next_steps": [
+      {
+        "text": "I am sending the agreement this afternoon.",
+        "group": "next_steps",
+        "claim_id": "next_steps-0"
+      },
+      {
+        "text": "Dr. Mehta signs early next week.",
+        "group": "next_steps",
+        "claim_id": "next_steps-1"
+      },
+      {
+        "text": "We aim the cutover for the weekend after signing.",
+        "group": "next_steps",
+        "claim_id": "next_steps-2"
+      },
+      {
+        "text": "I will set up the training live-review of call recordings for your office manager during onboarding, with no extra line item.",
+        "group": "next_steps",
+        "claim_id": "next_steps-3"
+      }
+    ],
+    "assurance": "Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.",
+    "signoff": "Best,\nMaya",
+    "body": "Hi Rahul,\n\nThanks for the time today. Here is what we agreed.\n\nYou are in: a two-location ninety-day pilot at twenty six per seat, recall tooling included.\n\nWhat we covered:\n- The price that landed is twenty six per seat, with recall tooling included.\n\nNext steps:\n- I am sending the agreement this afternoon.\n- Dr. Mehta signs early next week.\n- We aim the cutover for the weekend after signing.\n- I will set up the training live-review of call recordings for your office manager during onboarding, with no extra line item.\n\nEvery line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.\n\nBest,\nMaya",
+    "bullets": [
+      {
+        "text": "You are in: a two-location ninety-day pilot at twenty six per seat, recall tooling included.",
+        "group": "outcome",
+        "claim_id": "summary-0-0"
+      },
+      {
+        "text": "The price that landed is twenty six per seat, with recall tooling included.",
+        "group": "recap",
+        "claim_id": "pricing-0"
+      },
+      {
+        "text": "I am sending the agreement this afternoon.",
+        "group": "next_steps",
+        "claim_id": "next_steps-0"
+      },
+      {
+        "text": "Dr. Mehta signs early next week.",
+        "group": "next_steps",
+        "claim_id": "next_steps-1"
+      },
+      {
+        "text": "We aim the cutover for the weekend after signing.",
+        "group": "next_steps",
+        "claim_id": "next_steps-2"
+      },
+      {
+        "text": "I will set up the training live-review of call recordings for your office manager during onboarding, with no extra line item.",
+        "group": "next_steps",
+        "claim_id": "next_steps-3"
+      }
+    ]
+  },
+  "screen": {
+    "cut": 0,
+    "off_template_cut": 0,
+    "bullets": 6,
+    "claim_ids": [
+      "summary-0-0",
+      "pricing-0",
+      "next_steps-0",
+      "next_steps-1",
+      "next_steps-2",
+      "next_steps-3"
+    ]
+  },
+  "provenance": {
+    "template_id": "close-pilot-confirmation",
+    "template_version": "1.0.0",
+    "model": "offline-author",
+    "base_url": null,
+    "temperature": 0,
+    "cut": 0,
+    "off_template_cut": 0,
+    "bullets": 6,
+    "claim_ids": [
+      "summary-0-0",
+      "pricing-0",
+      "next_steps-0",
+      "next_steps-1",
+      "next_steps-2",
+      "next_steps-3"
+    ],
+    "note": "authored offline, screened by the real choke; regenerate live with LLM_API_KEY"
+  },
+  "routing": {
+    "considered": [
+      {
+        "id": "no-next-step-reengagement",
+        "priority": 10,
+        "fired": false
+      },
+      {
+        "id": "ghosted-deal-nudge",
+        "priority": 20,
+        "fired": false
+      },
+      {
+        "id": "close-pilot-confirmation",
+        "priority": 30,
+        "fired": true
+      },
+      {
+        "id": "pricing-followup",
+        "priority": 40,
+        "fired": true
+      },
+      {
+        "id": "post-demo-followup",
+        "priority": 50,
+        "fired": true
+      },
+      {
+        "id": "commitment-fulfillment",
+        "priority": 60,
+        "fired": true
+      },
+      {
+        "id": "objection-addressed",
+        "priority": 70,
+        "fired": true
+      },
+      {
+        "id": "post-discovery-followup",
+        "priority": 80,
+        "fired": false
+      }
+    ]
+  },
+  "generated_at": "2026-08-14T04:51:36.203Z"
+}

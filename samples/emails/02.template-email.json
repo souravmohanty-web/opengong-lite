@@ -1,0 +1,149 @@
+{
+  "call_id": "02",
+  "template": {
+    "id": "post-demo-followup",
+    "version": "1.0.0",
+    "title": "Post-demo follow-up",
+    "short": "post-demo",
+    "explainer": "The detected next step picked this template. A free model drafted it. The gate checked every line."
+  },
+  "draft": {
+    "subject": "Next steps after the demo",
+    "greeting": "Hi Rahul,",
+    "opener": "Thanks for the time on the demo. Here is what I took away, and what we said we would do next.",
+    "outcome": {
+      "text": "The demo landed. After-hours routing, answering machine detection and consent-tracked texting all resonated with you.",
+      "group": "outcome",
+      "claim_id": "summary-0-0"
+    },
+    "recap": [
+      {
+        "text": "You said downtime is a dealbreaker, that you cannot be down during patient hours at all.",
+        "group": "recap",
+        "claim_id": "objections-0"
+      }
+    ],
+    "next_steps": [
+      {
+        "text": "I will send the SOC 2 report and the TCPA one-pager to your office manager, both by Friday.",
+        "group": "next_steps",
+        "claim_id": "next_steps-0"
+      },
+      {
+        "text": "You will pull the RingHawk call-volume report and send it over, early next week, so I can size the deal.",
+        "group": "next_steps",
+        "claim_id": "next_steps-1"
+      },
+      {
+        "text": "Once those documents are exchanged, we both move to pricing.",
+        "group": "next_steps",
+        "claim_id": "next_steps-2"
+      }
+    ],
+    "assurance": "Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.",
+    "signoff": "Best,\nMaya",
+    "body": "Hi Rahul,\n\nThanks for the time on the demo. Here is what I took away, and what we said we would do next.\n\nThe demo landed. After-hours routing, answering machine detection and consent-tracked texting all resonated with you.\n\nWhat we covered:\n- You said downtime is a dealbreaker, that you cannot be down during patient hours at all.\n\nNext steps:\n- I will send the SOC 2 report and the TCPA one-pager to your office manager, both by Friday.\n- You will pull the RingHawk call-volume report and send it over, early next week, so I can size the deal.\n- Once those documents are exchanged, we both move to pricing.\n\nEvery line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.\n\nBest,\nMaya",
+    "bullets": [
+      {
+        "text": "The demo landed. After-hours routing, answering machine detection and consent-tracked texting all resonated with you.",
+        "group": "outcome",
+        "claim_id": "summary-0-0"
+      },
+      {
+        "text": "You said downtime is a dealbreaker, that you cannot be down during patient hours at all.",
+        "group": "recap",
+        "claim_id": "objections-0"
+      },
+      {
+        "text": "I will send the SOC 2 report and the TCPA one-pager to your office manager, both by Friday.",
+        "group": "next_steps",
+        "claim_id": "next_steps-0"
+      },
+      {
+        "text": "You will pull the RingHawk call-volume report and send it over, early next week, so I can size the deal.",
+        "group": "next_steps",
+        "claim_id": "next_steps-1"
+      },
+      {
+        "text": "Once those documents are exchanged, we both move to pricing.",
+        "group": "next_steps",
+        "claim_id": "next_steps-2"
+      }
+    ]
+  },
+  "screen": {
+    "cut": 0,
+    "off_template_cut": 0,
+    "bullets": 5,
+    "claim_ids": [
+      "summary-0-0",
+      "objections-0",
+      "next_steps-0",
+      "next_steps-1",
+      "next_steps-2"
+    ]
+  },
+  "provenance": {
+    "template_id": "post-demo-followup",
+    "template_version": "1.0.0",
+    "model": "offline-author",
+    "base_url": null,
+    "temperature": 0,
+    "cut": 0,
+    "off_template_cut": 0,
+    "bullets": 5,
+    "claim_ids": [
+      "summary-0-0",
+      "objections-0",
+      "next_steps-0",
+      "next_steps-1",
+      "next_steps-2"
+    ],
+    "note": "authored offline, screened by the real choke; regenerate live with LLM_API_KEY"
+  },
+  "routing": {
+    "considered": [
+      {
+        "id": "no-next-step-reengagement",
+        "priority": 10,
+        "fired": false
+      },
+      {
+        "id": "ghosted-deal-nudge",
+        "priority": 20,
+        "fired": false
+      },
+      {
+        "id": "close-pilot-confirmation",
+        "priority": 30,
+        "fired": false
+      },
+      {
+        "id": "pricing-followup",
+        "priority": 40,
+        "fired": false
+      },
+      {
+        "id": "post-demo-followup",
+        "priority": 50,
+        "fired": true
+      },
+      {
+        "id": "commitment-fulfillment",
+        "priority": 60,
+        "fired": true
+      },
+      {
+        "id": "objection-addressed",
+        "priority": 70,
+        "fired": true
+      },
+      {
+        "id": "post-discovery-followup",
+        "priority": 80,
+        "fired": true
+      }
+    ]
+  },
+  "generated_at": "2026-08-14T04:51:36.201Z"
+}

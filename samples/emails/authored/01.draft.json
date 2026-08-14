@@ -1,0 +1,13 @@
+{
+  "subject": "Thanks for the time today",
+  "greeting": "Hi Rahul,",
+  "opener": "Thanks for the time today. Here is what I took away.",
+  "bullets": [
+    { "claim_id": "pain-1", "group": "recap", "text": "After-hours calls ring out to a voicemail nobody checks until morning. You called that the real bleed." },
+    { "claim_id": "pain-0", "group": "recap", "text": "Calls drop mid-transfer between locations at least a few times a day." },
+    { "claim_id": "pain-2", "group": "recap", "text": "Fear of TCPA keeps you from texting patients at all today, even though your office manager wants it." },
+    { "claim_id": "next_steps-0", "group": "next_steps", "text": "I will run a 30-minute demo on Thursday covering after-hours routing and the compliant texting flow, no slides." }
+  ],
+  "close": "Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.",
+  "signoff": "Best,\nMaya"
+}

@@ -1,0 +1,14 @@
+{
+  "subject": "Where pricing landed",
+  "greeting": "Hi Rahul,",
+  "opener": "Thanks for the time today. Here is where pricing landed.",
+  "bullets": [
+    { "claim_id": "pricing-0", "group": "recap", "text": "Our quote is twenty eight per month for all five locations, with routing, texting and recall tooling included." },
+    { "claim_id": "pricing-1", "group": "recap", "text": "RingHawk counter-offered twenty two to keep the account the moment it sensed a switch." },
+    { "claim_id": "pricing-2", "group": "recap", "text": "You flagged the six-per-seat gap that Dr. Mehta will question." },
+    { "claim_id": "pricing-3", "group": "recap", "text": "You asked for fifteen off, enough to make this a service decision." },
+    { "claim_id": "next_steps-0", "group": "next_steps", "text": "I will come back with a sharper number and the porting proof, and you will take it to Dr. Mehta." }
+  ],
+  "close": "Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.",
+  "signoff": "Best,\nMaya"
+}

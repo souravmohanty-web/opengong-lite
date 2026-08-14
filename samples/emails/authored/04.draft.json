@@ -1,0 +1,14 @@
+{
+  "subject": "Where things stand",
+  "greeting": "Hi Rahul,",
+  "opener": "Thanks for the time today. Quick check on where things stand.",
+  "bullets": [
+    { "claim_id": "02:next_steps-0", "group": "recap", "text": "On the demo call I promised the SOC 2 report and the TCPA one-pager to your office manager by Friday." },
+    { "claim_id": "objections-0", "group": "recap", "text": "The one-pager never showed up and your office manager asked twice. That one is on me." },
+    { "claim_id": "03:next_steps-0", "group": "recap", "text": "From the pricing call I still owe you a sharper number and the porting proof." },
+    { "claim_id": "next_steps-0", "group": "next_steps", "text": "I am sending the TCPA one-pager to your office manager today." },
+    { "claim_id": "next_steps-1", "group": "next_steps", "text": "You get the pilot proposal on paper this week, with the sharper number in it." }
+  ],
+  "close": "Every line above came from something said on a call. If I got any of it wrong, tell me and I will fix it.",
+  "signoff": "Best,\nMaya"
+}

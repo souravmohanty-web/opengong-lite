@@ -49,6 +49,7 @@ one fixture bundle. That's the tier-1 view alone, useful for a side question.)
 - **Tab 2**: `http://127.0.0.1:4318/notes/04.html` (Commitment check, what's owed)
 - **Tab 3**: `http://127.0.0.1:4318/notes/03.html` (Pricing, the gate catching the lie)
 - **Tab 4**: `http://127.0.0.1:4318/notes/05.html` (Close, the self-correction flourish)
+- **Tab 5**: `http://127.0.0.1:4318/notes/02.html` (Demo, the routed template panel)
 - **Tab 6**: `http://127.0.0.1:4318/notes/06.html` (Messy, the blocked injection, never-cut)
 
 Zero network calls in this whole path (`src/deal-server.mjs` is a static file server over
@@ -87,6 +88,24 @@ airplane-mode act.** It's what you run even when the wifi is perfect.
      passed the gate, and `src/email.js` is where that gets enforced. Hand it one unknown
      claim id and the whole draft dies. That's the difference between a summary and
      something you'd let send mail."*
+
+- **+0:20 THE TEMPLATE PICKS ITSELF (insert after the money moment; everything after it
+  shifts twenty seconds, and this is the first beat to drop if you are behind at the 2:30
+  checkpoint):** switch to Tab 5 (`notes/02.html`, Demo). Scroll past the **Follow-up
+  email** panel to the second one, **"Routed follow-up: post-demo template"**. Say:
+  *"Same claims, one difference. The next step this call actually agreed picked a template
+  file off our library. Six calls, six templates, and the call picks its own. Then the
+  draft comes back through the same gate as the panel above it. That line at the bottom
+  says which template, who wrote it, and how many lines got cut on the way in."*
+  Point at the provenance line while you say it.
+
+  > **What is actually on screen:** `Template post-demo-followup · model offline-author ·
+  > 0 lines cut`, and the note *"authored offline, screened by the real choke; regenerate
+  > live with LLM_API_KEY"*. Say **offline-author** if a judge reads it out: the cached
+  > draft was written to the model's own output shape and put through the real
+  > `screenDraft()`, and it is labelled that way on purpose rather than dressed up as a
+  > model run. With a free Groq key set, `node scripts/generate-template-email.mjs`
+  > regenerates all six live and the same line names the model instead.
 
 - **2:00–2:40 What's still owed, the commitment ledger:** switch to Tab 2
   (`notes/04.html`, Commitment check). Scroll to **Objections**: **"Dropped commitment

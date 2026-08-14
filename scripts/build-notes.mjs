@@ -34,6 +34,7 @@ import {
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const BUNDLES_DIR = join(ROOT, 'samples/bundles');
 const AUDIO_SRC_DIR = join(ROOT, 'samples/audio');
+const EMAILS_DIR = join(ROOT, 'samples/emails');
 const PUBLIC_DIR = join(ROOT, 'public');
 
 const DEAL_NAME = SAMPLE_DEAL_NAME;
@@ -63,6 +64,21 @@ export function callsNav(bundles) {
       href: `${id}.html`, // pages live together in public/notes/
     };
   });
+}
+
+// The routed template draft for one call, if one has been generated and cached
+// (scripts/generate-template-email.mjs). The build never generates it: pages are
+// built with no key and no network, so a call with no cached draft simply gets
+// the verbatim panel and no second one. An unreadable artifact is the same
+// answer as a missing one.
+export function loadRoutedEmail(callId, dir = EMAILS_DIR) {
+  const path = join(dir, `${callId}.template-email.json`);
+  if (!existsSync(path)) return null;
+  try {
+    return JSON.parse(readFileSync(path, 'utf8'));
+  } catch {
+    return null;
+  }
 }
 
 // Stage one audio file next to the page that plays it. Copies only when the
@@ -178,6 +194,7 @@ export function buildNotes({
       owners: OWNERS,
       homeHref: '../index.html',
       audioSrc: audioPresent.get(id) ? `/audio/${id}.m4a` : null,
+      routedEmail: loadRoutedEmail(id),
     });
     writeFileSync(join(NOTES_DIR, `${id}.html`), html);
   }

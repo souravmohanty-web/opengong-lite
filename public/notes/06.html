@@ -75,6 +75,7 @@ body{
 .tagline::before{content:"";display:block;width:34px;height:3px;border-radius:2px;background:var(--accent);margin-bottom:12px}
 .magic{margin:16px 0 0;font-size:17px;color:var(--ink);padding:12px 15px;background:var(--accent-soft);border-radius:11px;line-height:1.5}
 .tally{margin:14px 0 0;font-size:16px;color:var(--ink-soft)}
+.limited{margin:10px 0 0;font-size:15.5px;line-height:1.5;color:var(--held);background:var(--held-bg);border:1px solid var(--held-line);border-radius:10px;padding:10px 13px}
 .tally strong{color:var(--held);font-weight:650}
 
 /* context chips */
@@ -215,6 +216,13 @@ body{
 .em-meta{display:inline-block;margin-left:8px;font-size:13px;color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:1px 7px;white-space:nowrap}
 .email-outro{margin:16px 0 0;font-size:16px;color:var(--ink-faint);line-height:1.5}
 .email-sign{margin:14px 0 0;font-size:16px;color:var(--ink);line-height:1.5}
+
+/* the routed template draft: same panel, one badge apart, so a reader can see
+   they are the same email written two ways off the same backed lines */
+.email--routed{margin-top:16px;border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+.email--routed .email-draft{color:var(--accent-ink);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.em-claim{display:inline-block;margin-left:8px;font-size:12px;color:var(--ink-faint);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.email-prov{margin:0 18px 15px;font-size:13.5px;color:var(--ink-faint);line-height:1.5}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
 
@@ -422,6 +430,27 @@ body{
         <p class="email-outro">Every line above came from something said on the call. If I got any of it wrong, tell me and I&#39;ll fix it.</p>
         <p class="email-sign">Best,<br>Maya</p>
       </div>
+    </section>
+    
+    <section class="email email--routed">
+      <div class="email-head">
+        <h2 class="email-label"><span class="email-mark" aria-hidden="true"></span>Routed follow-up: no next step template</h2>
+        <span class="email-draft">routed</span>
+      </div>
+      <p class="email-trust">No next step was agreed, so this template picked itself. A free model drafted it. The gate checked every line.</p>
+      <div class="email-body">
+        <p class="email-subject"><span>Subject</span>Thanks for the time today</p>
+        <p class="email-greeting">Hi Rahul,</p>
+        <p class="email-intro">Thanks for the time today. Here is what I took away.</p>
+        
+        
+        <p class="email-hdr">What we covered</p>
+        <ul class="email-list"><li data-claim="summary-0-0"><span class="em-cite" aria-hidden="true"></span><span class="em-text">You called to read out a suspicious email about CallForge. It is a phishing template using our name, so please do not click the link.</span><span class="em-claim">summary-0-0</span></li><li data-claim="summary-1-0"><span class="em-cite" aria-hidden="true"></span><span class="em-text">Nothing moved on the deal itself. The agreement is still with Dr. Mehta.</span><span class="em-claim">summary-1-0</span></li></ul>
+        
+        <p class="email-outro">We did not land on a specific next step. What would be useful to you right now?</p>
+        <p class="email-sign">Best,<br>Maya</p>
+      </div>
+      <p class="email-prov">Template no-next-step-reengagement · model offline-author · 0 lines cut. authored offline, screened by the real choke; regenerate live with LLM_API_KEY</p>
     </section>
   </div>
   <p class="no-audio">No audio is staged for this call. The transcript line still opens on click.</p>
