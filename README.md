@@ -45,11 +45,10 @@ MIT. Node 22+. Zero runtime dependencies. 528 tests that pass offline. The demo 
  THE GATE               deterministic code; every claim must cite a line
       │                 that exists verbatim in the transcript
       │
-      ├─ verified ─────────────► notes, citation attached
-      ├─ segment_corrected ────► notes, wrong citation fixed and labeled
-      ├─ uncorroborated ───────► kept on screen, marked
-      └─ blocked_injection ────► struck out, barred everywhere
-      │
+      │   the cited line exists ......... claim ships, citation attached
+      │   the model cited the wrong line  code finds the right one, labels the fix
+      │   no line supports the claim .... stays on screen, marked
+      │   the line attacks the model .... struck out, barred from notes and email
       ▼
  consumers              deal workspace · commitment ledger · scorecards
       │                 · template-routed follow-up email
@@ -65,13 +64,9 @@ MIT. Node 22+. Zero runtime dependencies. 528 tests that pass offline. The demo 
 ```bash
 git clone https://github.com/souravmohanty-web/opengong-lite.git
 cd opengong-lite
-npm start
-```
+npm start                          # six-call sample deal at 127.0.0.1:4318
 
-Open http://127.0.0.1:4318. A six-call sample deal loads with zero keys and no npm install, because there are no dependencies to install. To transcribe your own call:
-
-```bash
-node src/ingest.js your-call.wav
+node src/ingest.js your-call.wav   # transcribe a call of your own
 ```
 
 A free PyAI sandbox key mints itself on first use and the console tells you it did. Stereo WAV gets exact speaker labels. Mono transcribes fine and the speakers stay unlabeled, stated on the page.
@@ -214,7 +209,7 @@ Nobody runs a server for you and nobody is on call. Read that file before you up
 
 Live capture through open source meeting bots. Approval-gated CRM write-back. An interpretation gate for the harder problem of a right quote read wrongly, which the citation at least lets you catch in one click. Scorecard trends per rep.
 
-A hosted-style web app on the same harness, with upload UI, live mic and share links, lives at [sarithakonudula/open-gong-lite](https://github.com/sarithakonudula/open-gong-lite). Same gate, same tests, one project.
+A full web app on the same harness, with upload UI, live mic, global search, scorecard tabs and share links, lives at [sarithakonudula/open-gong-lite](https://github.com/sarithakonudula/open-gong-lite). Same gate, same tests, one project.
 
 MIT licensed. Runs on [PyAI](https://docs.pyai.com/quickstart); a free sandbox key mints itself on first transcription.
 
