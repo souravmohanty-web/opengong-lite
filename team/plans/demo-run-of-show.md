@@ -107,6 +107,13 @@ airplane-mode act.** It's what you run even when the wifi is perfect.
   > model run. With a free Groq key set, `node scripts/generate-template-email.mjs`
   > regenerates all six live and the same line names the model instead.
 
+> **The six-word beat, use it anywhere a tally is on screen:** point at "20 of 21
+> backed. 1 held back." and say: *"Our summary can be wrong out loud. Theirs can't."*
+> That sentence is the whole Fireflies/Fathom differentiation; the full Q&A block for
+> it is in team/plans/summary-standard.md (beat-them layer), including the honest
+> where-they-beat-us list. Concede live capture and video without blinking; close on
+> the ledger and open source.
+
 - **2:00–2:40 What's still owed, the commitment ledger:** switch to Tab 2
   (`notes/04.html`, Commitment check). Scroll to **Objections**: **"Dropped commitment
   called out: the TCPA one-pager promised by Friday never showed up, and the office

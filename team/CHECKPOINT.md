@@ -60,5 +60,11 @@ OpenGong Lite — open-source call notes where every claim links to the exact tr
 - PyAI live key in .env (gitignored): Hear + voice:synthesize scopes work; limits rps20/conc10/$10 cap. TTS endpoint is flaky (503/404/timeout — transient).
 - Team: hackathon session (spec/gate/orchestration + standing auditor), projects-2f/GH+adhoc (viewer/server/README/deploy), Saritha (reasoning lane), Aakash (competitive intel).
 
+## FINAL STATE (2026-08-14 ~noon, pre-demo): BOTH PRs MERGED INTO SARITHA'S MAIN
+- PR #1 (trust package) merged 05:59Z; PR #11 (template-library port: 8 routed templates, one LLM plumbing via her resolveLlmChain/chatText with our keyless Ollama tier as a caller-resolved target) merged 06:33Z. Both per Sourav's explicit authorization; the account has collaborator access and the branch was also pushed directly to her repo.
+- HER MAIN VERIFIED POST-MERGE: 194/194 test:gates, tsc clean, 21/21 adversarial vectors. All her features intact (multi-call-type scoring, LLM failover chain, momentum, contextual email, hubspot map, coaching, digest, upload compression).
+- ENGINE REPO: 529 tests, deal-first workspace :4318, 8-template library + page, 3-tier LLM ladder, one-command pipeline-to-workspace loop. All pushed.
+- The entry is one product now. Remaining human items: Sourav tells Saritha about the merges, rehearsal, the name.
+
 ## Checkpoint cadence
 Commit + update this file + SYNC entry at each milestone. Green commits only (exclude in-flight red WIP). Memory file mirrors this at /Users/souravm/.claude/.../project_pyai_hackathon_opengong.md.
