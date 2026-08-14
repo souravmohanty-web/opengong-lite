@@ -65,7 +65,7 @@ The harness is the product. These are the choices that make it hard to fool.
 
 | What | Value | Where it comes from |
 |---|---|---|
-| Tests | 409 passing | `npm test`, offline |
+| Tests | 528 passing | `npm test`, offline |
 | Note precision | 43 of 44 correct | Hand-labeled golden calls, `team/labels.json` |
 | Citations found | 107 of 108 | Across the six-call sample deal |
 | Cost per call | $0.0067 | Logged from a real run (local run records; a fresh clone shows null until you run one) |

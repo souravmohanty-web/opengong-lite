@@ -12,7 +12,7 @@
 import { existsSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
-import { startServer, DEFAULT_PUBLIC_DIR } from './deal-server.mjs';
+import { startServer, explainListenError, DEFAULT_PUBLIC_DIR } from './deal-server.mjs';
 import { buildNotes } from '../scripts/build-notes.mjs';
 import { buildDealWorkspace } from '../scripts/build-deal-index.mjs';
 import { loadKey } from './keystore.js';
@@ -100,5 +100,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     console.log(process.env.ANTHROPIC_API_KEY
       ? 'Anthropic key: set. Live extraction available.'
       : 'Anthropic key: not set. The cached demo works fully without it.');
+  }).on('error', (err) => {
+    console.error(explainListenError(err));
+    process.exit(1);
   });
 }

@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { extname, join, normalize, sep } from 'node:path';
 
 const HOST = '127.0.0.1';
-const PORT = 4318;
+const PORT = Number(process.env.PORT ?? 4318);
 
 export const DEFAULT_PUBLIC_DIR = fileURLToPath(new URL('../public', import.meta.url));
 
@@ -124,10 +124,23 @@ export function startServer(publicDir = DEFAULT_PUBLIC_DIR, { host = HOST, port 
   return createServer(createApp(publicDir)).listen(port, host);
 }
 
+// Listen failures get a named exit like every other failure in this repo — a
+// raw EADDRINUSE stack trace is exactly the silent-ish death we don't ship.
+export function explainListenError(err) {
+  if (err.code === 'EADDRINUSE') {
+    const where = `${err.address ?? HOST}:${err.port ?? PORT}`;
+    return `exit: PORT_IN_USE — ${where} already has a server on it (another OpenGong Lite?). Stop it, or pick a port: PORT=4319 npm start`;
+  }
+  return `exit: LISTEN_FAILED — ${err.message}`;
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const publicDir = process.argv[2] ?? DEFAULT_PUBLIC_DIR;
   startServer(publicDir).on('listening', () => {
     console.log(`deal workspace: http://${HOST}:${PORT}/  (serving ${publicDir})`);
     console.log('run `node scripts/build-deal-index.mjs` first if this is a fresh checkout');
+  }).on('error', (err) => {
+    console.error(explainListenError(err));
+    process.exit(1);
   });
 }
