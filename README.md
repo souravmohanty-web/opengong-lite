@@ -6,6 +6,16 @@ AI notes for sales calls, with citations. Like Perplexity cites its sources, but
 
 ![Deal workspace: every note carries a citation into the transcript and audio](docs/hero.png)
 
+## Try it
+
+```bash
+git clone https://github.com/souravmohanty-web/opengong-lite.git
+cd opengong-lite
+npm start
+```
+
+Open http://127.0.0.1:4318. A full six-call sample deal loads with zero keys and zero setup. A free PyAI key mints itself the first time you transcribe your own call.
+
 ## How it works
 
 1. **Drop in a deal's calls.** Upload recordings or point at URLs. Stereo files get exact speaker labels, read off the channels.
@@ -13,15 +23,6 @@ AI notes for sales calls, with citations. Like Perplexity cites its sources, but
 3. **Click any note.** The source line lights up and plays. Notes come with numbered citations, the way you'd expect from a research tool.
 4. **See the score honestly.** A note the AI couldn't back says "not found in the call" and stays visible. A line that tried to inject instructions is blocked and shown. The header reads "20 of 21 backed" because that is what the checker found.
 5. **Send the follow-up.** The email drafts only from notes that passed the check. One bad citation kills the whole draft. You hit send, it never does.
-
-## Try it
-
-```bash
-git clone <repo> && cd opengong-lite
-npm start
-```
-
-Open http://127.0.0.1:4318. A full six-call sample deal loads with zero keys and zero setup. A free PyAI key mints itself the first time you transcribe your own call.
 
 ## Every note is one of four things
 
@@ -88,3 +89,9 @@ The harness is the product. These are the choices that make it hard to fool.
 ## Roadmap
 
 Live call capture via open-source meeting bots. CRM write-back, approval-gated. An interpretation gate for the "right quote, wrong reading" problem. Scorecard trends per rep.
+
+## The two repos
+
+This repo is the engine and the deal workspace. A hosted-style web app built on the same harness (upload UI, live mic, share links) lives at [sarithakonudula/open-gong-lite](https://github.com/sarithakonudula/open-gong-lite). Same gate, same tests, one project.
+
+MIT licensed. Node 22 or newer.

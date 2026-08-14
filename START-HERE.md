@@ -50,7 +50,7 @@ of the above automatically.
 | Path | Purpose |
 |---|---|
 | `DECISION-BRIEF.md` | The spec — 19 locked decisions (L1–L19), build order, 5 open decisions (D1–D5). |
-| `README.md` | Internal team README (state banner + repo map) — **not** the public launch README, which doesn't exist yet. |
+| `README.md` | The public README (deal-first, human vocabulary). Team state lives in `team/CHECKPOINT.md`. |
 | `CLAUDE.md` | Session bootstrap — auto-onboards any Claude Code session opened here. |
 | `capabilities.json` | Role → model map (transcription / extraction / tts); extractors declare roles, never models (L12). |
 | `package.json` | Node ≥22, `npm start` / `npm test`. |

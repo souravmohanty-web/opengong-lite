@@ -27,7 +27,7 @@ network-call row.
 | 1 | Cold start with no valid PyAI key on disk (`npm start`, or first `pyaiFetch` call with no `sandbox.pyai_key` / `PYAI_API_KEY`) | `POST /v1/sandbox/keys` | PyAI | Empty body. No user content, no audio, no transcript | A sandbox API key (`pyai_test_…`) plus expiry (~7 days) and scopes | Key is written to local file `sandbox.pyai_key` (mode `0600`, gitignored). PyAI's own retention of the mint event is out of our control | `src/pyai.js:56` |
 | 2 | Uploading/ingesting a call for transcription (`node src/ingest.js <file>`, or any code path that calls `submitJob`) | `POST /v1/transcription/jobs` (via the shared authed client) | PyAI | The **audio file itself** (multipart upload), or an `audio_url` if that ingestion path is used instead. No transcript, no notes, no claims. This is the first thing to touch PyAI, before any text exists | `{ job_id, status: 'queued' }` | PyAI processes the audio server-side to produce the transcript. OpenGong Lite does not control or extend PyAI's retention of the uploaded audio. See "What we don't control" below | `src/ingest.js:40` → `pyaiFetch` → `fetch()` at `src/pyai.js:104` |
 | 3 | Polling a transcription job to completion (`pollJob`, called automatically after #2) | `GET /v1/transcription/jobs/:job_id` | PyAI | Nothing beyond the job id in the URL path. No new content sent | The transcript (`result.text`, `result.segments[]`, `result.words[]`) | Same as #2, PyAI-side and not ours | `src/ingest.js:67` → `pyaiFetch` → `fetch()` at `src/pyai.js:104` |
-| 4 | Boot-time reachability check (`npm start` → `src/index.js`) | `GET /v1/voices` | PyAI | Nothing. This is a cheap authed no-op call to prove the minted/loaded key actually works | A voice catalog, unrelated to the user's call. This call exists only to exercise the key and the 401→re-mint path | Nothing user-derived sent or returned | `src/index.js:13` → `pyaiFetch` → `fetch()` at `src/pyai.js:104` |
+| 4 | Boot (`npm start` → `src/index.js`) | none | nobody | Nothing. Boot makes zero network calls: it reads any stored key from disk and serves the sample workspace. A key self-mints lazily on the first real transcription, never at boot (commit c0bec7b) | n/a | Nothing sent anywhere | `src/index.js` (only `loadKey()`, a local file read) |
 | 5 | Running extraction on new audio (`--live` extraction, requires `ANTHROPIC_API_KEY`) | `POST /v1/messages` | Anthropic | The **rendered transcript text** (speaker/role tokens plus utterance text, `[U<id>] role: text`, see `src/prompt.js:renderLine`. No timestamps, no audio, no filenames), plus the fixed system discipline/glossary text and the extractor's task prompt. This is the one call where call content leaves the machine as text | Structured JSON (claims plus evidence, schema-enforced via `output_config.format`), token usage, cost | Anthropic's own retention/training policy for API traffic applies. This codebase does not configure or override it. See "What we don't control" | `src/extract.js:484` (`callLlm = (req) => callMessages(req)`) → `src/llm.js:138` |
 
 **Row count check (Gate B, SCORECARD.md auto-check "DATA-FLOW rows == fetch sites"):**
@@ -87,10 +87,7 @@ needed, works offline"` (`src/server.js:120`).
 
 There is no `OPENGONG_OFFLINE`-style environment flag in this codebase today. The demo
 path's offline guarantee comes from what `server.js` simply cannot import, rather than
-from a toggle that could be flipped on accidentally. Worth stating precisely: **`npm
-start` (`src/index.js`) is not the offline path.** It unconditionally mints/loads a PyAI
-key and calls `GET /v1/voices` (row #4 above) every time it runs, key or no key in your
-environment. Only `npm run demo` is the zero-network path.
+from a toggle that could be flipped on accidentally. Worth stating precisely: **`npm start` makes no network calls at boot.** It reads any stored key from disk and serves the cached sample deal. The first live transcription is what mints or uses a key. Everything before that point runs offline.
 
 ## You'll hate this if…
 
