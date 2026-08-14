@@ -568,7 +568,7 @@ export function renderNotesPage(model, ctx = {}) {
         ${r.assurance ? `<p class="email-outro">${escapeHtml(r.assurance)}</p>` : ''}
         <p class="email-sign">${r.signoff.split('\n').map((l) => escapeHtml(l)).join('<br>')}</p>
       </div>
-      <p class="email-prov">${escapeHtml(r.provenanceLine)}${r.note ? `. ${escapeHtml(r.note)}` : ''}</p>
+      <p class="email-prov">${escapeHtml(r.provenanceLine)}${r.note ? `. ${escapeHtml(r.note)}` : ''}. <a class="prov-link" href="${escapeHtml(ctx.templatesHref ?? '../templates.html')}">From the template library</a></p>
     </section>` : '';
 
   const audioSrc = ctx.audioSrc ?? null;
@@ -866,6 +866,7 @@ ${groupsHtml(m.groups ?? [], owners)}
   <footer class="deal-foot">
     <p>Gong records what happened. We do what was promised.</p>
     <p>Anything we couldn't find in a call is shown held back on that call's page. The follow-up email only carries backed notes.</p>
+    <p class="deal-foot-nav"><a class="foot-link" href="${escapeHtml(ctx.templatesHref ?? 'templates.html')}">Templates</a> <span class="foot-note">Every follow-up template a call can pick from, each one a file you can edit.</span></p>
   </footer>
 </main>
 <script type="module">${DEAL_SCRIPT}</script>
@@ -1098,6 +1099,8 @@ body{
 .email--routed .email-draft{color:var(--accent-ink);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
 .em-claim{display:inline-block;margin-left:8px;font-size:12px;color:var(--ink-faint);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .email-prov{margin:0 18px 15px;font-size:13.5px;color:var(--ink-faint);line-height:1.5}
+.prov-link{color:var(--accent-ink);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+.prov-link:hover{color:var(--accent)}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
 
@@ -1209,6 +1212,10 @@ const DEAL_STYLES = `
 .deal-foot{margin-top:6px;padding-top:20px;border-top:1px solid var(--line-soft);color:var(--ink-soft);font-size:15px;line-height:1.6}
 .deal-foot p{margin:0 0 8px}
 .deal-foot p:first-child{color:var(--ink);font-weight:600}
+.deal-foot-nav{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.foot-link{color:var(--accent-ink);font-weight:600;text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+.foot-link:hover{color:var(--accent)}
+.foot-note{font-size:13.5px;color:var(--ink-faint)}
 @media (max-width:620px){
   .deal-h1{font-size:30px}
   .call-go{display:none}

@@ -30,6 +30,7 @@ import { renderCallPage, renderDealWorkspace, buildCallGroup, shortLabel } from 
 import {
   DEFAULT_MANIFEST_PATH, SAMPLE_DEAL_NAME, SAMPLE_DEAL_META, readManifest, groupCalls, loadCallBundle,
 } from '../src/calls-manifest.mjs';
+import { buildTemplatesPage } from './build-templates-page.mjs';
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const BUNDLES_DIR = join(ROOT, 'samples/bundles');
@@ -212,6 +213,11 @@ export function buildNotes({
     groups: mine.groups,
   }));
 
+  // The template library (public/templates.html): the 8 files in templates/,
+  // read-only, linked from the landing and from every routed panel. Built from
+  // the same files the router reads, so it cannot drift from them.
+  const library = buildTemplatesPage({ quiet: true, publicDir: PUBLIC, ctx: { dealName: DEAL_NAME } });
+
   // The old samples-first landing lived under public/notes/. One flow means one
   // landing, so a stale copy from an earlier build never competes with it.
   const stale = join(NOTES_DIR, 'index.html');
@@ -224,9 +230,12 @@ export function buildNotes({
     if (mine.pages) {
       console.log(`your calls: ${mine.pages} in ${mine.groups.length} ${mine.groups.length === 1 ? 'deal' : 'deals'} -> public/mine/ (${mine.staged} with audio)`);
     }
+    console.log(`template library: ${library.count} templates -> public/templates.html`);
     console.log(`open the demo at the deal-server root (/ -> index.html)`);
   }
-  return { calls: calls.length, staged, mine: mine.pages, groups: mine.groups.length };
+  return {
+    calls: calls.length, staged, mine: mine.pages, groups: mine.groups.length, templates: library.count,
+  };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

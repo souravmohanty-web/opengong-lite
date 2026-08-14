@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Template library · OpenGong</title>
+<style>
+:root{
+  --paper:#f6f7f9; --surface:#ffffff; --ink:#14171c; --ink-soft:#565d68;
+  --ink-faint:#5f6672; --line:#e3e6ea; --line-soft:#eceef1;
+  --accent:#2947d8; --accent-soft:#e7ebfc; --accent-ink:#1c34ad;
+  --backed:#0f7a52; --held:#b26a00; --held-bg:#fbf3e3; --held-line:#eccf9c;
+  --shadow:0 1px 2px rgba(20,23,28,.05),0 6px 20px rgba(20,23,28,.05);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1115; --surface:#181b21; --ink:#e7e9ee; --ink-soft:#a2a9b4;
+    --ink-faint:#98a0ac; --line:#282d35; --line-soft:#20242b;
+    --accent:#7f94ff; --accent-soft:#1c2440; --accent-ink:#aab6ff;
+    --backed:#39b483; --held:#e0a24a; --held-bg:#241d10; --held-line:#4a3c1e;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1115; --surface:#181b21; --ink:#e7e9ee; --ink-soft:#a2a9b4;
+  --ink-faint:#98a0ac; --line:#282d35; --line-soft:#20242b;
+  --accent:#7f94ff; --accent-soft:#1c2440; --accent-ink:#aab6ff;
+  --backed:#39b483; --held:#e0a24a; --held-bg:#241d10; --held-line:#4a3c1e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px}
+
+.deal-rail{
+  position:sticky; top:0; z-index:5; display:flex; align-items:center; gap:18px;
+  padding:11px 22px; background:color-mix(in srgb,var(--surface) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(8px); border-bottom:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.deal-name{font-size:16px;font-weight:600;letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.deal-name:hover{color:var(--accent-ink)}
+.deal-name::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.rail-here{font-size:15px;color:var(--accent-ink);font-weight:600}
+
+.wrap{max-width:1080px;margin:0 auto;padding:34px 22px 72px}
+.eyebrow{margin:0 0 8px;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint)}
+h1{margin:0 0 10px;font-size:31px;line-height:1.2;letter-spacing:-.015em}
+.t-lead{margin:0 0 6px;font-size:18px;color:var(--ink)}
+.t-sub{margin:0 0 18px;font-size:15px;color:var(--ink-soft);max-width:66ch}
+.t-legend{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0 0 26px;padding:0}
+.t-legend li{
+  flex:1 1 260px;background:var(--surface);border:1px solid var(--line);border-radius:11px;
+  padding:11px 13px;font-size:13.5px;color:var(--ink-soft);
+}
+.t-kind{
+  display:inline-block;margin-right:8px;padding:2px 8px;border-radius:999px;font-size:11.5px;
+  letter-spacing:.02em;border:1px solid var(--line);color:var(--ink-faint);background:var(--line-soft);
+  white-space:nowrap;
+}
+.t-kind--slot{color:var(--backed);border-color:color-mix(in srgb,var(--backed) 35%,var(--line))}
+.t-kind--instruction{color:var(--held);border-color:var(--held-line);background:var(--held-bg)}
+.t-kind--text{color:var(--ink-faint)}
+
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;align-items:start}
+.tcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.tcard[open]{grid-column:1/-1;border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+.tcard-head{list-style:none;cursor:pointer;display:grid;gap:6px;padding:15px 17px}
+.tcard-head::-webkit-details-marker{display:none}
+.tcard-rank{
+  display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+  border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);
+  font-size:12px;font-weight:600;
+}
+.tcard-name{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.tcard-id{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink-faint)}
+.tcard-purpose{font-size:14.5px;color:var(--ink-soft)}
+.tcard-trigger{font-size:13.5px;color:var(--ink-faint);border-left:2px solid var(--line);padding-left:10px}
+.tcard-more{font-size:12.5px;color:var(--accent-ink)}
+.tcard[open] .tcard-more::after{content:" is below"}
+.tcard-body{padding:0 17px 17px;border-top:1px solid var(--line-soft)}
+.t-meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin:14px 0 10px;font-size:14px}
+.t-meta-k{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);margin-right:6px}
+.t-panel,.t-shape{margin:0 0 8px;font-size:13.5px;color:var(--ink-soft)}
+.t-blocks{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.t-block{
+  display:grid;grid-template-columns:22px auto auto 1fr;gap:6px 9px;align-items:baseline;
+  padding:9px 11px;border:1px solid var(--line-soft);border-radius:10px;background:var(--paper);
+}
+.t-block--slot{border-color:color-mix(in srgb,var(--backed) 25%,var(--line-soft))}
+.t-block--instruction{border-color:var(--held-line);background:var(--held-bg)}
+.t-num{font-size:12px;color:var(--ink-faint)}
+.t-role{font-size:12.5px;font-weight:600;color:var(--ink)}
+.t-src{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:var(--ink-faint)}
+.t-text{grid-column:2/-1;font-size:14px;color:var(--ink-soft)}
+.t-foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-faint)}
+.t-foot a{color:var(--accent-ink)}
+@media (max-width:640px){
+  .tgrid{grid-template-columns:1fr}
+  .t-block{grid-template-columns:22px 1fr}
+  .t-text{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+<nav class="deal-rail">
+  <a class="deal-name" href="index.html">Brightsmile Dental Group</a>
+  <span class="rail-here">Template library</span>
+</nav>
+<main class="wrap">
+  <header class="t-head">
+    <p class="eyebrow">OpenGong · notes that cite the call</p>
+    <h1>Template library</h1>
+    <p class="t-lead">Eight follow-up templates. The call picks one by what actually happened on it. Each is a file you can edit.</p>
+    <p class="t-sub">The router reads them in this order and stops at the first one that fires. When none fire, the call keeps its plain follow-up email.</p>
+    <ul class="t-legend"><li><span class="t-kind">fixed text</span>Ships word for word from the file. The model never rewrites it.</li><li><span class="t-kind">filled from backed notes</span>Filled from claims the gate checked, each carrying its claim id.</li><li><span class="t-kind">instruction to the model</span>House rules for the draft. The buyer never sees this line.</li></ul>
+  </header>
+  <div class="tgrid">
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">1</span>
+      <span class="tcard-name">No next step re-engagement</span>
+      <span class="tcard-id">no-next-step-reengagement</span>
+      <span class="tcard-purpose">A call happened and nothing was agreed. The honest case.</span>
+      <span class="tcard-trigger">Fires when the call has a summary, and either nothing was agreed as a next step, or no next step was found. It stays quiet if a next step was agreed with a date, something to send, or a loose check back.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Thanks for the time today
+        <span class="t-meta-k">Word cap</span>100
+        <span class="t-meta-k">File</span><code>templates/no-next-step-reengagement.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: No next step was agreed, so this template picked itself. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">7 lines: 4 fixed text, 2 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">opener</span>
+      <span class="t-text">Thanks for the time today. Here is what I took away.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">summary</span>
+      <span class="t-text">What the call was actually about.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">pain</span>
+      <span class="t-text">Anything new the buyer named as a problem. Renders nothing when there was none.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Every sentence that says something about the call must carry the claim id it came from. We did not land on a next step, so ask one open question about what would be useful. Never invent a step, a date, or a reason to hurry. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">6</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">cta</span>
+      <span class="t-text">We did not land on a specific next step. What would be useful to you right now?</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">7</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">2</span>
+      <span class="tcard-name">Ghosted deal nudge</span>
+      <span class="tcard-id">ghosted-deal-nudge</span>
+      <span class="tcard-purpose">The last call left a real step on the table and the deal has gone quiet since.</span>
+      <span class="tcard-trigger">Fires when 14 days or more have passed since the last call, and a next step was agreed with a date, something to send, or a loose check back.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Checking in on next steps
+        <span class="t-meta-k">Word cap</span>90
+        <span class="t-meta-k">File</span><code>templates/ghosted-deal-nudge.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: The silence since the last call picked this template. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">5 lines: 3 fixed text, 1 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">Where we left off</span><span class="t-src">next_steps</span>
+      <span class="t-text">The last thing each side said they would do. This is the moment the email anchors on.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Name the exact thing that was true when we last spoke, carrying the claim id it came from. Then ask one soft question. No urgency, no pressure, nothing about time running out. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">cta</span>
+      <span class="t-text">Still the right time, or has something changed on your end?</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">3</span>
+      <span class="tcard-name">Close and pilot confirmation</span>
+      <span class="tcard-id">close-pilot-confirmation</span>
+      <span class="tcard-purpose">The buyer committed on the call and there are steps to confirm.</span>
+      <span class="tcard-trigger">Fires when a next step was agreed, and either a concern came up that the buyer accepted, or the buying stage reads committed.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Confirming what we agreed
+        <span class="t-meta-k">Word cap</span>120
+        <span class="t-meta-k">File</span><code>templates/close-pilot-confirmation.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: The commit on this call picked this template. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">8 lines: 4 fixed text, 3 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">opener</span>
+      <span class="t-text">Thanks for the time today. Here is what we agreed.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">outcome</span><span class="t-src">summary</span>
+      <span class="t-text">The commit itself, in one line.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">pricing</span>
+      <span class="t-text">The price that landed, exactly as the claim states it. Renders nothing when no quote was backed.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">Next steps</span><span class="t-src">next_steps</span>
+      <span class="t-text">Signature and logistics, with owner and due date.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">6</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Every sentence that says something about the call must carry the claim id it came from. Copy the price exactly as the claim writes it. Do not promise a date nobody named. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">7</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">assurance</span>
+      <span class="t-text">Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">8</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">4</span>
+      <span class="tcard-name">Pricing follow-up</span>
+      <span class="tcard-id">pricing-followup</span>
+      <span class="tcard-purpose">A number is on the table: a quote, a discount ask, or a price the buyer pushed back on.</span>
+      <span class="tcard-trigger">Fires when a price came up as a quote, a discount ask, a pushback on price, sticker shock, or a rival price.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Where pricing landed
+        <span class="t-meta-k">Word cap</span>120
+        <span class="t-meta-k">File</span><code>templates/pricing-followup.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: The number on the table picked this template. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">8 lines: 4 fixed text, 3 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">opener</span>
+      <span class="t-text">Thanks for the time today. Here is where pricing landed.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">pricing</span>
+      <span class="t-text">Every number, exactly as the claim states it. No totals, no rounding, no arithmetic.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">objections</span>
+      <span class="t-text">Price pushback only. Renders nothing when the call had none.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">Next steps</span><span class="t-src">next_steps</span>
+      <span class="t-text">What each side agreed to do next on the number.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">6</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Every sentence that says something about the call must carry the claim id it came from. Copy every number exactly as the claim writes it, in words if the claim uses words. Never add a number, a total, or a percentage of your own. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">7</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">assurance</span>
+      <span class="t-text">Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">8</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">5</span>
+      <span class="tcard-name">Post-demo follow-up</span>
+      <span class="tcard-id">post-demo-followup</span>
+      <span class="tcard-purpose">The demo landed, a concern got answered, and both sides agreed to do something.</span>
+      <span class="tcard-trigger">Fires when a next step was agreed with a date or something to send, and a concern came up that was answered on the call.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Next steps after the demo
+        <span class="t-meta-k">Word cap</span>120
+        <span class="t-meta-k">File</span><code>templates/post-demo-followup.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: The detected next step picked this template. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">8 lines: 4 fixed text, 3 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">opener</span>
+      <span class="t-text">Thanks for the time on the demo. Here is what I took away, and what we said we would do next.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">outcome</span><span class="t-src">summary</span>
+      <span class="t-text">Where the demo landed, in one line.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">objections</span>
+      <span class="t-text">The concern the buyer raised and how it was answered on the call.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">Next steps</span><span class="t-src">next_steps</span>
+      <span class="t-text">What each side agreed to do. Keep the owner and the due date that came with the claim.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">6</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Every sentence that says something about the call must carry the claim id it came from. Say only what those lines say. Do not add a step, a number, a date, or a name that is not in them. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">7</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">assurance</span>
+      <span class="t-text">Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">8</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">6</span>
+      <span class="tcard-name">Commitment fulfillment</span>
+      <span class="tcard-id">commitment-fulfillment</span>
+      <span class="tcard-purpose">An earlier call on this deal left the rep holding a promise, and this call is where it gets reconciled.</span>
+      <span class="tcard-trigger">Fires when a promise from an earlier call is still open, and a next step was agreed owned by the rep.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Where things stand
+        <span class="t-meta-k">Word cap</span>120
+        <span class="t-meta-k">File</span><code>templates/commitment-fulfillment.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: An open promise from an earlier call picked this template. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">8 lines: 4 fixed text, 3 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">opener</span>
+      <span class="t-text">Thanks for the time today. Quick check on where things stand.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What I promised</span><span class="t-src">deal</span>
+      <span class="t-text">Promises the rep made on earlier calls. Each one carries the call it was made on. Reads open rep promises from earlier calls.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">objections</span>
+      <span class="t-text">What the buyer said about those promises on this call.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">New from today</span><span class="t-src">next_steps</span>
+      <span class="t-text">What was agreed on this call, with owner and due date.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">6</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Every sentence that says something about a call must carry the claim id it came from. Name a promise as delivered only when a claim says so. Never mark something done to make the ledger look better. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">7</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">assurance</span>
+      <span class="t-text">Every line above came from something said on a call. If I got any of it wrong, tell me and I will fix it.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">8</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">7</span>
+      <span class="tcard-name">Objection addressed follow-up</span>
+      <span class="tcard-id">objection-addressed</span>
+      <span class="tcard-purpose">The buyer raised something, the rep answered it on the call, and it is worth putting in writing.</span>
+      <span class="tcard-trigger">Fires when a concern came up that was answered on the call, and that the buyer accepted or left open.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Following up on your questions
+        <span class="t-meta-k">Word cap</span>110
+        <span class="t-meta-k">File</span><code>templates/objection-addressed.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: The objection answered on this call picked this template. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">7 lines: 4 fixed text, 2 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">opener</span>
+      <span class="t-text">Thanks for the time today. Wanted to follow up on a couple of things you raised.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">objections</span>
+      <span class="t-text">Each concern the buyer raised, and how it was answered on the call.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">Next steps</span><span class="t-src">next_steps</span>
+      <span class="t-text">Anything agreed off the back of those answers.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Every sentence that says something about the call must carry the claim id it came from. Do not claim a concern is settled unless the claim says the buyer accepted it. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">6</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">assurance</span>
+      <span class="t-text">Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">7</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+    <details class="tcard">
+    <summary class="tcard-head">
+      <span class="tcard-rank">8</span>
+      <span class="tcard-name">Post-discovery follow-up</span>
+      <span class="tcard-id">post-discovery-followup</span>
+      <span class="tcard-purpose">The problem got named, nothing commercial has come up yet, and something got agreed.</span>
+      <span class="tcard-trigger">Fires when a problem got named, and a next step was agreed. It stays quiet if a price came up as a quote, a discount ask, or a pushback on price.</span>
+      <span class="tcard-more">Open the anatomy</span>
+    </summary>
+    <div class="tcard-body">
+      <p class="t-meta">
+        <span class="t-meta-k">Subject</span>Thanks for the time today
+        <span class="t-meta-k">Word cap</span>120
+        <span class="t-meta-k">File</span><code>templates/post-discovery-followup.json</code>
+      </p>
+      <p class="t-panel">On the call page it says: The pain the call surfaced picked this template. A free model drafted it. The gate checked every line.</p>
+      <p class="t-shape">7 lines: 4 fixed text, 2 filled from backed notes, and 1 instruction to the model.</p>
+      <ol class="t-blocks"><li class="t-block t-block--text">
+      <span class="t-num">1</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">greeting</span>
+      <span class="t-text">Hi {{recipient}},</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">2</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">opener</span>
+      <span class="t-text">Thanks for the time today. Here is what I took away.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">3</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">What we covered</span><span class="t-src">pain</span>
+      <span class="t-text">The problems the buyer described, in their own terms.</span>
+    </li><li class="t-block t-block--slot">
+      <span class="t-num">4</span>
+      <span class="t-kind t-kind--slot">filled from backed notes</span>
+      <span class="t-role">Next steps</span><span class="t-src">next_steps</span>
+      <span class="t-text">What each side agreed to do, with the owner and due date the claim carries.</span>
+    </li><li class="t-block t-block--instruction">
+      <span class="t-num">5</span>
+      <span class="t-kind t-kind--instruction">instruction to the model</span>
+      
+      <span class="t-text">Rewrite the lines above as one short email in the second person. Every sentence that says something about the call must carry the claim id it came from. No pricing block renders here, so never mention money. Short sentences.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">6</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">assurance</span>
+      <span class="t-text">Every line above came from something said on the call. If I got any of it wrong, tell me and I will fix it.</span>
+    </li><li class="t-block t-block--text">
+      <span class="t-num">7</span>
+      <span class="t-kind t-kind--text">fixed text</span>
+      <span class="t-role">signoff</span>
+      <span class="t-text">Best, {{sender}}</span>
+    </li></ol>
+    </div>
+  </details>
+  </div>
+  <footer class="t-foot">
+    <p>Read-only here. Change a template by editing its file and building the workspace again.</p>
+    <p><a href="index.html">Back to the deal workspace</a></p>
+  </footer>
+</main>
+</body>
+</html>
