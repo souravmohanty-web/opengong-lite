@@ -204,12 +204,17 @@ body{
 .email-body{margin:14px;padding:15px 16px;border:1px solid var(--line-soft);border-radius:10px;background:var(--paper)}
 .email-subject{margin:0 0 12px;font-size:16px;color:var(--ink);font-weight:600}
 .email-subject span{display:inline-block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-right:9px}
-.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.email-greeting{margin:0 0 8px;font-size:16px;color:var(--ink)}
+.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink);line-height:1.5}
+.email-lead{margin:0 0 14px;font-size:16px;color:var(--ink);line-height:1.5;font-weight:600}
+.email-hdr{margin:14px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:650}
 .email-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
 .email-list li{position:relative;padding-left:24px;font-size:16px;line-height:1.5;color:var(--ink)}
 .em-cite{position:absolute;left:0;top:5px;width:15px;height:15px;border-radius:50%;background:color-mix(in srgb,var(--backed) 16%,transparent)}
 .em-cite::after{content:"";position:absolute;left:5px;top:3px;width:3px;height:7px;border:solid var(--backed);border-width:0 2px 2px 0;transform:rotate(42deg)}
-.email-outro{margin:12px 0 0;font-size:16px;color:var(--ink-faint)}
+.em-meta{display:inline-block;margin-left:8px;font-size:13px;color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.email-outro{margin:16px 0 0;font-size:16px;color:var(--ink-faint);line-height:1.5}
+.email-sign{margin:14px 0 0;font-size:16px;color:var(--ink);line-height:1.5}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
 
@@ -277,7 +282,7 @@ body{
   <div class="notes">
     
     <section class="grp grp--brief">
-      <h2 class="grp-label">Summary</h2>
+      <h2 class="grp-label">Outcome</h2>
       <div class="cards">
         <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Maya at 0:00">1</button></sup></p>
@@ -310,6 +315,37 @@ body{
           <span class="src-spk">Rahul</span>
           <span class="src-q">the ringhawk renewal is november and if i&#39;m switching i need to know before…</span>
           <span class="src-t">0:52</span>
+        </button>
+      </li></ol>
+    </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Next steps</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Rahul at 1:20">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">let&#39;s do that <mark>bring me a sharper number and the porting proof now and then i take it to doctor meta</mark></p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 1, Rahul at 1:20">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">let&#39;s do that <mark>bring me a sharper number and the porting proof now and then i take it to doctor meta</mark></p>
+  </div></div>
+  </article>
+      </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-next_steps-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">bring me a sharper number and the porting proof now and then i take it to…</span>
+          <span class="src-t">1:20</span>
         </button>
       </li></ol>
     </div>
@@ -348,30 +384,6 @@ body{
           <span class="src-spk">Rahul</span>
           <span class="src-q">the old vendor told us back in the day that porting numbers takes months if…</span>
           <span class="src-t">1:03</span>
-        </button>
-      </li></ol>
-    </div>
-    </section>
-    <section class="grp">
-      <h2 class="grp-label">Competition</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">RingHawk counter-offered twenty two to keep the account, and its renewal falls in November.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:08">1</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
-    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="8.96" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">twenty eight archer so here&#39;s my problem may i <mark>ring hawk came back the moment they smelled a switch and offered twenty two to renew</mark></p>
-  </div></div>
-  </article>
-      </div>
-      <div class="src-block">
-      <span class="src-label">Sources</span>
-      <ol class="sources"><li>
-        <button class="source" type="button" data-cite="rc-competitors-0-0">
-          <span class="src-n">1</span>
-          <span class="src-spk">Rahul</span>
-          <span class="src-q">ring hawk came back the moment they smelled a switch and offered twenty two to…</span>
-          <span class="src-t">0:08</span>
         </button>
       </li></ol>
     </div>
@@ -443,6 +455,30 @@ body{
     </div>
     </section>
     <section class="grp">
+      <h2 class="grp-label">Competition</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">RingHawk counter-offered twenty two to keep the account, and its renewal falls in November.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:08">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="8.96" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">twenty eight archer so here&#39;s my problem may i <mark>ring hawk came back the moment they smelled a switch and offered twenty two to renew</mark></p>
+  </div></div>
+  </article>
+      </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-competitors-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">ring hawk came back the moment they smelled a switch and offered twenty two to…</span>
+          <span class="src-t">0:08</span>
+        </button>
+      </li></ol>
+    </div>
+    </section>
+    <section class="grp">
       <h2 class="grp-label">Stakeholders</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
@@ -480,37 +516,6 @@ body{
       </li></ol>
     </div>
     </section>
-    <section class="grp">
-      <h2 class="grp-label">Next steps</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Rahul at 1:20">1</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
-    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">let&#39;s do that <mark>bring me a sharper number and the porting proof now and then i take it to doctor meta</mark></p>
-  </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 1, Rahul at 1:20">1</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
-    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="80.48" aria-label="Play from 1:20"><span class="tri" aria-hidden="true"></span>1:20</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">let&#39;s do that <mark>bring me a sharper number and the porting proof now and then i take it to doctor meta</mark></p>
-  </div></div>
-  </article>
-      </div>
-      <div class="src-block">
-      <span class="src-label">Sources</span>
-      <ol class="sources"><li>
-        <button class="source" type="button" data-cite="rc-next_steps-0-0">
-          <span class="src-n">1</span>
-          <span class="src-spk">Rahul</span>
-          <span class="src-q">bring me a sharper number and the porting proof now and then i take it to…</span>
-          <span class="src-t">1:20</span>
-        </button>
-      </li></ol>
-    </div>
-    </section>
     
     <section class="held">
       <h2 class="held-label"><span class="held-mark" aria-hidden="true"></span>Not found in the call</h2>
@@ -532,11 +537,17 @@ body{
       <p class="email-trust">Only backed notes reach this draft. 1 stayed out. Every line below came from something said on the call.</p>
       <div class="email-body">
         <p class="email-subject"><span>Subject</span>Follow-up: the pricing call</p>
-        <p class="email-intro">Recapping what we covered and what happens next:</p>
-        <ul class="email-list">
-          <li><span class="em-cite" aria-hidden="true"></span>Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.</li><li><span class="em-cite" aria-hidden="true"></span>RingHawk renews in November: the buyer needs a decision before the auto-renew locks.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer must justify the six-per-seat gap to Dr. Mehta, who signs the checks.</li><li><span class="em-cite" aria-hidden="true"></span>Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer&#39;s actually experienced.</li><li><span class="em-cite" aria-hidden="true"></span>CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.</li><li><span class="em-cite" aria-hidden="true"></span>RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr. Mehta will question.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer wants fifteen off, enough to make this a service decision instead of a price fight.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to bring a sharper number and porting proof; buyer takes it to Dr. Mehta.</li>
-        </ul>
-        <p class="email-outro">Every line traces to a numbered source above.</p>
+        <p class="email-greeting">Hi Rahul,</p>
+        <p class="email-intro">Thanks for the time on the pricing call. Here is what I took away, and what we said we would do next.</p>
+        <p class="email-lead">Pricing on the table: twenty eight per month all-in; RingHawk countered twenty two; buyer asked for fifteen off.</p>
+        
+        <p class="email-hdr">What we covered</p>
+        <ul class="email-list"><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">RingHawk renews in November: the buyer needs a decision before the auto-renew locks.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Buyer must justify the six-per-seat gap to Dr. Mehta, who signs the checks.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Porting fear is secondhand. The old vendor told them numbers take months to port, not something the buyer&#39;s actually experienced.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">CallForge quote: twenty eight per month, all five locations, routing and texting and recall tooling included.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">RingHawk counter-offered twenty two to retain the account the moment it sensed a switch.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Buyer flags a six-per-seat gap versus the RingHawk renewal that Dr. Mehta will question.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Buyer wants fifteen off, enough to make this a service decision instead of a price fight.</span></li></ul>
+        
+        <p class="email-hdr">Next steps</p>
+        <ul class="email-list"><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Rep to bring a sharper number and the porting proof; buyer will then take it to Dr. Mehta.</span><span class="em-meta">Maya · before the November renewal</span></li></ul>
+        <p class="email-outro">Every line above came from something said on the call. If I got any of it wrong, tell me and I&#39;ll fix it.</p>
+        <p class="email-sign">Best,<br>Maya</p>
       </div>
     </section>
   </div>

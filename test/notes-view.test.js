@@ -410,3 +410,96 @@ test('held-back claim reason and email framing carry no em-dash even from dashed
   assert.ok(!m.title.includes('—'));
   assert.ok(!m.email.subject.includes('—'));
 });
+
+// ── the follow-up email panel reads like an email a rep would send ───────────
+// Structure from research/13-sybill-deep/02-email-infra.md (the market-standard
+// template), substance from the gate: every asserting line is a backed claim.
+
+test('the rendered email panel has a greeting, an outcome line, labelled blocks and a close', () => {
+  const b = bundleById('02');
+  const html = renderCallPage(b, { ...navCtx(b), owners: { rep: 'Maya', buyer: 'Rahul', joint: 'Both', unknown: '' } });
+  const panel = /<section class="email">[\s\S]*?<\/section>/.exec(html)[0];
+  assert.match(panel, /class="email-greeting">Hi Rahul,</, 'the draft opens on a named greeting');
+  assert.match(panel, /class="email-intro">Thanks for the time on the demo call\./, 'one line of context up front');
+  assert.match(panel, /class="email-lead">Demo landed/, 'where the call landed leads');
+  assert.match(panel, /class="email-hdr">What we covered</);
+  assert.match(panel, /class="email-hdr">Next steps</);
+  assert.match(panel, /class="email-sign">Best,<br>Maya</, 'the draft closes like a person wrote it');
+  assert.ok(!/Recapping what we covered and what happens next/.test(panel), 'the old flat single-list draft is gone');
+});
+
+test('a next step in the panel shows who owns it and when it is due', () => {
+  const b = bundleById('05');
+  const html = renderCallPage(b, { ...navCtx(b), owners: { rep: 'Maya', buyer: 'Rahul', joint: 'Both', unknown: '' } });
+  assert.match(html, /Rep to send the agreement this afternoon\.<\/span><span class="em-meta">Maya · this afternoon</);
+  assert.match(html, /<span class="em-meta">Rahul · early next week</);
+  assert.match(html, /<span class="em-meta">Both · weekend after signing · tentative</, 'a soft step says it is tentative');
+});
+
+test('every bullet rendered in the email panel maps to an emailable claim id', () => {
+  for (const b of loadBundles()) {
+    const m = buildNotesModel(b, { owners: { rep: 'Maya', buyer: 'Rahul', joint: 'Both', unknown: '' } });
+    const emailable = new Set(b.claims
+      .filter((c) => c.status === 'verified' || c.status === 'segment_corrected')
+      .map((c) => c.id));
+    const grouped = [...(m.email.outcome ? [m.email.outcome] : []), ...m.email.recap, ...m.email.next_steps];
+    assert.deepEqual(grouped.map((x) => x.claim_id), m.email.bullets.map((x) => x.claim_id),
+      `${b.call.id}: the blocks on screen are exactly the screened bullets`);
+    assert.ok(grouped.length > 0, `${b.call.id}: the draft is not empty`);
+
+    const html = renderCallPage(b, { ...navCtx(b), owners: { rep: 'Maya', buyer: 'Rahul' } });
+    const panel = /<section class="email">[\s\S]*?<\/section>/.exec(html)[0];
+    const rendered = [...panel.matchAll(/<span class="em-text">([\s\S]*?)<\/span>/g)].map((x) => x[1]);
+    const leads = [...panel.matchAll(/class="email-lead">([\s\S]*?)<\/p>/g)].map((x) => x[1]);
+    for (const text of [...leads, ...rendered]) {
+      const hit = grouped.find((x) => escapeHtmlish(x.text) === text);
+      assert.ok(hit, `${b.call.id}: a line on screen with no bullet behind it: ${text}`);
+      assert.ok(emailable.has(hit.claim_id), `${b.call.id}: bullet ${hit.claim_id} is not a backed claim`);
+    }
+    assert.equal(rendered.length + leads.length, grouped.length, `${b.call.id}: every bullet renders exactly once`);
+  }
+});
+
+// The renderer escapes; the test compares against the same escaping, so a
+// quote or an apostrophe in a claim can never make this assertion pass falsely.
+function escapeHtmlish(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[ch]));
+}
+
+// ── the summary a manager scans in ten seconds ───────────────────────────────
+
+test('the notes lead on the outcome, then what happens next', () => {
+  for (const b of loadBundles()) {
+    const m = buildNotesModel(b);
+    assert.equal(m.primary[0].key, 'summary', `${b.call.id}: the outcome is not first`);
+    assert.equal(m.primary[0].label, 'Outcome');
+    const nextIdx = m.primary.findIndex((s) => s.key === 'next_steps');
+    if (nextIdx >= 0) {
+      assert.equal(nextIdx, 1, `${b.call.id}: next steps must sit right under the outcome`);
+    }
+    assert.ok(m.primary[0].cards.length <= 3, `${b.call.id}: the outcome brief is 3 lines at most`);
+    for (const card of m.primary[0].cards) {
+      assert.ok(card.receipts.length > 0, `${b.call.id}: an outcome line with no receipt`);
+    }
+  }
+});
+
+test('the notes body stays inside the 300 to 500 word cap, and omits rather than pads', () => {
+  for (const b of loadBundles()) {
+    const m = buildNotesModel(b);
+    const words = m.primary
+      .flatMap((s) => s.cards)
+      .map((c) => c.text)
+      .join(' ')
+      .split(/\s+/)
+      .filter(Boolean).length;
+    assert.ok(words <= 500, `${b.call.id}: notes body is ${words} words, over the cap`);
+    // omit-don't-N/A: a section with nothing backing it is not rendered at all
+    for (const sec of m.primary) assert.ok(sec.cards.length > 0, `${b.call.id}/${sec.key} rendered empty`);
+    const html = renderCallPage(b, navCtx(b));
+    const text = visibleText(html);
+    assert.equal(/\bN\/A\b/.exec(text), null, `${b.call.id} renders an N/A placeholder`);
+  }
+});

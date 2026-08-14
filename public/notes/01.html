@@ -204,12 +204,17 @@ body{
 .email-body{margin:14px;padding:15px 16px;border:1px solid var(--line-soft);border-radius:10px;background:var(--paper)}
 .email-subject{margin:0 0 12px;font-size:16px;color:var(--ink);font-weight:600}
 .email-subject span{display:inline-block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-right:9px}
-.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.email-greeting{margin:0 0 8px;font-size:16px;color:var(--ink)}
+.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink);line-height:1.5}
+.email-lead{margin:0 0 14px;font-size:16px;color:var(--ink);line-height:1.5;font-weight:600}
+.email-hdr{margin:14px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:650}
 .email-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
 .email-list li{position:relative;padding-left:24px;font-size:16px;line-height:1.5;color:var(--ink)}
 .em-cite{position:absolute;left:0;top:5px;width:15px;height:15px;border-radius:50%;background:color-mix(in srgb,var(--backed) 16%,transparent)}
 .em-cite::after{content:"";position:absolute;left:5px;top:3px;width:3px;height:7px;border:solid var(--backed);border-width:0 2px 2px 0;transform:rotate(42deg)}
-.email-outro{margin:12px 0 0;font-size:16px;color:var(--ink-faint)}
+.em-meta{display:inline-block;margin-left:8px;font-size:13px;color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.email-outro{margin:16px 0 0;font-size:16px;color:var(--ink-faint);line-height:1.5}
+.email-sign{margin:14px 0 0;font-size:16px;color:var(--ink);line-height:1.5}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
 
@@ -289,7 +294,7 @@ body{
   <div class="notes">
     
     <section class="grp grp--brief">
-      <h2 class="grp-label">Summary</h2>
+      <h2 class="grp-label">Outcome</h2>
       <div class="cards">
         <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Discovery landed a 30-minute demo of after-hours routing and compliant texting.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Maya at 1:27">1</button></sup></p>
@@ -322,6 +327,44 @@ body{
           <span class="src-spk">Rahul</span>
           <span class="src-q">we lose maybe ten bookings a week that way</span>
           <span class="src-t">0:25</span>
+        </button>
+      </li></ol>
+    </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Next steps</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to run a 30-minute demo Thursday covering after-hours routing and the compliant texting flow, no slides.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Rahul at 1:38">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="98.4" aria-label="Play from 1:38"><span class="tri" aria-hidden="true"></span>1:38</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">alright <mark>do it thursday before the lunch rush and keep it practical</mark> i don&#39;t need a slideshow</p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to run the demo Thursday: routing plus texting, no slides.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Maya at 1:43">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="103.92" aria-label="Play from 1:43"><span class="tri" aria-hidden="true"></span>1:43</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line">thursday tiz <mark>i&#39;ll bring the routing demo and the texting flow no slides</mark></p>
+  </div></div>
+  </article>
+      </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-next_steps-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">do it thursday before the lunch rush and keep it practical</span>
+          <span class="src-t">1:38</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-next_steps-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">i&#39;ll bring the routing demo and the texting flow no slides</span>
+          <span class="src-t">1:43</span>
         </button>
       </li></ol>
     </div>
@@ -403,30 +446,6 @@ body{
     </div>
     </section>
     <section class="grp">
-      <h2 class="grp-label">Competition</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Brightsmile runs all five locations on RingHawk and has for about three years, and is now unhappy: the incumbent bumped price again while service got worse.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:15">1</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
-    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="15.040000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">yeah well fiverr on ringhawk <mark>and have been for about three years</mark> and look the system works until it doesn&#39;t cause drop mid transfer between locations at least a few times a day now</p>
-  </div></div>
-  </article>
-      </div>
-      <div class="src-block">
-      <span class="src-label">Sources</span>
-      <ol class="sources"><li>
-        <button class="source" type="button" data-cite="rc-competitors-0-0">
-          <span class="src-n">1</span>
-          <span class="src-spk">Rahul</span>
-          <span class="src-q">and have been for about three years</span>
-          <span class="src-t">0:15</span>
-        </button>
-      </li></ol>
-    </div>
-    </section>
-    <section class="grp">
       <h2 class="grp-label">Pricing</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
@@ -465,6 +484,30 @@ body{
     </div>
     </section>
     <section class="grp">
+      <h2 class="grp-label">Competition</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Brightsmile runs all five locations on RingHawk and has for about three years, and is now unhappy: the incumbent bumped price again while service got worse.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:15">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="15.040000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">yeah well fiverr on ringhawk <mark>and have been for about three years</mark> and look the system works until it doesn&#39;t cause drop mid transfer between locations at least a few times a day now</p>
+  </div></div>
+  </article>
+      </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-competitors-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">and have been for about three years</span>
+          <span class="src-t">0:15</span>
+        </button>
+      </li></ol>
+    </div>
+    </section>
+    <section class="grp">
       <h2 class="grp-label">Stakeholders</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
@@ -495,44 +538,6 @@ body{
       </li></ol>
     </div>
     </section>
-    <section class="grp">
-      <h2 class="grp-label">Next steps</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to run a 30-minute demo Thursday covering after-hours routing and the compliant texting flow, no slides.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Rahul at 1:38">1</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
-    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="98.4" aria-label="Play from 1:38"><span class="tri" aria-hidden="true"></span>1:38</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">alright <mark>do it thursday before the lunch rush and keep it practical</mark> i don&#39;t need a slideshow</p>
-  </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to run the demo Thursday: routing plus texting, no slides.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Maya at 1:43">2</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
-    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="103.92" aria-label="Play from 1:43"><span class="tri" aria-hidden="true"></span>1:43</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line">thursday tiz <mark>i&#39;ll bring the routing demo and the texting flow no slides</mark></p>
-  </div></div>
-  </article>
-      </div>
-      <div class="src-block">
-      <span class="src-label">Sources</span>
-      <ol class="sources"><li>
-        <button class="source" type="button" data-cite="rc-next_steps-0-0">
-          <span class="src-n">1</span>
-          <span class="src-spk">Rahul</span>
-          <span class="src-q">do it thursday before the lunch rush and keep it practical</span>
-          <span class="src-t">1:38</span>
-        </button>
-      </li><li>
-        <button class="source" type="button" data-cite="rc-next_steps-1-0">
-          <span class="src-n">2</span>
-          <span class="src-spk">Maya</span>
-          <span class="src-q">i&#39;ll bring the routing demo and the texting flow no slides</span>
-          <span class="src-t">1:43</span>
-        </button>
-      </li></ol>
-    </div>
-    </section>
     
     
     
@@ -544,11 +549,17 @@ body{
       <p class="email-trust">Only backed notes reach this draft. Every line below came from something said on the call.</p>
       <div class="email-body">
         <p class="email-subject"><span>Subject</span>Follow-up: the discovery call</p>
-        <p class="email-intro">Recapping what we covered and what happens next:</p>
-        <ul class="email-list">
-          <li><span class="em-cite" aria-hidden="true"></span>Discovery landed a 30-minute demo of after-hours routing and compliant texting.</li><li><span class="em-cite" aria-hidden="true"></span>About ten bookings a week are lost after hours; calls also drop mid-transfer a few times a day.</li><li><span class="em-cite" aria-hidden="true"></span>Calls drop mid-transfer between locations at least a few times a day.</li><li><span class="em-cite" aria-hidden="true"></span>After-hours calls ring out to a voicemail nobody checks until morning: the real bleed.</li><li><span class="em-cite" aria-hidden="true"></span>Fear of TCPA keeps the practice from texting patients at all today, even though the office manager wants it.</li><li><span class="em-cite" aria-hidden="true"></span>Trust is the blocker. They got burned switching software once and won&#39;t repeat that without proof it works.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer states budget is not the blocker: &#39;we do not have a budget problem.&#39;</li><li><span class="em-cite" aria-hidden="true"></span>The RingHawk renewal is &#39;too expensive for what we&#39;re getting.&#39; That&#39;s about the incumbent&#39;s price, not CallForge&#39;s.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to run a 30-minute demo Thursday covering after-hours routing and the compliant texting flow, no slides.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to run the demo Thursday: routing plus texting, no slides.</li>
-        </ul>
-        <p class="email-outro">Every line traces to a numbered source above.</p>
+        <p class="email-greeting">Hi Rahul,</p>
+        <p class="email-intro">Thanks for the time on the discovery call. Here is what I took away, and what we said we would do next.</p>
+        <p class="email-lead">Discovery landed a 30-minute demo of after-hours routing and compliant texting.</p>
+        
+        <p class="email-hdr">What we covered</p>
+        <ul class="email-list"><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">About ten bookings a week are lost after hours; calls also drop mid-transfer a few times a day.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Calls drop mid-transfer between locations at least a few times a day.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">After-hours calls ring out to a voicemail nobody checks until morning: the real bleed.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Fear of TCPA keeps the practice from texting patients at all today, even though the office manager wants it.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Trust is the blocker. They got burned switching software once and won&#39;t repeat that without proof it works.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Buyer states budget is not the blocker: &#39;we do not have a budget problem.&#39;</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">The RingHawk renewal is &#39;too expensive for what we&#39;re getting.&#39; That&#39;s about the incumbent&#39;s price, not CallForge&#39;s.</span></li></ul>
+        
+        <p class="email-hdr">Next steps</p>
+        <ul class="email-list"><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Rep to run a 30-minute demo Thursday covering after-hours routing and the compliant texting flow, no slides.</span><span class="em-meta">Maya · Thursday</span></li></ul>
+        <p class="email-outro">Every line above came from something said on the call. If I got any of it wrong, tell me and I&#39;ll fix it.</p>
+        <p class="email-sign">Best,<br>Maya</p>
       </div>
     </section>
   </div>

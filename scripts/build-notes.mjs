@@ -88,6 +88,7 @@ export function buildNotes({ quiet = false } = {}) {
       seq,
       total: calls.length,
       speakers: SPEAKERS,
+      owners: OWNERS,
       homeHref: '../index.html',
       audioSrc: audioPresent.get(id) ? `/audio/${id}.m4a` : null,
     });

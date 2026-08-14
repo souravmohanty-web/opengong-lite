@@ -24,15 +24,18 @@ import { buildViewModel, escapeHtml, formatTime } from './viewer.js';
 import { composeEmail } from './email.js';
 import { buildCommitmentLedger } from './deal-index.mjs';
 
-// Notes body (human prose, each claim a card), in reading order.
+// Notes body (human prose, each claim a card), in reading order. The order is
+// the one a manager scans in ten seconds and the one team/plans/representation.md
+// locks: where it landed first, then what happens next, then the detail behind
+// both. A section with nothing backing it is omitted, never rendered as "N/A".
 const PRIMARY = [
-  ['summary', 'Summary'],
+  ['summary', 'Outcome'],
+  ['next_steps', 'Next steps'],
   ['pain', 'Pain'],
   ['objections', 'Objections'],
-  ['competitors', 'Competition'],
   ['pricing', 'Pricing'],
+  ['competitors', 'Competition'],
   ['stakeholders', 'Stakeholders'],
-  ['next_steps', 'Next steps'],
 ];
 
 // Analytical extras: small secondary chips, never prose cards.
@@ -180,13 +183,13 @@ export function buildNotesModel(bundle, opts = {}) {
   }
 
   const primary = [];
-  const emailClaimIds = [];
+  const emailClaimRefs = [];
   for (const [key, label] of PRIMARY) {
     const s = sectionByKey.get(key);
     if (!s || !s.blocks.length) continue;
     const cards = s.blocks.map(cardFromBlock);
     if (EMAIL_SECTIONS.has(key)) {
-      for (const card of cards) for (const id of card.claimIds) emailClaimIds.push(id);
+      for (const card of cards) for (const id of card.claimIds) emailClaimRefs.push({ id, section: key });
     }
     primary.push(numberSources({ key, label, cards }));
   }
@@ -195,9 +198,41 @@ export function buildNotesModel(bundle, opts = {}) {
   // only verified/segment_corrected claims survive it, so nothing un-cited can
   // reach an outbound draft. We feed it the deal-notes claims (the human notes,
   // in reading order) and render its structured bullets, each traced to a note.
-  const emailClaims = emailClaimIds.map((id) => claimById.get(id)).filter(Boolean);
-  const draft = composeEmail(emailClaims, { title: `the ${shortLabel(vm.title).toLowerCase()} call` });
-  const email = { subject: draft.subject, bullets: draft.bullets };
+  //
+  // The section a claim was rendered under travels with it, so the composer can
+  // put next steps in the next-steps block. Owner, due date and firmness come
+  // off the raw claim, which is where the extractor wrote them; buildViewModel
+  // does not carry those fields because the receipts UI has no use for them.
+  const owners = opts.owners ?? {};
+  const emailClaims = emailClaimRefs.map(({ id, section }) => {
+    const c = claimById.get(id);
+    if (!c) return null;
+    const raw = rawById.get(id) ?? {};
+    return {
+      ...c,
+      section,
+      owner: raw.owner ?? null,
+      due: raw.due ?? null,
+      commitment: raw.commitment ?? null,
+    };
+  }).filter(Boolean);
+  const draft = composeEmail(emailClaims, {
+    title: `the ${shortLabel(vm.title).toLowerCase()} call`,
+    recipient: owners.buyer ?? null,
+    sender: owners.rep ?? null,
+    owners,
+  });
+  const email = {
+    subject: draft.subject,
+    greeting: draft.greeting,
+    opener: draft.opener,
+    outcome: draft.outcome,
+    recap: draft.recap,
+    next_steps: draft.next_steps,
+    assurance: draft.assurance,
+    signoff: draft.signoff,
+    bullets: draft.bullets,
+  };
 
   const secondary = [];
   for (const [key, label] of SECONDARY) {
@@ -415,6 +450,13 @@ export function renderNotesPage(model, ctx = {}) {
     </section>` : '';
 
   const keptOut = m.tallies.notFound + m.tallies.blocked;
+  // The draft renders in the shape a rep sends: greeting, where the call landed,
+  // the recap, then the steps with who owns each and when it is due, then a
+  // close. A block with nothing backing it is left out, never shown empty.
+  const emailBullet = (b) => `<li><span class="em-cite" aria-hidden="true"></span><span class="em-text">${escapeHtml(b.text)}</span>${b.meta ? `<span class="em-meta">${escapeHtml(b.meta)}</span>` : ''}</li>`;
+  const emailBlock = (label, items) => (items.length ? `
+        <p class="email-hdr">${escapeHtml(label)}</p>
+        <ul class="email-list">${items.map(emailBullet).join('')}</ul>` : '');
   const emailHtml = m.email && m.email.bullets.length ? `
     <section class="email">
       <div class="email-head">
@@ -424,11 +466,13 @@ export function renderNotesPage(model, ctx = {}) {
       <p class="email-trust">Only backed notes reach this draft.${keptOut > 0 ? ` ${keptOut} stayed out.` : ''} Every line below came from something said on the call.</p>
       <div class="email-body">
         <p class="email-subject"><span>Subject</span>${escapeHtml(m.email.subject)}</p>
-        <p class="email-intro">Recapping what we covered and what happens next:</p>
-        <ul class="email-list">
-          ${m.email.bullets.map((b) => `<li><span class="em-cite" aria-hidden="true"></span>${escapeHtml(b.text)}</li>`).join('')}
-        </ul>
-        <p class="email-outro">Every line traces to a numbered source above.</p>
+        <p class="email-greeting">${escapeHtml(m.email.greeting)}</p>
+        <p class="email-intro">${escapeHtml(m.email.opener)}</p>
+        ${m.email.outcome ? `<p class="email-lead">${escapeHtml(m.email.outcome.text)}</p>` : ''}
+        ${emailBlock('What we covered', m.email.recap)}
+        ${emailBlock('Next steps', m.email.next_steps)}
+        <p class="email-outro">${escapeHtml(m.email.assurance)}</p>
+        <p class="email-sign">${m.email.signoff.split('\n').map((l) => escapeHtml(l)).join('<br>')}</p>
       </div>
     </section>` : '';
 
@@ -479,7 +523,7 @@ ${audioHtml}
 // Convenience: bundle → full page in one call (used by the build script).
 export function renderCallPage(bundle, ctx = {}) {
   const model = buildNotesModel(bundle, {
-    seq: ctx.seq, total: ctx.total, dealName: ctx.dealName, stage: ctx.stage,
+    seq: ctx.seq, total: ctx.total, dealName: ctx.dealName, stage: ctx.stage, owners: ctx.owners,
   });
   return renderNotesPage(model, ctx);
 }
@@ -880,12 +924,17 @@ body{
 .email-body{margin:14px;padding:15px 16px;border:1px solid var(--line-soft);border-radius:10px;background:var(--paper)}
 .email-subject{margin:0 0 12px;font-size:16px;color:var(--ink);font-weight:600}
 .email-subject span{display:inline-block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-right:9px}
-.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.email-greeting{margin:0 0 8px;font-size:16px;color:var(--ink)}
+.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink);line-height:1.5}
+.email-lead{margin:0 0 14px;font-size:16px;color:var(--ink);line-height:1.5;font-weight:600}
+.email-hdr{margin:14px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:650}
 .email-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
 .email-list li{position:relative;padding-left:24px;font-size:16px;line-height:1.5;color:var(--ink)}
 .em-cite{position:absolute;left:0;top:5px;width:15px;height:15px;border-radius:50%;background:color-mix(in srgb,var(--backed) 16%,transparent)}
 .em-cite::after{content:"";position:absolute;left:5px;top:3px;width:3px;height:7px;border:solid var(--backed);border-width:0 2px 2px 0;transform:rotate(42deg)}
-.email-outro{margin:12px 0 0;font-size:16px;color:var(--ink-faint)}
+.em-meta{display:inline-block;margin-left:8px;font-size:13px;color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.email-outro{margin:16px 0 0;font-size:16px;color:var(--ink-faint);line-height:1.5}
+.email-sign{margin:14px 0 0;font-size:16px;color:var(--ink);line-height:1.5}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
 

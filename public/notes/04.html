@@ -204,12 +204,17 @@ body{
 .email-body{margin:14px;padding:15px 16px;border:1px solid var(--line-soft);border-radius:10px;background:var(--paper)}
 .email-subject{margin:0 0 12px;font-size:16px;color:var(--ink);font-weight:600}
 .email-subject span{display:inline-block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-right:9px}
-.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.email-greeting{margin:0 0 8px;font-size:16px;color:var(--ink)}
+.email-intro{margin:0 0 10px;font-size:16px;color:var(--ink);line-height:1.5}
+.email-lead{margin:0 0 14px;font-size:16px;color:var(--ink);line-height:1.5;font-weight:600}
+.email-hdr{margin:14px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:650}
 .email-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
 .email-list li{position:relative;padding-left:24px;font-size:16px;line-height:1.5;color:var(--ink)}
 .em-cite{position:absolute;left:0;top:5px;width:15px;height:15px;border-radius:50%;background:color-mix(in srgb,var(--backed) 16%,transparent)}
 .em-cite::after{content:"";position:absolute;left:5px;top:3px;width:3px;height:7px;border:solid var(--backed);border-width:0 2px 2px 0;transform:rotate(42deg)}
-.email-outro{margin:12px 0 0;font-size:16px;color:var(--ink-faint)}
+.em-meta{display:inline-block;margin-left:8px;font-size:13px;color:var(--accent-ink);background:var(--accent-soft);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.email-outro{margin:16px 0 0;font-size:16px;color:var(--ink-faint);line-height:1.5}
+.email-sign{margin:14px 0 0;font-size:16px;color:var(--ink);line-height:1.5}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
 
@@ -283,7 +288,7 @@ body{
   <div class="notes">
     
     <section class="grp grp--brief">
-      <h2 class="grp-label">Summary</h2>
+      <h2 class="grp-label">Outcome</h2>
       <div class="cards">
         <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Maya at 0:14">1</button></sup></p>
@@ -316,6 +321,51 @@ body{
           <span class="src-spk">Rahul</span>
           <span class="src-q">lost two receptions this month every new hire has to lend ringhawks fifteen…</span>
           <span class="src-t">0:44</span>
+        </button>
+      </li></ol>
+    </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Next steps</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to send the overdue TCPA one-pager today, directly to the office manager.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Maya at 0:14">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="14" aria-label="Play from 0:14"><span class="tri" aria-hidden="true"></span>0:14</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line">you&#39;re right that one&#39;s on me <mark>it goes out today and i&#39;ll send it directly to her so it doesn&#39;t root through you</mark></p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Rahul at 0:58">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">good so tcpa paper today <mark>palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
+  </div></div>
+  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-2-0" aria-label="Source 2, Rahul at 0:58">2</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-2-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">good so tcpa paper today <mark>palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
+  </div></div>
+  </article>
+      </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-next_steps-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Maya</span>
+          <span class="src-q">it goes out today and i&#39;ll send it directly to her so it doesn&#39;t root through…</span>
+          <span class="src-t">0:14</span>
+        </button>
+      </li><li>
+        <button class="source" type="button" data-cite="rc-next_steps-1-0">
+          <span class="src-n">2</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">palate proposal on paper this week and the sharper number you owe me from last…</span>
+          <span class="src-t">0:58</span>
         </button>
       </li></ol>
     </div>
@@ -369,30 +419,6 @@ body{
     </div>
     </section>
     <section class="grp">
-      <h2 class="grp-label">Competition</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">RingHawk&#39;s fifteen-screen UI (spoken &#39;ringhawks&#39;) is now a training burden as front-desk staff churn.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:44">1</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
-    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="44.08" aria-label="Play from 0:44"><span class="tri" aria-hidden="true"></span>0:44</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">contest tenab again lost two receptions this month <mark>every new hire has to lend ringhawks fifteen screens</mark> and honestly training time is becoming its own cost</p>
-  </div></div>
-  </article>
-      </div>
-      <div class="src-block">
-      <span class="src-label">Sources</span>
-      <ol class="sources"><li>
-        <button class="source" type="button" data-cite="rc-competitors-0-0">
-          <span class="src-n">1</span>
-          <span class="src-spk">Rahul</span>
-          <span class="src-q">every new hire has to lend ringhawks fifteen screens</span>
-          <span class="src-t">0:44</span>
-        </button>
-      </li></ol>
-    </div>
-    </section>
-    <section class="grp">
       <h2 class="grp-label">Pricing</h2>
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
@@ -412,6 +438,30 @@ body{
           <span class="src-spk">Rahul</span>
           <span class="src-q">the sharper number you owe me from last time comes with it</span>
           <span class="src-t">0:58</span>
+        </button>
+      </li></ol>
+    </div>
+    </section>
+    <section class="grp">
+      <h2 class="grp-label">Competition</h2>
+      <div class="cards">
+        <article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">RingHawk&#39;s fifteen-screen UI (spoken &#39;ringhawks&#39;) is now a training burden as front-desk staff churn.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:44">1</button></sup></p>
+    
+    <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
+    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="44.08" aria-label="Play from 0:44"><span class="tri" aria-hidden="true"></span>0:44</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">contest tenab again lost two receptions this month <mark>every new hire has to lend ringhawks fifteen screens</mark> and honestly training time is becoming its own cost</p>
+  </div></div>
+  </article>
+      </div>
+      <div class="src-block">
+      <span class="src-label">Sources</span>
+      <ol class="sources"><li>
+        <button class="source" type="button" data-cite="rc-competitors-0-0">
+          <span class="src-n">1</span>
+          <span class="src-spk">Rahul</span>
+          <span class="src-q">every new hire has to lend ringhawks fifteen screens</span>
+          <span class="src-t">0:44</span>
         </button>
       </li></ol>
     </div>
@@ -461,51 +511,6 @@ body{
       </li></ol>
     </div>
     </section>
-    <section class="grp">
-      <h2 class="grp-label">Next steps</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to send the overdue TCPA one-pager today, directly to the office manager.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Maya at 0:14">1</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
-    <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="14" aria-label="Play from 0:14"><span class="tri" aria-hidden="true"></span>0:14</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line">you&#39;re right that one&#39;s on me <mark>it goes out today and i&#39;ll send it directly to her so it doesn&#39;t root through you</mark></p>
-  </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Rahul at 0:58">2</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
-    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">good so tcpa paper today <mark>palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
-  </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-2-0" aria-label="Source 2, Rahul at 0:58">2</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-2-0">
-    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="58.88" aria-label="Play from 0:58"><span class="tri" aria-hidden="true"></span>0:58</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">good so tcpa paper today <mark>palate proposal on paper this week and the sharper number you owe me from last time comes with it</mark></p>
-  </div></div>
-  </article>
-      </div>
-      <div class="src-block">
-      <span class="src-label">Sources</span>
-      <ol class="sources"><li>
-        <button class="source" type="button" data-cite="rc-next_steps-0-0">
-          <span class="src-n">1</span>
-          <span class="src-spk">Maya</span>
-          <span class="src-q">it goes out today and i&#39;ll send it directly to her so it doesn&#39;t root through…</span>
-          <span class="src-t">0:14</span>
-        </button>
-      </li><li>
-        <button class="source" type="button" data-cite="rc-next_steps-1-0">
-          <span class="src-n">2</span>
-          <span class="src-spk">Rahul</span>
-          <span class="src-q">palate proposal on paper this week and the sharper number you owe me from last…</span>
-          <span class="src-t">0:58</span>
-        </button>
-      </li></ol>
-    </div>
-    </section>
     
     
     
@@ -517,11 +522,17 @@ body{
       <p class="email-trust">Only backed notes reach this draft. Every line below came from something said on the call.</p>
       <div class="email-body">
         <p class="email-subject"><span>Subject</span>Follow-up: the commitment check call</p>
-        <p class="email-intro">Recapping what we covered and what happens next:</p>
-        <ul class="email-list">
-          <li><span class="em-cite" aria-hidden="true"></span>SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.</li><li><span class="em-cite" aria-hidden="true"></span>Front-desk churn: lost two receptionists this month; RingHawk&#39;s fifteen screens make training a cost.</li><li><span class="em-cite" aria-hidden="true"></span>Front-desk churn is now a cost center: every new hire must learn RingHawk&#39;s fifteen screens, so training time is its own cost.</li><li><span class="em-cite" aria-hidden="true"></span>Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.</li><li><span class="em-cite" aria-hidden="true"></span>Buyer is still owed the sharper number from the pricing call; it will land with the proposal.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to send the overdue TCPA one-pager today, directly to the office manager.</li><li><span class="em-cite" aria-hidden="true"></span>Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.</li><li><span class="em-cite" aria-hidden="true"></span>Rep sends the overdue TCPA one-pager today, and the pilot proposal plus sharper number this week.</li>
-        </ul>
-        <p class="email-outro">Every line traces to a numbered source above.</p>
+        <p class="email-greeting">Hi Rahul,</p>
+        <p class="email-intro">Thanks for the time on the commitment check call. Here is what I took away, and what we said we would do next.</p>
+        <p class="email-lead">SOC 2 delivered but the TCPA one-pager was missed; rep owned it and re-committed. Pilot scoped to two locations.</p>
+        
+        <p class="email-hdr">What we covered</p>
+        <ul class="email-list"><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Front-desk churn: lost two receptionists this month; RingHawk&#39;s fifteen screens make training a cost.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Front-desk churn is now a cost center: every new hire must learn RingHawk&#39;s fifteen screens, so training time is its own cost.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Dropped commitment called out: the TCPA one-pager promised by Friday never showed up, and the office manager asked twice.</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Buyer is still owed the sharper number from the pricing call; it will land with the proposal.</span></li></ul>
+        
+        <p class="email-hdr">Next steps</p>
+        <ul class="email-list"><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Rep to send the overdue TCPA one-pager today, directly to the office manager.</span><span class="em-meta">Maya · today</span></li><li><span class="em-cite" aria-hidden="true"></span><span class="em-text">Rep to deliver the pilot proposal on paper this week together with the sharper number owed from last call.</span><span class="em-meta">Maya · this week</span></li></ul>
+        <p class="email-outro">Every line above came from something said on the call. If I got any of it wrong, tell me and I&#39;ll fix it.</p>
+        <p class="email-sign">Best,<br>Maya</p>
       </div>
     </section>
   </div>

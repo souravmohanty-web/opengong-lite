@@ -46,6 +46,7 @@ state **current truth only**.
 | DEAL-STATE.md + 6 call scripts (5 arc + 1 messy/injection), 1:1 per D2, planted elements manifest | **projects-2f (drafting agent)** | **in-progress** — DRAFTS for human content-owner review; keyless work |
 | Stereo TTS generation from scripts | blocked: `voice:synthesize` scope | queued (projects-2f offered) |
 | Golden-call hand-labeling (2 calls) | Sourav + drafting agent | blocked: scripts + Sourav time |
+| Output-quality match vs the documented standard: render-layer fixes to the email panel + `composeEmail` baseline shape + summary section order | **projects-2f** | **done** — `research/13-sybill-deep/04-output-standard-match.md` (26-item verdict table + before/after); greeting/outcome-lead/grouped recap/owner+due next steps/close, choke point untouched; `npm test` 437/436 pass, 1 skip. Template system + DSL remain Aakash's (issue #2), untouched |
 
 ## Build slices — roadmap
 
