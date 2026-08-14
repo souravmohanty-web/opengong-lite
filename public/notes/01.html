@@ -227,6 +227,11 @@ body{
 .prov-link:hover{color:var(--accent)}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
+.topics{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.chip.topic{font-size:12.5px;border-radius:999px;padding:3px 12px;text-transform:capitalize}
+.owner-grp{margin:0 0 14px}
+.owner-label{font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 6px}
+.step-meta{margin:4px 0 0;font-size:12.5px;color:var(--ink-faint)}
 
 @media (max-width:560px){
   .wrap{padding:26px 16px 70px}
@@ -251,6 +256,28 @@ body{
     <p class="tagline">Gong records what happened. We do what was promised.</p>
     <p class="magic">Every note carries a numbered citation. Click a number to read the line it came from and hear it said.</p>
     <p class="tally">24 of 24 notes backed.</p>
+    
+    <div class="topics" aria-label="Topics detected">
+      <span class="chip topic" role="button" tabindex="0" aria-expanded="false">RingHawk<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="11.120000000000001" aria-label="Play from 0:11"><span class="tri" aria-hidden="true"></span>0:11</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>tell me what&#39;s happening today you&#39;re running five locations on ringhawk right</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">RingHawk<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="15.040000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line"><mark>yeah well fiverr on ringhawk and have been for about three years and look the system works until it doesn&#39;t cause drop mid transfer between locations at least a few times a day now</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">RingHawk<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="64.4" aria-label="Play from 1:04"><span class="tri" aria-hidden="true"></span>1:04</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>what is your ringhawk renewal look like</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">Compliance<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="73.76" aria-label="Play from 1:13"><span class="tri" aria-hidden="true"></span>1:13</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>okay one more thing from compliance so you&#39;re texting patients</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">TCPA<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="76.8" aria-label="Play from 1:16"><span class="tri" aria-hidden="true"></span>1:16</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line"><mark>we want to my office manager keeps asking about text reminders but i keep hearing letters like tcpa and i don&#39;t want to be the test case so today we just don&#39;t text at all</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">Compliance<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="87.12" aria-label="Play from 1:27"><span class="tri" aria-hidden="true"></span>1:27</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>that&#39;s exactly the kind of thing our compliance tooling handles is what i&#39;d suggest a proper demo thirty minutes i&#39;ll show you the after hours routing and the compliant texting flow live</mark></p>
+  </div></span></span>
+    </div>
   </header>
   
     <div class="context" aria-label="Call context">
@@ -278,28 +305,6 @@ body{
     <p class="rc-line"><mark>we asked ring hog for after hours routing last year</mark> the support tickets go nowhere you wait four days and get a reply asking you to restart the router i&#39;m done filing them</p>
   </div></span></span>
         </div>
-        <div class="chip-grp">
-          <span class="chip-label">Also mentioned</span>
-          <span class="chip" role="button" tabindex="0" aria-expanded="false">RingHawk came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="11.120000000000001" aria-label="Play from 0:11"><span class="tri" aria-hidden="true"></span>0:11</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>tell me what&#39;s happening today you&#39;re running five locations on ringhawk right</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">RingHawk came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="15.040000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line"><mark>yeah well fiverr on ringhawk and have been for about three years and look the system works until it doesn&#39;t cause drop mid transfer between locations at least a few times a day now</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">RingHawk came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="64.4" aria-label="Play from 1:04"><span class="tri" aria-hidden="true"></span>1:04</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>what is your ringhawk renewal look like</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Compliance came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="73.76" aria-label="Play from 1:13"><span class="tri" aria-hidden="true"></span>1:13</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>okay one more thing from compliance so you&#39;re texting patients</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">TCPA came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="76.8" aria-label="Play from 1:16"><span class="tri" aria-hidden="true"></span>1:16</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line"><mark>we want to my office manager keeps asking about text reminders but i keep hearing letters like tcpa and i don&#39;t want to be the test case so today we just don&#39;t text at all</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Compliance came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="87.12" aria-label="Play from 1:27"><span class="tri" aria-hidden="true"></span>1:27</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>that&#39;s exactly the kind of thing our compliance tooling handles is what i&#39;d suggest a proper demo thirty minutes i&#39;ll show you the after hours routing and the compliant texting flow live</mark></p>
-  </div></span></span>
-        </div>
     </div>
   <div class="notes">
     
@@ -308,6 +313,7 @@ body{
       <div class="cards">
         <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Discovery landed a 30-minute demo of after-hours routing and compliant texting.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Maya at 1:27">1</button></sup></p>
+    
     <span class="cue">Click a number to read the line it came from</span>
     <div class="receipts"><div class="receipt" id="rc-summary-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="87.12" aria-label="Play from 1:27"><span class="tri" aria-hidden="true"></span>1:27</button><span class="rc-spk">Maya</span></div>
@@ -315,6 +321,7 @@ body{
   </div></div>
   </article><article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">About ten bookings a week are lost after hours; calls also drop mid-transfer a few times a day.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-1-0" aria-label="Source 2, Rahul at 0:25">2</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-summary-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="25.6" aria-label="Play from 0:25"><span class="tri" aria-hidden="true"></span>0:25</button><span class="rc-spk">Rahul</span></div>
@@ -343,23 +350,27 @@ body{
     </section>
     <section class="grp">
       <h2 class="grp-label">Next steps</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
+      
+      <div class="owner-grp">
+        <h3 class="owner-label">Rep</h3>
+        <div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Rep to run a 30-minute demo Thursday covering after-hours routing and the compliant texting flow, no slides.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Rahul at 1:38">1</button></sup></p>
+    <p class="step-meta">due Thursday</p>
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="98.4" aria-label="Play from 1:38"><span class="tri" aria-hidden="true"></span>1:38</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">alright <mark>do it thursday before the lunch rush and keep it practical</mark> i don&#39;t need a slideshow</p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+  </article></div>
+      </div><div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Rep to run the demo Thursday: routing plus texting, no slides.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Maya at 1:43">2</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="103.92" aria-label="Play from 1:43"><span class="tri" aria-hidden="true"></span>1:43</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">thursday tiz <mark>i&#39;ll bring the routing demo and the texting flow no slides</mark></p>
   </div></div>
-  </article>
-      </div>
+  </article></div>
       <div class="src-block">
       <span class="src-label">Sources</span>
       <ol class="sources"><li>
@@ -385,6 +396,7 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Calls drop mid-transfer between locations at least a few times a day.<sup class="cites"><button class="cite" type="button" data-cite="rc-pain-0-0" aria-label="Source 1, Rahul at 0:15">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-pain-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="15.040000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">yeah well fiverr on ringhawk and have been for about three years and look the system works until it doesn&#39;t <mark>cause drop mid transfer between locations at least a few times a day now</mark></p>
@@ -392,12 +404,14 @@ body{
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">After-hours calls ring out to a voicemail nobody checks until morning: the real bleed.<sup class="cites"><button class="cite" type="button" data-cite="rc-pain-1-0" aria-label="Source 2, Rahul at 0:25">2</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-pain-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="25.6" aria-label="Play from 0:25"><span class="tri" aria-hidden="true"></span>0:25</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>after hours is the real bleed anything after six just rings out and goes to a voice mail nobody checks until morning</mark> we lose maybe ten bookings a week that way a cleaning patient calls at seven nobody answers they</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Fear of TCPA keeps the practice from texting patients at all today, even though the office manager wants it.<sup class="cites"><button class="cite" type="button" data-cite="rc-pain-2-0" aria-label="Source 3, Rahul at 1:16">3</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-pain-2-0">
     <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="76.8" aria-label="Play from 1:16"><span class="tri" aria-hidden="true"></span>1:16</button><span class="rc-spk">Rahul</span></div>
@@ -437,6 +451,7 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Trust is the blocker. They got burned switching software once and won&#39;t repeat that without proof it works.<sup class="cites"><button class="cite" type="button" data-cite="rc-objections-0-0" aria-label="Source 1, Rahul at 0:55">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-objections-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="55.28" aria-label="Play from 0:55"><span class="tri" aria-hidden="true"></span>0:55</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>we do not have a budget problem honestly it&#39;s a trust problem i got burned once switching software and i&#39;m not doing that dance again without proof it works</mark></p>
@@ -461,12 +476,14 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Buyer states budget is not the blocker: &#39;we do not have a budget problem.&#39;<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-0-0" aria-label="Source 1, Rahul at 0:55">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-pricing-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="55.28" aria-label="Play from 0:55"><span class="tri" aria-hidden="true"></span>0:55</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line"><mark>we do not have a budget problem</mark> honestly it&#39;s a trust problem i got burned once switching software and i&#39;m not doing that dance again without proof it works</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">The RingHawk renewal is &#39;too expensive for what we&#39;re getting.&#39; That&#39;s about the incumbent&#39;s price, not CallForge&#39;s.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-1-0" aria-label="Source 2, Rahul at 1:06">2</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-pricing-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="66.48" aria-label="Play from 1:06"><span class="tri" aria-hidden="true"></span>1:06</button><span class="rc-spk">Rahul</span></div>
@@ -499,6 +516,7 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Brightsmile runs all five locations on RingHawk and has for about three years, and is now unhappy: the incumbent bumped price again while service got worse.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:15">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="15.040000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">yeah well fiverr on ringhawk <mark>and have been for about three years</mark> and look the system works until it doesn&#39;t cause drop mid transfer between locations at least a few times a day now</p>
@@ -523,12 +541,14 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Office manager&#39;s pushing for text reminders internally, though she wasn&#39;t on this call.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-0-0" aria-label="Source 1, Rahul at 1:16">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-stakeholders-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="76.8" aria-label="Play from 1:16"><span class="tri" aria-hidden="true"></span>1:16</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">we want to <mark>my office manager keeps asking about text reminders</mark> but i keep hearing letters like tcpa and i don&#39;t want to be the test case so today we just don&#39;t text at all</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Single-threaded: only one contact in the loop so far.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-1-0" aria-label="Source 1, Rahul at 1:16">1</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-stakeholders-1-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="76.8" aria-label="Play from 1:16"><span class="tri" aria-hidden="true"></span>1:16</button><span class="rc-spk">Rahul</span></div>

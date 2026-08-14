@@ -227,6 +227,11 @@ body{
 .prov-link:hover{color:var(--accent)}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
+.topics{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.chip.topic{font-size:12.5px;border-radius:999px;padding:3px 12px;text-transform:capitalize}
+.owner-grp{margin:0 0 14px}
+.owner-label{font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 6px}
+.step-meta{margin:4px 0 0;font-size:12.5px;color:var(--ink-faint)}
 
 @media (max-width:560px){
   .wrap{padding:26px 16px 70px}
@@ -251,6 +256,19 @@ body{
     <p class="tagline">Gong records what happened. We do what was promised.</p>
     <p class="magic">Every note carries a numbered citation. Click a number to read the line it came from and hear it said.</p>
     <p class="tally">19 of 19 notes backed.</p>
+    
+    <div class="topics" aria-label="Topics detected">
+      <span class="chip topic" role="button" tabindex="0" aria-expanded="false">Answering machine detection<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="15.68" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>and he is answering machine detection on the outbound side when your record campaign hits a voice mail the system knows it&#39;s a machine and drops the right message instead of burning staff time</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">Compliance<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="31.92" aria-label="Play from 0:31"><span class="tri" aria-hidden="true"></span>0:31</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>exactly that and the texting flow you&#39;re asking every message goes out with consent tracking attached so the compliance question stops being your problem</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">TCPA<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="43.92" aria-label="Play from 0:43"><span class="tri" aria-hidden="true"></span>0:43</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>do things from my side then i&#39;ll send you our sot report and the tcpa one paper for your office manager both by friday</mark></p>
+  </div></span></span>
+    </div>
   </header>
   
     <div class="context" aria-label="Call context">
@@ -275,19 +293,6 @@ body{
     <p class="rc-line">could send both an exchange or <mark>pull our call volume report from ringcak so you can size this properly</mark> i can get that to you early next week</p>
   </div></span></span>
         </div>
-        <div class="chip-grp">
-          <span class="chip-label">Also mentioned</span>
-          <span class="chip" role="button" tabindex="0" aria-expanded="false">Answering machine detection came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="15.68" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>and he is answering machine detection on the outbound side when your record campaign hits a voice mail the system knows it&#39;s a machine and drops the right message instead of burning staff time</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Compliance came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="31.92" aria-label="Play from 0:31"><span class="tri" aria-hidden="true"></span>0:31</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>exactly that and the texting flow you&#39;re asking every message goes out with consent tracking attached so the compliance question stops being your problem</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">TCPA came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="43.92" aria-label="Play from 0:43"><span class="tri" aria-hidden="true"></span>0:43</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>do things from my side then i&#39;ll send you our sot report and the tcpa one paper for your office manager both by friday</mark></p>
-  </div></span></span>
-        </div>
     </div>
   <div class="notes">
     
@@ -296,6 +301,7 @@ body{
       <div class="cards">
         <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Demo landed: after-hours routing, AMD, and consent-tracked texting all resonated with the buyer.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Rahul at 0:39">1</button></sup></p>
+    
     <span class="cue">Click a number to read the line it came from</span>
     <div class="receipts"><div class="receipt" id="rc-summary-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="39.36" aria-label="Play from 0:39"><span class="tri" aria-hidden="true"></span>0:39</button><span class="rc-spk">Rahul</span></div>
@@ -303,6 +309,7 @@ body{
   </div></div>
   </article><article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Buyer is drawn to answering-machine detection and to consent-tracked texting for compliance.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-1-0" aria-label="Source 2, Rahul at 0:25">2</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-summary-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="25.6" aria-label="Play from 0:25"><span class="tri" aria-hidden="true"></span>0:25</button><span class="rc-spk">Rahul</span></div>
@@ -331,37 +338,51 @@ body{
     </section>
     <section class="grp">
       <h2 class="grp-label">Next steps</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
+      
+      <div class="owner-grp">
+        <h3 class="owner-label">Rep</h3>
+        <div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Rep committed to send the SOC 2 report and the TCPA one-pager to the office manager, both by Friday.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Maya at 0:43">1</button></sup></p>
+    <p class="step-meta">due Friday</p>
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="43.92" aria-label="Play from 0:43"><span class="tri" aria-hidden="true"></span>0:43</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">do things from my side then <mark>i&#39;ll send you our sot report and the tcpa one paper for your office manager both by friday</mark></p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+  </article></div>
+      </div>
+      <div class="owner-grp">
+        <h3 class="owner-label">Buyer</h3>
+        <div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Buyer to pull the RingHawk call-volume report and send it so the rep can size the deal, early next week.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Rahul at 0:50">2</button></sup></p>
+    <p class="step-meta">due early next week</p>
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="50.88" aria-label="Play from 0:50"><span class="tri" aria-hidden="true"></span>0:50</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">could send both an exchange or <mark>pull our call volume report from ringcak so you can size this properly</mark> i can get that to you early next week</p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+  </article></div>
+      </div>
+      <div class="owner-grp">
+        <h3 class="owner-label">Both sides</h3>
+        <div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Once the documents are exchanged, both sides move to pricing.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-2-0" aria-label="Source 3, Rahul at 1:25">3</button></sup></p>
+    <p class="step-meta">due after documents exchanged · tentative</p>
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-2-0">
     <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="85.84" aria-label="Play from 1:25"><span class="tri" aria-hidden="true"></span>1:25</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">fine send me the two documents i&#39;ll send the report <mark>and then let&#39;s talk numbers</mark></p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+  </article></div>
+      </div><div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Rep to send SOC 2 report and TCPA one-pager by Friday; buyer to send the call-volume report early next week.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-3-0" aria-label="Source 1, Maya at 0:43">1</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-3-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="43.92" aria-label="Play from 0:43"><span class="tri" aria-hidden="true"></span>0:43</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">do things from my side then <mark>i&#39;ll send you our sot report and the tcpa one paper for your office manager both by friday</mark></p>
   </div></div>
-  </article>
-      </div>
+  </article></div>
       <div class="src-block">
       <span class="src-label">Sources</span>
       <ol class="sources"><li>
@@ -394,6 +415,7 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Front desk currently loses time to answering-machine beeps on recall campaigns; AMD would give that time back.<sup class="cites"><button class="cite" type="button" data-cite="rc-pain-0-0" aria-label="Source 1, Rahul at 0:25">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-pain-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="25.6" aria-label="Play from 0:25"><span class="tri" aria-hidden="true"></span>0:25</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">so the detection part is <mark>my front desk isn&#39;t sitting there listening to beeps all afternoon</mark> because recall days are half wasted on that</p>
@@ -417,6 +439,7 @@ body{
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Downtime is a dealbreaker: &#39;we cannot be down during patient hours at all, if switching means two dead days of phones the deal is off before it starts.&#39;<sup class="cites"><button class="cite" type="button" data-cite="rc-objections-0-0" aria-label="Source 1, Rahul at 1:00">1</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-objections-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="60.160000000000004" aria-label="Play from 1:00"><span class="tri" aria-hidden="true"></span>1:00</button><span class="rc-spk">Rahul</span></div>
@@ -442,6 +465,7 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">No numbers yet: buyer signals pricing is the next conversation once documents are exchanged.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-0-0" aria-label="Source 1, Rahul at 1:25">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-pricing-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="85.84" aria-label="Play from 1:25"><span class="tri" aria-hidden="true"></span>1:25</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">fine send me the two documents i&#39;ll send the report <mark>and then let&#39;s talk numbers</mark></p>
@@ -465,6 +489,7 @@ body{
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">RingHawk (spoken &#39;ringcak&#39;) is still the system of record: the buyer will export its call-volume report to size the CallForge deal.<sup class="cites"><button class="cite" type="button" data-cite="rc-competitors-0-0" aria-label="Source 1, Rahul at 0:50">1</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-competitors-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="50.88" aria-label="Play from 0:50"><span class="tri" aria-hidden="true"></span>0:50</button><span class="rc-spk">Rahul</span></div>
@@ -490,12 +515,14 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Office manager&#39;s the internal champion for texting. She wasn&#39;t on this call.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-0-0" aria-label="Source 1, Rahul at 0:39">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-stakeholders-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="39.36" aria-label="Play from 0:39"><span class="tri" aria-hidden="true"></span>0:39</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">texting piece with the consent baked in that i like <mark>my office manager will like it more</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Single-threaded: only one contact in the loop so far.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-1-0" aria-label="Source 1, Rahul at 0:39">1</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-stakeholders-1-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="39.36" aria-label="Play from 0:39"><span class="tri" aria-hidden="true"></span>0:39</button><span class="rc-spk">Rahul</span></div>

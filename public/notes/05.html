@@ -227,6 +227,11 @@ body{
 .prov-link:hover{color:var(--accent)}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
+.topics{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.chip.topic{font-size:12.5px;border-radius:999px;padding:3px 12px;text-transform:capitalize}
+.owner-grp{margin:0 0 14px}
+.owner-label{font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 6px}
+.step-meta{margin:4px 0 0;font-size:12.5px;color:var(--ink-faint)}
 
 @media (max-width:560px){
   .wrap{padding:26px 16px 70px}
@@ -251,6 +256,22 @@ body{
     <p class="tagline">Gong records what happened. We do what was promised.</p>
     <p class="magic">Every note carries a numbered citation. Click a number to read the line it came from and hear it said.</p>
     <p class="tally">23 of 23 notes backed.</p>
+    
+    <div class="topics" aria-label="Topics detected">
+      <span class="chip topic" role="button" tabindex="0" aria-expanded="false">Pilot<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>so proposals in front of you two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">Pilot<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line"><mark>twenty six i can sell doctor meta looked at it last night and his only question was whether we&#39;re locked in if the pilot goes badly</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">Pilot<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="15.200000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Maya</span></div>
+    <p class="rc-line"><mark>you&#39;re not if the pilot fills your numbers you walk at ninety days and your lines port right back that&#39;s in section four</mark></p>
+  </div></span></span><span class="chip topic" role="button" tabindex="0" aria-expanded="false">Pilot<span class="chip-receipt"><div class="receipt">
+    <div class="rc-meta"><button class="play" type="button" data-t="22.080000000000002" aria-label="Play from 0:22"><span class="tri" aria-hidden="true"></span>0:22</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line"><mark>that clause is what got him to yes honestly okay the two pilot sites are the downtown location and the elm street one</mark></p>
+  </div></span></span>
+    </div>
   </header>
   
     <div class="context" aria-label="Call context">
@@ -275,22 +296,6 @@ body{
     <p class="rc-line"><mark>get my after ask patients booking again</mark> and i&#39;ll be your reference customer talk next week</p>
   </div></span></span>
         </div>
-        <div class="chip-grp">
-          <span class="chip-label">Also mentioned</span>
-          <span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>so proposals in front of you two locations ninety day pilot and we landed at twenty six per seat with the recall tooling included</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line"><mark>twenty six i can sell doctor meta looked at it last night and his only question was whether we&#39;re locked in if the pilot goes badly</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="15.200000000000001" aria-label="Play from 0:15"><span class="tri" aria-hidden="true"></span>0:15</button><span class="rc-spk">Maya</span></div>
-    <p class="rc-line"><mark>you&#39;re not if the pilot fills your numbers you walk at ninety days and your lines port right back that&#39;s in section four</mark></p>
-  </div></span></span><span class="chip" role="button" tabindex="0" aria-expanded="false">Pilot came up.<span class="chip-receipt"><div class="receipt">
-    <div class="rc-meta"><button class="play" type="button" data-t="22.080000000000002" aria-label="Play from 0:22"><span class="tri" aria-hidden="true"></span>0:22</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line"><mark>that clause is what got him to yes honestly okay the two pilot sites are the downtown location and the elm street one</mark></p>
-  </div></span></span>
-        </div>
     </div>
   <div class="notes">
     
@@ -299,6 +304,7 @@ body{
       <div class="cards">
         <article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Verbal commit: two-location ninety-day pilot at twenty six per seat, recall tooling included.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-0-0" aria-label="Source 1, Maya at 0:00">1</button></sup></p>
+    
     <span class="cue">Click a number to read the line it came from</span>
     <div class="receipts"><div class="receipt" id="rc-summary-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
@@ -307,12 +313,14 @@ body{
   </article><article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Cutover happens on a weekend so phones never go dark on a patient day.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-1-0" aria-label="Source 2, Maya at 0:29">2</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-summary-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="29.44" aria-label="Play from 0:29"><span class="tri" aria-hidden="true"></span>0:29</button><span class="rc-spk">Maya</span><span class="rc-tag">citation corrected</span></div>
     <p class="rc-line">busiest and smallest <mark>smart cutover happens on a weekend like we your phones never go dark on a patient day</mark></p>
   </div></div>
   </article><article class="card card--brief" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Buyer wants to use call recordings to train new front-desk hires and sees it fixing churn.<sup class="cites"><button class="cite" type="button" data-cite="rc-summary-2-0" aria-label="Source 3, Rahul at 0:35">3</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-summary-2-0">
     <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="35.76" aria-label="Play from 0:35"><span class="tri" aria-hidden="true"></span>0:35</button><span class="rc-spk">Rahul</span></div>
@@ -348,44 +356,59 @@ body{
     </section>
     <section class="grp">
       <h2 class="grp-label">Next steps</h2>
-      <div class="cards">
-        <article class="card" role="button" tabindex="0" aria-expanded="false">
+      
+      <div class="owner-grp">
+        <h3 class="owner-label">Rep</h3>
+        <div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Rep to send the agreement this afternoon.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-0-0" aria-label="Source 1, Maya at 0:59">1</button></sup></p>
+    <p class="step-meta">due this afternoon</p>
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="59.44" aria-label="Play from 0:59"><span class="tri" aria-hidden="true"></span>0:59</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line"><mark>agreement goes out this afternoon</mark> rahul genuinely looking forward to this one</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Buyer to have Dr. Mehta sign the agreement early next week.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Rahul at 0:51">2</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
-    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">then we&#39;re done negotiating send the agreement over <mark>i&#39;ll have doctor meta sign early next week</mark> and let&#39;s aim the cutover for the weekend after</p>
-  </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
-    <p class="note">Both sides to aim the cutover for the weekend after signing.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-2-0" aria-label="Source 3, Rahul at 0:51">3</button></sup></p>
-    
-    <div class="receipts"><div class="receipt" id="rc-next_steps-2-0">
-    <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
-    <p class="rc-line">then we&#39;re done negotiating send the agreement over i&#39;ll have doctor meta sign early next week and <mark>let&#39;s aim the cutover for the weekend after</mark></p>
-  </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Rep to set up a training live-review of call recordings for the office manager as part of onboarding, no extra line item.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-3-0" aria-label="Source 4, Maya at 0:45">4</button></sup></p>
+    <p class="step-meta">due during onboarding</p>
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-3-0">
     <div class="rc-meta"><span class="rc-n">4</span><button class="play" type="button" data-t="45.28" aria-label="Play from 0:45"><span class="tri" aria-hidden="true"></span>0:45</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">yes and <mark>i&#39;ll set up the training live review for your office manager as part of onboarding no extra line item</mark></p>
   </div></div>
-  </article><article class="card" role="button" tabindex="0" aria-expanded="false">
+  </article></div>
+      </div>
+      <div class="owner-grp">
+        <h3 class="owner-label">Buyer</h3>
+        <div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Buyer to have Dr. Mehta sign the agreement early next week.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-1-0" aria-label="Source 2, Rahul at 0:51">2</button></sup></p>
+    <p class="step-meta">due early next week</p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-1-0">
+    <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">then we&#39;re done negotiating send the agreement over <mark>i&#39;ll have doctor meta sign early next week</mark> and let&#39;s aim the cutover for the weekend after</p>
+  </div></div>
+  </article></div>
+      </div>
+      <div class="owner-grp">
+        <h3 class="owner-label">Both sides</h3>
+        <div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
+    <p class="note">Both sides to aim the cutover for the weekend after signing.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-2-0" aria-label="Source 3, Rahul at 0:51">3</button></sup></p>
+    <p class="step-meta">due weekend after signing · tentative</p>
+    
+    <div class="receipts"><div class="receipt" id="rc-next_steps-2-0">
+    <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
+    <p class="rc-line">then we&#39;re done negotiating send the agreement over i&#39;ll have doctor meta sign early next week and <mark>let&#39;s aim the cutover for the weekend after</mark></p>
+  </div></div>
+  </article></div>
+      </div><div class="cards"><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Rep sends the agreement this afternoon; Dr. Mehta signs early next week; cutover the weekend after.<sup class="cites"><button class="cite" type="button" data-cite="rc-next_steps-4-0" aria-label="Source 5, Rahul at 0:51">5</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-next_steps-4-0">
     <div class="rc-meta"><span class="rc-n">5</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">then we&#39;re done negotiating send the agreement over <mark>i&#39;ll have doctor meta sign early next week and let&#39;s aim the cutover for the weekend after</mark></p>
   </div></div>
-  </article>
-      </div>
+  </article></div>
       <div class="src-block">
       <span class="src-label">Sources</span>
       <ol class="sources"><li>
@@ -432,6 +455,7 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Front-desk churn is Rahul&#39;s own problem; he sees call recordings for training as the thing that might fix it.<sup class="cites"><button class="cite" type="button" data-cite="rc-pain-0-0" aria-label="Source 1, Rahul at 0:35">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-pain-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="35.76" aria-label="Play from 0:35"><span class="tri" aria-hidden="true"></span>0:35</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">more thing i noticed in the proposal <mark>the core recording can we use those for training the new front desk hires because that alone might fix my churn problem</mark></p>
@@ -455,6 +479,7 @@ body{
       <div class="cards">
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Dr. Mehta&#39;s only remaining question: are we locked in if the pilot goes badly?<sup class="cites"><button class="cite" type="button" data-cite="rc-objections-0-0" aria-label="Source 1, Rahul at 0:08">1</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-objections-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
@@ -480,12 +505,14 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Final landed price: twenty six per seat, recall tooling included, on a two-location ninety-day pilot.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-0-0" aria-label="Source 1, Maya at 0:00">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-pricing-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="0" aria-label="Play from 0:00"><span class="tri" aria-hidden="true"></span>0:00</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">so proposals in front of you two locations ninety day pilot and <mark>we landed at twenty six per seat with the recall tooling included</mark></p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Buyer can sell twenty six internally; Dr. Mehta reviewed it the night before.<sup class="cites"><button class="cite" type="button" data-cite="rc-pricing-1-0" aria-label="Source 2, Rahul at 0:08">2</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-pricing-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
@@ -518,6 +545,7 @@ body{
         <article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Dr. Mehta reviewed the proposal himself and is set to sign. He wasn&#39;t on this call.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-0-0" aria-label="Source 1, Rahul at 0:08">1</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-stakeholders-0-0">
     <div class="rc-meta"><span class="rc-n">1</span><button class="play" type="button" data-t="8.08" aria-label="Play from 0:08"><span class="tri" aria-hidden="true"></span>0:08</button><span class="rc-spk">Rahul</span></div>
     <p class="rc-line">twenty six i can sell <mark>doctor meta looked at it last night</mark> and his only question was whether we&#39;re locked in if the pilot goes badly</p>
@@ -525,12 +553,14 @@ body{
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Office manager gets the training live-review as part of onboarding. She wasn&#39;t on this call either.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-1-0" aria-label="Source 2, Maya at 0:45">2</button></sup></p>
     
+    
     <div class="receipts"><div class="receipt" id="rc-stakeholders-1-0">
     <div class="rc-meta"><span class="rc-n">2</span><button class="play" type="button" data-t="45.28" aria-label="Play from 0:45"><span class="tri" aria-hidden="true"></span>0:45</button><span class="rc-spk">Maya</span></div>
     <p class="rc-line">yes and <mark>i&#39;ll set up the training live review for your office manager</mark> as part of onboarding no extra line item</p>
   </div></div>
   </article><article class="card" role="button" tabindex="0" aria-expanded="false">
     <p class="note">Single-threaded: only one contact in the loop so far.<sup class="cites"><button class="cite" type="button" data-cite="rc-stakeholders-2-0" aria-label="Source 3, Rahul at 0:51">3</button></sup></p>
+    
     
     <div class="receipts"><div class="receipt" id="rc-stakeholders-2-0">
     <div class="rc-meta"><span class="rc-n">3</span><button class="play" type="button" data-t="51.04" aria-label="Play from 0:51"><span class="tri" aria-hidden="true"></span>0:51</button><span class="rc-spk">Rahul</span></div>

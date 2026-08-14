@@ -157,7 +157,13 @@ export function buildNotesModel(bundle, opts = {}) {
       if (r) receipts.push(r);
       if (c?.status === 'segment_corrected') corrected = true;
     }
-    return { text: block.text, receipts, corrected, claimIds };
+    // Next-step blocks carry who owns the step and when it is due (the claim
+    // already has both) so the renderer can group by owner, Fathom-style.
+    const rawFirst = rawById.get(claimIds[0]);
+    const step = rawFirst?.owner !== undefined && claimIds.some((id) => id.startsWith('next_steps'))
+      ? { owner: rawFirst.owner ?? 'unknown', due: rawFirst.due || null, commitment: rawFirst.commitment ?? null }
+      : null;
+    return { text: block.text, receipts, corrected, claimIds, step };
   }
 
   // Citations, Perplexity-style: every receipt in a section gets a number, the
@@ -379,11 +385,48 @@ function cardHtml(card, { hint = false, hasAudio = true, brief = false, names = 
   const attrs = hasReceipt
     ? ` role="button" tabindex="0" aria-expanded="false"`
     : '';
+  const stepMeta = card.step && (card.step.due || card.step.commitment === 'tentative')
+    ? `<p class="step-meta">${[card.step.due ? `due ${escapeHtml(card.step.due)}` : null,
+        card.step.commitment === 'tentative' ? 'tentative' : null].filter(Boolean).join(' · ')}</p>`
+    : '';
   return `<article class="card${hasReceipt ? '' : ' card--flat'}${brief ? ' card--brief' : ''}"${attrs}>
     <p class="note">${escapeHtml(card.text)}${citesHtml(card, names)}</p>
+    ${stepMeta}
     ${affordance}
     ${hasReceipt ? `<div class="receipts">${receipts}</div>` : ''}
   </article>`;
+}
+
+// Next steps render grouped by who owns them (Fathom-style): the claims carry
+// owner and due already, so this is pure arrangement. Cards without step meta
+// (e.g. a summary roll-up) land last, unlabeled.
+const OWNER_ORDER = ['rep', 'buyer', 'joint', 'unknown'];
+function ownerName(owner, names) {
+  if (names[owner]) return names[owner];
+  return { rep: 'Rep', buyer: 'Buyer', joint: 'Both sides', unknown: 'Unassigned' }[owner] ?? owner;
+}
+function ownerGroupedCardsHtml(sec, opts) {
+  const groups = new Map();
+  const rest = [];
+  for (const card of sec.cards) {
+    if (card.step) {
+      const key = OWNER_ORDER.includes(card.step.owner) ? card.step.owner : 'unknown';
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(card);
+    } else {
+      rest.push(card);
+    }
+  }
+  if (!groups.size) {
+    return `<div class="cards">${sec.cards.map((c) => cardHtml(c, opts)).join('')}</div>`;
+  }
+  const grouped = OWNER_ORDER.filter((o) => groups.has(o)).map((o) => `
+      <div class="owner-grp">
+        <h3 class="owner-label">${escapeHtml(ownerName(o, opts.names ?? {}))}</h3>
+        <div class="cards">${groups.get(o).map((c) => cardHtml(c, opts)).join('')}</div>
+      </div>`).join('');
+  const restHtml = rest.length ? `<div class="cards">${rest.map((c) => cardHtml(c, opts)).join('')}</div>` : '';
+  return grouped + restHtml;
 }
 
 // The section's source list: the numbered lines the notes above stand on.
@@ -467,19 +510,34 @@ export function renderNotesPage(model, ctx = {}) {
 
   const primaryHtml = m.primary.map((sec) => {
     const brief = sec.key === 'summary';
+    const body = sec.key === 'next_steps'
+      ? ownerGroupedCardsHtml(sec, { hint: false, hasAudio, brief, names })
+      : `<div class="cards">
+        ${sec.cards.map((card) => cardHtml(card, { hint: useHint(card.receipts.length > 0), hasAudio, brief, names })).join('')}
+      </div>`;
     return `
     <section class="grp${brief ? ' grp--brief' : ''}">
       <h2 class="grp-label">${escapeHtml(sec.label)}</h2>
-      <div class="cards">
-        ${sec.cards.map((card) => cardHtml(card, { hint: useHint(card.receipts.length > 0), hasAudio, brief, names })).join('')}
-      </div>
+      ${body}
       ${sourceListHtml(sec, names)}
     </section>`;
   }).join('');
 
-  const chipsHtml = m.secondary.length ? `
+  // Topic chips (tracker hits) sit under the title, Fireflies-tag style; the
+  // remaining context groups (buying stage, flags) keep the fuller treatment.
+  const topicSec = m.secondary.find((sec) => sec.key === 'tracker');
+  const topicsHtml = topicSec ? `
+    <div class="topics" aria-label="Topics detected">
+      ${topicSec.chips.map((c) => {
+        const r = c.receipts[0] ?? null;
+        const attrs = r ? ` role="button" tabindex="0" aria-expanded="false"` : '';
+        return `<span class="chip topic${r ? '' : ' chip--flat'}"${attrs}>${escapeHtml(c.text.replace(/ came up\.?$/i, ''))}${r ? `<span class="chip-receipt">${receiptRowHtml(r, hasAudio, names)}</span>` : ''}</span>`;
+      }).join('')}
+    </div>` : '';
+  const contextSecs = m.secondary.filter((sec) => sec.key !== 'tracker');
+  const chipsHtml = contextSecs.length ? `
     <div class="context" aria-label="Call context">
-      ${m.secondary.map((sec) => `
+      ${contextSecs.map((sec) => `
         <div class="chip-grp">
           <span class="chip-label">${escapeHtml(sec.label)}</span>
           ${sec.chips.map((c) => {
@@ -608,6 +666,7 @@ ${navHtml(ctx)}
     <p class="tagline">Gong records what happened. We do what was promised.</p>
     <p class="magic">${escapeHtml(magicLine)}</p>
     <p class="tally">${tallyLine(m)}</p>${coverageHtml}
+    ${topicsHtml}
   </header>
   ${chipsHtml}
   <div class="notes">
@@ -1103,6 +1162,11 @@ body{
 .prov-link:hover{color:var(--accent)}
 
 .no-audio{margin:26px 0 0;font-size:15px;color:var(--ink-faint);text-align:center}
+.topics{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.chip.topic{font-size:12.5px;border-radius:999px;padding:3px 12px;text-transform:capitalize}
+.owner-grp{margin:0 0 14px}
+.owner-label{font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 6px}
+.step-meta{margin:4px 0 0;font-size:12.5px;color:var(--ink-faint)}
 
 @media (max-width:560px){
   .wrap{padding:26px 16px 70px}
