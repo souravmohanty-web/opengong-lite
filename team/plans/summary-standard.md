@@ -69,6 +69,46 @@ Target (finesse register, same claims, same citations):
 - Chapters follow the call's order and carry start–end times from the cited utterances.
 - Action items emit owner + action + spoken due phrase; the renderer groups by owner.
 
+## Addendum: the Fathom benchmark (second example from Sourav — the CRISP bar)
+
+Fireflies is the completeness bar; Fathom is the crispness bar. Sourav's real Fathom
+export (Hobbes × JustCall eval) adds four properties, and its full structure is the
+canonical output template:
+
+1. **Meeting Purpose: ONE sentence.** "Evaluate Hobbes as a replacement for JustCall's
+   current product tour tool." Complete orientation in a line. Always first.
+2. **Key Takeaways are reasoned theses, not observations.** Each of its 4 bullets is
+   claim + BECAUSE + a specific: "Hobbes's pricing model is a key concern. Billing per
+   'active conversation' is risky, as it could be cost-prohibitive if applied to their
+   high volume of unqualified leads (~1,500/mo)." Rule: a takeaway must carry a reason
+   and a number/specific, and survive the "so what?" test. 3–5 max, bold lead phrase.
+3. **Topic sections get CALL-SPECIFIC titles** ("Novatic's Limitations", never
+   "Objections") **with labeled facts and paired sub-bullets**: a bold label lead
+   ("HubSpot Integration Failure:") and nested consequence/response pairs — a concern
+   immediately followed by the other side's answer ("Hobbes's Response: synthetic-data
+   feature planned for early July"). Dialogue-aware structure, not a flat list.
+4. **Action items carry deep links** ("WATCH (5 secs): …?timestamp=2053"). Ours are
+   strictly better when rendered right: the citation chip that plays the second AND
+   shows the line. Owner-first phrasing, compound actions allowed ("Discuss pricing w/
+   Deepan; email Chirag re: next steps").
+
+### Canonical template (target output shape, top to bottom)
+
+```
+[Call title] · [date]
+Meeting Purpose        ← one sentence
+Key Takeaways          ← 3–5 reasoned theses (claim + because + specific)
+Topics                 ← call-specific section titles; bold labeled facts;
+                         concern → response pairs as nested bullets
+Next Steps             ← grouped by person, plain phrasing
+Action Items           ← owner + compound action + citation (click plays the second)
+```
+
+Crispness rules (the "really good, crisp, specific" bar): no sentence without a
+payload (name, number, tool, date, or verbatim phrase); no observation without its
+consequence; generic section titles banned; if a takeaway could describe any sales
+call, it fails.
+
 ## Implementation routing
 
 - **Deployment (Saritha):** LLM prompt rules + render grouping. Appended to issue #14's
